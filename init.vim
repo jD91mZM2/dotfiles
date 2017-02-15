@@ -14,6 +14,7 @@ set indentkeys-=:
 set shiftwidth=4
 set cursorline
 set number
+set ruler
 
 colorscheme ron
 hi CursorLine ctermbg=darkgray cterm=none
@@ -23,5 +24,5 @@ let g:go_fmt_autosave = 0
 let g:go_template_autocreate = 0
 
 " Commands
-command CWD silent exec "cd %:p:h" | echo "Changed directory!"
-command VTerm rightbelow vnew +terminal
+command! CWD silent exec "cd %:p:h" | echo "Changed directory!"
+command! VTerm rightbelow vnew +terminal
