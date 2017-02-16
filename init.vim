@@ -19,6 +19,8 @@ set ruler
 colorscheme ron
 hi CursorLine ctermbg=darkgray cterm=none
 hi LineNr ctermfg=gray
+hi Trail ctermbg=red
+match Trail /\s\+$/
 
 let g:go_fmt_autosave = 0
 let g:go_template_autocreate = 0
