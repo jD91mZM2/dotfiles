@@ -5,6 +5,7 @@ Plug 'jiangmiao/auto-pairs'
 
 " Languages
 Plug 'fatih/vim-go'
+Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
 
