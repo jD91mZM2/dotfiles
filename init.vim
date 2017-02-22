@@ -37,3 +37,4 @@ function! JSON()
 endfunction
 
 command! JSON call JSON()
+command! JSONMIN silent %!ruby minify.rb
