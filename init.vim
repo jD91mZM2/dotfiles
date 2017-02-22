@@ -30,3 +30,10 @@ let g:go_template_autocreate = 0
 " Commands
 command! CWD silent exec "cd %:p:h" | echo "Changed directory!"
 command! VTerm rightbelow vnew +terminal
+
+function! JSON()
+	%!python -m json.tool
+	retab!
+endfunction
+
+command! JSON call JSON()
