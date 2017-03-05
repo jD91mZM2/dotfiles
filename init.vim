@@ -2,6 +2,9 @@ call plug#begin()
 
 Plug 'aperezdc/vim-template'
 Plug 'jiangmiao/auto-pairs'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'altercation/vim-colors-solarized'
 
 " Languages
 Plug 'fatih/vim-go'
@@ -12,14 +15,17 @@ call plug#end()
 
 " Settings
 set tabstop=4
-set indentkeys-=:
 set shiftwidth=4
 set cursorline
 set number
 set ruler
 
-colorscheme ron
-hi CursorLine ctermbg=darkgray cterm=none
+" Colors
+syntax enable
+set background=dark
+colorscheme solarized
+
+hi CursorLine ctermbg=black cterm=none
 hi LineNr ctermfg=gray
 hi Trail ctermbg=red
 match Trail /\s\+$/
