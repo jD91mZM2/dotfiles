@@ -50,4 +50,5 @@ function! JSON()
 endfunction
 
 command! JSON call JSON()
-command! JSONMIN silent %!ruby ~/.config/nvim/minify.rb " ~/minify.rb for normal vim users.
+command! JSONMIN silent %!ruby ~/.config/nvim/minify.rb
+" ~/minify.rb for normal vim users.
