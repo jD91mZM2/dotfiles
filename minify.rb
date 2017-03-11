@@ -1,21 +1,21 @@
-input = $stdin.read;
+input = STDIN.read
 
-output = "";
-string = false;
-escapes = 0;
-for c in input.split("")
-	if c == '"' && escapes % 2 == 0 then
-		string = !string;
-		escapes = 0;
-	elsif c == '\\' then
-		escapes += 1;
+output = ""
+string = false
+escapes = 0
+input.split("").each do |c|
+	if c == '"' && escapes % 2 == 0
+		string = !string
+		escapes = 0
+	elsif c == '\\'
+		escapes += 1
 	else
-		escapes = 0;
+		escapes = 0
 	end
 
-	if (c != ' ' && c != "\t" && c != "\n") || string then
-		output += c;
+	if (c != ' ' && c != "\t" && c != "\n") || string
+		output += c
 	end
 end
 
-puts output;
+puts output
