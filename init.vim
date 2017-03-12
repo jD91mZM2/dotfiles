@@ -29,9 +29,12 @@ colorscheme solarized
 
 hi CursorLine ctermbg=black cterm=none
 hi LineNr ctermfg=gray
-hi Trail ctermbg=red
 hi Normal ctermbg=none
-match Trail /\s\+$/
+
+hi Trail ctermbg=red
+
+" Copy pasted from http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+autocmd BufWinEnter * match Trail /^\s* \s*\|\s\+$/
 
 " Plugins
 
