@@ -10,7 +10,7 @@ input.split("").each do |c|
 	elsif c == '\\'
 		escapes += 1;
 	else
-		escapes = 0
+		escapes = 0;
 	end
 
 	if (c != ' ' && c != "\t" && c != "\n") || string
