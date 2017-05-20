@@ -82,3 +82,5 @@ command! JSON call JSON()
 command! JSONMIN silent %!ruby ~/.config/nvim/minify.rb
 command! JavaFmt call JavaFmt()
 command! -nargs=1 Keyword syn keyword Keyword <args>
+
+map <S-Tab> gg=G<C-O><C-O>
