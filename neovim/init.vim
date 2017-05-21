@@ -43,7 +43,7 @@ hi Normal ctermbg=none
 hi Trail ctermbg=red
 
 " Copy pasted from http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-au BufWinEnter * match Trail /^ \s*\|\s\+$/
+au BufWinEnter * match Trail /^\s\+$/
 
 " Plugins
 au FileType fish compiler fish
