@@ -2,7 +2,6 @@ hard_tabs         = true
 trailing_comma    = "Never"
 use_try_shorthand = true
 wrap_comments     = true
-format_strings    = true
 fn_single_line    = true
 match_block_trailing_comma = true
 condense_wildcard_suffices = true
