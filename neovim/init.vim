@@ -74,6 +74,11 @@ function! JavaFmt()
 	retab!
 	let &tabstop=tab
 endfunction
+function! InjectSemicolon()
+	let pos = getpos(".")
+	normal! A;
+	call setpos(".", pos)
+endfunction
 
 command! CWD silent exec "cd %:p:h" | echo "Changed directory!"
 command! VTerm cd %:p:h | vnew +terminal
@@ -83,4 +88,5 @@ command! JSONMIN silent %!ruby ~/.config/nvim/minify.rb
 command! JavaFmt call JavaFmt()
 command! -nargs=1 Keyword syn keyword Keyword <args>
 
-map <S-Tab> gg=G<C-O><C-O>
+nnoremap <S-Tab> gg=G<C-O><C-O>
+nnoremap <leader>; :call InjectSemicolon()<CR>
