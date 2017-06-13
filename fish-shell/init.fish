@@ -1,6 +1,7 @@
 # Aliases
-alias rm="rmtrash"
-alias rmdir="rmdirtrash"
+alias rm=rmtrash
+alias rmdir=rmdirtrash
+alias reset="command reset; insult | cowsay"
 
 function unicopy --description "unicopy <character>" --argument character
 	if test -z $character
@@ -26,3 +27,6 @@ rvm default
 
 # Dircolors
 bass eval `dircolors ~/.dir_colors/dircolors`
+
+# INSULTS!
+insult | cowsay
