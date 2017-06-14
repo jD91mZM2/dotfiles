@@ -23,8 +23,8 @@ call plug#end()
 " Settings
 filetype plugin indent on
 
-set tabstop=4
-set shiftwidth=4
+set ts=4
+set sw=0
 set cursorline
 set number
 set splitright
@@ -41,12 +41,11 @@ hi LineNr ctermfg=gray
 hi Normal ctermbg=none
 hi Trail ctermbg=red
 
-" Copy pasted from http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-au BufWinEnter * match Trail /\s\+$/
+au BufWinEnter * match Trail /\s\+$/ " Copy pasted from http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+au FileType fish compiler fish
+au FileType yaml setlocal ts=2 expandtab indentkeys=
 
 " Plugins
-au FileType fish compiler fish
-
 let g:go_template_autocreate = 0
 let g:go_fmt_command = 'goimports'
 let g:go_metalinter_autosave = 1
@@ -68,10 +67,10 @@ function! JSON()
 endfunction
 function! JavaFmt()
 	silent %!java -jar ~/.config/nvim/google-java-format-1.3-all-deps.jar -
-	let tab = &tabstop
-	let &tabstop=2
+	let tab = &ts
+	let &ts=2
 	retab!
-	let &tabstop=tab
+	let &ts=tab
 endfunction
 function! InjectSemicolon()
 	let pos = getpos(".")
