@@ -33,4 +33,6 @@ rvm default
 bass eval `dircolors ~/.dir_colors/dircolors`
 
 # INSULTS!
-insult | cowsay
+if [ -z "$ASCIINEMA_REC" ]
+	insult | cowsay
+end
