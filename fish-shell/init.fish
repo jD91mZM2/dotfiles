@@ -1,3 +1,7 @@
+if ps -o comm | grep nvim > /dev/null
+	exit
+end
+
 # Aliases
 alias rm=rmtrash
 alias rmdir=rmdirtrash
