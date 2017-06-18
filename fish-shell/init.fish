@@ -5,7 +5,7 @@ end
 # Aliases
 alias rm=rmtrash
 alias rmdir=rmdirtrash
-alias reset="command reset; insult | cowsay"
+alias clear='command clear; insult | cowsay; echo -ne "\e[3J"'
 
 function unicopy --description "unicopy <character>" --argument character
 	if test -z $character
