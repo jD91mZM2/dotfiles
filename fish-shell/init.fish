@@ -27,7 +27,9 @@ function loop --description "loop <n> <command>" --argument n command
 end
 
 # Default Ruby
-rvm default
+if [ -z "$TMUX" ]
+	rvm default
+end
 
 # Dircolors
 bass eval `dircolors ~/.dir_colors/dircolors`
