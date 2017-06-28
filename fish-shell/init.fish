@@ -32,7 +32,7 @@ if [ -z "$TMUX" ]
 end
 
 # Dircolors
-bass eval `dircolors ~/.dir_colors/dircolors`
+bass eval `dircolors ~/.dir_colors/dircolors-solarized/dircolors.256dark`
 
 # INSULTS!
 if [ -z "$ASCIINEMA_REC" ]
