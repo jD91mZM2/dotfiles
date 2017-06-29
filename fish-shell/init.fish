@@ -3,8 +3,6 @@ if ps -o comm | grep nvim > /dev/null
 end
 
 # Aliases
-alias rm=rmtrash
-alias rmdir=rmdirtrash
 alias clear='command clear; insult | cowsay; echo -ne "\e[3J"'
 
 function unicopy --description "unicopy <character>" --argument character
