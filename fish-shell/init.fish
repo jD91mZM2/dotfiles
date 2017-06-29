@@ -5,6 +5,15 @@ end
 # Aliases
 alias clear='command clear; insult | cowsay; echo -ne "\e[3J"'
 
+function rm --description "Use `trash`"
+	if set -q argv[2]; and echo "$argv[2]" | grep "^/tmp/" > /dev/null
+		# Special case for RVM.
+		command rm $argv
+	else
+		echo "Don't use rm, use `trash`."
+	end
+end
+
 function unicopy --description "unicopy <character>" --argument character
 	if test -z $character
 		echo "unicopy <character>"
