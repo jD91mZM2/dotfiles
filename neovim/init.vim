@@ -13,9 +13,9 @@ Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'justmao945/vim-clang'
-
 Plug 'dag/vim-fish'
 Plug 'vim-ruby/vim-ruby'
+Plug 'udalov/kotlin-vim'
 Plug 'artur-shaik/vim-javacomplete2'
 
 call plug#end()
@@ -86,5 +86,4 @@ command! JSONMIN silent %!ruby ~/.config/nvim/minify.rb
 command! JavaFmt call JavaFmt()
 command! -nargs=1 Keyword syn keyword Keyword <args>
 
-nnoremap <S-Tab> gg=G<C-O><C-O>
 nnoremap <leader>; :call InjectSemicolon()<CR>
