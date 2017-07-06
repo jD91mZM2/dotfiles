@@ -27,6 +27,7 @@ set ts=4
 set sw=0
 set cursorline
 set number
+set splitright
 set nrformats=alpha,octal,hex
 set autowrite
 
@@ -46,6 +47,7 @@ au FileType yaml setlocal ts=2 expandtab indentkeys=
 
 " Plugins
 let g:netrw_liststyle = 3
+let g:netrw_winsize = 25
 
 let g:go_template_autocreate = 0
 let g:go_fmt_command = 'goimports'
@@ -81,7 +83,6 @@ endfunction
 
 command! CWD silent exec "cd %:p:h" | echo "Changed directory!"
 command! VTerm cd %:p:h | vnew +terminal
-command! E topleft 50vsplit +e.
 command! SudoW silent exec "w !sudo tee %" | echo "Saved!"
 
 command! JSON call JSON()
