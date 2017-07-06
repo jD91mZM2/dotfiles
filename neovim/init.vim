@@ -3,6 +3,7 @@ call plug#begin()
 Plug 'aperezdc/vim-template'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
+Plug 'scrooloose/nerdtree'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -41,14 +42,16 @@ hi LineNr ctermfg=gray
 hi Normal ctermbg=none
 hi Trail ctermbg=red
 
+" Auto commands
 au BufWinEnter * match Trail /\s\+$/ " Copy pasted from http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 au FileType fish compiler fish
 au FileType yaml setlocal ts=2 expandtab indentkeys=
 
-" Plugins
-let g:netrw_liststyle = 3
-let g:netrw_winsize = 25
+" NERDTree copy pastes
+au VimEnter * NERDTree
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" Plugins
 let g:go_template_autocreate = 0
 let g:go_fmt_command = 'goimports'
 let g:go_metalinter_autosave = 1
