@@ -44,11 +44,13 @@ hi Trail ctermbg=red
 
 " Auto commands
 au BufWinEnter * match Trail /\s\+$/ " Copy pasted from http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+au BufEnter * lcd %:p:h
+
 au FileType fish compiler fish
 au FileType yaml setlocal ts=2 expandtab indentkeys=
 
 " NERDTree copy pastes
-au VimEnter * NERDTree
+au VimEnter * NERDTree | wincmd p
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Plugins
@@ -84,7 +86,7 @@ function! InjectSemicolon()
 	call setpos(".", pos)
 endfunction
 
-command! CWD silent exec "cd %:p:h" | echo "Changed directory!"
+command! CWD silent exec "lcd %:p:h" | echo "Changed directory!"
 command! VTerm cd %:p:h | vnew +terminal
 command! SudoW silent exec "w !sudo tee %" | echo "Saved!"
 
@@ -94,3 +96,4 @@ command! JavaFmt call JavaFmt()
 command! -nargs=1 Keyword syn keyword Keyword <args>
 
 nnoremap <leader>; :call InjectSemicolon()<CR>
+nnoremap <leader>n :NERDTree \| wincmd p<CR>
