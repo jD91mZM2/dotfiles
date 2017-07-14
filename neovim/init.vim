@@ -4,6 +4,7 @@ Plug 'aperezdc/vim-template'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-surround'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -30,7 +31,6 @@ set cursorline
 set number
 set splitright
 set nrformats=alpha,octal,hex
-set autowrite
 
 " Colors
 syntax enable
@@ -44,7 +44,7 @@ hi Trail ctermbg=red
 
 " Auto commands
 au BufWinEnter * match Trail /\s\+$/ " Copy pasted from http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-au BufEnter * lcd %:p:h
+au BufEnter * silent! lcd %:p:h
 
 au FileType fish compiler fish
 au FileType yaml setlocal ts=2 expandtab indentkeys=
@@ -86,8 +86,8 @@ function! InjectSemicolon()
 	call setpos(".", pos)
 endfunction
 
-command! CWD silent exec "lcd %:p:h" | echo "Changed directory!"
-command! VTerm cd %:p:h | vnew +terminal
+command! CWD silent! lcd %:p:h | echo "Changed directory!"
+command! VTerm silent! lcd %:p:h | vnew +terminal
 command! SudoW silent exec "w !sudo tee %" | echo "Saved!"
 
 command! JSON call JSON()
