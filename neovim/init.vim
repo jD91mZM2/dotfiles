@@ -19,6 +19,7 @@ Plug 'dag/vim-fish'
 Plug 'vim-ruby/vim-ruby'
 Plug 'udalov/kotlin-vim'
 Plug 'artur-shaik/vim-javacomplete2'
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
