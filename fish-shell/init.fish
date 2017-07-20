@@ -4,6 +4,7 @@ end
 
 # Aliases
 alias clear='command clear; insult | cowsay; echo -ne "\e[3J"'
+alias git=hub
 
 function rm --description "Use `trash`"
 	if set -q argv[2]; and echo "$argv[2]" | grep "^/tmp/" > /dev/null
