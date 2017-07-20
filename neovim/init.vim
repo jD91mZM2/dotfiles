@@ -6,6 +6,7 @@ Plug 'alvan/vim-closetag'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'PeterRincker/vim-argumentative'
+Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -49,7 +50,7 @@ au BufWinEnter * match Trail /\s\+$/ " Copy pasted from http://vim.wikia.com/wik
 au BufEnter * silent! lcd %:p:h
 
 au FileType fish compiler fish
-au FileType yaml setlocal ts=2 expandtab indentkeys=
+au FileType yaml,markdown setlocal ts=2 expandtab indentkeys=
 
 " NERDTree copy pastes
 au VimEnter * NERDTree | wincmd p
