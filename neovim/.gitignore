@@ -1,6 +1,7 @@
 *
 !.gitignore
 !init.vim
+!minimal-init.vim
 !minify.rb
 !vim-templates/
 !vim-templates/*
