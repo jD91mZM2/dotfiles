@@ -26,8 +26,6 @@ Plug 'cespare/vim-toml'
 call plug#end()
 
 " Settings
-filetype plugin indent on
-
 set ts=4
 set sw=0
 set cursorline
@@ -36,7 +34,6 @@ set splitright
 set nrformats=alpha,octal,hex
 
 " Colors
-syntax enable
 set background=dark
 colorscheme solarized
 
