@@ -132,6 +132,8 @@ fi
 # Fun stuff!
 # ---------------------------------------------
 
+alias ls='ls -CF --color=auto'
+
 export THEME=$HOME/.bash/themes/agnoster-bash/agnoster.bash
 export DEFAULT_USER=`whoami`
 source $THEME
