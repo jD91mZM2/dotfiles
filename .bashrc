@@ -129,12 +129,40 @@ if [ -x /usr/bin/mint-fortune ]; then
 fi
 
 # ---------------------------------------------
-# Fun stuff!!!1!!!111
+# Fun stuff!
 # ---------------------------------------------
 
 export THEME=$HOME/.bash/themes/agnoster-bash/agnoster.bash
 export DEFAULT_USER=`whoami`
 source $THEME
+
+alias clear='command clear; insult | cowsay; echo -ne "\e[3J"'
+alias git=hub
+
+rm() {
+	if echo "$1" | grep "^/tmp/" > /dev/null; then
+		# Special case for RVM.
+		command rm "$@"
+	else
+		echo "Don't use rm, use \`trash\`."
+	fi
+}
+unicopy() {
+	[ -z "$1" ] && echo "unicopy <character>" && return
+	unicode "$1" --format "{pchar}" | xclip -sel clip
+}
+loop() {
+	if [ -z "$1" ] || [ -z "$2" ]; then
+		echo "loop <n> <command...>"
+		return
+	fi
+
+	for _ in $(seq 1 "$1"); do
+		eval "${@:2}"
+	done
+}
+
+[ -z "$ASCIINEMA_REC" ] && insult | cowsay
 
 # ---------------------------------------------
 # $PATH

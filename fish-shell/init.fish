@@ -1,7 +1,3 @@
-if ps -o comm | grep nvim > /dev/null
-	exit
-end
-
 # Aliases
 alias clear='command clear; insult | cowsay; echo -ne "\e[3J"'
 alias git=hub
@@ -38,6 +34,4 @@ end
 bass eval `dircolors ~/.dircolors`
 
 # INSULTS!
-if [ -z "$ASCIINEMA_REC" ]
-	insult | cowsay
-end
+[ -z "$ASCIINEMA_REC" ]; and insult | cowsay
