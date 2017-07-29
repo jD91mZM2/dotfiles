@@ -35,7 +35,7 @@ function loop --description "loop <n> <command>" --argument n command
 end
 
 # Dircolors
-bass eval `dircolors ~/.dir_colors/dircolors-solarized/dircolors.256dark`
+bass eval `dircolors ~/.dircolors`
 
 # INSULTS!
 if [ -z "$ASCIINEMA_REC" ]
