@@ -159,6 +159,11 @@ loop() {
 	done
 }
 
+powerline() {
+	PS1="$(~/.powerline/powerline-shell.py $? 2> /dev/null)"
+}
+PROMPT_COMMAND=powerline
+
 # ---------------------------------------------
 # $PATH
 # ---------------------------------------------

@@ -1,4 +1,5 @@
-# Aliases
+bass eval `dircolors ~/.dircolors`
+
 alias clear='command clear; echo -ne "\e[3J"'
 alias git=hub
 
@@ -30,5 +31,6 @@ function loop --description "loop <n> <command>" --argument n command
 	end
 end
 
-# Dircolors
-bass eval `dircolors ~/.dircolors`
+function fish_prompt
+	~/.powerline/powerline-shell.py $status --shell bare ^/dev/null
+end
