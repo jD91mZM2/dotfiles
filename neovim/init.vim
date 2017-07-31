@@ -8,9 +8,9 @@ Plug 'tpope/vim-surround'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'dhruvasagar/vim-table-mode'
 
+Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'altercation/vim-colors-solarized'
 
 " Languages
 Plug 'fatih/vim-go'
@@ -35,7 +35,7 @@ set nrformats=alpha,octal,hex
 
 " Colors
 set background=dark
-colorscheme solarized
+colorscheme base16-default-dark
 
 hi CursorLine ctermbg=black cterm=none
 hi LineNr ctermfg=gray
@@ -63,7 +63,7 @@ let g:rust_recommended_style = 0
 let g:racer_cmd = '~/.cargo/bin/racer'
 let g:racer_experimental_completer = 1
 
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'base16_default'
 
 let g:AutoPairsMultilineClose = 0
 let g:AutoPairsMapBS = 0

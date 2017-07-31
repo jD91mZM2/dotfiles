@@ -1,5 +1,5 @@
 # Aliases
-alias clear='command clear; insult | cowsay; echo -ne "\e[3J"'
+alias clear='command clear; echo -ne "\e[3J"'
 alias git=hub
 
 function rm --description "Use `trash`"
@@ -32,6 +32,3 @@ end
 
 # Dircolors
 bass eval `dircolors ~/.dircolors`
-
-# INSULTS!
-[ -z "$ASCIINEMA_REC" ]; and status --is-interactive; and insult | cowsay

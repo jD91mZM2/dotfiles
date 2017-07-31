@@ -133,12 +133,7 @@ fi
 # ---------------------------------------------
 
 alias ls='ls -CF --color=auto'
-
-export THEME=$HOME/.bash/themes/agnoster-bash/agnoster.bash
-export DEFAULT_USER=`whoami`
-source $THEME
-
-alias clear='command clear; insult | cowsay; echo -ne "\e[3J"'
+alias clear='command clear; echo -ne "\e[3J"'
 alias git=hub
 
 rm() {
@@ -163,8 +158,6 @@ loop() {
 		eval "${@:2}"
 	done
 }
-
-[ -z "$ASCIINEMA_REC" ] && insult | cowsay
 
 # ---------------------------------------------
 # $PATH
