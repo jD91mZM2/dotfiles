@@ -34,4 +34,4 @@ end
 bass eval `dircolors ~/.dircolors`
 
 # INSULTS!
-[ -z "$ASCIINEMA_REC" ]; and insult | cowsay
+[ -z "$ASCIINEMA_REC" ]; and status --is-interactive; and insult | cowsay
