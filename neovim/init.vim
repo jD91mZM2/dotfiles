@@ -13,15 +13,16 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Languages
-Plug 'fatih/vim-go'
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'justmao945/vim-clang'
-Plug 'dag/vim-fish'
-Plug 'vim-ruby/vim-ruby'
-Plug 'udalov/kotlin-vim'
+Plug 'Xe/lolcode.vim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'cespare/vim-toml'
+Plug 'dag/vim-fish'
+Plug 'fatih/vim-go'
+Plug 'justmao945/vim-clang'
+Plug 'racer-rust/vim-racer'
+Plug 'rust-lang/rust.vim'
+Plug 'udalov/kotlin-vim'
+Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
 
