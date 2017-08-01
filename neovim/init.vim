@@ -37,8 +37,8 @@ set nrformats=alpha,octal,hex
 set background=dark
 colorscheme base16-default-dark
 
-hi CursorLine ctermbg=yellow cterm=none
-hi LineNr ctermfg=gray
+hi CursorLine ctermbg=green cterm=none
+hi LineNr ctermfg=darkgray
 hi Normal ctermbg=none
 hi Trail ctermbg=red
 
