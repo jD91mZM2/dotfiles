@@ -99,6 +99,8 @@ command! -nargs=1 Keyword syn keyword Keyword <args>
 
 nnoremap <leader>; :call InjectSemicolon()<CR>
 nnoremap <leader>n :NERDTree \| wincmd p<CR>
-vnoremap <leader>c y`>a = <C-r>=<C-r>"<CR>
+vnoremap <leader>c y`>a = <c-r>=<c-r>"<cr><esc>
+tnoremap <esc><esc> <c-\><c-n>
+
 set exrc
 set secure
