@@ -59,7 +59,6 @@ let g:go_template_autocreate = 0
 let g:go_fmt_command = 'goimports'
 let g:go_metalinter_autosave = 1
 
-let g:rustfmt_autosave = 1
 let g:rust_recommended_style = 0
 let g:racer_cmd = '~/.cargo/bin/racer'
 let g:racer_experimental_completer = 1
