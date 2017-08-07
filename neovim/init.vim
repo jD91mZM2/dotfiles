@@ -33,6 +33,7 @@ set cursorline
 set number
 set splitright
 set nrformats=alpha,octal,hex
+set mouse=a
 
 " Colors
 set background=dark
