@@ -13,13 +13,14 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Languages
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Xe/lolcode.vim'
 Plug 'artur-shaik/vim-javacomplete2'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'cespare/vim-toml'
 Plug 'dag/vim-fish'
 Plug 'fatih/vim-go'
 Plug 'justmao945/vim-clang'
-Plug 'racer-rust/vim-racer'
 Plug 'rust-lang/rust.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'vim-ruby/vim-ruby'
@@ -68,6 +69,12 @@ let g:airline_theme = 'base16_default'
 
 let g:AutoPairsMultilineClose = 0
 let g:AutoPairsMapBS = 0
+
+let g:LanguageClient_serverCommands = {
+	\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+\ }
+let g:LanguageClient_autoStart = 1
+let g:deoplete#enable_at_startup = 1
 
 " Commands
 function! JSON()
