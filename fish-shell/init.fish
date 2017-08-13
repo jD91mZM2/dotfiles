@@ -35,3 +35,6 @@ end
 function fish_prompt
 	~/.powerline/powerline-shell.py $status --shell bare ^/dev/null
 end
+
+# https://github.com/pstadler/keybase-gpg-github/issues/11
+set -gx GPG_TTY (tty)
