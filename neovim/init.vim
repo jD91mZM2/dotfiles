@@ -1,29 +1,29 @@
 call plug#begin()
 
-Plug 'aperezdc/vim-template'
-Plug 'jiangmiao/auto-pairs'
+Plug 'PeterRincker/vim-argumentative'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'alvan/vim-closetag'
+Plug 'aperezdc/vim-template'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
-Plug 'PeterRincker/vim-argumentative'
-Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Languages
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Xe/lolcode.vim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'cespare/vim-toml'
 Plug 'dag/vim-fish'
-Plug 'fatih/vim-go'
-Plug 'justmao945/vim-clang'
 Plug 'rust-lang/rust.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'vim-ruby/vim-ruby'
+Plug 'zchee/deoplete-clang'
+Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 call plug#end()
 
