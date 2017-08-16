@@ -13,7 +13,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Languages
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Xe/lolcode.vim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
@@ -75,6 +74,8 @@ let g:LanguageClient_serverCommands = {
 \ }
 let g:LanguageClient_autoStart = 1
 let g:deoplete#enable_at_startup = 1
+
+set omnifunc=LanguageClient#complete
 
 " Commands
 function! JSON()
