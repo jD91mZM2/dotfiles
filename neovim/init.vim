@@ -6,6 +6,7 @@ Plug 'alvan/vim-closetag'
 Plug 'aperezdc/vim-template'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'jiangmiao/auto-pairs'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 
@@ -52,29 +53,27 @@ au BufEnter * silent! lcd %:p:h
 au FileType fish compiler fish
 au FileType yaml,markdown setlocal ts=2 expandtab indentkeys=
 
-" NERDTree copy pastes
-au VimEnter * NERDTree | wincmd p
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 " Plugins
-let g:go_template_autocreate = 0
-let g:go_fmt_command = 'goimports'
-let g:go_metalinter_autosave = 1
-
-let g:rust_recommended_style = 0
-let g:racer_cmd = '~/.cargo/bin/racer'
-let g:racer_experimental_completer = 1
-
-let g:airline_theme = 'base16_default'
-
-let g:AutoPairsMultilineClose = 0
+"
 let g:AutoPairsMapBS = 0
+let g:AutoPairsMultilineClose = 0
 
+let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
 	\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
 \ }
-let g:LanguageClient_autoStart = 1
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'base16_default'
+
 let g:deoplete#enable_at_startup = 1
+
+let g:nerdtree_tabs_open_on_console_startup = 1
+
+let g:racer_cmd = '~/.cargo/bin/racer'
+let g:racer_experimental_completer = 1
+let g:rust_recommended_style = 0
 
 " Commands
 function! JSON()
