@@ -41,9 +41,9 @@ set mouse=a
 set background=dark
 colorscheme base16-default-dark
 
+hi Normal ctermbg=none
 hi CursorLine ctermbg=green cterm=none
 hi LineNr ctermfg=darkgray
-hi Normal ctermbg=none
 hi Trail ctermbg=red
 
 " Auto commands
