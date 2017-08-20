@@ -53,6 +53,9 @@ au BufEnter * silent! lcd %:p:h
 au FileType fish compiler fish
 au FileType yaml,markdown setlocal ts=2 expandtab indentkeys=
 
+au User LanguageClientStarted set signcolumn=yes
+au User LanguageClientStopped set signcolumn=auto
+
 " Plugins
 "
 let g:AutoPairsMapBS = 0
