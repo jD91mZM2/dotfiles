@@ -23,7 +23,6 @@ Plug 'dag/vim-fish'
 Plug 'rust-lang/rust.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'vim-ruby/vim-ruby'
-Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 call plug#end()
@@ -64,6 +63,7 @@ let g:AutoPairsMultilineClose = 0
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
 	\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+	\ 'c': ['clangd']
 \ }
 
 let g:airline#extensions#tabline#enabled = 1
