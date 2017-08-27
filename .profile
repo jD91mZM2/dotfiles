@@ -23,7 +23,7 @@ PATH="$PATH:$HOME/.cargo/bin"
 PATH="$PATH:$HOME/Coding/Go/bin"
 PATH="$PATH:/usr/local/go/bin"
 PATH="$PATH:/usr/local/kotlin/bin"
-PATH="$PATH:~/.llvm/build/bin"
+PATH="$PATH:$HOME/.llvm/build/bin"
 export PATH
 
 export GOPATH="$HOME/Coding/Go"
