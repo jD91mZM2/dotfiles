@@ -16,18 +16,23 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# Variables
+# $PATH
+## Single user installs
 PATH="$HOME/.rvm/rubies/default/bin:$PATH"
-PATH="$PATH:$HOME/bin:$HOME/.local/bin"
 PATH="$PATH:$HOME/.cargo/bin"
-PATH="$PATH:$HOME/Coding/Go/bin"
-PATH="$PATH:/usr/local/go/bin"
-PATH="$PATH:/usr/local/kotlin/bin"
 PATH="$PATH:$HOME/.llvm/build/bin"
+PATH="$PATH:$HOME/Coding/Go/bin"
+PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+
+## Multi user installs
+PATH="$PATH:/opt/google/go/bin"
+PATH="$PATH:/opt/gradle/bin"
+
 export PATH
 
+# Variables
 export GOPATH="$HOME/Coding/Go"
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src/"
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export SHELL="/usr/bin/fish"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
