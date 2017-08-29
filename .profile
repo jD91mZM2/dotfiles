@@ -32,6 +32,7 @@ export PATH
 
 # Variables
 export GOPATH="$HOME/Coding/Go"
+export GOROOT="/opt/google/go"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export SHELL="/usr/bin/fish"
 export VISUAL=nvim
