@@ -23,6 +23,7 @@ PATH="$PATH:$HOME/.cargo/bin"
 PATH="$PATH:$HOME/.llvm/build/bin"
 PATH="$PATH:$HOME/Coding/Go/bin"
 PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+PATH="$PATH:$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin"
 
 ## Multi user installs
 PATH="$PATH:/opt/google/go/bin"

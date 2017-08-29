@@ -30,6 +30,7 @@ call plug#end()
 " Settings
 set ts=4
 set sw=0
+set expandtab
 set cursorline
 set number
 set splitright
@@ -50,7 +51,8 @@ au BufWinEnter * match Trail /\s\+$/ " Copy pasted from http://vim.wikia.com/wik
 au BufEnter * silent! lcd %:p:h
 
 au FileType fish compiler fish
-au FileType yaml,markdown setlocal ts=2 expandtab indentkeys=
+au FileType haskell       setlocal ts=2
+au FileType yaml,markdown setlocal ts=2 indentkeys=
 
 au User LanguageClientStarted set signcolumn=yes
 au User LanguageClientStopped set signcolumn=auto
