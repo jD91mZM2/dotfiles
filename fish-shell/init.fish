@@ -33,9 +33,7 @@ function loop --description "loop <n> <command>" --argument n command
 end
 
 function fish_prompt
-    # powerline-shell --shell bare $status
-    # https://github.com/banga/powerline-shell/issues/290
-    echo -n (pwd)"> "
+    powerline-shell --shell bare $status
 end
 
 # https://github.com/pstadler/keybase-gpg-github/issues/11
