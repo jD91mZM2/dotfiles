@@ -1,7 +1,7 @@
 call plug#begin()
 
 Plug 'PeterRincker/vim-argumentative'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-completion-manager'
 Plug 'alvan/vim-closetag'
 Plug 'aperezdc/vim-template'
 Plug 'dhruvasagar/vim-table-mode'
@@ -70,8 +70,6 @@ let g:LanguageClient_serverCommands = {
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'base16_default'
-
-let g:deoplete#enable_at_startup = 1
 
 let g:nerdtree_tabs_open_on_console_startup = 1
 
