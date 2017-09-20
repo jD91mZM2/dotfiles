@@ -11,6 +11,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 
 Plug 'chriskempson/base16-vim'
+Plug 'enricobacis/vim-airline-clock'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -81,13 +82,6 @@ let g:rust_recommended_style = 0
 function! JSON()
 	%!python -m json.tool
 	retab!
-endfunction
-function! JavaFmt()
-	silent %!java -jar ~/.config/nvim/google-java-format-1.3-all-deps.jar -
-	let tab = &ts
-	let &ts=2
-	retab!
-	let &ts=tab
 endfunction
 function! InjectSemicolon()
 	let pos = getpos(".")

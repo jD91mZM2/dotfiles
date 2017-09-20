@@ -32,12 +32,13 @@ PATH="$PATH:/opt/gradle/bin"
 export PATH
 
 # Variables
+export EDITOR="$VISUAL"
 export GOPATH="$HOME/Coding/Go"
 export GOROOT="/opt/google/go"
+export RUST_BACKTRACE=1
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export SHELL="/usr/bin/fish"
 export VISUAL=nvim
-export EDITOR="$VISUAL"
 
 # https://github.com/electron/electron/issues/8455
 export ELECTRON_FORCE_WINDOW_MENU_BAR=1
