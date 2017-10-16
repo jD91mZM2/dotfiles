@@ -1,3 +1,7 @@
+if status --is-login
+    bass source ~/.profile
+end
+
 bass eval `dircolors ~/.dircolors`
 
 alias clear='command clear; echo -ne "\e[3J"'
@@ -38,11 +42,3 @@ end
 
 # https://github.com/pstadler/keybase-gpg-github/issues/11
 set -gx GPG_TTY (tty)
-
-# Because I use Arch now =)
-if status --is-login
-    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-        test -s "$HOME/.profile"; and bass source "$HOME/.profile"
-        exec startx -- -keeptty
-    end
-end

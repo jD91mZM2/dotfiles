@@ -43,3 +43,8 @@ export VISUAL=nvim
 
 # https://github.com/electron/electron/issues/8455
 export ELECTRON_FORCE_WINDOW_MENU_BAR=1
+
+# Arch Linux <3
+
+[ -z "$SSH_AUTH_SOCK" ] && [ -z "$SSH_AGENT_PID" ] && eval $(ssh-agent)
+[ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ] && exec startx -keeptty
