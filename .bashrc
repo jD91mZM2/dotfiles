@@ -51,12 +51,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -138,30 +138,30 @@ alias tmux='tmux -2'
 alias git=hub
 
 rm() {
-	if echo "$1" | grep "^/tmp/" > /dev/null; then
-		# Special case for RVM.
-		command rm "$@"
-	else
-		echo "Don't use rm, use \`trash\`."
-	fi
+    if echo "$1" | grep "^/tmp/" > /dev/null; then
+        # Special case for RVM.
+        command rm "$@"
+    else
+        echo "Don't use rm, use \`trash\`."
+    fi
 }
 unicopy() {
-	[ -z "$1" ] && echo "unicopy <character>" && return
-	unicode "$1" --format "{pchar}" | xclip -sel clip
+    [ -z "$1" ] && echo "unicopy <character>" && return
+    unicode "$1" --format "{pchar}" | xclip -sel clip
 }
 loop() {
-	if [ -z "$1" ] || [ -z "$2" ]; then
-		echo "loop <n> <command...>"
-		return
-	fi
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        echo "loop <n> <command...>"
+        return
+    fi
 
-	for _ in $(seq 1 "$1"); do
-		eval "${@:2}"
-	done
+    for _ in $(seq 1 "$1"); do
+        eval "${@:2}"
+    done
 }
 
 powerline() {
-	PS1="$(powerline-shell --shell bash $?)"
+    PS1="$(powerline-shell --shell bash $?)"
 }
 PROMPT_COMMAND=powerline
 
@@ -169,11 +169,11 @@ PROMPT_COMMAND=powerline
 export GPG_TTY="$(tty)"
 
 # ---------------------------------------------
-# $PATH
+# More boring stuff
 # ---------------------------------------------
 
 # added by travis gem
-[ -f /home/legolord208/.travis/travis.sh ] && source /home/legolord208/.travis/travis.sh
+[ -f /home/jD91mZM2/.travis/travis.sh ] && source /home/jD91mZM2/.travis/travis.sh
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
