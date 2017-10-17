@@ -41,6 +41,7 @@ export GPG_TTY="$(tty)"
 # ---------------------------------------------
 
 source ~/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # ---------------------------------------------
 # Boring stuff
