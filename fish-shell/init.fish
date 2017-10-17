@@ -1,7 +1,3 @@
-if status --is-login
-    bass source ~/.profile
-end
-
 bass eval `dircolors ~/.dircolors`
 
 alias clear='command clear; echo -ne "\e[3J"'
@@ -42,3 +38,9 @@ end
 
 # https://github.com/pstadler/keybase-gpg-github/issues/11
 set -gx GPG_TTY (tty)
+
+test -z "$SSH_AUTH_SOCK" -a -z "$SSH_AUTH_PID"; bass eval (ssh-agent)"true" # Because ssh-agent ends with a semicolon and that messes up bass for some reason.
+    if begin status --is-login; and test -z "$DISPLAY" -a -n "$XDG_VTNR"; and test "$XDG_VTNR" = 1; end
+	bass source ~/.profile
+	exec startx -keeptty
+end
