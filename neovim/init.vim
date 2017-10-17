@@ -65,7 +65,7 @@ let g:AutoPairsMultilineClose = 0
 
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-	\ 'rust': ['rustup', 'run', 'nightly', 'rls']
+	\ 'rust': ['rls']
 \ }
 
 let g:airline#extensions#tabline#enabled = 1
