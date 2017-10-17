@@ -36,6 +36,10 @@ precmd_functions+=(powerline)
 # https://github.com/pstadler/keybase-gpg-github/issues/11
 export GPG_TTY="$(tty)"
 
+# https://unix.stackexchange.com/a/140499
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
 # ---------------------------------------------
 # Plugins
 # ---------------------------------------------
