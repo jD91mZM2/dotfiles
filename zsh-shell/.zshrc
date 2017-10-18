@@ -27,7 +27,6 @@ loop() {
         eval "${@:2}"
     done
 }
-
 powerline() {
     PS1="$(powerline-shell --shell zsh $?)"
 }
@@ -36,20 +35,36 @@ precmd_functions+=(powerline)
 # https://github.com/pstadler/keybase-gpg-github/issues/11
 export GPG_TTY="$(tty)"
 
-# https://unix.stackexchange.com/a/140499
+# --------------------------------
+# Options
+# --------------------------------
+
+export HISTFILE="$HOME/.zsh_history"
+export SAVEHIST=100
+
+setopt APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+
+# --------------------------------
+# Keybinds
+# --------------------------------
+
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+bindkey "^[[3~"   delete-char
 
-# ---------------------------------------------
+# --------------------------------
 # Plugins
-# ---------------------------------------------
+# --------------------------------
 
 source ~/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# ---------------------------------------------
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=10"
+
+# --------------------------------
 # Boring stuff
-# ---------------------------------------------
+# --------------------------------
 
 # added by travis gem
 [ -f /home/jD91mZM2/.travis/travis.sh ] && source /home/jD91mZM2/.travis/travis.sh
