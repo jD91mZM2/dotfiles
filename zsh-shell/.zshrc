@@ -52,6 +52,8 @@ setopt HIST_IGNORE_DUPS
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 bindkey "^[[3~"   delete-char
+bindkey "^U"      backward-kill-line
+bindkey "^Y"      yank
 
 # --------------------------------
 # Plugins
