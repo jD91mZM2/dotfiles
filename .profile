@@ -18,10 +18,8 @@ fi
 
 # $PATH
 ## Single user installs
-PATH="$HOME/.rvm/rubies/default/bin:$PATH"
-PATH="$PATH:$HOME/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin"
+PATH="$PATH:$(ruby -e "print Gem.user_dir")/bin"
 PATH="$PATH:$HOME/.cargo/bin"
-PATH="$PATH:$HOME/.llvm/build/bin"
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/Coding/Go/bin"
 PATH="$PATH:$HOME/bin:$HOME/.local/bin"
