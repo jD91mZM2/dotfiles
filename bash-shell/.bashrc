@@ -137,14 +137,6 @@ alias clear='command clear; echo -ne "\e[3J"'
 alias tmux='tmux -2'
 alias git=hub
 
-rm() {
-    if echo "$1" | grep "^/tmp/" > /dev/null; then
-        # Special case for RVM.
-        command rm "$@"
-    else
-        echo "Don't use rm, use \`trash\`."
-    fi
-}
 unicopy() {
     [ -z "$1" ] && echo "unicopy <character>" && return
     unicode "$1" --format "{pchar}" | xclip -sel clip
@@ -167,13 +159,3 @@ PROMPT_COMMAND=powerline
 
 # https://github.com/pstadler/keybase-gpg-github/issues/11
 export GPG_TTY="$(tty)"
-
-# ---------------------------------------------
-# More boring stuff
-# ---------------------------------------------
-
-# added by travis gem
-[ -f /home/jD91mZM2/.travis/travis.sh ] && source /home/jD91mZM2/.travis/travis.sh
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
