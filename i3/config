@@ -156,11 +156,15 @@ exec --no-startup-id i3-sensible-terminal
 assign [title="Konsole"] 1
 assign [title="Discord"] 2
 assign [title="Firefox"] 3
+for_window [title="KeePassXC"] floating enable
+for_window [title="pinentry"] floating enable
 
 bindsym $mod+Shift+l exec i3lock
 
 bindsym --release $mod+bracketleft exec xdotool type "å"
 bindsym --release $mod+apostrophe  exec xdotool type "ä"
 bindsym --release $mod+semicolon   exec xdotool type "ö"
+
+bindsym --release $mod+shift+f exec keepassxc
 bindsym --release $mod+s exec "xdotool key U00AF && xdotool type '\\_(' && xdotool key U30C4 && xdotool type ')_/' && xdotool key U00AF"
 bindsym --release $mod+z exec echo -n "​" | xclip -sel clip
