@@ -1,3 +1,3 @@
-#exec i3
 #exec gnome-session
-exec startkde
+#exec startkde
+exec i3
