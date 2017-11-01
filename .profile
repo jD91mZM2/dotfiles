@@ -33,6 +33,7 @@ export PATH
 # Variables
 export EDITOR="$VISUAL"
 export GOPATH="$HOME/Coding/Go"
+export QT_QTA_PLATFORMTHEME="qt5ct"
 export RUST_BACKTRACE=1
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export VISUAL=nvim
