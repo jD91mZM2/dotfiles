@@ -152,6 +152,8 @@ exec --no-startup-id setxkbmap -option compose:ralt
 exec --no-startup-id /usr/lib/notify-osd/notify-osd
 exec --no-startup-id discord
 exec --no-startup-id i3-sensible-terminal
+exec --no-startup-id konsole -e ssh-add ~/.ssh/id_rsa
+exec --no-startup-id nm-applet
 
 assign [title="Konsole"] 1
 assign [title="Discord"] 2
