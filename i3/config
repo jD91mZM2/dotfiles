@@ -174,6 +174,8 @@ assign [title="Discord"] 10
 for_window [title="pinentry"] floating enable
 
 bindsym $mod+Shift+l exec i3lock
+bindsym Print exec spectacle -m
+bindsym $mod+Shift+Print exec spectacle -r
 
 bindsym --release $mod+bracketleft exec xdotool type "å"
 bindsym --release $mod+apostrophe  exec xdotool type "ä"
