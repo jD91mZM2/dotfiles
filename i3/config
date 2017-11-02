@@ -146,7 +146,7 @@ bar {
 
 # Custom stuff
 
-workspace 2 output DP-1
+workspace 10 output DP-1
 
 set $system Shutdown (s), Cancel (c)
 mode "$system" {
@@ -169,8 +169,8 @@ exec --no-startup-id konsole -e ssh-add ~/.ssh/id_rsa
 exec --no-startup-id nm-applet
 
 assign [title="Konsole"] 1
-assign [title="Discord"] 2
-assign [title="Firefox"] 3
+assign [title="Firefox"] 2
+assign [title="Discord"] 10
 for_window [title="pinentry"] floating enable
 
 bindsym $mod+Shift+l exec i3lock
