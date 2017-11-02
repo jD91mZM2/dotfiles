@@ -137,10 +137,16 @@ bar {
     status_command i3status
 
     # Custom stuff
+
+    position top
     tray_output primary
+
     colors {
-        focused_workspace  #ffffff #000000 #ffffff
-        inactive_workspace #000000 #000000 #ffffff
+        background #111111
+
+        focused_workspace  #ffffff #111111 #ffffff
+        inactive_workspace #111111 #111111 #ffffff
+        urgent_workspace   #ff0000 #111111 #ff0000
     }
 }
 
