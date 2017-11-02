@@ -139,6 +139,16 @@ bar {
 
 # Custom stuff
 
+set $system Shutdown (s), Cancel (c)
+mode "$system" {
+    bindsym s mode "Shutting down..."; exec --no-startup-id sleep 1 && systemctl poweroff
+
+    bindsym c mode "default"
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+bindsym $mod+Pause mode "$system"
+
 exec --no-startup-id xsetroot -solid "#$(openssl rand -hex 3)"
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
 exec --no-startup-id setxkbmap -option compose:ralt
@@ -152,7 +162,6 @@ exec --no-startup-id nm-applet
 assign [title="Konsole"] 1
 assign [title="Discord"] 2
 assign [title="Firefox"] 3
-for_window [title="KeePassXC"] floating enable
 for_window [title="pinentry"] floating enable
 
 bindsym $mod+Shift+l exec i3lock
@@ -162,5 +171,5 @@ bindsym --release $mod+apostrophe  exec xdotool type "ä"
 bindsym --release $mod+semicolon   exec xdotool type "ö"
 
 bindsym --release $mod+shift+f exec keepassxc
-bindsym --release $mod+shift+s exec "xdotool key U00AF && xdotool type '\\_(' && xdotool key U30C4 && xdotool type ')_/' && xdotool key U00AF"
+bindsym --release $mod+shift+s exec xdotool key U00AF && xdotool type "\\_(" && xdotool key U30C4 && xdotool type ")_/" && xdotool key U00AF
 bindsym --release $mod+z exec echo -n "​" | xclip -sel clip
