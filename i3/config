@@ -154,7 +154,7 @@ bar {
 
 workspace 10 output DP-1
 
-bindsym $mod+Pause exec "i3-nagbar -t warning -m 'You pressed the shut down button' -b 'No shit, Sherlock' zsh"
+bindsym $mod+Pause exec "i3-nagbar -t warning -m 'You pressed the shut down button' -b 'No shit, Sherlock' 'systemctl poweroff'"
 
 exec --no-startup-id xsetroot -solid "#$(openssl rand -hex 3)"
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
