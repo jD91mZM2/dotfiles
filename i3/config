@@ -171,7 +171,11 @@ assign [class="Firefox"] 2
 assign [class="discord"] 10
 for_window [title="pinentry"] floating enable
 
-bindsym $mod+Shift+l exec i3lock -c "#111111"
+set $lock i3lock -c "#111111"
+
+bindsym $mod+Shift+l exec $lock
+exec --no-startup-id xautolock -time 1 -locker '$lock' -secure
+
 bindsym Print exec spectacle -m
 bindsym $mod+Shift+Print exec spectacle -r
 
