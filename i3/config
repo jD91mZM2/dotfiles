@@ -154,15 +154,7 @@ bar {
 
 workspace 10 output DP-1
 
-set $system Shutdown (s), Cancel (c)
-mode "$system" {
-    bindsym s mode "Shutting down..."; exec --no-startup-id sleep 1 && systemctl poweroff
-
-    bindsym c mode "default"
-    bindsym Escape mode "default"
-    bindsym Return mode "default"
-}
-bindsym $mod+Pause mode "$system"
+bindsym $mod+Pause exec "i3-nagbar -t warning -m 'You pressed the shut down button' -b 'No shit, Sherlock' zsh"
 
 exec --no-startup-id xsetroot -solid "#$(openssl rand -hex 3)"
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
