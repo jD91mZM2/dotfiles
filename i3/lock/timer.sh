@@ -3,7 +3,7 @@
 dir="$(dirname "$0")"
 
 xautolock \
-  -time 1 \
+  -time 5 \
   -locker "$dir/lock.sh" \
   -secure \
   -notify 10 \
