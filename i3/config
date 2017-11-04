@@ -174,16 +174,16 @@ set $lock i3lock -c "#111111"
 bindsym $mod+Shift+l exec --no-startup-id ~/.config/i3/lock/lock.sh
 exec --no-startup-id ~/.config/i3/lock/timer.sh
 
-bindsym Print exec spectacle -m
-bindsym $mod+Shift+Print exec spectacle -r
+bindsym Print exec --no-startup-id spectacle -m
+bindsym $mod+Shift+Print exec --no-startup-id spectacle -r
 
-bindsym --release $mod+bracketleft exec xdotool type "å"
-bindsym --release $mod+apostrophe  exec xdotool type "ä"
-bindsym --release $mod+semicolon   exec xdotool type "ö"
+bindsym --release $mod+bracketleft exec --no-startup-id xdotool type "å"
+bindsym --release $mod+apostrophe  exec --no-startup-id xdotool type "ä"
+bindsym --release $mod+semicolon   exec --no-startup-id xdotool type "ö"
 
-bindsym --release $mod+shift+f exec keepassxc
-bindsym --release $mod+shift+s exec xdotool key U00AF && xdotool type "\\_(" && xdotool key U30C4 && xdotool type ")_/" && xdotool key U00AF
-bindsym --release $mod+z exec echo -n "​" | xclip -sel clip
+bindsym --release $mod+shift+f exec --no-startup-id keepassxc
+bindsym --release $mod+shift+s exec --no-startup-id xdotool key U00AF && xdotool type "\\_(" && xdotool key U30C4 && xdotool type ")_/" && xdotool key U00AF
+bindsym --release $mod+z exec --no-startup-id echo -n "​" | xclip -sel clip
 
 # Colors
 
