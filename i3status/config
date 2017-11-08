@@ -50,8 +50,9 @@ disk "/" {
 # Custom stuff
 
 volume master {
-    device    = "pulse"
-    format    = "VOL %volume"
-    mixer     = "Master"
-    mixer_idx = 0
+    device       = "pulse"
+    format       = "VOL %volume"
+    format_muted = "VOL %volume"
+    mixer        = "Master"
+    mixer_idx    = 0
 }
