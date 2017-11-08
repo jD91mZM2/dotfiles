@@ -154,35 +154,42 @@ bar {
 
 workspace 10 output DP-1
 
-bindsym $mod+Pause exec "i3-nagbar -t warning -m 'You pressed the shut down button' -b 'No shit, Sherlock' 'systemctl poweroff'"
-
-exec --no-startup-id xsetroot -solid "#$(openssl rand -hex 3)"
-exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
-exec --no-startup-id setxkbmap -option compose:ralt
+# Autostart programs
 
 exec --no-startup-id "i3-msg 'workspace 10; exec --no-startup-id discord'"
 exec --no-startup-id "i3-msg 'workspace 1;  exec --no-startup-id i3-sensible-terminal'"
 exec --no-startup-id "i3-msg 'workspace 1;  exec --no-startup-id konsole -e ssh-add ~/.ssh/id_rsa'"
+exec --no-startup-id dropbox
 exec --no-startup-id nm-applet
-
-assign [class="discord"] 10
-for_window [title="pinentry"] floating enable
-
-set $lock i3lock -c "#111111"
-
-bindsym $mod+Shift+l exec --no-startup-id ~/.config/i3/lock/lock.sh
+exec --no-startup-id setxkbmap -option compose:ralt
+exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
+exec --no-startup-id xsetroot -solid "#$(openssl rand -hex 3)"
 exec --no-startup-id ~/.config/i3/lock/timer.sh
 
-bindsym Print exec --no-startup-id spectacle -m
+# Keybinds
+
+bindsym $mod+Pause exec "i3-nagbar -t warning -m 'You pressed the shut down button' -b 'No shit, Sherlock' 'systemctl poweroff'"
+
 bindsym $mod+Shift+Print exec --no-startup-id spectacle -r
+bindsym $mod+Shift+l exec --no-startup-id ~/.config/i3/lock/lock.sh
+bindsym $mod+shift+f exec --no-startup-id keepassxc
+bindsym Print exec --no-startup-id spectacle -m
 
 bindsym --release $mod+bracketleft exec --no-startup-id xdotool type "å"
 bindsym --release $mod+apostrophe  exec --no-startup-id xdotool type "ä"
 bindsym --release $mod+semicolon   exec --no-startup-id xdotool type "ö"
-
-bindsym --release $mod+shift+f exec --no-startup-id keepassxc
 bindsym --release $mod+shift+s exec --no-startup-id xdotool key U00AF && xdotool type "\\_(" && xdotool key U30C4 && xdotool type ")_/" && xdotool key U00AF
 bindsym --release $mod+z exec --no-startup-id echo -n "​" | xclip -sel clip
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse set Master 5%+ unmute && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse set Master 5%- unmute && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
+bindsym XF86AudioMute        exec --no-startup-id amixer -D pulse set Master toggle && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
+
+# Program settings
+
+assign [class="discord"] 10
+for_window [title="pinentry"] floating enable
+
 
 # Colors
 
