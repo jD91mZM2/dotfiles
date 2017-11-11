@@ -182,15 +182,14 @@ bindsym --release $mod+semicolon   exec --no-startup-id xdotool type "ö"
 bindsym --release $mod+shift+s exec --no-startup-id xdotool key U00AF && xdotool type "\\_(" && xdotool key U30C4 && xdotool type ")_/" && xdotool key U00AF
 bindsym --release $mod+z exec --no-startup-id echo -n "​" | xclip -sel clip
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ unmute && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- unmute && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 2%+ unmute && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 2%- unmute && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
 bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle && paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
 
 # Program settings
 
 assign [class="discord"] 10
 for_window [title="pinentry"] floating enable
-
 
 # Colors
 
