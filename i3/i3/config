@@ -165,7 +165,7 @@ exec --no-startup-id udiskie
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
 exec --no-startup-id xsetroot -solid "#$(openssl rand -hex 3)"
 exec --no-startup-id ~/.config/i3/lock/timer.sh
-exec --no-startup-id ~/.config/i3/polybar.sh
+exec_always --no-startup-id ~/.config/i3/polybar.sh
 
 # Keybinds
 
