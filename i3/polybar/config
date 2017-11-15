@@ -9,8 +9,8 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #222
-background-alt = #444
+background = #99222222
+background-alt = #99444444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
@@ -24,7 +24,7 @@ width = 100%
 height = 27
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 0
 fixed-center = false
 
 background = ${colors.background}
@@ -33,8 +33,8 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
-border-color = #00000000
+border-size = 0
+border-color = #000000
 
 padding-left = 0
 padding-right = 2
@@ -52,7 +52,7 @@ modules-right = filesystem xbacklight volume xkeyboard memory cpu wlan eth batte
 
 tray-position = right
 tray-padding = 2
-;tray-transparent = true
+tray-transparent = true
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm

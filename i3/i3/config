@@ -159,12 +159,13 @@ workspace 10 output DP-1
 exec --no-startup-id "i3-msg 'workspace 10; exec --no-startup-id discord'"
 exec --no-startup-id "i3-msg 'workspace 1;  exec --no-startup-id i3-sensible-terminal'"
 exec --no-startup-id "i3-msg 'workspace 1;  exec --no-startup-id konsole -e ssh-add ~/.ssh/id_rsa'"
+exec --no-startup-id compton -b
 exec --no-startup-id dropbox
 exec --no-startup-id setxkbmap -option compose:ralt
 exec --no-startup-id udiskie
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
-exec --no-startup-id xsetroot -solid "#$(openssl rand -hex 3)"
 exec --no-startup-id ~/.config/i3/lock/timer.sh
+exec_always --no-startup-id feh --bg-fill /usr/share/archlinux/wallpaper/archlinux-firestarter.jpg
 exec_always --no-startup-id ~/.config/i3/polybar.sh
 
 # Keybinds
@@ -189,6 +190,7 @@ bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle && pa
 # Program settings
 
 assign [class="discord"] 10
+for_window [class="konsole"]  border none
 for_window [title="pinentry"] floating enable
 
 # Colors
