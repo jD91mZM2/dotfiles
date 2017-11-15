@@ -190,10 +190,14 @@ bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle && pa
 # Program settings
 
 assign [class="discord"] 10
-for_window [class="konsole"]  border none
+for_window [class="^.*$"]     border none
 for_window [title="pinentry"] floating enable
 
 # Colors
 
 client.focused          #000000 #000000 #ffffff #000000 #000000
 client.focused_inactive #000000 #000000 #aaaaaa #000000 #000000
+
+# Gaps
+
+gaps inner 10
