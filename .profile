@@ -40,3 +40,6 @@ export VISUAL=nvim
 
 # https://github.com/electron/electron/issues/8455
 export ELECTRON_FORCE_WINDOW_MENU_BAR=1
+
+# ssh-agent
+[ -z "$SSH_AUTH_SOCK" ] && [ -z "$SSH_AGENT_PID" ] && eval $(ssh-agent)
