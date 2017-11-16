@@ -165,8 +165,8 @@ exec --no-startup-id setxkbmap -option compose:ralt
 exec --no-startup-id udiskie
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
 exec --no-startup-id ~/.config/i3/lock/timer.sh
-exec_always --no-startup-id feh --bg-fill /usr/share/archlinux/wallpaper/archlinux-firestarter.jpg
 exec_always --no-startup-id ~/.config/i3/polybar.sh
+exec_always --no-startup-id ~/.screenlayout/default.sh && feh --bg-fill /usr/share/archlinux/wallpaper/archlinux-firestarter.jpg
 
 # Keybinds
 
