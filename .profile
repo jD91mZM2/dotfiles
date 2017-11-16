@@ -17,16 +17,11 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # $PATH
-## Single user installs
 PATH="$PATH:$(ruby -e "print Gem.user_dir")/bin"
 PATH="$PATH:$HOME/.cargo/bin"
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/Coding/Go/bin"
 PATH="$PATH:$HOME/bin:$HOME/.local/bin"
-
-## Multi user installs
-PATH="$PATH:/opt/google/go/bin"
-PATH="$PATH:/opt/gradle/bin"
 
 export PATH
 
