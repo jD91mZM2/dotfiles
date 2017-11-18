@@ -161,7 +161,6 @@ exec --no-startup-id "i3-msg 'workspace 1;  exec --no-startup-id i3-sensible-ter
 exec --no-startup-id "i3-msg 'workspace 1;  exec --no-startup-id konsole -e ssh-add ~/.ssh/id_rsa'"
 exec --no-startup-id compton -b
 exec --no-startup-id dropbox
-exec --no-startup-id setxkbmap -option compose:ralt
 exec --no-startup-id udiskie
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
 exec --no-startup-id ~/.config/i3/lock/timer.sh
