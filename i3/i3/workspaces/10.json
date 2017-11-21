@@ -1,0 +1,58 @@
+// vim:ts=4:sw=4:et
+{
+    // stacked split container with 2 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "stacked",
+    "percent": null,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 721,
+               "width": 1346,
+               "x": 10,
+               "y": 37
+            },
+            "name": "Discord",
+            "percent": 0.5,
+            "swallows": [
+               {
+                  "class": "^discord$"
+               // "instance": "^discord$",
+               // "title": "^Discord$",
+               // "transient_for": "^$",
+               // "window_role": "^browser\\-window$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 721,
+               "width": 668,
+               "x": 688,
+               "y": 37
+            },
+            "name": "general - Redox Redox : Back in the cinemas",
+            "percent": 0.5,
+            "swallows": [
+               {
+                  "class": "^Mattermost$"
+               // "instance": "^mattermost$",
+               // "title": "^general\\ \\-\\ Redox\\ Redox\\ \\:\\ Back\\ in\\ the\\ cinemas$",
+               // "transient_for": "^$",
+               // "window_role": "^browser\\-window$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+

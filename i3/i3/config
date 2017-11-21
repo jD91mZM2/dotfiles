@@ -156,9 +156,13 @@ workspace 10 output DP-1
 
 # Autostart programs
 
-exec --no-startup-id "i3-msg 'workspace 10; exec --no-startup-id discord'"
-exec --no-startup-id "i3-msg 'workspace 1;  exec --no-startup-id i3-sensible-terminal'"
-exec --no-startup-id "i3-msg 'workspace 1;  exec --no-startup-id konsole -e ssh-add ~/.ssh/id_rsa'"
+exec --no-startup-id "i3-msg 'workspace 10; append_layout ~/.config/i3/workspaces/10.json'"
+exec --no-startup-id "i3-msg 'workspace 1;  append_layout ~/.config/i3/workspaces/1.json'"
+exec --no-startup-id discord
+exec --no-startup-id i3-sensible-terminal
+exec --no-startup-id konsole -e ssh-add ~/.ssh/id_rsa
+exec --no-startup-id mattermost-desktop
+
 exec --no-startup-id compton -b
 exec --no-startup-id dropbox
 exec --no-startup-id udiskie
