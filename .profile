@@ -31,6 +31,7 @@ export GOPATH="$HOME/Coding/Go"
 export QT_QPA_PLATFORMTHEME=gtk2
 export RUST_BACKTRACE=1
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+export TERMINAL=konsole
 export VISUAL=nvim
 
 # https://github.com/electron/electron/issues/8455
