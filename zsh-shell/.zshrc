@@ -37,6 +37,11 @@ export SAVEHIST=100
 setopt APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
 
+zstyle ":completion:*" menu select
+
+autoload -Uz compinit
+compinit
+
 # --------------------------------
 # Keybinds
 # --------------------------------
