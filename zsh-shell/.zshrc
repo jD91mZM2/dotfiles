@@ -51,7 +51,8 @@ bindkey "^Y"      yank
 # Plugins
 # --------------------------------
 
-source ~/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions
+source /usr/share/zsh/plugins/zsh-completions
+source /usr/share/zsh/plugins/zsh-syntax-highlighting
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=10"
