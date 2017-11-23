@@ -9,13 +9,37 @@
        "x": 0,
        "y": 0
     },
-    "name": "jD91mZM2 : zsh — Konsole",
-    "percent": 1,
+    "name": "workspaces : perl — Konsole",
+    "percent": 0.5,
     "swallows": [
        {
-          "class": "^konsole$"
+       "class": "^konsole$"
        // "instance": "^konsole$",
-       // "title": "^jD91mZM2\\ \\:\\ zsh\\ \\—\\ Konsole$",
+       // "title": "^workspaces\\ \\:\\ perl\\ \\—\\ Konsole$",
+       // "transient_for": "^$",
+       // "window_role": "^MainWindow\\#1$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "none",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 444,
+       "width": 650,
+       "x": 0,
+       "y": 0
+    },
+    "name": "jD91mZM2 : ssh-add — Konsole",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^konsole$",
+       "title": "ssh-add"
+       // "instance": "^konsole$",
        // "transient_for": "^$",
        // "window_role": "^MainWindow\\#1$"
        }
