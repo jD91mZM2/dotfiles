@@ -9,13 +9,13 @@
        "x": 0,
        "y": 0
     },
-    "name": "workspaces : perl — Konsole",
+    "name": "workspaces : perl — konsole",
     "percent": 0.5,
     "swallows": [
        {
-       "class": "^konsole$"
+       "class": "^konsole$",
+       "title": ": (?!ssh-add).{7}"
        // "instance": "^konsole$",
-       // "title": "^workspaces\\ \\:\\ perl\\ \\—\\ Konsole$",
        // "transient_for": "^$",
        // "window_role": "^MainWindow\\#1$"
        }
