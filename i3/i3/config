@@ -175,10 +175,12 @@ exec_always --no-startup-id ~/.screenlayout/default.sh && feh --bg-fill /usr/sha
 
 bindsym $mod+Pause exec "i3-nagbar -t warning -m 'You pressed the shut down button' -b 'No shit, Sherlock' 'systemctl poweroff'"
 
+bindsym $mod+Print exec --no-startup-id spectacle -a
 bindsym $mod+Shift+Print exec --no-startup-id spectacle -r
+bindsym Print exec --no-startup-id spectacle -m
+
 bindsym $mod+Shift+l exec --no-startup-id ~/.config/i3/lock/lock.sh
 bindsym $mod+shift+f exec --no-startup-id keepassxc
-bindsym Print exec --no-startup-id spectacle -m
 
 bindsym --release $mod+bracketleft exec --no-startup-id xdotool type "å"
 bindsym --release $mod+apostrophe  exec --no-startup-id xdotool type "ä"
