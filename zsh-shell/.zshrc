@@ -1,3 +1,7 @@
+# --------------------------------
+# General
+# --------------------------------
+
 eval "$(dircolors ~/.dircolors)"
 
 alias ls='ls -CF --color=auto'
