@@ -153,7 +153,7 @@ loop() {
 }
 
 powerline() {
-    PS1="$(powerline-shell --shell bash $?)"
+    PS1="$(powerline-go --shell bash --error $? --modules "venv,ssh,cwd,perms,git,hg,jobs,exit,root")"
 }
 PROMPT_COMMAND=powerline
 
