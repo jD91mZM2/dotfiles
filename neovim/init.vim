@@ -1,13 +1,14 @@
 call plug#begin()
 
 Plug 'PeterRincker/vim-argumentative'
-Plug 'roxma/nvim-completion-manager'
 Plug 'alvan/vim-closetag'
 Plug 'aperezdc/vim-template'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'roxma/nvim-completion-manager'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 Plug 'chriskempson/base16-vim'
