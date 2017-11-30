@@ -28,7 +28,7 @@ function loop --description "loop <n> <command>" --argument n command
 end
 
 function fish_prompt
-    powerline-go --shell bare --error $status --modules "venv,ssh,cwd,perms,git,hg,jobs,exit,root"
+    powerline-rs --shell bare $status
 end
 
 # https://github.com/pstadler/keybase-gpg-github/issues/11

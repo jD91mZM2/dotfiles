@@ -24,7 +24,7 @@ loop() {
     done
 }
 powerline() {
-    PS1="$(powerline-go --shell zsh --error $? --modules "venv,ssh,cwd,perms,git,hg,jobs,exit,root")"
+    PS1="$(powerline-rs --shell zsh $?)"
 }
 precmd_functions+=(powerline)
 
