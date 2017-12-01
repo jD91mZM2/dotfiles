@@ -166,6 +166,7 @@ exec --no-startup-id mattermost-desktop
 exec --no-startup-id compton -b
 exec --no-startup-id dropbox
 exec --no-startup-id udiskie
+exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
 exec --no-startup-id ~/.config/i3/lock/timer.sh
 exec_always --no-startup-id ~/.config/i3/polybar.sh
