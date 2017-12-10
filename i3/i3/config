@@ -168,8 +168,8 @@ exec --no-startup-id dropbox
 exec --no-startup-id udiskie
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
-exec --no-startup-id ~/.config/i3/lock/timer.sh
-exec_always --no-startup-id ~/.config/i3/polybar.sh
+exec --no-startup-id ~/.dotfiles/i3/scripts/lock/timer.sh
+exec_always --no-startup-id ~/.dotfiles/i3/scripts/polybar.sh
 exec_always --no-startup-id ~/.screenlayout/default.sh && feh --bg-fill /usr/share/archlinux/wallpaper/archlinux-firestarter.jpg
 
 # Keybinds
@@ -180,7 +180,7 @@ bindsym $mod+Print exec --no-startup-id spectacle -a
 bindsym $mod+Shift+Print exec --no-startup-id spectacle -r
 bindsym Print exec --no-startup-id spectacle -m
 
-bindsym $mod+Shift+l exec --no-startup-id ~/.config/i3/lock/lock.sh
+bindsym $mod+Shift+l exec --no-startup-id ~/.dotfiles/i3/scripts/lock/lock.sh
 bindsym $mod+shift+f exec --no-startup-id keepassxc
 
 bindsym --release $mod+bracketleft exec --no-startup-id xdotool type "å"
