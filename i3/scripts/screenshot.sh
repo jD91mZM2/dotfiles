@@ -34,6 +34,10 @@ case "$1" in
     window)
         maim -i "$(xdotool getactivewindow)" /tmp/screenshot
         ;;
+    wait)
+        sleep 2
+        maim -s /tmp/screenshot
+        ;;
     region)
         maim -s /tmp/screenshot
         ;;
