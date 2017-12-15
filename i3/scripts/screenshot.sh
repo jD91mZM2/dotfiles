@@ -4,7 +4,7 @@ case "$1" in
     screen)
         # -----------------------------------------------------------------------------------
         # COPY PASTED FROM https://gist.github.com/naelstrof/f9b74b5221cdc324c0911c89a47b8d97
-        # ALL CREDIT TO HIM
+        # ALL CREDITS GO TO THE CREATOR OF THAT SCRIPT
         # -----------------------------------------------------------------------------------
         monitors=$(xrandr | grep -o '[0-9]*x[0-9]*[+-][0-9]*[+-][0-9]*')
         # Get the location of the mouse
