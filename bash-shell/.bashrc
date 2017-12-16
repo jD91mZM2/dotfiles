@@ -159,3 +159,9 @@ PROMPT_COMMAND=powerline
 
 # https://github.com/pstadler/keybase-gpg-github/issues/11
 export GPG_TTY="$(tty)"
+
+# ---------------------------------------------
+# Plugins
+# ---------------------------------------------
+
+source /usr/share/z/z.sh
