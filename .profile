@@ -26,7 +26,7 @@ PATH="$PATH:$HOME/bin:$HOME/.local/bin"
 export PATH
 
 # Variables
-export EDITOR="$VISUAL"
+export EDITOR=nvim
 export GOPATH="$HOME/Coding/Go"
 export QT_QPA_PLATFORMTHEME=gtk2
 export RUST_BACKTRACE=1
