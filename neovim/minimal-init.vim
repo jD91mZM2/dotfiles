@@ -16,9 +16,10 @@ au BufEnter * silent! lcd %:p:h
 " Automatically change directory to the local file.
 
 set splitright " Make splits open on the right
-command! Term silent! lcd %:p:h | tabe +terminal
+command! Term  silent! lcd %:p:h | tabe +terminal
+command! HTerm silent! lcd %:p:h | rightbelow new +terminal
 command! VTerm silent! lcd %:p:h | vnew +terminal
-" Open terminal with :Term and :VTerm
+" Open terminals in different locations with :Term, :HTerm and :VTerm
 
 vnoremap <leader>c y`>a = <c-r>=<c-r>"<cr><esc>
 " Calculate math expressions with \c in visual mode

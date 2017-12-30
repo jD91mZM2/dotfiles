@@ -94,6 +94,7 @@ endfunction
 command! CWD silent! lcd %:p:h | echo "Changed directory!"
 command! Term silent! lcd %:p:h | tabe +terminal
 command! VTerm silent! lcd %:p:h | vnew +terminal
+command! HTerm silent! lcd %:p:h | rightbelow new +terminal
 command! SudoW silent exec "w !sudo tee % > /dev/null" | echo "Saved!"
 
 command! JSON call JSON()
