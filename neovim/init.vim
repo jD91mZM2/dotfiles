@@ -80,6 +80,8 @@ let g:racer_cmd = '~/.cargo/bin/racer'
 let g:racer_experimental_completer = 1
 let g:rust_recommended_style = 0
 
+let g:table_mode_corner_corner='+'
+
 " Commands
 function! JSON()
 	%!python -m json.tool
