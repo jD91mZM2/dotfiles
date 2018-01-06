@@ -30,14 +30,14 @@ Plug 'zchee/deoplete-go', { 'do': 'make' }
 call plug#end()
 
 " Settings
-set ts=4
-set sw=0
-set expandtab
 set cursorline
+set expandtab
+set mouse=a
+set nrformats=alpha,octal,hex
 set number
 set splitright
-set nrformats=alpha,octal,hex
-set mouse=a
+set sw=0
+set ts=4
 
 " Colors
 set background=dark
@@ -52,12 +52,13 @@ hi Trail ctermbg=red
 au BufWinEnter * match Trail /\s\+$/ " Copy pasted from http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 au BufEnter * silent! lcd %:p:h
 
-au FileType fish compiler fish
-au FileType haskell       setlocal ts=2
-au FileType yaml,markdown setlocal ts=2 indentkeys=
+au BufEnter * setlocal signcolumn=yes
+au BufLeave * setlocal signcolumn=no
 
-au User LanguageClientStarted set signcolumn=yes
-au User LanguageClientStopped set signcolumn=auto
+au FileType fish compiler fish
+au FileType haskell setlocal ts=2
+au FileType rust compiler rust
+au FileType yaml,markdown setlocal ts=2 indentkeys=
 
 " Plugins
 "
@@ -104,7 +105,8 @@ command! JSONMIN silent %!ruby ~/.config/nvim/minify.rb
 command! JavaFmt call JavaFmt()
 command! -nargs=1 Keyword syn keyword Keyword <args>
 
-nnoremap <leader>; :call InjectSemicolon()<CR>
-nnoremap <leader>n :NERDTree \| wincmd p<CR>
-vnoremap <leader>c y`>a = <c-r>=<c-r>"<cr><esc>
-tnoremap <esc><esc> <c-\><c-n>
+nnoremap <LEADER>; :call InjectSemicolon()<CR>
+nnoremap <LEADER>c :make build<CR>
+nnoremap <LEADER>n :NERDTree \| wincmd p<CR>
+tnoremap <ESC><ESC> <C-\><C-N>
+vnoremap <LEADER>c y`>a = <C-R>=<C-R>"<CR><ESC>
