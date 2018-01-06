@@ -80,30 +80,6 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -133,43 +109,77 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-#bar {
-#    status_command i3status
-#
-#    # Custom stuff
-#
-#    position top
-#    tray_output primary
-#
-#    colors {
-#        background #111111
-#
-#        focused_workspace  #ffffff #111111 #ffffff
-#        inactive_workspace #111111 #111111 #ffffff
-#        urgent_workspace   #ff0000 #111111 #ff0000
-#    }
-#}
+bar {
+    status_command i3status
+
+    # Custom stuff
+
+    font pango:Font Awesome 5 Free 8
+    height 25
+    i3bar_command i3bar -t
+    position top
+    strip_workspace_numbers yes
+    tray_output primary
+
+    colors {
+        background #11111190
+
+        focused_workspace  #ffffff90 #11111190 #ffffff
+        inactive_workspace #11111190 #11111190 #ffffff
+        urgent_workspace   #ff000090 #11111190 #ff0000
+    }
+}
 
 # Custom stuff
 
-workspace 10 output DP-1
+# Workspaces
+set $ws1 1: 
+set $ws10 10: 
+workspace "$ws10" output DP-1
+
+## switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace $ws10
+
+## move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Autostart programs
 
-exec --no-startup-id "i3-msg 'workspace 10; append_layout ~/.config/i3/workspaces/10.json'"
-exec --no-startup-id "i3-msg 'workspace 1;  append_layout ~/.config/i3/workspaces/1.json'"
+## Interactive
 exec --no-startup-id discord
+exec --no-startup-id dropbox
+exec --no-startup-id evolution
 exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id konsole -e ssh-add ~/.ssh/id_rsa
 exec --no-startup-id mattermost-desktop
-
-exec --no-startup-id compton -b
-exec --no-startup-id dropbox
-exec --no-startup-id udiskie
+exec --no-startup-id synac-gtk
 exec --no-startup-id xfce4-power-manager
+
+## Background
+exec --no-startup-id "i3-msg 'workspace $ws10; append_layout ~/.dotfiles/i3/workspaces/10.json'"
+exec --no-startup-id "i3-msg 'workspace $ws1;  append_layout ~/.dotfiles/i3/workspaces/1.json'"
+exec --no-startup-id compton -b
+exec --no-startup-id udiskie
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
 exec --no-startup-id ~/.dotfiles/i3/scripts/lock/timer.sh
-exec_always --no-startup-id ~/.dotfiles/i3/scripts/polybar.sh
 exec_always --no-startup-id ~/.screenlayout/default.sh && feh --bg-fill /usr/share/archlinux/wallpaper/archlinux-firestarter.jpg
 
 # Keybinds
@@ -196,7 +206,7 @@ bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle && pa
 
 # Program settings
 
-assign [class="discord"] 10
+assign [class="discord"] $ws10
 for_window [class="^.*$"]     border none
 for_window [title="pinentry"] floating enable
 
