@@ -133,8 +133,8 @@ bar {
 # Custom stuff
 
 # Workspaces
-set $ws1 1: 
-set $ws10 10: 
+set $ws1 1:
+set $ws10 10:
 workspace "$ws10" output DP-1
 
 ## switch to workspace
