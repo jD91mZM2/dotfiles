@@ -106,7 +106,7 @@ command! JavaFmt call JavaFmt()
 command! -nargs=1 Keyword syn keyword Keyword <args>
 
 nnoremap <LEADER>; :call InjectSemicolon()<CR>
-nnoremap <LEADER>c :make build<CR>
+nnoremap <LEADER>c :make check<CR>
 nnoremap <LEADER>n :NERDTree \| wincmd p<CR>
 tnoremap <ESC><ESC> <C-\><C-N>
 vnoremap <LEADER>c y`>a = <C-R>=<C-R>"<CR><ESC>
