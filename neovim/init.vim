@@ -57,7 +57,7 @@ au BufLeave * setlocal signcolumn=no
 
 au FileType fish compiler fish
 au FileType haskell setlocal ts=2
-au FileType rust compiler rust
+au FileType rust compiler cargo
 au FileType yaml,markdown setlocal ts=2 indentkeys=
 
 " Plugins
