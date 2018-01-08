@@ -19,7 +19,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Languages
 Plug 'Xe/lolcode.vim'
 Plug 'artur-shaik/vim-javacomplete2'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'cespare/vim-toml'
 Plug 'dag/vim-fish'
 Plug 'rust-lang/rust.vim'
