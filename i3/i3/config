@@ -164,6 +164,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # Autostart programs
 
 ## Interactive
+exec --no-startup-id /usr/lib/deja-dup/deja-dup-monitor
 exec --no-startup-id discord
 exec --no-startup-id dropbox
 exec --no-startup-id evolution
