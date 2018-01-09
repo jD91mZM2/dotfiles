@@ -1,3 +1,5 @@
+# BASED ON grml-zsh-config because it had all the things I wanted by default.
+
 # --------------------------------
 # General
 # --------------------------------
@@ -35,26 +37,7 @@ export GPG_TTY="$(tty)"
 # Options
 # --------------------------------
 
-export HISTFILE="$HOME/.zsh_history"
-export SAVEHIST=100
-
-setopt APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
-
-zstyle ":completion:*" menu select
-
-autoload -Uz compinit
-compinit
-
-# --------------------------------
-# Keybinds
-# --------------------------------
-
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-bindkey "^[[3~"   delete-char
-bindkey "^U"      backward-kill-line
-bindkey "^Y"      yank
 
 # --------------------------------
 # Plugins
