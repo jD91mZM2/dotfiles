@@ -3,7 +3,7 @@
 # Pause notifications
 pkill dunst -USR1
 
-i3lock -c "#111111" -n
+i3lock -knc "#111111" --timecolor "#FFFFFFFF" --textcolor "#FFFFFFFF" --datecolor "#FFFFFFFF"
 
 # Start notifications
 pkill dunst -USR2
