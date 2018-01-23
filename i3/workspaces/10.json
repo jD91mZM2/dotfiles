@@ -1,6 +1,6 @@
 // vim:ts=4:sw=4:et
 {
-    // stacked split container with 4 children
+    // stacked split container with 3 children
     "border": "normal",
     "floating": "auto_off",
     "layout": "stacked",
@@ -12,51 +12,13 @@
             "current_border_width": 0,
             "floating": "auto_off",
             "geometry": {
-               "height": 721,
-               "width": 668,
-               "x": 688,
-               "y": 37
-            },
-            "name": "general - Redox Redox : Back in the cinemas",
-            "percent": 0.25,
-            "swallows": [
-               {
-                  "class": "^Mattermost$"
-               }
-            ],
-            "type": "con"
-        },
-        {
-            "border": "none",
-            "current_border_width": 0,
-            "floating": "auto_off",
-            "geometry": {
-               "height": 685,
-               "width": 1346,
-               "x": 10,
-               "y": 73
-            },
-            "name": "#general - Discord",
-            "percent": 0.25,
-            "swallows": [
-               {
-                  "class": "^discord$"
-               }
-            ],
-            "type": "con"
-        },
-        {
-            "border": "none",
-            "current_border_width": 0,
-            "floating": "auto_off",
-            "geometry": {
                "height": 667,
                "width": 1346,
                "x": 10,
                "y": 91
             },
-            "name": "Inbox — Evolution",
-            "percent": 0.25,
+            "name": "Evolution",
+            "percent": 0.333333333333333,
             "swallows": [
                {
                   "class": "^Evolution$"
@@ -69,16 +31,35 @@
             "current_border_width": 0,
             "floating": "auto_off",
             "geometry": {
-               "height": 648,
-               "width": 1152,
-               "x": 107,
-               "y": 60
+               "height": 721,
+               "width": 668,
+               "x": 688,
+               "y": 37
             },
-            "name": "Synac GTK+ client",
-            "percent": 0.25,
+            "name": "Mattermost",
+            "percent": 0.333333333333333,
             "swallows": [
                {
-                  "title": "^Synac\\ GTK\\+\\ client$"
+                  "class": "^Mattermost$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 925,
+               "width": 1260,
+               "x": 1376,
+               "y": 89
+            },
+            "name": "Discord",
+            "percent": 0.333333333333333,
+            "swallows": [
+               {
+                  "class": "^discord$"
                }
             ],
             "type": "con"

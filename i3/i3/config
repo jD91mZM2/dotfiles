@@ -163,6 +163,10 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Autostart programs
 
+## Layouts
+exec --no-startup-id "i3-msg 'workspace $ws10; append_layout ~/.dotfiles/i3/workspaces/10.json'"
+exec --no-startup-id "i3-msg 'workspace $ws1;  append_layout ~/.dotfiles/i3/workspaces/1.json'"
+
 ## Interactive
 exec --no-startup-id /usr/lib/deja-dup/deja-dup-monitor
 exec --no-startup-id discord
@@ -170,12 +174,9 @@ exec --no-startup-id dropbox
 exec --no-startup-id evolution
 exec --no-startup-id i3-sensible-terminal
 exec --no-startup-id mattermost-desktop
-exec --no-startup-id synac-gtk
 exec --no-startup-id xfce4-power-manager
 
 ## Background
-exec --no-startup-id "i3-msg 'workspace $ws10; append_layout ~/.dotfiles/i3/workspaces/10.json'"
-exec --no-startup-id "i3-msg 'workspace $ws1;  append_layout ~/.dotfiles/i3/workspaces/1.json'"
 exec --no-startup-id compton -b
 exec --no-startup-id udiskie
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
@@ -206,8 +207,7 @@ bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle && pa
 
 # Program settings
 
-assign [class="discord"] $ws10
-for_window [class="^.*$"]     border none
+for_window [class="^.*$"]      border none
 for_window [title="pinentry"] floating enable
 
 # Colors
