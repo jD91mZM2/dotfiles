@@ -207,7 +207,7 @@ bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle && pa
 
 # Program settings
 
-for_window [class="^.*$"]      border none
+for_window [class="^.*$"]     border none
 for_window [title="pinentry"] floating enable
 
 # Colors
