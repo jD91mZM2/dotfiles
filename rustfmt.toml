@@ -2,7 +2,7 @@ trailing_comma    = "Never"
 use_try_shorthand = true
 wrap_comments     = true
 match_block_trailing_comma = true
-condense_wildcard_suffices = true
+condense_wildcard_suffixes = true
 
 reorder_imports          = true
 reorder_imported_names   = true
