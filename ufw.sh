@@ -27,3 +27,5 @@ sudo ufw allow in from 209.222.18.222
 sudo ufw allow in from 209.222.18.218
 sudo ufw allow out to 209.222.18.222
 sudo ufw allow out to 209.222.18.218
+
+sudo ufw enable
