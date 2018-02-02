@@ -177,7 +177,6 @@ exec --no-startup-id mattermost-desktop
 exec --no-startup-id xfce4-power-manager
 
 ## Background
-exec --no-startup-id caffeine
 exec --no-startup-id compton -b
 exec --no-startup-id udiskie
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
