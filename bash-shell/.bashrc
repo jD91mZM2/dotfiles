@@ -134,7 +134,6 @@ fi
 
 alias ls="ls -CF --color=auto"
 alias clear='command clear; echo -ne "\e[3J"'
-alias tmux="tmux -2"
 alias git=hub
 
 unicopy() {

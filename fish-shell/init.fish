@@ -5,7 +5,6 @@ end
 bass eval `dircolors ~/.dircolors`
 
 alias clear='command clear; echo -ne "\e[3J"'
-alias tmux="tmux -2"
 alias git=hub
 
 function unicopy --description "unicopy <character>" --argument character
