@@ -192,7 +192,7 @@ bindsym $mod+Shift+Print exec --no-startup-id ~/.dotfiles/i3/scripts/screenshot.
 bindsym Print            exec --no-startup-id ~/.dotfiles/i3/scripts/screenshot.sh screen
 bindsym Ctrl+Print       exec --no-startup-id ~/.dotfiles/i3/scripts/screenshot.sh wait
 
-bindsym $mod+Shift+l exec --no-startup-id ~/.dotfiles/i3/scripts/lock/lock.sh
+bindsym $mod+Shift+l exec --no-startup-id "echo -ne '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"
 bindsym $mod+shift+f exec --no-startup-id keepassxc
 
 bindsym --release $mod+bracketleft exec --no-startup-id xdotool type "å"
