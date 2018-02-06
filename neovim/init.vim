@@ -88,11 +88,6 @@ function! JSON()
 	%!python -m json.tool
 	retab!
 endfunction
-function! InjectSemicolon()
-	let pos = getpos(".")
-	normal! A;
-	call setpos(".", pos)
-endfunction
 
 command! CWD silent! lcd %:p:h | echo "Changed directory!"
 command! Term silent! lcd %:p:h | tabe +terminal
@@ -105,7 +100,6 @@ command! JSONMIN silent %!ruby ~/.config/nvim/minify.rb
 command! JavaFmt call JavaFmt()
 command! -nargs=1 Keyword syn keyword Keyword <args>
 
-nnoremap <LEADER>; :call InjectSemicolon()<CR>
 nnoremap <LEADER>c :make check<CR>
 nnoremap <LEADER>ji <Plug>(JavaComplete-Imports-Add)
 nnoremap <LEADER>n :NERDTree \| wincmd p<CR>
