@@ -1,3 +1,7 @@
+" Enable filetype detection and syntax highlighting
+filetype plugin indent on
+syntax on
+
 " Remove drawing background (fix issues with transparent terminals)
 hi Normal ctermbg=none
 
