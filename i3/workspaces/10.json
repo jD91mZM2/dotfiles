@@ -60,7 +60,7 @@
             "swallows": [
                {
                   "class": "^discord$",
-                  "title": "Discord"
+                  "title": "^Discord$"
                }
             ],
             "type": "con"
