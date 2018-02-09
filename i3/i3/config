@@ -180,17 +180,17 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id compton -b
 exec --no-startup-id udiskie
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
-exec --no-startup-id ~/.dotfiles/i3/scripts/lock/timer.sh
+exec --no-startup-id ~/.dotfiles/i3/scripts/timer.sh
 exec_always --no-startup-id ~/.screenlayout/default.sh && feh --bg-fill /usr/share/archlinux/wallpaper/archlinux-firestarter.jpg
 
 # Keybinds
 
 bindsym $mod+Pause exec "i3-nagbar -t warning -m 'You pressed the shut down button' -b 'No shit, Sherlock' 'systemctl poweroff'"
 
-bindsym $mod+Print       exec --no-startup-id ~/.dotfiles/i3/scripts/screenshot.sh window
-bindsym $mod+Shift+Print exec --no-startup-id ~/.dotfiles/i3/scripts/screenshot.sh region
-bindsym Print            exec --no-startup-id ~/.dotfiles/i3/scripts/screenshot.sh screen
-bindsym Ctrl+Print       exec --no-startup-id ~/.dotfiles/i3/scripts/screenshot.sh wait
+bindsym $mod+Print       exec --no-startup-id ~/.dotfiles/screenshot.sh window
+bindsym $mod+Shift+Print exec --no-startup-id ~/.dotfiles/screenshot.sh region
+bindsym Print            exec --no-startup-id ~/.dotfiles/screenshot.sh screen
+bindsym Ctrl+Print       exec --no-startup-id ~/.dotfiles/screenshot.sh wait
 
 bindsym $mod+Shift+l exec --no-startup-id "echo -ne '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"
 bindsym $mod+shift+f exec --no-startup-id keepassxc
