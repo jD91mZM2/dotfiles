@@ -34,8 +34,9 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export TERMINAL=konsole
 export VISUAL=nvim
 
-# Use gpg agent for ssh
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+# Use GNOME Keyring for ssh
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
 
 # https://github.com/electron/electron/issues/8455
 export ELECTRON_FORCE_WINDOW_MENU_BAR=1
