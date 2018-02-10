@@ -180,7 +180,7 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id compton -b
 exec --no-startup-id udiskie
 exec --no-startup-id xinput disable "$(xinput list | grep Touchpad | cut -d '=' -f 2 | cut -d $'\t' -f 1)"
-exec --no-startup-id ~/.dotfiles/i3/scripts/timer.sh
+exec --no-startup-id ~/.dotfiles/timer.sh ~/.dotfiles/i3/lock.sh
 exec_always --no-startup-id ~/.screenlayout/default.sh && feh --bg-fill /usr/share/archlinux/wallpaper/archlinux-firestarter.jpg
 
 # Keybinds
