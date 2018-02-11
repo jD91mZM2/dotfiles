@@ -56,24 +56,27 @@ main = do
       ((myModMask .|. shiftMask, xK_Print), spawn "~/.dotfiles/screenshot.sh region"),
 
       -- Volume
-      ((0, xK_XF86AudioLowerVolume),        spawn "amixer set Master 2%- unmute && \
+      ((0, xK_XF86AudioLowerVolume), spawn "amixer set Master 2%- unmute && \
 \ paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"),
-      ((0, xK_XF86AudioRaiseVolume),        spawn "amixer set Master 2%+ unmute && \
+      ((0, xK_XF86AudioRaiseVolume), spawn "amixer set Master 2%+ unmute && \
 \ paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"),
 
       -- Misc
-      ((myModMask .|. shiftMask, xK_l),     spawn "echo -ne '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"),
-      ((myModMask, xK_z),                   spawn $ "echo -n '" ++ [chr 0x200B] ++ "' | xclip -sel clip"),
-      ((myModMask, xK_f),                   withFocused (\x -> sendMessage $ AddFullscreen x)),
-      ((myModMask .|. shiftMask, xK_f),     withFocused (\x -> sendMessage $ RemoveFullscreen x)),
+      ((myModMask .|. shiftMask, xK_l), spawn "echo -ne '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"),
+      ((myModMask, xK_z),               spawn $ "echo -n '" ++ [chr 0x200B] ++ "' | xclip -sel clip"),
+      ((myModMask, xK_f),               withFocused (\x -> sendMessage $ AddFullscreen x)),
+      ((myModMask .|. shiftMask, xK_f), withFocused (\x -> sendMessage $ RemoveFullscreen x)),
 
-      -- Overrides and aliases
-      ((myModMask .|. shiftMask, xK_q),     confirm "Exit XMonad" $ io $ exitWith ExitSuccess),
-      ((myModMask .|. shiftMask, xK_r),     spawn "xmonad --recompile"),
-      ((myModMask, xK_Down),                windows focusDown),
-      ((myModMask, xK_Left),                sendMessage Shrink),
-      ((myModMask, xK_Pause),               confirm "Shutdown computer" $ spawn "systemctl poweroff"),
-      ((myModMask, xK_Right),               sendMessage Expand),
-      ((myModMask, xK_Up),                  windows focusUp),
-      ((myModMask, xK_p),                   spawn "j4-dmenu-desktop")
+      -- Arrow keys aren't evil
+      ((myModMask, xK_Down),  windows focusDown),
+      ((myModMask, xK_Left),  sendMessage Shrink),
+      ((myModMask, xK_Right), sendMessage Expand),
+      ((myModMask, xK_Up),    windows focusUp),
+
+      -- System
+      ((myModMask .|. shiftMask, xK_q), confirm "Exit XMonad" $ io $ exitWith ExitSuccess),
+      ((myModMask, xK_Pause),           confirm "Shutdown" $ spawn "systemctl poweroff"),
+
+      ((myModMask .|. shiftMask, xK_r), spawn "xmonad --recompile"),
+      ((myModMask, xK_p),               spawn "j4-dmenu-desktop")
     ]
