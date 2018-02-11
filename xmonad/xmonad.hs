@@ -23,6 +23,12 @@ main = do
   xmonad $ ewmh $ docks $ def
     {
       layoutHook = avoidStruts $ layoutHook def,
+      manageHook = composeAll [
+        manageHook def,
+        className =? "discord"            --> doShift "9",
+        className =? "evolution"          --> doShift "9",
+        className =? "mattermost-desktop" --> doShift "9"
+      ],
       modMask = myModMask,
       startupHook = do
         spawnOnce "~/.dotfiles/xmonad/startup.sh",
