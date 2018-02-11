@@ -1,0 +1,4 @@
+Config {
+    alpha = 127,
+    font = "xft:noto sans:size=10"
+}

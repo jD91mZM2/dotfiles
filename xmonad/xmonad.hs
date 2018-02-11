@@ -7,6 +7,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.StackSet
 import XMonad.Util.Dmenu
 import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 
 myModMask  = mod4Mask
@@ -20,9 +21,13 @@ confirm x callback = do
     return ()
 
 main = do
-  xmonad $ ewmh $ docks $ def
+  bar <- spawnPipe "xmobar"
+  xmonad $ ewmh $ docks def
     {
       layoutHook = avoidStruts $ layoutHook def,
+      logHook = dynamicLogWithPP $ xmobarPP {
+        ppOutput = hPutStrLn bar
+      },
       manageHook = composeAll [
         manageHook def,
         className =? "discord"            --> doShift "9",
