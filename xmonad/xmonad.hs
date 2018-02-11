@@ -38,9 +38,9 @@ main = do
       },
       manageHook = composeAll [
         manageHook def,
-        className =? "discord"            --> doShift "9",
-        className =? "evolution"          --> doShift "9",
-        className =? "mattermost-desktop" --> doShift "9"
+        appName =? "discord" <||>
+        appName =? "evolution" <||>
+        appName =? "mattermost" --> doShift "9"
       ],
       modMask = myModMask,
       startupHook = do
