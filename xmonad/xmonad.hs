@@ -4,11 +4,15 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.PerWorkspace
 import XMonad.StackSet
 import XMonad.Util.Dmenu
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
+
+xK_XF86AudioLowerVolume = 0x1008ff11
+xK_XF86AudioRaiseVolume = 0x1008ff13
 
 myModMask  = mod4Mask
 
@@ -24,7 +28,9 @@ main = do
   bar <- spawnPipe "xmobar"
   xmonad $ ewmh $ docks def
     {
-      layoutHook = avoidStruts $ layoutHook def,
+      layoutHook = avoidStruts $
+        onWorkspace "9" (Tall 1 (3/100) (17/20)) $
+        layoutHook def,
       logHook = dynamicLogWithPP $ xmobarPP {
         ppOutput = hPutStrLn bar
       },
@@ -45,6 +51,12 @@ main = do
       ((0, xK_Print),                       spawn "~/.dotfiles/screenshot.sh screen"),
       ((myModMask, xK_Print),               spawn "~/.dotfiles/screenshot.sh window"),
       ((myModMask .|. shiftMask, xK_Print), spawn "~/.dotfiles/screenshot.sh region"),
+
+      -- Volume
+      ((0, xK_XF86AudioLowerVolume),        spawn "amixer set Master 2%- unmute && \
+\ paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"),
+      ((0, xK_XF86AudioRaiseVolume),        spawn "amixer set Master 2%+ unmute && \
+\ paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"),
 
       -- Misc
       ((myModMask .|. shiftMask, xK_l),     spawn "echo -ne '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"),
