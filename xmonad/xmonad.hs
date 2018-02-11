@@ -4,6 +4,7 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Gaps
 import XMonad.Layout.PerWorkspace
 import XMonad.StackSet
 import XMonad.Util.Dmenu
@@ -29,6 +30,7 @@ main = do
   xmonad $ ewmh $ docks def
     {
       layoutHook = avoidStruts $
+        gaps [(U, 8), (L, 8), (D, 8), (R, 8)] $
         onWorkspace "9" (Tall 1 (3/100) (17/20)) $
         layoutHook def,
       logHook = dynamicLogWithPP $ xmobarPP {
