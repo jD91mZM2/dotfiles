@@ -4,6 +4,7 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Fullscreen
 import XMonad.Layout.Gaps
 import XMonad.Layout.PerWorkspace
 import XMonad.StackSet
@@ -27,7 +28,7 @@ confirm x callback = do
 
 main = do
   bar <- spawnPipe "xmobar"
-  xmonad $ ewmh $ docks def
+  xmonad $ ewmh $ docks $ fullscreenSupport def
     {
       layoutHook = avoidStruts $
         gaps [(U, 8), (L, 8), (D, 8), (R, 8)] $
@@ -63,12 +64,15 @@ main = do
       -- Misc
       ((myModMask .|. shiftMask, xK_l),     spawn "echo -ne '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"),
       ((myModMask, xK_z),                   spawn $ "echo -n '" ++ [chr 0x200B] ++ "' | xclip -sel clip"),
+      ((myModMask, xK_f),                   withFocused (\x -> sendMessage $ AddFullscreen x)),
+      ((myModMask .|. shiftMask, xK_f),     withFocused (\x -> sendMessage $ RemoveFullscreen x)),
 
-      -- Overrides
+      -- Overrides and aliases
       ((myModMask .|. shiftMask, xK_q),     confirm "Exit XMonad" $ io $ exitWith ExitSuccess),
       ((myModMask .|. shiftMask, xK_r),     spawn "xmonad --recompile"),
       ((myModMask, xK_Down),                windows focusDown),
       ((myModMask, xK_Left),                sendMessage Shrink),
+      ((myModMask, xK_Pause),               confirm "Shutdown computer" $ spawn "systemctl poweroff"),
       ((myModMask, xK_Right),               sendMessage Expand),
       ((myModMask, xK_Up),                  windows focusUp),
       ((myModMask, xK_p),                   spawn "j4-dmenu-desktop")
