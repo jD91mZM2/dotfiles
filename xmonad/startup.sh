@@ -20,4 +20,5 @@ dropbox &
 evolution &
 konsole &
 mattermost-desktop &
+xfce4-panel &
 xfce4-power-manager &
