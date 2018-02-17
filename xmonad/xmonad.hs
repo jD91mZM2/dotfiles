@@ -27,16 +27,12 @@ confirm x callback = do
     return ()
 
 main = do
-  bar <- spawnPipe "xmobar"
   xmonad $ ewmh $ docks $ fullscreenSupport def
     {
       layoutHook = avoidStruts $
         gaps [(U, 8), (L, 8), (D, 8), (R, 8)] $
         onWorkspace "9" (Tall 1 (3/100) (17/20)) $
         layoutHook def,
-      logHook = dynamicLogWithPP $ xmobarPP {
-        ppOutput = hPutStrLn bar
-      },
       manageHook = composeAll [
         manageHook def,
         appName =? "discord" <||>
