@@ -41,6 +41,9 @@ export SSH_AUTH_SOCK
 # https://github.com/electron/electron/issues/8455
 export ELECTRON_FORCE_WINDOW_MENU_BAR=1
 
+# https://bbs.archlinux.org/viewtopic.php?id=159016
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 # `less` colors
 export LESS_TERMCAP_md=$'\e[01;31m'
 export LESS_TERMCAP_me=$'\e[0m'
