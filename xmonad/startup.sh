@@ -21,6 +21,7 @@ discord &
 dropbox &
 evolution &
 konsole &
+liferea &
 mattermost-desktop &
 nm-applet &
 xfce4-panel &
