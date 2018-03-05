@@ -47,3 +47,25 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=10"
+
+# --------------------------------
+# System updates
+# --------------------------------
+
+if [ ! -f "/tmp/pacman-updates" ]; then
+    checkupdates > /tmp/pacman-updates
+fi
+if [ ! -f "/tmp/aur-updates" ]; then
+    trizen -Syua 2> /dev/null > /tmp/aur-updates
+fi
+
+updates="$(cat /tmp/pacman-updates | wc -l)"
+if [ "$updates" -gt 0 ]; then
+    echo "\rSystem update: $updates packages available."
+    echo "sudo pacman -Syu"
+fi
+updates="$(cat /tmp/aur-updates | wc -l)"
+if [ "$updates" -gt 0 ]; then
+    echo "\rSystem update: $updates packages available *from the AUR*."
+    echo "trizen -Syua"
+fi

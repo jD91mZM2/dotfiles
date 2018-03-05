@@ -164,3 +164,25 @@ export GPG_TTY="$(tty)"
 # ---------------------------------------------
 
 source /usr/share/z/z.sh
+
+# --------------------------------
+# System updates
+# --------------------------------
+
+if [ ! -f "/tmp/pacman-updates" ]; then
+    checkupdates > /tmp/pacman-updates
+fi
+if [ ! -f "/tmp/aur-updates" ]; then
+    trizen -Syua 2> /dev/null > /tmp/aur-updates
+fi
+
+updates="$(cat /tmp/pacman-updates | wc -l)"
+if [ "$updates" -gt 0 ]; then
+    echo "\rSystem update: $updates packages available."
+    echo "sudo pacman -Syu"
+fi
+updates="$(cat /tmp/aur-updates | wc -l)"
+if [ "$updates" -gt 0 ]; then
+    echo "\rSystem update: $updates packages available *from the AUR*."
+    echo "trizen -Syua"
+fi
