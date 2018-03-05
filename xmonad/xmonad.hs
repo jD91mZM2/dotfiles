@@ -37,6 +37,7 @@ main = do
         manageHook def,
         appName =? "discord" <||>
         appName =? "evolution" <||>
+        appName =? "liferea" <||>
         appName =? "mattermost" --> doShift "9"
       ],
       modMask = myModMask,
