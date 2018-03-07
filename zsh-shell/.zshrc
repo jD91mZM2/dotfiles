@@ -63,9 +63,11 @@ updates="$(cat /tmp/pacman-updates | wc -l)"
 if [ "$updates" -gt 0 ]; then
     echo "\rSystem update: $updates packages available."
     echo "sudo pacman -Syu"
+    rm /tmp/pacman-updates # If they upgrade, don't display the outdated version
 fi
 updates="$(cat /tmp/aur-updates | wc -l)"
 if [ "$updates" -gt 0 ]; then
     echo "\rSystem update: $updates packages available *from the AUR*."
     echo "trizen -Syua"
+    rm /tmp/aur-updates # If they upgrade, don't display the outdated version
 fi
