@@ -29,7 +29,8 @@ confirm x callback = do
 main = do
   xmonad $ ewmh $ docks $ fullscreenSupport def
     {
-      layoutHook = avoidStruts $
+      layoutHook =
+        avoidStruts $
         gaps [(U, 8), (L, 8), (D, 8), (R, 8)] $
         onWorkspace "9" (Tall 1 (3/100) (17/20)) $
         layoutHook def,
