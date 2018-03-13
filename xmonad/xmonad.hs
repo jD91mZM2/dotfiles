@@ -6,6 +6,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.Gaps
+import XMonad.Layout.Spacing
 import XMonad.Layout.PerWorkspace
 import XMonad.StackSet
 import XMonad.Util.Dmenu
@@ -31,7 +32,8 @@ main = do
     {
       layoutHook =
         avoidStruts $
-        gaps [(U, 8), (L, 8), (D, 8), (R, 8)] $
+        gaps [(U, 6), (L, 6), (D, 6), (R, 6)] $
+        spacing 2 $
         onWorkspace "9" (Tall 1 (3/100) (17/20)) $
         layoutHook def,
       manageHook = composeAll [
