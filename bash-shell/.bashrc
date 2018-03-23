@@ -132,9 +132,11 @@ fi
 # Fun stuff!
 # ---------------------------------------------
 
-alias ls="ls -CF --color=auto"
+alias cabal='cabal --ghc-option=-dynamic'
 alias clear='command clear; echo -ne "\e[3J"'
 alias git=hub
+alias ls="ls -CF --color=auto"
+alias rsynca='rsync -avzhP'
 
 unicopy() {
     [ -z "$1" ] && echo "unicopy <character>" && return
