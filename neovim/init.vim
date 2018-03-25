@@ -1,31 +1,37 @@
 call plug#begin()
 
+" Editing
+Plug 'mattn/emmet-vim'
 Plug 'PeterRincker/vim-argumentative'
-Plug 'alvan/vim-closetag'
 Plug 'aperezdc/vim-template'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'jiangmiao/auto-pairs'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'roxma/nvim-completion-manager'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
+" Look and feel
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+
 Plug 'chriskempson/base16-vim'
+
 Plug 'enricobacis/vim-airline-clock'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Completion and compiling
+Plug 'w0rp/ale'
+Plug 'roxma/nvim-completion-manager'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+
 " Languages
 Plug 'Xe/lolcode.vim'
 Plug 'artur-shaik/vim-javacomplete2'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'cespare/vim-toml'
 Plug 'dag/vim-fish'
 Plug 'rust-lang/rust.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'vim-ruby/vim-ruby'
-Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 call plug#end()
 
@@ -65,10 +71,11 @@ au FileType yaml,markdown setlocal ts=2 indentkeys=
 let g:AutoPairsMapBS = 0
 let g:AutoPairsMultilineClose = 0
 
-let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-	\ 'rust': ['rls']
+    \ 'rust': ['rls'],
+    \ 'go': ['go-langserver']
 \ }
+let g:LanguageClient_loggingLevel = 'DEBUG'
 
 let g:airline#extensions#clock#format = "%I:%M%p"
 let g:airline#extensions#tabline#enabled = 1
@@ -85,8 +92,8 @@ let g:table_mode_corner_corner='+'
 
 " Commands
 function! JSON()
-	%!python -m json.tool
-	retab!
+    %!python -m json.tool
+    retab!
 endfunction
 
 command! CWD silent! lcd %:p:h | echo "Changed directory!"
@@ -95,13 +102,9 @@ command! VTerm silent! lcd %:p:h | vnew +terminal
 command! HTerm silent! lcd %:p:h | rightbelow new +terminal
 command! SudoW silent exec "w !sudo tee % > /dev/null" | echo "Saved!"
 
-command! JSON call JSON()
-command! JSONMIN silent %!ruby ~/.config/nvim/minify.rb
-command! JavaFmt call JavaFmt()
-command! -nargs=1 Keyword syn keyword Keyword <args>
+nnoremap K :call LanguageClient_textDocument_hover()<CR>
+nnoremap gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <F2> :call LanguageClient_textDocument_rename()<CR>
 
-nnoremap <LEADER>c :make check<CR>
 nnoremap <LEADER>ji <Plug>(JavaComplete-Imports-Add)
-nnoremap <LEADER>n :NERDTree \| wincmd p<CR>
 tnoremap <ESC><ESC> <C-\><C-N>
-vnoremap <LEADER>c y`>a = <C-R>=<C-R>"<CR><ESC>
