@@ -22,10 +22,9 @@ myModMask  = mod4Mask
 confirm :: String -> (X ()) -> X ()
 confirm x callback = do
   s <- dmenu ["Cancel", x]
-  if s == x then
-    callback
-  else
-    return ()
+  if s == x
+    then callback
+    else return ()
 
 main = do
   xmonad $ ewmh $ docks $ fullscreenSupport def
@@ -62,10 +61,10 @@ main = do
 \ paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"),
 
       -- Misc
-      ((myModMask .|. shiftMask, xK_l), spawn "echo -ne '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"),
-      ((myModMask, xK_z),               spawn $ "echo -n '" ++ [chr 0x200B] ++ "' | xclip -sel clip"),
-      ((myModMask, xK_f),               withFocused (\x -> sendMessage $ AddFullscreen x)),
-      ((myModMask .|. shiftMask, xK_f), withFocused (\x -> sendMessage $ RemoveFullscreen x)),
+      ((myModMask .|. shiftMask, xK_l), spawn "echo -n '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"),
+      ((myModMask, xK_z),               spawn "echo -n '\x200b' | xclip -sel clip"),
+      ((myModMask, xK_f),               withFocused $ sendMessage . AddFullscreen),
+      ((myModMask .|. shiftMask, xK_f), withFocused $ sendMessage . RemoveFullscreen),
 
       -- Arrow keys aren't evil
       ((myModMask, xK_Down),  windows focusDown),
