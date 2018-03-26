@@ -67,7 +67,7 @@ au FileType rust compiler cargo
 au FileType yaml,markdown setlocal ts=2 indentkeys=
 
 " Plugins
-"
+
 let g:AutoPairsMapBS = 0
 let g:AutoPairsMultilineClose = 0
 
@@ -82,10 +82,11 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'base16_default'
 
+"                     Default - vvvvvvvvvvvvvvv | vvvvvvvvvvv - Custom
+let g:ale_haskell_ghc_options = '-fno-code -v0' . ' -dynamic'
+
 let g:nerdtree_tabs_open_on_console_startup = 1
 
-let g:racer_cmd = '~/.cargo/bin/racer'
-let g:racer_experimental_completer = 1
 let g:rust_recommended_style = 0
 
 let g:table_mode_corner_corner='+'
