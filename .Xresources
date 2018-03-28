@@ -1,0 +1,4 @@
+#include ".Xresources.d/base16-default-dark.Xresources"
+
+Xcursor.theme: whiteglass
+Xcursor.size: 16
