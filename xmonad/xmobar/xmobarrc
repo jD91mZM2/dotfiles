@@ -1,4 +1,0 @@
-Config {
-    alpha = 127,
-    font = "xft:hack:size=9"
-}
