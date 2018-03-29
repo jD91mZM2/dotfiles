@@ -19,10 +19,10 @@ udiskie &
 /usr/lib/deja-dup/deja-dup-monitor &
 discord &
 dropbox &
-evolution &
 konsole &
 liferea &
 mattermost-desktop &
 nm-applet &
+thunderbird &
 xfce4-panel &
 xfce4-power-manager &

@@ -38,7 +38,7 @@ main = do
       manageHook = composeAll [
         manageHook def,
         appName =? "discord" <||>
-        appName =? "evolution" <||>
+        appName =? "thunderbird" <||>
         appName =? "liferea" <||>
         appName =? "mattermost" --> doShift "9"
       ],
@@ -67,10 +67,12 @@ main = do
       ((myModMask .|. shiftMask, xK_f), withFocused $ sendMessage . RemoveFullscreen),
 
       -- Arrow keys aren't evil
-      ((myModMask, xK_Down),  windows focusDown),
       ((myModMask, xK_Left),  sendMessage Shrink),
       ((myModMask, xK_Right), sendMessage Expand),
+      ((myModMask, xK_Down),  windows focusDown),
       ((myModMask, xK_Up),    windows focusUp),
+      ((myModMask .|. shiftMask, xK_Down),  windows swapDown),
+      ((myModMask .|. shiftMask, xK_Up),  windows swapUp),
 
       -- System
       ((myModMask .|. shiftMask, xK_q), confirm "Exit XMonad" $ io $ exitWith ExitSuccess),
