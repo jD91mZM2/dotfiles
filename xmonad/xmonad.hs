@@ -38,7 +38,7 @@ main = do
       manageHook = composeAll [
         manageHook def,
         appName =? "discord" <||>
-        appName =? "thunderbird" <||>
+        className =? "Thunderbird" <||>
         appName =? "liferea" <||>
         appName =? "mattermost" --> doShift "9"
       ],
