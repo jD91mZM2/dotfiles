@@ -26,8 +26,7 @@ confirm x callback = do
     then callback
     else return ()
 
-main = do
-  xmonad $ ewmh $ docks $ fullscreenSupport def
+main = xmonad $ ewmh $ docks $ fullscreenSupport def
     {
       layoutHook =
         avoidStruts $
