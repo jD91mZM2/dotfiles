@@ -23,9 +23,9 @@ sudo ufw allow in 1198/udp
 sudo ufw allow out 1198/udp
 
 ## DNS Servers
-sudo ufw allow in from 209.222.18.222
-sudo ufw allow in from 209.222.18.218
-sudo ufw allow out to 209.222.18.222
-sudo ufw allow out to 209.222.18.218
+sudo ufw allow in from 1.1.1.1
+sudo ufw allow in from 1.0.0.1
+sudo ufw allow out to 1.1.1.1
+sudo ufw allow out to 1.0.0.1
 
 sudo ufw enable
