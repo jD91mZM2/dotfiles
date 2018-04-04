@@ -22,7 +22,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Completion and compiling
 Plug 'w0rp/ale'
 Plug 'roxma/nvim-completion-manager'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'make release' }
 
 " Languages
 Plug 'Xe/lolcode.vim'
