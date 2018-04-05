@@ -17,11 +17,12 @@ import XMonad.Util.SpawnOnce
 xK_XF86AudioLowerVolume = 0x1008ff11
 xK_XF86AudioRaiseVolume = 0x1008ff13
 
-myModMask  = mod4Mask
+myModMask = mod4Mask
+myDmenu = ["-fn", "Hack-10", "-i"]
 
 confirm :: String -> (X ()) -> X ()
 confirm x callback = do
-  s <- dmenu ["Cancel", x]
+  s <- menuArgs "dmenu" myDmenu ["Cancel", x]
   if s == x
     then callback
     else return ()
@@ -70,13 +71,13 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
       ((myModMask, xK_Right), sendMessage Expand),
       ((myModMask, xK_Down),  windows focusDown),
       ((myModMask, xK_Up),    windows focusUp),
-      ((myModMask .|. shiftMask, xK_Down),  windows swapDown),
-      ((myModMask .|. shiftMask, xK_Up),  windows swapUp),
+      ((myModMask .|. shiftMask, xK_Down), windows swapDown),
+      ((myModMask .|. shiftMask, xK_Up),   windows swapUp),
 
       -- System
       ((myModMask .|. shiftMask, xK_q), confirm "Exit XMonad" $ io $ exitWith ExitSuccess),
       ((myModMask, xK_Pause),           confirm "Shutdown" $ spawn "systemctl poweroff"),
 
       ((myModMask .|. shiftMask, xK_r), spawn "xmonad --recompile"),
-      ((myModMask, xK_p),               spawn "j4-dmenu-desktop")
+      ((myModMask, xK_p),               spawn $ "j4-dmenu-desktop --dmenu \"dmenu " ++ (unwords myDmenu) ++ "\"")
     ]
