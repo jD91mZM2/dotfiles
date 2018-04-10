@@ -1,4 +1,11 @@
 #include ".Xresources.d/base16-default-dark.Xresources"
 
+! General options
+
 Xcursor.theme: whiteglass
 Xcursor.size: 16
+
+! XTerm
+
+XTerm*decTerminalID: vt340
+XTerm*numColorRegisters: 256
