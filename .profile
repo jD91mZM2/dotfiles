@@ -4,6 +4,7 @@ PATH="$PATH:$HOME/.cargo/bin"
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/Coding/Go/bin"
 PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+PATH="$PATH:$HOME/redox/deb/usr/bin"
 
 export PATH
 
