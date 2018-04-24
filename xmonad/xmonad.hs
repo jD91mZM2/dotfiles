@@ -6,8 +6,8 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.Gaps
-import XMonad.Layout.Spacing
 import XMonad.Layout.PerWorkspace
+import XMonad.Layout.Spacing
 import XMonad.StackSet
 import XMonad.Util.Dmenu
 import XMonad.Util.EZConfig(additionalKeys)
