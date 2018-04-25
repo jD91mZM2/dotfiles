@@ -18,7 +18,8 @@ xK_XF86AudioLowerVolume = 0x1008ff11
 xK_XF86AudioRaiseVolume = 0x1008ff13
 
 myModMask = mod4Mask
-myDmenu = ["-fn", "Hack-10", "-i"]
+myDmenu = ["-fn", "Hack-10", "-i", "-sb", "#a38b06"]
+myDmenuRun = myDmenu ++ ["-l", "15", "-p", "Run:"]
 
 confirm :: String -> (X ()) -> X ()
 confirm x callback = do
@@ -26,6 +27,10 @@ confirm x callback = do
   if s == x
     then callback
     else return ()
+
+join :: [String] -> String
+join [] = ""
+join (x:xs) = "\"" ++ x ++ "\" " ++ join xs
 
 main = xmonad $ ewmh $ docks $ fullscreenSupport def
     {
@@ -79,5 +84,5 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
       ((myModMask, xK_Pause),           confirm "Shutdown" $ spawn "systemctl poweroff"),
 
       ((myModMask .|. shiftMask, xK_r), spawn "xmonad --recompile"),
-      ((myModMask, xK_p),               spawn $ "j4-dmenu-desktop --dmenu \"dmenu " ++ (unwords myDmenu) ++ "\"")
+      ((myModMask, xK_p),               spawn $ "j4-dmenu-desktop --dmenu 'dmenu " ++ (join myDmenuRun) ++ "'")
     ]
