@@ -23,6 +23,7 @@ konsole &
 liferea &
 mattermost-desktop &
 nm-applet &
+plank &
 thunderbird &
 xfce4-panel &
 xfce4-power-manager &
