@@ -6,8 +6,10 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.Gaps
+import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Spacing
+import XMonad.Layout.ToggleLayouts
 import XMonad.StackSet
 import XMonad.Util.Dmenu
 import XMonad.Util.EZConfig(additionalKeys)
@@ -43,6 +45,9 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
         avoidStruts $
         gaps [(U, 6), (L, 6), (D, 6), (R, 6)] $
         spacing 2 $
+        smartBorders $
+        toggleLayouts Full $
+
         onWorkspace (ws 9) (Tall 1 (3/100) (17/20)) $
         layoutHook def,
       manageHook = composeAll [
@@ -72,10 +77,11 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
 \ paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"),
 
       -- Misc
-      ((myModMask .|. shiftMask, xK_l), spawn "echo -n '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"),
-      ((myModMask, xK_z),               spawn "echo -n '\x200b' | xclip -sel clip"),
-      ((myModMask, xK_f),               withFocused $ sendMessage . AddFullscreen),
-      ((myModMask .|. shiftMask, xK_f), withFocused $ sendMessage . RemoveFullscreen),
+      ((myModMask .|. shiftMask, xK_l),       spawn "echo -n '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"),
+      ((myModMask, xK_z),                     spawn "echo -n '\x200b' | xclip -sel clip"),
+      ((myModMask, xK_f),                     withFocused $ sendMessage . AddFullscreen),
+      ((myModMask .|. shiftMask, xK_f),       withFocused $ sendMessage . RemoveFullscreen),
+      ((myModMask .|. controlMask, xK_space), sendMessage ToggleLayout),
 
       -- Arrow keys aren't evil
       ((myModMask, xK_Left),  sendMessage Shrink),
