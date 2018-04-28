@@ -14,6 +14,8 @@ import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 
+myWorkspaces = ["\xF120", "\xf015", "3", "4", "5", "6", "7", "8", "\xf086"]
+
 xK_XF86AudioLowerVolume = 0x1008ff11
 xK_XF86AudioRaiseVolume = 0x1008ff13
 
@@ -32,25 +34,29 @@ join :: [String] -> String
 join [] = ""
 join (x:xs) = "\"" ++ x ++ "\" " ++ join xs
 
+ws :: Int -> String
+ws n = myWorkspaces !! (n-1)
+
 main = xmonad $ ewmh $ docks $ fullscreenSupport def
     {
       layoutHook =
         avoidStruts $
         gaps [(U, 6), (L, 6), (D, 6), (R, 6)] $
         spacing 2 $
-        onWorkspace "9" (Tall 1 (3/100) (17/20)) $
+        onWorkspace (ws 9) (Tall 1 (3/100) (17/20)) $
         layoutHook def,
       manageHook = composeAll [
         manageHook def,
         appName =? "discord" <||>
         className =? "Thunderbird" <||>
         appName =? "liferea" <||>
-        appName =? "mattermost" --> doShift "9"
+        appName =? "mattermost" --> doShift (ws 9)
       ],
       modMask = myModMask,
       startupHook = do
         spawnOnce "~/.dotfiles/xmonad/startup.sh",
-      terminal = "konsole"
+      terminal = "konsole",
+      XMonad.workspaces = myWorkspaces
     }
     `additionalKeys`
     [
