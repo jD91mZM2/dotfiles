@@ -43,9 +43,11 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
     {
       layoutHook =
         avoidStruts $
+
         gaps [(U, 6), (L, 6), (D, 6), (R, 6)] $
         spacing 2 $
-        smartBorders $
+
+        noBorders $
         toggleLayouts Full $
 
         onWorkspace (ws 9) (Tall 1 (3/100) (17/20)) $
