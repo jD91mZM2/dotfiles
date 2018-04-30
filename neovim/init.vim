@@ -1,11 +1,13 @@
 call plug#begin()
 
 " Editing
-Plug 'mattn/emmet-vim'
 Plug 'PeterRincker/vim-argumentative'
+Plug 'SirVer/ultisnips'
 Plug 'aperezdc/vim-template'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
+Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
