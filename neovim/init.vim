@@ -34,6 +34,7 @@ Plug 'dag/vim-fish'
 Plug 'rust-lang/rust.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'vim-ruby/vim-ruby'
+Plug 'LnL7/vim-nix'
 
 call plug#end()
 
