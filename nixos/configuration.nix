@@ -4,6 +4,11 @@
 
 { config, pkgs, ... }:
 
+let
+  myPackages = {
+    z = (pkgs.callPackage ./z.nix {});
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -45,7 +50,7 @@
     # Graphical - applications
     firefox kdeApplications.konsole xfce.thunar
     # Utils
-    git gitAndTools.hub fd ripgrep wget xclip htop socat gnupg
+    git gitAndTools.hub fd ripgrep wget xclip htop socat gnupg file myPackages.z
   ];
   security.wrappers.slock = {
     source = pkgs.slock + "/bin/slock";
@@ -63,7 +68,12 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs.bash.enableCompletion = true;
+  programs.bash = {
+    enableCompletion = true;
+    interactiveShellInit = ''
+      source "${myPackages.z}/share/z.sh"
+    '';
+  };
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -71,6 +81,7 @@
     syntaxHighlighting.enable = true;
     interactiveShellInit = ''
       source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
+      source "${myPackages.z}/share/z.sh"
     '';
   };
   # programs.mtr.enable = true;

@@ -24,7 +24,6 @@ Plug 'vim-airline/vim-airline-themes'
 " Completion and compiling
 Plug 'w0rp/ale'
 Plug 'roxma/nvim-completion-manager'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'make release' }
 
 " Languages
 Plug 'Xe/lolcode.vim'
@@ -74,12 +73,6 @@ au FileType yaml,markdown setlocal ts=2 indentkeys=
 let g:AutoPairsMapBS = 0
 let g:AutoPairsMultilineClose = 0
 
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rls'],
-    \ 'go': ['go-langserver']
-\ }
-let g:LanguageClient_loggingLevel = 'DEBUG'
-
 let g:airline#extensions#clock#format = "%I:%M%p"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -105,10 +98,6 @@ command! Term silent! lcd %:p:h | tabe +terminal
 command! VTerm silent! lcd %:p:h | vnew +terminal
 command! HTerm silent! lcd %:p:h | rightbelow new +terminal
 command! SudoW silent exec "w !sudo tee % > /dev/null" | echo "Saved!"
-
-nnoremap K :call LanguageClient_textDocument_hover()<CR>
-nnoremap gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <F2> :call LanguageClient_textDocument_rename()<CR>
 
 nnoremap <LEADER>ji <Plug>(JavaComplete-Imports-Add)
 tnoremap <ESC><ESC> <C-\><C-N>

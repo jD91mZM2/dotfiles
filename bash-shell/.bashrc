@@ -165,7 +165,9 @@ export GPG_TTY="$(tty)"
 # Plugins
 # ---------------------------------------------
 
-source /usr/share/z/z.sh
+# Plugins are loaded using NixOS.
+# I'm using:
+# - z.sh
 
 # --------------------------------
 # System updates
