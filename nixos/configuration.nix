@@ -10,14 +10,14 @@ let
   };
 in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # OpenVPN configs
-      ./openvpn.nix
-      # VPN killswitch
-      ./killswitch.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    # OpenVPN configs
+    ./openvpn.nix
+    # VPN killswitch
+    ./killswitch.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -36,8 +36,12 @@ in
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # Networking
+  networking.hostName = "compotar";
+  networking.networkmanager.enable = true;
+  networking.nameservers = ["1.1.1.1" "1.0.0.1"];
+
+  # System packages
   environment.systemPackages = with pkgs; [
     # Look & Feel
     adapta-gtk-theme numix-icon-theme-circle xorg.xcursorthemes
@@ -84,15 +88,6 @@ in
       source "${myPackages.z}/share/z.sh"
     '';
   };
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-
-  # List services that you want to enable:
-  # services.whatever.enable = true;
-
-  networking.hostName = "compotar"; # Define your hostname.
-  networking.networkmanager.enable = true;
-  networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
