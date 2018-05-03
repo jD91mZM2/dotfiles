@@ -16,14 +16,13 @@ udiskie &
 
 # Interactive
 
-/usr/lib/deja-dup/deja-dup-monitor &
-discord &
-dropbox &
+"$(nix-build --no-out-link '<nixpkgs>' -A deja-dup)/libexec/deja-dup/deja-dup-monitor" &
+Discord &
+dropbox start &
 konsole &
 liferea &
-mattermost-desktop &
+chromium --app="https://chat.redox-os.org/" &
 nm-applet &
-plank &
 thunderbird &
 xfce4-panel &
 xfce4-power-manager &

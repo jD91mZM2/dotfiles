@@ -50,17 +50,12 @@ in
     # Shell
     neovim grml-zsh-config
     # Graphical - system
-    dmenu j4-dmenu-desktop slock networkmanagerapplet compton
+    dmenu j4-dmenu-desktop networkmanagerapplet compton
     # Graphical - applications
     firefox kdeApplications.konsole xfce.thunar
     # Utils
     git gitAndTools.hub fd ripgrep wget xclip htop socat gnupg file myPackages.z
   ];
-  security.wrappers.slock = {
-    source = pkgs.slock + "/bin/slock";
-    owner = "root";
-    setuid = true;
-  };
   fonts.fonts = with pkgs; [
     cantarell-fonts
     font-awesome-ttf
@@ -78,6 +73,7 @@ in
       source "${myPackages.z}/share/z.sh"
     '';
   };
+  programs.slock.enable = true;
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
