@@ -4,15 +4,19 @@
 
 { config, pkgs, ... }:
 
-let
-  myPackages = {
-    z = (pkgs.callPackage ./z.nix {});
-  };
-in
 {
+  nixpkgs.overlays = [(
+    self: super:
+    with super.lib;
+    {
+      z = super.callPackage ./z.nix {};
+    }
+  )];
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # System packages
+    ./packages.nix
     # OpenVPN configs
     ./openvpn.nix
     # VPN killswitch
@@ -41,37 +45,15 @@ in
   networking.networkmanager.enable = true;
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
-  # System packages
-  environment.systemPackages = with pkgs; [
-    # Look & Feel
-    adapta-gtk-theme numix-icon-theme-circle xorg.xcursorthemes
-    adapta-backgrounds
-    libsForQt5.qtstyleplugins # uniform QT/GTK look
-    # Shell
-    neovim grml-zsh-config
-    # Graphical - system
-    dmenu j4-dmenu-desktop networkmanagerapplet compton
-    # Graphical - applications
-    firefox kdeApplications.konsole xfce.thunar
-    # Utils
-    git gitAndTools.hub fd ripgrep wget xclip htop socat gnupg file myPackages.z
-  ];
+  # System environment stuff
   environment.variables.DEJA_DUP_MONITOR = "${pkgs.deja-dup}/libexec/deja-dup/deja-dup-monitor";
-  fonts.fonts = with pkgs; [
-    cantarell-fonts
-    font-awesome-ttf
-    hack-font
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.bash = {
     enableCompletion = true;
     interactiveShellInit = ''
-      source "${myPackages.z}/share/z.sh"
+      source "${pkgs.z}/share/z.sh"
     '';
   };
   programs.slock.enable = true;
@@ -82,7 +64,7 @@ in
     syntaxHighlighting.enable = true;
     interactiveShellInit = ''
       source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
-      source "${myPackages.z}/share/z.sh"
+      source "${pkgs.z}/share/z.sh"
     '';
   };
 
