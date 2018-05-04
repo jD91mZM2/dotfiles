@@ -41,6 +41,11 @@
   # System environment stuff
   environment.variables.DEJA_DUP_MONITOR = "${pkgs.deja-dup}/libexec/deja-dup/deja-dup-monitor";
 
+  ## Required by xfce4-panel
+  environment.pathsToLink = [ "/share/xfce4" ];
+  ## https://github.com/NixOS/nixpkgs/issues/33231
+  environment.variables.GDK_PIXBUF_MODULE_FILE = "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache";
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.bash = {
@@ -68,33 +73,34 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
-
-  # services.xserver.libinput.enable = true;
-
-  services.xserver.displayManager.lightdm = {
+  services.xserver = {
     enable = true;
-    background = "${pkgs.adapta-backgrounds}/share/backgrounds/adapta/tealized.jpg";
-    greeters.gtk = {
+    layout = "us";
+    xkbOptions = "eurosign:e";
+
+    # Touchpad:
+    # libinput.enable = true;
+
+    displayManager.lightdm = {
       enable = true;
-      iconTheme = {
-        name = "Numix-Circle";
-        package = pkgs.numix-icon-theme-circle;
-      };
-      theme = {
-        name = "Adapta";
-        package = pkgs.adapta-gtk-theme;
+      background = "${pkgs.adapta-backgrounds}/share/backgrounds/adapta/tealized.jpg";
+      greeters.gtk = {
+        enable = true;
+        iconTheme = {
+          name = "Numix-Circle";
+          package = pkgs.numix-icon-theme-circle;
+        };
+        theme = {
+          name = "Adapta";
+          package = pkgs.adapta-gtk-theme;
+        };
       };
     };
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
+    };
   };
-  services.xserver.windowManager.xmonad = {
-    enable = true;
-    enableContribAndExtras = true;
-  };
-  services.xserver.desktopManager.xfce.enable = true; # This is actually just for a working xfce4 panel
 
   services.gnome3.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;

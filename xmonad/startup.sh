@@ -24,4 +24,4 @@ liferea &
 chromium --app="https://chat.redox-os.org/" &
 nm-applet &
 thunderbird &
-xfce4-panel &
+xfce4-panel --disable-wm-check &

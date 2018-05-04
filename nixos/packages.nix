@@ -5,6 +5,7 @@
     adapta-backgrounds
     adapta-gtk-theme
     libsForQt5.qtstyleplugins # uniform QT/GTK look
+    numix-icon-theme
     numix-icon-theme-circle
     xorg.xcursorthemes
 
@@ -14,6 +15,10 @@
     dunst
     j4-dmenu-desktop
     networkmanagerapplet
+    ## XFCE Panel
+    xfce.xfce4-panel
+    xfce.xfce4-pulseaudio-plugin
+    xfce.xfce4-battery-plugin
 
     # Graphical - Applications
     firefox
