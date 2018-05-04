@@ -11,6 +11,7 @@
     # Graphical - System
     compton
     dmenu
+    dunst
     j4-dmenu-desktop
     networkmanagerapplet
 
@@ -52,6 +53,9 @@
     wget
     xclip
     zip
+
+    # Daemons
+    udiskie
   ];
   fonts.fonts = with pkgs; [
     cantarell-fonts
