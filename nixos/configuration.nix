@@ -56,6 +56,7 @@ in
     # Utils
     git gitAndTools.hub fd ripgrep wget xclip htop socat gnupg file myPackages.z
   ];
+  environment.variables.DEJA_DUP_MONITOR = "${pkgs.deja-dup}/libexec/deja-dup/deja-dup-monitor";
   fonts.fonts = with pkgs; [
     cantarell-fonts
     font-awesome-ttf

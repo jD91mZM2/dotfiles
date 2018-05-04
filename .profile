@@ -1,5 +1,4 @@
 # $PATH
-PATH="$PATH:$(ruby -e "print Gem.user_dir")/bin"
 PATH="$PATH:$HOME/.cargo/bin"
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/Coding/Go/bin"
