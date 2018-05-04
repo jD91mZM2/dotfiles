@@ -18,6 +18,7 @@
     firefox
     gnome3.seahorse
     kdeApplications.konsole
+    mpv
     pavucontrol
     xfce.thunar
 
@@ -32,6 +33,7 @@
     neovim
 
     # Utils
+    autojump
     bind
     binutils
     fd
@@ -49,7 +51,6 @@
     unzip
     wget
     xclip
-    z
     zip
   ];
   fonts.fonts = with pkgs; [

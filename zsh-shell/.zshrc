@@ -46,8 +46,8 @@ setopt HIST_IGNORE_DUPS
 
 # Plugins are loaded using NixOS's things.
 # I'm using:
+# - autojump
 # - grml-zsh-config
-# - z (jump around)
 # - zsh-autosuggestions
 # - zsh-completions
 # - zsh-syntax-highlighting

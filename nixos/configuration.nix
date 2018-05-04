@@ -5,13 +5,6 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.overlays = [(
-    self: super:
-    with super.lib;
-    {
-      z = super.callPackage ./z.nix {};
-    }
-  )];
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -53,7 +46,7 @@
   programs.bash = {
     enableCompletion = true;
     interactiveShellInit = ''
-      source "${pkgs.z}/share/z.sh"
+      source "${pkgs.autojump}/share/autojump/autojump.bash"
     '';
   };
   programs.slock.enable = true;
@@ -64,7 +57,7 @@
     syntaxHighlighting.enable = true;
     interactiveShellInit = ''
       source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
-      source "${pkgs.z}/share/z.sh"
+      source "${pkgs.autojump}/share/autojump/autojump.zsh"
     '';
   };
 
@@ -80,10 +73,8 @@
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
 
-  # Enable touchpad support.
   # services.xserver.libinput.enable = true;
 
-  # X11 Setup
   services.xserver.displayManager.lightdm = {
     enable = true;
     background = "${pkgs.adapta-backgrounds}/share/backgrounds/adapta/tealized.jpg";

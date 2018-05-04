@@ -167,7 +167,7 @@ export GPG_TTY="$(tty)"
 
 # Plugins are loaded using NixOS.
 # I'm using:
-# - z.sh
+# - autojump
 
 # --------------------------------
 # System updates
