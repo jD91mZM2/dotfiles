@@ -41,7 +41,6 @@
     gitAndTools.hub
     gnupg
     htop
-    z
     patchelf
     ripgrep
     socat
@@ -50,6 +49,7 @@
     unzip
     wget
     xclip
+    z
     zip
   ];
   fonts.fonts = with pkgs; [
