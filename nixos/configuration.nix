@@ -76,7 +76,7 @@
   services.xserver = {
     enable = true;
     layout = "us";
-    xkbOptions = "eurosign:e";
+    xkbOptions = "compose:ralt";
 
     # Touchpad:
     # libinput.enable = true;
