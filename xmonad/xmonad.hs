@@ -57,7 +57,7 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
         appName =? "discord" <||>
         className =? "Thunderbird" <||>
         appName =? "liferea" <||>
-        appName =? "mattermost" --> doShift (ws 9)
+        appName =? "chat.redox-os.org" --> doShift (ws 9)
       ],
       modMask = myModMask,
       startupHook = do
