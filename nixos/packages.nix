@@ -20,6 +20,9 @@
     xfce.xfce4-panel
     xfce.xfce4-pulseaudio-plugin
     xfce.xfconf
+    ## Déjà Dup
+    deja-dup
+    gnome3.dconf
 
     # Graphical - Applications
     firefox
