@@ -41,6 +41,7 @@
     mosh
     ncdu
     neovim
+    tmux
 
     # Utils
     autojump
@@ -53,6 +54,7 @@
     gitAndTools.hub
     gnupg
     htop
+    httpie
     patchelf
     ripgrep
     socat
