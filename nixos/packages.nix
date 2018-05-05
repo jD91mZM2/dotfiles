@@ -16,9 +16,10 @@
     j4-dmenu-desktop
     networkmanagerapplet
     ## XFCE Panel
+    xfce.xfce4-battery-plugin
     xfce.xfce4-panel
     xfce.xfce4-pulseaudio-plugin
-    xfce.xfce4-battery-plugin
+    xfce.xfconf
 
     # Graphical - Applications
     firefox
