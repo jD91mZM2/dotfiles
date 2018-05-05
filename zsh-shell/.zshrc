@@ -6,10 +6,10 @@
 
 eval "$(dircolors ~/.dircolors)"
 
-alias cabal='cabal --ghc-option=-dynamic'
-alias clear='command clear; echo -ne "\e[3J"'
+alias clear='clear; echo -ne "\e[3J"'
 alias git=hub
 alias ls="ls -CF --color=auto"
+alias nix-shell="nix-shell --run zsh"
 alias rsynca='rsync -avzhP'
 
 unicopy() {
