@@ -90,8 +90,8 @@
       greeters.gtk = {
         enable = true;
         iconTheme = {
-          name = "Numix-Circle";
-          package = pkgs.numix-icon-theme-circle;
+          name = "Numix";
+          package = pkgs.numix-icon-theme;
         };
         theme = {
           name = "Adapta";
