@@ -55,6 +55,7 @@
     gnupg
     htop
     httpie
+    nix-index
     patchelf
     ripgrep
     socat
