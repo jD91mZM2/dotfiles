@@ -31,9 +31,6 @@ powerline() {
 }
 precmd_functions+=(powerline)
 
-# https://github.com/pstadler/keybase-gpg-github/issues/11
-export GPG_TTY="$(tty)"
-
 # --------------------------------
 # Options
 # --------------------------------
@@ -53,27 +50,3 @@ setopt HIST_IGNORE_DUPS
 # - zsh-syntax-highlighting
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=10"
-
-# --------------------------------
-# System updates
-# --------------------------------
-
-if [ ! -f "/tmp/pacman-updates" ]; then
-    checkupdates > /tmp/pacman-updates
-fi
-if [ ! -f "/tmp/aur-updates" ]; then
-    trizen -Syua 2> /dev/null > /tmp/aur-updates
-fi
-
-updates="$(cat /tmp/pacman-updates | wc -l)"
-if [ "$updates" -gt 0 ]; then
-    echo "\rSystem update: $updates packages available."
-    echo "sudo pacman -Syu"
-    rm /tmp/pacman-updates # If they upgrade, don't display the outdated version
-fi
-updates="$(cat /tmp/aur-updates | wc -l)"
-if [ "$updates" -gt 0 ]; then
-    echo "\rSystem update: $updates packages available *from the AUR*."
-    echo "trizen -Syua"
-    rm /tmp/aur-updates # If they upgrade, don't display the outdated version
-fi
