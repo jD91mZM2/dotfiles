@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    # Look & Feel
+    # Graphical - Look & Feel
     adapta-backgrounds
     adapta-gtk-theme
     libsForQt5.qtstyleplugins # uniform QT/GTK look
@@ -42,6 +42,11 @@
     ncdu
     neovim
     tmux
+    weechat
+    ## NeoVim
+    neovim
+    python27Packages.neovim
+    python36Packages.neovim
 
     # Utils
     autojump
@@ -65,6 +70,13 @@
     wget
     xclip
     zip
+
+    # Languages
+    cabal-install
+    ghc
+    python
+    ruby
+    rustup
 
     # Daemons
     udiskie
