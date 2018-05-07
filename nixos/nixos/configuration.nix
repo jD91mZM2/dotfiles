@@ -8,6 +8,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # Monitor configs
+    ./monitors.nix
     # System packages
     ./packages.nix
     # OpenVPN configs
