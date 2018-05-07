@@ -14,6 +14,7 @@
     dmenu
     dunst
     j4-dmenu-desktop
+    keepassxc
     networkmanagerapplet
     ## XFCE Panel
     xfce.xfce4-battery-plugin
@@ -35,6 +36,7 @@
     # Graphical - Utils
     feh
     maim
+    gnome3.zenity
 
     # Applications
     grml-zsh-config
@@ -60,6 +62,7 @@
     gnupg
     htop
     httpie
+    neofetch
     nix-index
     patchelf
     ripgrep
@@ -69,6 +72,7 @@
     unzip
     wget
     xclip
+    youtube-dl
     zip
 
     # Languages

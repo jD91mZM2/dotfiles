@@ -18,6 +18,15 @@ in
     enable = true;
     path = https://github.com/rycee/home-manager/archive/master.tar.gz;
   };
+  home.packages = with pkgs; [
+    chromium
+    discord-latest
+    dropbox-cli
+    liferea
+    thunderbird
+  ];
+
+  # CLI
 
   programs.git = {
     enable = true;
@@ -68,6 +77,8 @@ in
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=10"
     '';
   };
+
+  # Graphical
 
   gtk = {
     enable = true;
