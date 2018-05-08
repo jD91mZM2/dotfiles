@@ -60,8 +60,8 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
         appName =? "chat.redox-os.org" --> doShift (ws 9)
       ],
       modMask = myModMask,
-      startupHook = do
-        spawnOnce "~/.dotfiles/xmonad/startup.sh",
+      startupHook =
+        spawnOnce "~/.xmonad/startup.sh",
       terminal = "konsole",
       XMonad.workspaces = myWorkspaces
     }
