@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 let
-  dotfiles = "${builtins.getEnv "HOME"}/.dotfiles";
   aliases = {
     clear = "clear; echo -ne \"\\e[3J\"";
     git = "hub";
@@ -53,7 +52,7 @@ in
 
   programs.bash = {
     enable = true;
-    profileExtra = (builtins.readFile "${dotfiles}/.profile");
+    profileExtra = (builtins.readFile ./profile);
     initExtra = ''
       eval "$(dircolors ~/.dircolors)"
 
