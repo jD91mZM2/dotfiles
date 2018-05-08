@@ -61,6 +61,7 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+    promptInit = "";
     interactiveShellInit = ''
       source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
       source "${pkgs.autojump}/share/autojump/autojump.zsh"
