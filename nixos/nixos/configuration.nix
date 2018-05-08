@@ -18,27 +18,31 @@
     ./killswitch.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
+  # systemd-boot
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Intel Microcode
+  # Intel microcode
   hardware.cpu.intel.updateMicrocode = true;
 
-  # Select internationalisation properties.
+  # TTY settings
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
   };
 
-  # Set your time zone.
+  # Time
   time.timeZone = "Europe/Stockholm";
 
   # Networking
   networking.hostName = "compotar";
   networking.networkmanager.enable = true;
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
+
+  # Sound
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # System environment stuff
   environment.variables.DEJA_DUP_MONITOR = "${pkgs.deja-dup}/libexec/deja-dup/deja-dup-monitor";
@@ -72,13 +76,7 @@
     autoPrune.enable = true;
   };
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
+  # Graphics! X11! Much wow!
   services.xserver = {
     enable = true;
     layout = "us";
@@ -111,7 +109,7 @@
   services.gnome3.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # User settings
   users.extraGroups.user = {};
   users.extraUsers.user = {
     isNormalUser = true;
