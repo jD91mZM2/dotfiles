@@ -27,6 +27,10 @@
       iptables -A INPUT -d 192.168.2.0/24 -j ACCEPT
       iptables -A OUTPUT -d 192.168.2.0/24 -j ACCEPT
 
+      # Allow localhost
+      iptables -A INPUT -i lo -j ACCEPT
+      iptables -A OUTPUT -o lo -j ACCEPT
+
       # Drop everything else!
       iptables -A INPUT -j DROP
       iptables -A OUTPUT -j DROP
