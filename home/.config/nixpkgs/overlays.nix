@@ -1,7 +1,7 @@
 [(
   self: super:
   {
-    discord-latest = super.discord.overrideAttrs (orig: rec {
+    discord = super.discord.overrideAttrs (orig: rec {
       name = "discord-${version}";
       version = "0.0.5";
 

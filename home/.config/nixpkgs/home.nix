@@ -19,7 +19,7 @@ in
   };
   home.packages = with pkgs; [
     chromium
-    discord-latest
+    discord
     dropbox-cli
     liferea
     thunderbird
