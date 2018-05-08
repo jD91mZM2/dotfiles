@@ -8,6 +8,7 @@ let
     nix-shell = "nix-shell --run zsh";
     rsynca = "rsync -avzhP";
   };
+  unstable = import <nixos-unstable> {};
 in
 {
   # Imports
@@ -19,7 +20,7 @@ in
   };
   home.packages = with pkgs; [
     chromium
-    discord
+    unstable.discord
     dropbox-cli
     liferea
     thunderbird
