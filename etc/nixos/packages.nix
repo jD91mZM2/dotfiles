@@ -72,6 +72,7 @@
     unzip
     wget
     xclip
+    xdotool
     youtube-dl
     zip
 
