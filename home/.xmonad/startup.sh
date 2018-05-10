@@ -16,10 +16,11 @@ udiskie &
 
 "$DEJA_DUP_MONITOR" &
 Discord &
+chromium --app="https://chat.redox-os.org/" &
 dropbox start &
 konsole &
 liferea &
-chromium --app="https://chat.redox-os.org/" &
 nm-applet &
 thunderbird &
 xfce4-panel --disable-wm-check &
+xfce4-power-manager &

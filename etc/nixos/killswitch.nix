@@ -26,6 +26,8 @@
       # Allow local connections
       iptables -A INPUT -d 192.168.0.0/24 -j ACCEPT
       iptables -A OUTPUT -d 192.168.0.0/24 -j ACCEPT
+      iptables -A INPUT -d 192.168.1.0/24 -j ACCEPT
+      iptables -A OUTPUT -d 192.168.1.0/24 -j ACCEPT
       iptables -A INPUT -d 192.168.2.0/24 -j ACCEPT
       iptables -A OUTPUT -d 192.168.2.0/24 -j ACCEPT
 

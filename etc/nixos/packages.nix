@@ -31,6 +31,7 @@
     kdeApplications.konsole
     mpv
     pavucontrol
+    xfce.xfce4-power-manager
     xfce.thunar
 
     # Graphical - Utils
