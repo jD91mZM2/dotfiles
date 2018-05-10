@@ -20,7 +20,6 @@ in
   };
   home.packages = with pkgs; [
     chromium
-    unstable.discord
     dropbox-cli
     liferea
     thunderbird

@@ -15,8 +15,8 @@ udiskie &
 # Interactive
 
 "$DEJA_DUP_MONITOR" &
-Discord &
 chromium --app="https://chat.redox-os.org/" &
+chromium --app="https://discordapp.com/channels/@me" &
 dropbox start &
 konsole &
 liferea &
