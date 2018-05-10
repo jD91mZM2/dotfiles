@@ -55,6 +55,7 @@
     bind
     binutils
     fd
+    ffmpeg
     file
     gist
     git
