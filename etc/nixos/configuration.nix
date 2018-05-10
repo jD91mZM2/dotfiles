@@ -75,6 +75,7 @@
     enable = true;
     autoPrune.enable = true;
   };
+  virtualisation.virtualbox.host.enable = true;
 
   # Graphics! X11! Much wow!
   services.xserver = {
