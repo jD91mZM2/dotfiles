@@ -79,6 +79,26 @@ in
 
   # Graphical
 
+  xresources = {
+    extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
+      owner = "chriskempson";
+      repo = "base16-xresources";
+      rev = "79e6e1de591f7444793fd8ed38b67ce7fce25ab6";
+
+      sha256 = "1nnj5py5n0m8rkq3ic01wzyzkgl3g9a8q5dc5pcgj3qr47hhddbw";
+    } + "/xresources/base16-default-dark.Xresources");
+    properties = {
+      "Xcursor.theme" = "whiteglass";
+      "Xcursor.size" = 16;
+
+      "XTerm.termName" = "xterm-256color";
+      "XTerm.vt100.faceName" = "Hack:size=10";
+
+      # Sixel stuff
+      "XTerm*decTerminalID" = "vt340";
+      "XTerm*numColorRegisters" = 256;
+    };
+  };
   gtk = {
     enable = true;
     font = {
