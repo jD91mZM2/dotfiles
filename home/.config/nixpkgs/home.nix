@@ -12,7 +12,8 @@ let
 in
 {
   # Imports
-  services.dunst = (import ./dunst.nix { inherit pkgs; });
+  services.dunst = import ./dunst.nix { inherit pkgs; };
+  home.sessionVariables = import ./profile.nix;
 
   programs.home-manager = {
     enable = true;
@@ -52,7 +53,11 @@ in
 
   programs.bash = {
     enable = true;
-    profileExtra = (builtins.readFile ./profile);
+    profileExtra = ''
+      # Use GNOME Keyring for ssh
+      eval "$(gnome-keyring-daemon --start)"
+      export SSH_AUTH_SOCK
+    '';
     initExtra = ''
       eval "$(dircolors ~/.dircolors)"
 
