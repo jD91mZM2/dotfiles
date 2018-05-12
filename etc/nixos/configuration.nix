@@ -111,10 +111,8 @@
   security.pam.services.lightdm.enableGnomeKeyring = true;
 
   # User settings
-  users.extraGroups.user = {};
   users.extraUsers.user = {
     isNormalUser = true;
-    group = "user";
     extraGroups = ["wheel" "docker"];
     shell = pkgs.zsh;
   };
