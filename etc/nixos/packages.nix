@@ -70,6 +70,7 @@ in {
     autojump
     bind
     binutils
+    efibootmgr
     fd
     ffmpeg
     file
