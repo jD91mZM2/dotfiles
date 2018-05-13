@@ -1,5 +1,7 @@
 { pkgs, ... }:
-{
+let
+  unstable = import <nixos-unstable> {};
+in {
   environment.systemPackages = with pkgs; [
     # Graphical - Look & Feel
     adapta-backgrounds
@@ -18,8 +20,8 @@
     networkmanagerapplet
     ## XFCE Panel
     xfce.xfce4-battery-plugin
-    xfce.xfce4-panel
     xfce.xfce4-pulseaudio-plugin
+    xfce.xfce4panel_gtk3
     xfce.xfconf
     ## Déjà Dup
     deja-dup
@@ -28,11 +30,23 @@
     # Graphical - Applications
     firefox
     gnome3.seahorse
-    kdeApplications.konsole
     mpv
     pavucontrol
-    xfce.xfce4-power-manager
     xfce.thunar
+    xfce.xfce4-power-manager
+    (unstable.st.override {
+      conf = builtins.readFile (substituteAll {
+        src = ./st/config.h;
+        colorscheme = builtins.readFile (fetchFromGitHub {
+          owner = "honza";
+          repo = "base16-st";
+          rev = "b3d0d4fbdf86d9b3eda06f42a5bdf261b1f7d1d1";
+
+          sha256 = "1z08abn9g01nnr1v4m4p8gp1j8cwlvcadgpjb7ngjy8ghrk8g0sh";
+        } + "/build/base16-default-dark-theme.h");
+        shell = ./st/tmux.sh;
+      });
+    })
 
     # Graphical - Utils
     feh

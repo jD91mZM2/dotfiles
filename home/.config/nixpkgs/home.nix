@@ -127,6 +127,10 @@ in
     extraOptions = ''
       inactive-dim = 0.05;
       mark-ovredir-focused = false; # causes issues in xmonad
+      focus-exclude = [ "class_g = 'xterm-256color'" ];
     '';
+    opacityRule = [
+      "90:class_g = 'xterm-256color'"
+    ];
   };
 }
