@@ -15,8 +15,6 @@ udiskie &
 # Interactive
 
 "$DEJA_DUP_MONITOR" &
-chromium --app="https://chat.redox-os.org/" &
-chromium --app="https://discordapp.com/channels/@me" &
 dropbox start &
 liferea &
 nm-applet &
@@ -24,3 +22,7 @@ st &
 thunderbird &
 xfce4-panel --disable-wm-check &
 xfce4-power-manager &
+
+chromium --app="https://chat.redox-os.org/"
+sleep 5 ## chromium isn't fast enough
+chromium --app="https://discordapp.com/channels/@me"
