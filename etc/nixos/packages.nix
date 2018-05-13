@@ -19,6 +19,7 @@ in {
     keepassxc
     networkmanagerapplet
     ## XFCE Panel
+    xfce.exo
     xfce.xfce4-battery-plugin
     xfce.xfce4-pulseaudio-plugin
     xfce.xfce4panel_gtk3
