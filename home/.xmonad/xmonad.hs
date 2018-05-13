@@ -62,7 +62,7 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
       modMask = myModMask,
       startupHook =
         spawnOnce "~/.xmonad/startup.sh",
-      terminal = "konsole",
+      terminal = "st",
       XMonad.workspaces = myWorkspaces
     }
     `additionalKeys`

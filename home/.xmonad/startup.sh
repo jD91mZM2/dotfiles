@@ -18,9 +18,9 @@ udiskie &
 chromium --app="https://chat.redox-os.org/" &
 chromium --app="https://discordapp.com/channels/@me" &
 dropbox start &
-konsole &
 liferea &
 nm-applet &
+st &
 thunderbird &
 xfce4-panel --disable-wm-check &
 xfce4-power-manager &
