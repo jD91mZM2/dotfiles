@@ -23,6 +23,6 @@ thunderbird &
 xfce4-panel --disable-wm-check &
 xfce4-power-manager &
 
+sleep 60 # chromium isn't fast enough
 chromium --app="https://chat.redox-os.org/"
-sleep 5 ## chromium isn't fast enough
 chromium --app="https://discordapp.com/channels/@me"
