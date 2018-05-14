@@ -1,12 +1,12 @@
 {
-  PATH = "$PATH:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/Coding/Go/bin:$HOME/bin:$HOME/.local/bin:$HOME/redox/deb/usr/bin";
+  PATH = "$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/Coding/Go/bin:$HOME/redox/deb/usr/bin";
 
   EDITOR = "nvim";
+  VISUAL = "nvim";
+
   GOPATH = "$HOME/Coding/Go";
   QT_QPA_PLATFORMTHEME = "gtk2";
   RUST_BACKTRACE = 1;
-  TERMINAL = "konsole";
-  VISUAL = "nvim";
 
   # https://github.com/electron/electron/issues/8455
   ELECTRON_FORCE_WINDOW_MENU_BAR = 1;

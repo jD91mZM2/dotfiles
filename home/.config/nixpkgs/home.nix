@@ -8,6 +8,13 @@ let
     nix-shell = "nix-shell --run zsh";
     rsynca = "rsync -avzhP";
   };
+  dircolors = pkgs.fetchFromGitHub {
+    owner = "dotphiles";
+    repo = "dotzsh";
+    rev = "2.1.3";
+
+    sha256 = "0h95s5gvn08m4y11gb82anx8s9s2ywaks15idawxdg5bibjav79l";
+  } + "/themes/dotphiles/dircolors/dircolors.base16.dark";
   unstable = import <nixos-unstable> {};
 in
 {
@@ -52,14 +59,16 @@ in
   };
 
   programs.bash = {
-    enable = true;
     profileExtra = ''
       # Use GNOME Keyring for ssh
       eval "$(gnome-keyring-daemon --start)"
       export SSH_AUTH_SOCK
     '';
+
+    enable = true;
+    shellAliases = aliases;
     initExtra = ''
-      eval "$(dircolors ~/.dircolors)"
+      eval "$(dircolors "${dircolors}")"
 
       powerline() {
           PS1="$(powerline-rs --shell bash $?)"
@@ -71,7 +80,7 @@ in
     enable = true;
     shellAliases = aliases;
     initExtra = ''
-      eval "$(dircolors ~/.dircolors)"
+      eval "$(dircolors "${dircolors}")"
 
       powerline() {
           PS1="$(powerline-rs --shell zsh $?)"
