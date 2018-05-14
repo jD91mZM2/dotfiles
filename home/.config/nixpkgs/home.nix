@@ -17,14 +17,11 @@ let
   } + "/themes/dotphiles/dircolors/dircolors.base16.dark";
 in
 {
-  # Imports
-  services.dunst = import ./dunst.nix { inherit pkgs; };
-  home.sessionVariables = import ./profile.nix;
-
   programs.home-manager = {
     enable = true;
     path = https://github.com/rycee/home-manager/archive/master.tar.gz;
   };
+  home.sessionVariables = import ./profile.nix;
   home.packages = with pkgs; [
     chromium
     dropbox-cli
@@ -33,6 +30,11 @@ in
   ];
 
   # CLI
+
+  programs.ssh = {
+    enable = true;
+    matchBlocks = import ./ssh-hosts.nix;
+  };
 
   programs.git = {
     enable = true;
@@ -141,4 +143,5 @@ in
       "90:class_g = 'xterm-256color'"
     ];
   };
+  services.dunst = import ./dunst.nix { inherit pkgs; };
 }

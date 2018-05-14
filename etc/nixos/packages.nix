@@ -30,6 +30,7 @@ in {
 
     # Graphical - Applications
     firefox
+    gimp
     gnome3.seahorse
     mpv
     pavucontrol
