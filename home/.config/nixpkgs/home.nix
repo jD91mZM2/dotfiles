@@ -15,7 +15,6 @@ let
 
     sha256 = "0h95s5gvn08m4y11gb82anx8s9s2ywaks15idawxdg5bibjav79l";
   } + "/themes/dotphiles/dircolors/dircolors.base16.dark";
-  unstable = import <nixos-unstable> {};
 in
 {
   # Imports
