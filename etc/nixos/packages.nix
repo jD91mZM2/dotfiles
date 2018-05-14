@@ -57,7 +57,6 @@ in {
 
     # Applications
     grml-zsh-config
-    mosh
     ncdu
     neovim
     tmux
