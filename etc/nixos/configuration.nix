@@ -75,7 +75,7 @@
     enable = true;
     autoPrune.enable = true;
   };
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   # Graphics! X11! Much wow!
   services.xserver = {
@@ -91,10 +91,6 @@
       background = "${pkgs.adapta-backgrounds}/share/backgrounds/adapta/tealized.jpg";
       greeters.gtk = {
         enable = true;
-        iconTheme = {
-          name = "Numix";
-          package = pkgs.numix-icon-theme;
-        };
         theme = {
           name = "Adapta";
           package = pkgs.adapta-gtk-theme;
@@ -113,7 +109,7 @@
   # User settings
   users.extraUsers.user = {
     isNormalUser = true;
-    extraGroups = ["wheel" "docker"];
+    extraGroups = ["wheel" "docker" "libvirtd"];
     shell = pkgs.zsh;
   };
 

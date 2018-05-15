@@ -34,6 +34,7 @@ in {
     gnome3.seahorse
     mpv
     pavucontrol
+    virtmanager
     xfce.thunar
     xfce.xfce4-power-manager
     (unstable.st.override {
