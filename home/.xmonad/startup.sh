@@ -25,4 +25,5 @@ xfce4-power-manager &
 
 sleep 60 # chromium isn't fast enough
 chromium --app="https://chat.redox-os.org/"
+sleep 10
 chromium --app="https://discordapp.com/channels/@me"
