@@ -5,7 +5,7 @@ let
     clear = "clear; echo -ne \"\\e[3J\"";
     git = "hub";
     ls = "ls -CF --color=auto";
-    nix-shell = "nix-shell --run zsh";
+    nix-shell = "nix-shell --command zsh";
     rsynca = "rsync -avzhP";
   };
   dircolors = pkgs.fetchFromGitHub {
@@ -72,7 +72,10 @@ in
       eval "$(dircolors "${dircolors}")"
 
       powerline() {
-          PS1="$(powerline-rs --shell bash $?)"
+        PS1="$(powerline-rs --shell bash $?)"
+        if [ -n "$IN_NIX_SHELL" ]; then
+          PS1="''${PS1//\\\$/N}"
+        fi
       }
       PROMPT_COMMAND=powerline
     '';
@@ -84,7 +87,10 @@ in
       eval "$(dircolors "${dircolors}")"
 
       powerline() {
-          PS1="$(powerline-rs --shell zsh $?)"
+        PS1="$(powerline-rs --shell zsh $?)"
+        if [ -n "$IN_NIX_SHELL" ]; then
+          PS1="''${PS1//\%\#/N}"
+        fi
       }
       precmd_functions+=(powerline)
 
