@@ -55,9 +55,11 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
       manageHook = composeAll [
         manageHook def,
         appName =? "chat.redox-os.org" <||>
-        appName =? "discordapp.com__channels_@me" <||>
-        appName =? "liferea" <||>
-        className =? "Thunderbird" --> doShift (ws 9)
+          appName =? "discordapp.com__channels_@me" <||>
+          appName =? "liferea" <||>
+          appName =? "qemu-system-x86_64" <||>
+          className =? "Thunderbird"
+          --> doShift (ws 9)
       ],
       modMask = myModMask,
       startupHook =
