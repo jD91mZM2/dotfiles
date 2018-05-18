@@ -24,5 +24,5 @@ xfce4-panel --disable-wm-check &
 xfce4-power-manager &
 
 chromium --app="https://chat.redox-os.org/" &
-sleep 30 # please chromium just work
+sleep 60 # please chromium just work
 chromium --app="https://discordapp.com/channels/@me" &
