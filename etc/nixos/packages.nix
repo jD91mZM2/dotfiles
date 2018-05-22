@@ -53,8 +53,8 @@ in {
 
     # Graphical - Utils
     feh
-    maim
     gnome3.zenity
+    maim
 
     # Applications
     grml-zsh-config
@@ -88,6 +88,7 @@ in {
     socat
     trash-cli
     tree
+    units
     unzip
     wget
     xclip
