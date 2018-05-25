@@ -39,6 +39,12 @@
   networking.hostName = "compotar";
   networking.networkmanager.enable = true;
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
+  ## Manually overwrite /etc/resolv.conf because openresolv tries to add my ISP's DNS
+  environment.etc."resolv.conf".text = ''
+    ${builtins.concatStringsSep
+        "\n"
+        (map (ip: "nameserver " + ip) config.networking.nameservers)}
+  '';
 
   # Sound
   sound.enable = true;
