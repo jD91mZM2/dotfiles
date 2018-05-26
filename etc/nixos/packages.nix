@@ -102,6 +102,7 @@ in {
     python
     ruby
     rustup
+    unstable.cargo-release
 
     # Daemons
     udiskie
