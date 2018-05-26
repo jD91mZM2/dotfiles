@@ -81,6 +81,7 @@ in {
     gnupg
     htop
     httpie
+    manpages
     neofetch
     nix-index
     patchelf
