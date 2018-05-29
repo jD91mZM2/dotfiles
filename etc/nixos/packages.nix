@@ -57,6 +57,7 @@ in {
     maim
 
     # Applications
+    asciinema
     grml-zsh-config
     ncdu
     neovim
