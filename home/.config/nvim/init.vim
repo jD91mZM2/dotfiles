@@ -41,6 +41,7 @@ call plug#end()
 set cursorline
 set expandtab
 set mouse=a
+set nowrap
 set nrformats=alpha,octal,hex
 set number
 set splitright
