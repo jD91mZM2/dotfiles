@@ -100,7 +100,10 @@ in {
 
     # Languages
     cabal-install
+    cmake
+    gcc
     ghc
+    gnumake
     python
     ruby
     rustup
