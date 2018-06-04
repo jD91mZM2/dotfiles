@@ -33,6 +33,7 @@ in {
     gimp
     gnome3.seahorse
     mpv
+    obs-studio
     pavucontrol
     virtmanager
     xfce.thunar
