@@ -22,8 +22,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Completion and compiling
-Plug 'w0rp/ale'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'make release' }
 Plug 'roxma/nvim-completion-manager'
+Plug 'w0rp/ale'
 
 " Languages
 Plug 'Xe/lolcode.vim'
@@ -44,6 +45,7 @@ set mouse=a
 set nowrap
 set nrformats=alpha,octal,hex
 set number
+set signcolumn=yes
 set splitright
 set sw=0
 set ts=4
@@ -61,9 +63,6 @@ hi Trail ctermbg=red
 au BufWinEnter * match Trail /\s\+$/ " Copy pasted from http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 au BufEnter * silent! lcd %:p:h
 
-au BufEnter * setlocal signcolumn=yes
-au BufLeave * setlocal signcolumn=no
-
 au FileType fish compiler fish
 au FileType haskell setlocal ts=2
 au FileType rust compiler cargo
@@ -79,14 +78,18 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'base16_default'
 
-"                     Default - vvvvvvvvvvvvvvv | vvvvvvvvvvv - Custom
-let g:ale_haskell_ghc_options = '-fno-code -v0' . ' -dynamic'
+" Disable linters for rust, we use LanguageClient-neovim
+let g:ale_linters = {
+    \ 'rust': []
+\ }
 
 let g:nerdtree_tabs_open_on_console_startup = 1
-
 let g:rust_recommended_style = 0
-
 let g:table_mode_corner_corner='+'
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rls']
+\ }
 
 " Commands
 function! JSON()
@@ -100,5 +103,6 @@ command! VTerm silent! lcd %:p:h | vnew +terminal
 command! HTerm silent! lcd %:p:h | rightbelow new +terminal
 command! SudoW silent exec "w !sudo tee % > /dev/null" | echo "Saved!"
 
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <LEADER>ji <Plug>(JavaComplete-Imports-Add)
 tnoremap <ESC><ESC> <C-\><C-N>
