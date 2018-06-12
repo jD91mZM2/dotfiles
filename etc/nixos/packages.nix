@@ -33,6 +33,7 @@ in {
     gimp
     gnome3.seahorse
     mpv
+    multimc
     obs-studio
     pavucontrol
     virtmanager
