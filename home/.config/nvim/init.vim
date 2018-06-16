@@ -35,6 +35,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'LnL7/vim-nix'
+Plug 'https://gitlab.redox-os.org/redox-os/ion-vim'
 
 call plug#end()
 
