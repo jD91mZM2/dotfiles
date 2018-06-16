@@ -22,12 +22,7 @@ in
     path = https://github.com/rycee/home-manager/archive/master.tar.gz;
   };
   home.sessionVariables = import ./profile.nix;
-  home.packages = with pkgs; [
-    chromium
-    dropbox-cli
-    liferea
-    thunderbird
-  ];
+  home.packages = (import ./packages.nix { pkgs = pkgs; });
 
   # CLI
 
