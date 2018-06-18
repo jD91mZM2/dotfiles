@@ -33,8 +33,8 @@
       history_length = 5;
     };
     shortcuts = {
-      close = "ctrl+space";
-      close_all = "ctrl+shift+space";
+      close = "ctrl+BackSpace";
+      close_all = "ctrl+shift+BackSpace";
       history = "ctrl+grave";
       context = "ctrl+shift+period";
     };
