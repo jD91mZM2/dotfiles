@@ -70,9 +70,9 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
     `additionalKeys`
     [
       -- PrintScreen
-      ((0, xK_Print),                       spawn "~/.dotfiles/screenshot.sh screen"),
-      ((myModMask, xK_Print),               spawn "~/.dotfiles/screenshot.sh window"),
-      ((myModMask .|. shiftMask, xK_Print), spawn "~/.dotfiles/screenshot.sh region"),
+      ((0, xK_Print),                       spawn "~/dotfiles/screenshot.sh screen"),
+      ((myModMask, xK_Print),               spawn "~/dotfiles/screenshot.sh window"),
+      ((myModMask .|. shiftMask, xK_Print), spawn "~/dotfiles/screenshot.sh region"),
 
       -- Volume
       ((0, xK_XF86AudioLowerVolume), spawn "amixer set Master 2%- unmute && \
