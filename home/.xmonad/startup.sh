@@ -10,7 +10,7 @@ xsetroot -cursor_name left_ptr
 
 systemctl start --user compton
 udiskie &
-~/.dotfiles/lock-timer.sh slock &
+~/dotfiles/lock-timer.sh slock &
 
 # Interactive
 
