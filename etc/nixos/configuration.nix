@@ -9,7 +9,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     # Monitor configs
-    ./monitors.nix
+    #./monitors.nix
     # System packages
     ./packages.nix
     # OpenVPN configs
@@ -108,9 +108,6 @@
       enableContribAndExtras = true;
     };
   };
-
-  services.gnome3.gnome-keyring.enable = true;
-  security.pam.services.lightdm.enableGnomeKeyring = true;
 
   # User settings
   users.extraUsers.user = {

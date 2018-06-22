@@ -55,12 +55,6 @@ in
   };
 
   programs.bash = {
-    profileExtra = ''
-      # Use GNOME Keyring for ssh
-      eval "$(gnome-keyring-daemon --start)"
-      export SSH_AUTH_SOCK
-    '';
-
     enable = true;
     shellAliases = aliases;
     initExtra = ''
@@ -91,6 +85,12 @@ in
 
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=10"
     '';
+  };
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    defaultCacheTtl = 86400;
+    defaultCacheTtlSsh = 86400;
   };
 
   # Graphical

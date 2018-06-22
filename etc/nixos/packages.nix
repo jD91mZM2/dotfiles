@@ -31,7 +31,6 @@ in {
     # Graphical - Applications
     firefox
     gimp
-    gnome3.seahorse
     mpv
     multimc
     obs-studio
