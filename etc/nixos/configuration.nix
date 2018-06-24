@@ -9,7 +9,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     # Monitor configs
-    #./monitors.nix
+    ./monitors.nix
     # System packages
     ./packages.nix
     # OpenVPN configs
