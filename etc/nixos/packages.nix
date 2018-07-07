@@ -71,6 +71,7 @@ in {
     python36Packages.neovim
 
     # Utils
+    ascii
     autojump
     bind
     binutils
