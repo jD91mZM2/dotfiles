@@ -16,7 +16,6 @@ in {
     dmenu
     dunst
     j4-dmenu-desktop
-    keepassxc
     networkmanagerapplet
     ## XFCE Panel
     xfce.exo
@@ -35,6 +34,8 @@ in {
     multimc
     obs-studio
     pavucontrol
+    steam
+    unstable.keepassxc
     virtmanager
     xfce.thunar
     xfce.xfce4-power-manager

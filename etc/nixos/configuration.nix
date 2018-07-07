@@ -5,6 +5,9 @@
 { config, pkgs, ... }:
 
 {
+  # :(
+  nixpkgs.config.allowUnfree = true;
+
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -49,6 +52,10 @@
   # Sound
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+
+  # 32-bit support
+  hardware.opengl.driSupport32Bit = true;
+  hardware.pulseaudio.support32Bit = true;
 
   # System environment stuff
   environment.variables.DEJA_DUP_MONITOR = "${pkgs.deja-dup}/libexec/deja-dup/deja-dup-monitor";
