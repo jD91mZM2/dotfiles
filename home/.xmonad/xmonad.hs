@@ -75,10 +75,8 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
       ((myModMask .|. shiftMask, xK_Print), spawn "~/dotfiles/screenshot.sh region"),
 
       -- Volume
-      ((0, xK_XF86AudioLowerVolume), spawn "amixer set Master 2%- unmute && \
-\ paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"),
-      ((0, xK_XF86AudioRaiseVolume), spawn "amixer set Master 2%+ unmute && \
-\ paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"),
+      ((0, xK_XF86AudioLowerVolume), spawn "amixer set Master 2%- unmute"),
+      ((0, xK_XF86AudioRaiseVolume), spawn "amixer set Master 2%+ unmute"),
 
       -- Misc
       ((myModMask .|. shiftMask, xK_l),       spawn "echo -n '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"),
