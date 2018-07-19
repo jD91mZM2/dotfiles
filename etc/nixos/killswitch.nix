@@ -23,13 +23,13 @@
       iptables -A INPUT -i tun+ -j ACCEPT
       iptables -A OUTPUT -o tun+ -j ACCEPT
 
-      # Allow local connections
-      iptables -A INPUT -d 192.168.0.0/24 -j ACCEPT
-      iptables -A OUTPUT -d 192.168.0.0/24 -j ACCEPT
-      iptables -A INPUT -d 192.168.1.0/24 -j ACCEPT
-      iptables -A OUTPUT -d 192.168.1.0/24 -j ACCEPT
-      iptables -A INPUT -d 192.168.2.0/24 -j ACCEPT
-      iptables -A OUTPUT -d 192.168.2.0/24 -j ACCEPT
+      # Allow local connections/local ips
+      iptables -A INPUT -d 10.0.0.0/8 -j ACCEPT
+      iptables -A OUTPUT -d 10.0.0.0/8 -j ACCEPT
+      iptables -A INPUT -d 172.16.0.0/12 -j ACCEPT
+      iptables -A OUTPUT -d 172.16.0.0/12 -j ACCEPT
+      iptables -A INPUT -d 192.168.0.0/16 -j ACCEPT
+      iptables -A OUTPUT -d 192.168.0.0/16 -j ACCEPT
 
       # Allow localhost
       iptables -A INPUT -i lo -j ACCEPT
