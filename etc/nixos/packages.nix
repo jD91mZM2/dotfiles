@@ -57,6 +57,7 @@ in {
     feh
     gnome3.zenity
     maim
+    xorg.xev
 
     # Applications
     asciinema
@@ -71,6 +72,7 @@ in {
     python36Packages.neovim
 
     # Utils
+    androidsdk
     ascii
     autojump
     bind
