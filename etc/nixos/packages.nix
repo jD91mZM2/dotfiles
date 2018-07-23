@@ -63,13 +63,9 @@ in {
     asciinema
     grml-zsh-config
     ncdu
-    neovim
     tmux
+    unstable.neovim
     weechat
-    ## NeoVim
-    neovim
-    python27Packages.neovim
-    python36Packages.neovim
 
     # Utils
     androidsdk

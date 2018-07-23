@@ -23,7 +23,11 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Completion and compiling
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'make release' }
-Plug 'roxma/nvim-completion-manager'
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-tmux'
+Plug 'roxma/nvim-yarp' " dependency of ncm2
 Plug 'w0rp/ale'
 
 " Languages
@@ -91,6 +95,11 @@ let g:table_mode_corner_corner='+'
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rls']
 \ }
+
+" Enable ncm2
+au BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+" ^ Required, see ':help Ncm2PopupOpen' for abosolutely no explanation why
 
 " Commands
 function! JSON()

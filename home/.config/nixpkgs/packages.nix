@@ -1,6 +1,6 @@
 { pkgs }:
 let
-  git = (import ~/nixpkgs {});
+  unstable = (import <nixos-unstable> {});
 in
   with pkgs; [
     chromium
@@ -8,6 +8,6 @@ in
     liferea
     thunderbird
 
-    git.cargo-edit
-    git.cargo-tree
+    unstable.cargo-edit
+    unstable.cargo-tree
   ]
