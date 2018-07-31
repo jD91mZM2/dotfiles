@@ -28,13 +28,17 @@ in {
     gnome3.dconf
 
     # Graphical - Applications
+    chromium
+    dropbox-cli
     firefox
     gimp
+    liferea
     mpv
     multimc
     obs-studio
     pavucontrol
     steam
+    thunderbird
     unstable.keepassxc
     virtmanager
     xfce.thunar
@@ -108,7 +112,9 @@ in {
     python
     ruby
     rustup
+    unstable.cargo-edit
     unstable.cargo-release
+    unstable.cargo-tree
 
     # Daemons
     udiskie

@@ -4,14 +4,6 @@ let
   excludeTarget = source: builtins.filterSource (path: _type: path != (toString (source + "/target"))) source;
 in
   with pkgs; [
-    chromium
-    dropbox-cli
-    liferea
-    thunderbird
-
-    unstable.cargo-edit
-    unstable.cargo-tree
-
     # My own software
     (unstable.rustPlatform.buildRustPackage (rec {
       name = "termplay-local";
