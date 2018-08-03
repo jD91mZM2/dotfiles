@@ -8,6 +8,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
@@ -93,7 +94,7 @@ let g:rust_recommended_style = 0
 let g:table_mode_corner_corner='+'
 
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rls']
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls']
 \ }
 
 " Enable ncm2
