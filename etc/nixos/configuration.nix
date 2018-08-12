@@ -13,6 +13,8 @@
     ./hardware-configuration.nix
     # Monitor configs
     ./monitors.nix
+    # Environment variables
+    ./env.nix
     # System packages
     ./packages.nix
     # OpenVPN configs
@@ -56,9 +58,6 @@
   # 32-bit support
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
-
-  # System environment stuff
-  environment.variables.DEJA_DUP_MONITOR = "${pkgs.deja-dup}/libexec/deja-dup/deja-dup-monitor";
 
   ## Required by xfce4-panel
   environment.pathsToLink = [ "/share/xfce4" ];
