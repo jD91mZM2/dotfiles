@@ -21,7 +21,7 @@ in
     enable = true;
     path = https://github.com/rycee/home-manager/archive/master.tar.gz;
   };
-  home.sessionVariables = import ./profile.nix;
+  home.sessionVariables = import ./env.nix;
   home.packages = (import ./packages.nix { pkgs = pkgs; });
 
   # CLI
