@@ -24,8 +24,9 @@
   ];
 
   # systemd-boot
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.supportedFilesystems = [ "zfs" ];
 
   # Intel microcode
   hardware.cpu.intel.updateMicrocode = true;
@@ -41,6 +42,7 @@
   time.timeZone = "Europe/Stockholm";
 
   # Networking
+  networking.hostId = "05fbf074";
   networking.hostName = "compotar";
   networking.networkmanager.enable = true;
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];

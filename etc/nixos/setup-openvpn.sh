@@ -38,8 +38,8 @@ for old_file in *.ovpn; do
     file="$(echo -n "$old_file" | sed -e 's/ /_/g' -e 's/\.ovpn$/\.conf/')"
     mv "$old_file" "$file"
 
-    sed 's/\(crl-verify \)\(crl.rsa.4096.pem\)/\1'"$(quoteSubst "$output")"'\2/' -i "$file"
-    sed 's/\(ca \)\(ca.rsa.4096.crt\)/\1'"$(quoteSubst "$output")"'\2/' -i "$file"
+    sed 's/\(crl-verify \)\(crl.rsa.4096.pem\)/\1'"$(quoteSubst "$output")"'\/\2/' -i "$file"
+    sed 's/\(ca \)\(ca.rsa.4096.crt\)/\1'"$(quoteSubst "$output")"'\/\2/' -i "$file"
 
     if [ "$autologin" == "true" ]; then
         echo "auth-user-pass $output/passwd" >> "$file"
@@ -56,3 +56,4 @@ echo -n "PIA Password: "
 read -r password
 
 printf "%s\n%s" "$username" "$password" > passwd
+chmod 0600 passwd
