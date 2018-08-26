@@ -23,6 +23,9 @@
     ./killswitch.nix
   ];
 
+  # File system
+  services.zfs.autoSnapshot.enable = true;
+
   # systemd-boot
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
