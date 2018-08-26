@@ -14,7 +14,6 @@ udiskie &
 
 # Interactive
 
-"$DEJA_DUP_MONITOR" &
 liferea &
 nm-applet &
 st &

@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
   environment.variables = {
-    DEJA_DUP_MONITOR = "${pkgs.deja-dup}/libexec/deja-dup/deja-dup-monitor";
-
     EDITOR = "nvim";
     VISUAL = "nvim";
 

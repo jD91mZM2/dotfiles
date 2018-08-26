@@ -26,6 +26,7 @@ in {
 
     # Graphical - Applications
     chromium
+    duplicity
     firefox
     gimp
     liferea
