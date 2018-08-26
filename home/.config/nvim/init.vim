@@ -86,15 +86,19 @@ let g:airline_theme = 'base16_default'
 
 " Disable linters for rust, we use LanguageClient-neovim
 let g:ale_linters = {
-    \ 'rust': []
+    \ 'rust': [],
+    \ 'nix': []
 \ }
 
 let g:nerdtree_tabs_open_on_console_startup = 1
 let g:rust_recommended_style = 0
 let g:table_mode_corner_corner='+'
 
+let g:LanguageClient_loggingFile = '/tmp/nvim-lang-client.log'
+let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls']
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'nix': ['nix-lsp']
 \ }
 
 " Enable ncm2
