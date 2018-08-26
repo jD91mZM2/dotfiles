@@ -23,13 +23,9 @@ in {
     xfce.xfce4-pulseaudio-plugin
     xfce.xfce4panel_gtk3
     xfce.xfconf
-    ## Déjà Dup
-    deja-dup
-    gnome3.dconf
 
     # Graphical - Applications
     chromium
-    dropbox-cli
     firefox
     gimp
     liferea
@@ -37,6 +33,7 @@ in {
     multimc
     obs-studio
     pavucontrol
+    rclone
     steam
     thunderbird
     unstable.keepassxc

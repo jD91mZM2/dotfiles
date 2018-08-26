@@ -24,6 +24,37 @@ in
   home.sessionVariables = import ./env.nix;
   home.packages = (import ./packages.nix { pkgs = pkgs; });
 
+  # Background
+
+  systemd.user.services.dropbox = {
+    Unit = {
+      Description = "Mirrors dropbox using rclone";
+    };
+    Service = {
+      ExecStart = (pkgs.writeScript "sync.sh" ''
+        #!/bin/sh
+        cd $HOME/Dropbox
+
+        # --update: Sync only if the timestamp is newer
+        ${pkgs.rclone}/bin/rclone copy --update . "Dropbox:"
+        ${pkgs.rclone}/bin/rclone copy --update "Dropbox:" .
+      '');
+    };
+  };
+  systemd.user.timers.dropbox = {
+    Unit = {
+      Description = "Automatically mirrors dropbox using rclone every hour";
+    };
+    Timer = {
+      OnBootSec = "1min";
+      OnUnitActiveSec = "1h";
+      Unit = "dropbox.service";
+    };
+    Install = {
+      WantedBy = [ "multi-user.target" ];
+    };
+  };
+
   # CLI
 
   programs.ssh = {

@@ -15,7 +15,6 @@ udiskie &
 # Interactive
 
 "$DEJA_DUP_MONITOR" &
-dropbox start &
 liferea &
 nm-applet &
 st &
