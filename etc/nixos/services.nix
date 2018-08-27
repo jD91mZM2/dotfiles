@@ -6,6 +6,7 @@
       path = with pkgs; [ rclone ];
       script = ''
         #!/bin/sh
+        set -e
         cd ~/Dropbox
 
         # --update: Sync only if the timestamp is newer
@@ -35,12 +36,15 @@
       };
       script = ''
         #!/bin/sh
+        set -e
+        cd ~/backup
 
-        borg create "$HOME/backup::$(date)" ~/Coding/ ~/dotfiles ~/Dropbox \
+        borg create ".::$(date)" ~/Coding/ ~/dotfiles ~/Dropbox \
           --progress \
           --stats \
           --compression lz4
-        rclone sync -v ~/backup "BackBlaze Backup:jD91mZM2-backups"
+        borg prune . --keep-daily 7
+        rclone sync -v . "BackBlaze Backup:jD91mZM2-backups"
       '';
       serviceConfig = {
         User = "user";
