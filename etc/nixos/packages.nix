@@ -34,7 +34,6 @@ in {
     multimc
     obs-studio
     pavucontrol
-    rclone
     steam
     thunderbird
     unstable.keepassxc
@@ -63,8 +62,10 @@ in {
 
     # Applications
     asciinema
+    borgbackup
     grml-zsh-config
     ncdu
+    rclone
     tmux
     unstable.neovim
     weechat
