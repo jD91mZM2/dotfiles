@@ -21,6 +21,8 @@
     ./openvpn.nix
     # VPN killswitch
     ./killswitch.nix
+    # Systemctl services
+    ./services.nix
   ];
 
   # File system
