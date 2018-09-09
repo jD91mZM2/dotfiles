@@ -92,6 +92,7 @@ in {
     patchelf
     ripgrep
     socat
+    sshfs
     trash-cli
     tree
     units
