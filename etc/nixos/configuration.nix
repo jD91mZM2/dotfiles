@@ -68,6 +68,11 @@
   ## https://github.com/NixOS/nixpkgs/issues/33231
   environment.variables.GDK_PIXBUF_MODULE_FILE = "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache";
 
+  # Mime type for wasm, see https://github.com/mdn/webassembly-examples/issues/5
+  environment.etc."mime.types".text = ''
+    application/wasm  wasm
+  '';
+
   # Program configuration
   programs.bash = {
     enableCompletion = true;
