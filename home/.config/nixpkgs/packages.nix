@@ -8,7 +8,7 @@ in
     (unstable.rustPlatform.buildRustPackage (rec {
       name = "termplay-local";
       src = excludeTarget ~/Coding/Rust/termplay;
-      cargoSha256 = "1sml3wpwkcc60vcm8gaw9d04a2ndzzp5fbsmkanf5sixmzdms0mx";
+      cargoSha256 = "0nr4xii09z6djdj9586b5mpncp7n3xlng65czz3g777ylwj0f7v2";
       inherit (unstable.termplay) cargoBuildFlags buildInputs nativeBuildInputs postInstall meta;
     }))
     (unstable.rustPlatform.buildRustPackage (rec {

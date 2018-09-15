@@ -1,6 +1,8 @@
 { pkgs, ... }:
 let
-  unstable = import <nixos-unstable> {};
+  unstable = import <nixos-unstable> {
+    config.allowUnfreePredicate = (p: pkgs.lib.hasPrefix "steam" p.name);
+  };
 in {
   environment.systemPackages = with pkgs; [
     # Graphical - Look & Feel
@@ -34,9 +36,9 @@ in {
     multimc
     obs-studio
     pavucontrol
-    steam
     thunderbird
     unstable.keepassxc
+    unstable.steam
     virtmanager
     xfce.thunar
     xfce.xfce4-power-manager
