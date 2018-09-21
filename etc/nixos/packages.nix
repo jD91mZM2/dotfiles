@@ -109,6 +109,7 @@ in {
     cabal-install
     cmake
     gcc
+    gdb
     ghc
     gnumake
     python
