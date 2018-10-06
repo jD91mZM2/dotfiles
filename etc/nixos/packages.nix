@@ -1,9 +1,12 @@
 { pkgs, ... }:
-let
-  unstable = import <nixos-unstable> {
-    config.allowUnfreePredicate = (p: pkgs.lib.hasPrefix "steam" p.name);
-  };
-in {
+#let
+#  unstable = import <nixos-unstable> {};
+#in
+{
+  nixpkgs.config.allowUnfreePredicate = (p:
+    pkgs.lib.hasPrefix "steam" p.name ||
+      (builtins.parseDrvName p.name).name == "android-sdk"
+  );
   environment.systemPackages = with pkgs; [
     # Graphical - Look & Feel
     adapta-backgrounds
@@ -31,18 +34,18 @@ in {
     duplicity
     firefox
     gimp
+    keepassxc
     liferea
     mpv
     multimc
     obs-studio
     pavucontrol
+    steam
     thunderbird
-    unstable.keepassxc
-    unstable.steam
     virtmanager
     xfce.thunar
     xfce.xfce4-power-manager
-    (unstable.st.override {
+    (st.override {
       conf = builtins.readFile (substituteAll {
         src = ./st/config.h;
         colorscheme = builtins.readFile (fetchFromGitHub {
@@ -67,9 +70,9 @@ in {
     borgbackup
     grml-zsh-config
     ncdu
+    neovim
     rclone
     tmux
-    unstable.neovim
     weechat
 
     # Utils
@@ -107,6 +110,9 @@ in {
 
     # Languages
     cabal-install
+    cargo-edit
+    cargo-release
+    cargo-tree
     cmake
     gcc
     gdb
@@ -115,9 +121,6 @@ in {
     python
     ruby
     rustup
-    unstable.cargo-edit
-    unstable.cargo-release
-    unstable.cargo-tree
 
     # Daemons
     udiskie
