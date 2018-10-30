@@ -8,17 +8,12 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # Monitor configs
-    ./monitors.nix
-    # Environment variables
+
     ./env.nix
-    # System packages
-    ./packages.nix
-    # OpenVPN configs
-    ./openvpn.nix
-    # VPN killswitch
     ./killswitch.nix
-    # Systemctl services
+    ./monitors.nix
+    ./openvpn.nix
+    ./packages.nix
     ./services.nix
   ];
 

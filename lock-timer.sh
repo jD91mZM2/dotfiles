@@ -23,11 +23,10 @@ read -r -d '' lock << EOF
 EOF
 
 xidlehook \
-  --time 1 \
-  --timer "$lock" \
-  --notify 10 \
-  --notifier  'xrandr --output "$(xrandr | grep primary | cut -d " " -f 1)" --brightness .1' \
-  --canceller 'xrandr --output "$(xrandr | grep primary | cut -d " " -f 1)" --brightness 1' \
   --not-when-fullscreen \
   --not-when-audio \
-  --socket /tmp/xidlehook.sock
+  --socket /tmp/xidlehook.sock \
+  --timer normal 60 \
+    'xrandr --output "$(xrandr | grep primary | cut -d " " -f 1)" --brightness .1' \
+    'xrandr --output "$(xrandr | grep primary | cut -d " " -f 1)" --brightness 1' \
+  --timer primary 10 "$lock" ""

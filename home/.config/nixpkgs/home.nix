@@ -22,7 +22,10 @@ in
     path = https://github.com/rycee/home-manager/archive/master.tar.gz;
   };
   home.sessionVariables = import ./env.nix;
-  home.packages = (import ./packages.nix { pkgs = pkgs; });
+  home.packages = (import ./packages.nix { inherit pkgs; });
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz))
+  ];
 
   # CLI
 
