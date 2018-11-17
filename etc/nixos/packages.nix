@@ -64,6 +64,7 @@
     gnome3.zenity
     maim
     xorg.xev
+    xorg.xwininfo
 
     # Applications
     asciinema
