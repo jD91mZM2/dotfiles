@@ -39,7 +39,8 @@ join (x:xs) = "\"" ++ x ++ "\" " ++ join xs
 ws :: Int -> String
 ws n = myWorkspaces !! (n-1)
 
-main = xmonad $ ewmh $ docks $ fullscreenSupport def
+main = xmonad $ ewmh $ docks def
+-- $ fullscreenSupport def
     {
       layoutHook =
         avoidStruts $
@@ -58,7 +59,7 @@ main = xmonad $ ewmh $ docks $ fullscreenSupport def
           appName =? "discordapp.com__channels_@me" <||>
           appName =? "liferea" <||>
           appName =? "qemu-system-x86_64" <||>
-          className =? "Thunderbird"
+          appName =? "Mail"
           --> doShift (ws 9)
       ],
       modMask = myModMask,
