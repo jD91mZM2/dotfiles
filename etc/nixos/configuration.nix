@@ -10,11 +10,13 @@
     ./hardware-configuration.nix
 
     ./env.nix
+    ./hardware.nix
     ./killswitch.nix
-    ./monitors.nix
+    #./monitors.nix
     ./openvpn.nix
     ./packages.nix
     ./services.nix
+    ./x11.nix
   ];
 
   # File system
@@ -24,9 +26,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
   boot.supportedFilesystems = [ "zfs" ];
-
-  # Intel microcode
-  hardware.cpu.intel.updateMicrocode = true;
 
   # TTY settings
   i18n = {
@@ -50,19 +49,6 @@
         (map (ip: "nameserver " + ip) config.networking.nameservers)}
   '';
 
-  # Sound
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  # 32-bit support
-  hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.support32Bit = true;
-
-  ## Required by xfce4-panel
-  environment.pathsToLink = [ "/share/xfce4" ];
-  ## https://github.com/NixOS/nixpkgs/issues/33231
-  environment.variables.GDK_PIXBUF_MODULE_FILE = "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache";
-
   # Mime type for wasm, see https://github.com/mdn/webassembly-examples/issues/5
   environment.etc."mime.types".text = ''
     application/wasm  wasm
@@ -75,7 +61,6 @@
       source "${pkgs.autojump}/share/autojump/autojump.bash"
     '';
   };
-  programs.slock.enable = true;
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
@@ -92,32 +77,6 @@
     autoPrune.enable = true;
   };
   virtualisation.libvirtd.enable = true;
-
-  # Graphics! X11! Much wow!
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    xkbOptions = "compose:ralt";
-
-    # Touchpad:
-    # libinput.enable = true;
-
-    displayManager.lightdm = {
-      enable = true;
-      background = "${pkgs.adapta-backgrounds}/share/backgrounds/adapta/tealized.jpg";
-      greeters.gtk = {
-        enable = true;
-        theme = {
-          name = "Adapta";
-          package = pkgs.adapta-gtk-theme;
-        };
-      };
-    };
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-    };
-  };
 
   # User settings
   users.extraUsers.user = {

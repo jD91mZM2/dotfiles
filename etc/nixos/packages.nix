@@ -5,6 +5,7 @@
 {
   nixpkgs.config.allowUnfreePredicate = (p:
     pkgs.lib.hasPrefix "steam" p.name ||
+      pkgs.lib.hasPrefix "nvidia" p.name ||
       (builtins.parseDrvName p.name).name == "android-sdk"
   );
   environment.systemPackages = with pkgs; [
@@ -34,6 +35,7 @@
     duplicity
     firefox
     gimp
+    inkscape
     keepassxc
     liferea
     mpv
@@ -96,6 +98,7 @@
     neofetch
     nix-index
     patchelf
+    pciutils
     ripgrep
     socat
     sshfs
