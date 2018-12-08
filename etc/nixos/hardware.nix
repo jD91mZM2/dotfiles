@@ -5,12 +5,7 @@
 
   # Graphic
   hardware.opengl.driSupport32Bit = true;
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.optimus_prime = {
-    enable = true;
-    nvidiaBusId = "PCI:4:0:0";
-    intelBusId = "PCI:0:2:0";
-  };
+  hardware.bumblebee.enable = true;
 
   # Sound
   hardware.pulseaudio.enable = true;

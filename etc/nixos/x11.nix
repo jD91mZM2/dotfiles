@@ -11,8 +11,7 @@
     layout = "us";
     xkbOptions = "compose:ralt";
 
-    videoDrivers = [ "nvidia" ];
-    dpi = 96; # nvidia detects a very, very small size by default
+    videoDrivers = [ "intel" ];
 
     # Touchpad:
     # libinput.enable = true;

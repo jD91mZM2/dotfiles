@@ -26,6 +26,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
   boot.supportedFilesystems = [ "zfs" ];
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   # TTY settings
   i18n = {
