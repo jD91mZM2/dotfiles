@@ -98,7 +98,7 @@ let g:table_mode_corner_corner='+'
 let g:LanguageClient_loggingFile = '/tmp/nvim-lang-client.log'
 let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'rust': ['rls'],
     \ 'nix': ['nix-lsp']
 \ }
 
