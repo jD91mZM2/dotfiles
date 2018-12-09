@@ -28,7 +28,6 @@
       show_indicators = true;
       icon_position = "left";
       max_icon_size = 32;
-      icon_path = "/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/";
       sticky_history = true;
       history_length = 5;
     };

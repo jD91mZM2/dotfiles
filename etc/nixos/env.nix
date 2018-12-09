@@ -19,5 +19,8 @@
     LESS_TERMCAP_so = "[01;44;33m";
     LESS_TERMCAP_ue = "[0m";
     LESS_TERMCAP_us = "[01;32m";
+
+    # TODO: Put this in home-manager, once that environment actually affects X11
+    QT_QPA_PLATFORMTHEME = "gtk2";
   };
 }
