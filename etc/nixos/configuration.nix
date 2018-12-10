@@ -12,7 +12,7 @@
     ./env.nix
     ./hardware.nix
     ./killswitch.nix
-    #./monitors.nix
+    ./monitors.nix
     ./openvpn.nix
     ./packages.nix
     ./services.nix
@@ -26,7 +26,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
   boot.supportedFilesystems = [ "zfs" ];
-  boot.blacklistedKernelModules = [ "nouveau" ];
 
   # TTY settings
   i18n = {
