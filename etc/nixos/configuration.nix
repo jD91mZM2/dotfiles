@@ -75,6 +75,7 @@
   virtualisation.docker = {
     enable = true;
     autoPrune.enable = true;
+    storageDriver = "zfs";
   };
   virtualisation.libvirtd.enable = true;
 

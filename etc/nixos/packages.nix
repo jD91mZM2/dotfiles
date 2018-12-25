@@ -8,6 +8,7 @@
       pkgs.lib.hasPrefix "nvidia" p.name ||
       (builtins.parseDrvName p.name).name == "android-sdk"
   );
+  nixpkgs.config.android_sdk.accept_license = true;
   environment.systemPackages = with pkgs; [
     # Graphical - Look & Feel
     adapta-backgrounds
