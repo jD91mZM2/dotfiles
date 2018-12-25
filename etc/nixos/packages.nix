@@ -72,6 +72,7 @@
     # Applications
     asciinema
     borgbackup
+    cdrkit
     grml-zsh-config
     ncdu
     neovim
