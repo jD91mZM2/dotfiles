@@ -8,12 +8,17 @@
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
     { device = "main/root";
+      fsType = "zfs";
+    };
+
+  fileSystems."/var/lib/docker" =
+    { device = "main/docker";
       fsType = "zfs";
     };
 
@@ -23,18 +28,11 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4CBE-F683";
+    { device = "/dev/disk/by-uuid/8D2E-4608";
       fsType = "vfat";
     };
 
-  fileSystems."/var/lib/docker" =
-    { device = "main/docker";
-      fsType = "zfs";
-    };
-
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/5bb3872c-d523-4109-9f3a-5e3d2666c317"; }
-    ];
+  swapDevices = [ ];
 
   nix.maxJobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

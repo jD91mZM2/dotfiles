@@ -2,7 +2,7 @@
 {
   systemd = {
     services.dropbox = {
-      description = "Mirrors dropbox using rclone";
+      description = "Dropbox sync (rclone)";
       path = with pkgs; [ rclone ];
       script = ''
         #!/bin/sh
@@ -19,7 +19,7 @@
     };
     timers.dropbox = {
       enable = true;
-      description = "Automatically mirrors dropbox using rclone every hour";
+      description = "Dropbox sync timer (rclone)";
       timerConfig = {
         OnBootSec = "1min";
         OnUnitActiveSec = "1h";
@@ -29,7 +29,7 @@
     };
 
     services.backup = {
-      description = "Performs a backup of important files";
+      description = "Daily Backup";
       path = with pkgs; [ borgbackup coreutils rclone ];
       environment = {
         BORG_PASSPHRASE = (import ./secret.nix).backup_passphrase;

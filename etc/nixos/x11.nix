@@ -32,8 +32,4 @@
       enableContribAndExtras = true;
     };
   };
-
-  # Graphical programs
-  programs.slock.enable = true;
-  programs.dconf.enable = true;
 }

@@ -3,12 +3,24 @@
 #  unstable = import <nixos-unstable> {};
 #in
 {
+  # Settings
   nixpkgs.config.allowUnfreePredicate = (p:
     pkgs.lib.hasPrefix "steam" p.name ||
       pkgs.lib.hasPrefix "nvidia" p.name ||
       (builtins.parseDrvName p.name).name == "android-sdk"
   );
   nixpkgs.config.android_sdk.accept_license = true;
+
+  # Services
+  services.dbus.packages = with pkgs; [ gnome3.dconf ];
+
+  # Programs
+  programs = {
+    dconf.enable = true;
+    slock.enable = true;
+  };
+
+  # Packages
   environment.systemPackages = with pkgs; [
     # Graphical - Look & Feel
     adapta-backgrounds
