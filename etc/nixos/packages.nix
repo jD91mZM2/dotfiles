@@ -13,6 +13,7 @@
 
   # Services
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
+  services.locate.enable = true;
 
   # Programs
   programs = {
