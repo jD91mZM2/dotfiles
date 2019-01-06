@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
 
     ./env.nix
+    ./fonts.nix
     ./hardware.nix
     ./killswitch.nix
     ./monitors.nix
@@ -26,13 +27,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
   boot.supportedFilesystems = [ "zfs" ];
-
-  # TTY settings
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
-  };
 
   # Time
   time.timeZone = "Europe/Stockholm";

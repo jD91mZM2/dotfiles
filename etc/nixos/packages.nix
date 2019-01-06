@@ -87,6 +87,7 @@
     borgbackup
     cdrkit
     grml-zsh-config
+    mosh
     ncdu
     neovim
     rclone
@@ -143,13 +144,5 @@
 
     # Daemons
     udiskie
-  ];
-  fonts.fonts = with pkgs; [
-    cantarell-fonts
-    font-awesome-ttf
-    hack-font
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
   ];
 }
