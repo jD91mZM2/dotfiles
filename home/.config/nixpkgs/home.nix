@@ -8,6 +8,23 @@ let
     nix-shell = "nix-shell --command zsh";
     rsynca = "rsync -avzhP";
   };
+  bashConfig = builtins.replaceStrings [ "  " ] [ "\t" ] ''
+      eval "$(dircolors "${dircolors}")"
+
+      forward() {
+        if [ -z "$1" ] || [ -z "$2" ]; then
+          echo "forward <remote> <port>"
+          return
+        fi
+        cat <<-EOF
+        Remote port being forwarded over SSH!
+
+        If it doesn't seem to work, make sure the remote's sshd_config
+        specifies "GatewayPorts" to either "yes" or "clientspecified".
+        EOF
+        ssh "$1" -R ":''${2}:localhost:$2" -- sleep infinity
+      }
+  '';
   dircolors = pkgs.fetchFromGitHub {
     owner = "dotphiles";
     repo = "dotzsh";
@@ -61,7 +78,7 @@ in
     enable = true;
     shellAliases = aliases;
     initExtra = ''
-      eval "$(dircolors "${dircolors}")"
+      ${bashConfig}
 
       powerline() {
         PS1="$(powerline-rs --shell bash $?)"
@@ -76,7 +93,7 @@ in
     enable = true;
     shellAliases = aliases;
     initExtra = ''
-      eval "$(dircolors "${dircolors}")"
+      ${bashConfig}
 
       powerline() {
         PS1="$(powerline-rs --shell zsh $?)"
