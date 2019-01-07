@@ -87,7 +87,6 @@
     borgbackup
     cdrkit
     grml-zsh-config
-    ncdu
     neovim
     rclone
     tmux
@@ -111,11 +110,13 @@
     httpie
     manpages
     mosh
+    ncdu
     ncftp
     neofetch
     nix-index
     patchelf
     pciutils
+    rename
     ripgrep
     socat
     sshfs
