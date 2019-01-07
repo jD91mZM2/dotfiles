@@ -87,7 +87,6 @@
     borgbackup
     cdrkit
     grml-zsh-config
-    mosh
     ncdu
     neovim
     rclone
@@ -111,6 +110,8 @@
     htop
     httpie
     manpages
+    mosh
+    ncftp
     neofetch
     nix-index
     patchelf
