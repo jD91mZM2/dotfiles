@@ -24,11 +24,14 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Completion and compiling
+Plug 'Shougo/neco-vim' " dependency of ncm2-vim
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'make release' }
 Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-vim'
 Plug 'roxma/nvim-yarp' " dependency of ncm2
 Plug 'w0rp/ale'
 

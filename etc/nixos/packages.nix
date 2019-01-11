@@ -87,7 +87,9 @@
     borgbackup
     cdrkit
     grml-zsh-config
-    neovim
+    (neovim.override {
+      extraPython3Packages = p: with p; [ jedi ];
+    })
     rclone
     tmux
     weechat
@@ -140,7 +142,7 @@
     gdb
     ghc
     gnumake
-    python
+    python3
     ruby
     rustup
 
