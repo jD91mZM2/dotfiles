@@ -6,19 +6,43 @@
   # Settings
   nixpkgs.config.allowUnfreePredicate = (p:
     pkgs.lib.hasPrefix "steam" p.name ||
-      pkgs.lib.hasPrefix "nvidia" p.name ||
-      (builtins.parseDrvName p.name).name == "android-sdk"
+      pkgs.lib.hasPrefix "nvidia" p.name
   );
-  nixpkgs.config.android_sdk.accept_license = true;
 
   # Services
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
   services.locate.enable = true;
 
-  # Programs
+  # More involved programs
   programs = {
+    adb.enable = true;
     dconf.enable = true;
     slock.enable = true;
+    bash = {
+      enableCompletion = true;
+      interactiveShellInit = ''
+        source "${pkgs.autojump}/share/autojump/autojump.bash"
+      '';
+    };
+    zsh = {
+      enable = true;
+      autosuggestions.enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
+      promptInit = "";
+      interactiveShellInit = ''
+        source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
+        source "${pkgs.autojump}/share/autojump/autojump.zsh"
+      '';
+    };
+  };
+  virtualisation = {
+    docker = {
+      enable = true;
+      autoPrune.enable = true;
+      storageDriver = "zfs";
+    };
+    libvirtd.enable = true;
   };
 
   # Packages
@@ -95,7 +119,6 @@
     weechat
 
     # Utils
-    androidsdk
     ascii
     autojump
     bind

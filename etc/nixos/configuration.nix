@@ -48,35 +48,10 @@
     application/wasm  wasm
   '';
 
-  # Program configuration
-  programs.bash = {
-    enableCompletion = true;
-    interactiveShellInit = ''
-      source "${pkgs.autojump}/share/autojump/autojump.bash"
-    '';
-  };
-  programs.zsh = {
-    enable = true;
-    autosuggestions.enable = true;
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
-    promptInit = "";
-    interactiveShellInit = ''
-      source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
-      source "${pkgs.autojump}/share/autojump/autojump.zsh"
-    '';
-  };
-  virtualisation.docker = {
-    enable = true;
-    autoPrune.enable = true;
-    storageDriver = "zfs";
-  };
-  virtualisation.libvirtd.enable = true;
-
   # User settings
   users.extraUsers.user = {
     isNormalUser = true;
-    extraGroups = ["wheel" "docker" "libvirtd"];
+    extraGroups = ["wheel" "docker" "libvirtd" "adbusers"];
     shell = pkgs.zsh;
   };
 
