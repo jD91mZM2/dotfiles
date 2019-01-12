@@ -125,3 +125,14 @@ command! SudoW silent exec "w !sudo tee % > /dev/null" | echo "Saved!"
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <LEADER>ji <Plug>(JavaComplete-Imports-Add)
 tnoremap <ESC><ESC> <C-\><C-N>
+
+nnoremap <LEFT> :echoerr "No using arrow keys! Bad!"<CR>
+nnoremap <RIGHT> :echoerr "No using arrow keys! Bad!"<CR>
+nnoremap <UP> :echoerr "No using arrow keys! Bad!"<CR>
+nnoremap <DOWN> :echoerr "No using arrow keys! Bad!"<CR>
+inoremap <LEFT> <NOP>
+inoremap <RIGHT> <NOP>
+inoremap <UP> <NOP>
+inoremap <DOWN> <NOP>
+cnoremap <UP> <NOP>
+cnoremap <DOWN> <NOP>
