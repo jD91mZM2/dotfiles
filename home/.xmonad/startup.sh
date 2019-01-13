@@ -22,5 +22,5 @@ xfce4-panel --disable-wm-check &
 xfce4-power-manager &
 
 chromium --app="https://chat.redox-os.org/"
-sleep 10 # chromium does not handle stess well
+sleep 20 # chromium does not handle stess well
 chromium --app="https://discordapp.com/channels/@me" &
