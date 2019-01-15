@@ -11,7 +11,10 @@
 
   # Services
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
-  services.locate.enable = true;
+  services.locate = {
+    enable = true;
+    interval = "07:00 PM";
+  };
 
   # More involved programs
   programs = {
@@ -165,9 +168,15 @@
     gdb
     ghc
     gnumake
+    nodejs
     python3
     ruby
     rustup
+
+    # LaTeX stuff
+    imagemagick
+    okular
+    texlive.combined.scheme-medium
 
     # Daemons
     udiskie

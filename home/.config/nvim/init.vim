@@ -28,23 +28,27 @@ Plug 'Shougo/neco-vim' " dependency of ncm2-vim
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'make release' }
 Plug 'ncm2/ncm2'
 Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-vim'
 Plug 'roxma/nvim-yarp' " dependency of ncm2
 Plug 'w0rp/ale'
 
 " Languages
+Plug 'LnL7/vim-nix'
 Plug 'Xe/lolcode.vim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'cespare/vim-toml'
 Plug 'dag/vim-fish'
+Plug 'https://gitlab.redox-os.org/redox-os/ion-vim'
+Plug 'lervag/vimtex'
+Plug 'mxw/vim-jsx'
+Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-tern', {'do': 'npm install'}
+Plug 'ncm2/ncm2-vim'
+Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'vim-ruby/vim-ruby'
-Plug 'LnL7/vim-nix'
-Plug 'https://gitlab.redox-os.org/redox-os/ion-vim'
 
 call plug#end()
 
@@ -88,10 +92,12 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'base16_default'
 
-" Disable linters for rust, we use LanguageClient-neovim
+" Disable a few linters, which most of them (but not all) are replaced with
+" something else.
 let g:ale_linters = {
+    \ 'javascript': [],
+    \ 'nix': [],
     \ 'rust': [],
-    \ 'nix': []
 \ }
 
 let g:nerdtree_tabs_open_on_console_startup = 1
@@ -109,6 +115,7 @@ let g:LanguageClient_serverCommands = {
 au BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 " ^ Required, see ':help Ncm2PopupOpen' for abosolutely no explanation why
+set shortmess+=c " disable 'The only match' message, for example
 
 " Commands
 function! JSON()
