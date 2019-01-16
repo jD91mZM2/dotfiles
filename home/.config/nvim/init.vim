@@ -116,6 +116,8 @@ au BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 " ^ Required, see ':help Ncm2PopupOpen' for abosolutely no explanation why
 set shortmess+=c " disable 'The only match' message, for example
+inoremap <expr> <CR> pumvisible() ? '<C-y><CR>' : '<CR>'
+" ^ handle enter correctly when a popup menu is up
 
 " Commands
 function! JSON()

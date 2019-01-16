@@ -118,6 +118,7 @@
       extraPython3Packages = p: with p; [ jedi ];
     })
     rclone
+    sqlite
     tmux
     weechat
 
@@ -174,8 +175,8 @@
     rustup
 
     # LaTeX stuff
-    imagemagick
     okular
+    poppler_utils
     texlive.combined.scheme-full
 
     # Daemons
