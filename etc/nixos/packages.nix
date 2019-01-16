@@ -176,7 +176,7 @@
     # LaTeX stuff
     imagemagick
     okular
-    texlive.combined.scheme-medium
+    texlive.combined.scheme-full
 
     # Daemons
     udiskie
