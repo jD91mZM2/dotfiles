@@ -21,6 +21,6 @@ thunderbird &
 xfce4-panel --disable-wm-check &
 xfce4-power-manager &
 
-chromium --app="https://chat.redox-os.org/"
-sleep 60 # chromium does not handle stess well AT ALL... even with the superspeeds of an SSD
+chromium --app="https://chat.redox-os.org/" &
+sleep 10 # chromium does not handle stess well
 chromium --app="https://discordapp.com/channels/@me" &
