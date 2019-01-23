@@ -110,6 +110,7 @@
     xorg.xwininfo
 
     # Applications
+    abiword
     asciinema
     borgbackup
     cdrkit
