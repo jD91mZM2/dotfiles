@@ -72,6 +72,7 @@
     xfce.xfconf
 
     # Graphical - Applications
+    abiword
     chromium
     duplicity
     firefox
@@ -110,10 +111,12 @@
     xorg.xwininfo
 
     # Applications
-    abiword
+    acpi
     asciinema
     borgbackup
     cdrkit
+    docker_compose
+    elinks
     grml-zsh-config
     (neovim.override {
       extraPython3Packages = p: with p; [ jedi ];
@@ -126,6 +129,7 @@
     # Utils
     ascii
     autojump
+    bc
     bind
     binutils
     efibootmgr

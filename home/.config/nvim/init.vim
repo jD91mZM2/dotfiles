@@ -5,8 +5,8 @@ Plug 'PeterRincker/vim-argumentative'
 Plug 'SirVer/ultisnips'
 Plug 'aperezdc/vim-template'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'honza/vim-snippets'
 Plug 'floobits/floobits-neovim'
+Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -38,6 +38,7 @@ Plug 'LnL7/vim-nix'
 Plug 'Xe/lolcode.vim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'cespare/vim-toml'
+Plug 'chr4/nginx.vim'
 Plug 'dag/vim-fish'
 Plug 'https://gitlab.redox-os.org/redox-os/ion-vim'
 Plug 'lervag/vimtex'
@@ -87,7 +88,7 @@ au FileType yaml,markdown setlocal ts=2 indentkeys=
 let g:AutoPairsMapBS = 0
 let g:AutoPairsMultilineClose = 0
 
-let g:airline#extensions#clock#format = "%I:%M%p"
+let g:airline#extensions#clock#format = '%I:%M%p'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'base16_default'
@@ -102,7 +103,9 @@ let g:ale_linters = {
 
 let g:nerdtree_tabs_open_on_console_startup = 1
 let g:rust_recommended_style = 0
-let g:table_mode_corner_corner='+'
+let g:table_mode_corner_corner = '+'
+let g:templates_directory = fnamemodify($MYVIMRC, ':p:h') . '/vim-templates'
+let g:templates_no_builtin_templates = 1
 
 let g:LanguageClient_loggingFile = '/tmp/nvim-lang-client.log'
 let g:LanguageClient_loggingLevel = 'INFO'
@@ -125,20 +128,20 @@ function! JSON()
     retab!
 endfunction
 
-command! CWD silent! lcd %:p:h | echo "Changed directory!"
+command! CWD silent! lcd %:p:h | echo 'Changed directory!'
 command! Term silent! lcd %:p:h | tabe +terminal
 command! VTerm silent! lcd %:p:h | vnew +terminal
 command! HTerm silent! lcd %:p:h | rightbelow new +terminal
-command! SudoW silent exec "w !sudo tee % > /dev/null" | echo "Saved!"
+command! SudoW silent exec 'w !sudo tee % > /dev/null' | echo 'Saved!'
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <LEADER>ji <Plug>(JavaComplete-Imports-Add)
 tnoremap <ESC><ESC> <C-\><C-N>
 
-nnoremap <LEFT> :echoerr "No using arrow keys! Bad!"<CR>
-nnoremap <RIGHT> :echoerr "No using arrow keys! Bad!"<CR>
-nnoremap <UP> :echoerr "No using arrow keys! Bad!"<CR>
-nnoremap <DOWN> :echoerr "No using arrow keys! Bad!"<CR>
+nnoremap <LEFT> :echoerr 'No using arrow keys! Bad!'<CR>
+nnoremap <RIGHT> :echoerr 'No using arrow keys! Bad!'<CR>
+nnoremap <UP> :echoerr 'No using arrow keys! Bad!'<CR>
+nnoremap <DOWN> :echoerr 'No using arrow keys! Bad!'<CR>
 inoremap <LEFT> <NOP>
 inoremap <RIGHT> <NOP>
 inoremap <UP> <NOP>

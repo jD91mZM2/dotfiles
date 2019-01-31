@@ -2,7 +2,7 @@
 let
   unstable = import <nixos-unstable> {};
   excludeTarget = source: builtins.filterSource (path: _type: path != (toString (source + "/target"))) source;
-  rust = pkgs.latest.rustChannels.stable;
+  rust = pkgs.latest.rustChannels.beta; # beta because the mozilla rust overlay for stable seems broken
   buildRustPackage = pkgs.rustPlatform.buildRustPackage.override {
     inherit rust;
   };
