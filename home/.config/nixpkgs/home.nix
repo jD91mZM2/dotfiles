@@ -82,9 +82,6 @@ in
 
       powerline() {
         PS1="$(powerline-rs --shell bash $?)"
-        if [ -n "$IN_NIX_SHELL" ]; then
-          PS1="''${PS1//\\\$/N}"
-        fi
       }
       PROMPT_COMMAND=powerline
     '';
@@ -97,9 +94,6 @@ in
 
       powerline() {
         PS1="$(powerline-rs --shell zsh $?)"
-        if [ -n "$IN_NIX_SHELL" ]; then
-          PS1="''${PS1//\%\#/N}"
-        fi
       }
       precmd_functions+=(powerline)
 

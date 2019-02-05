@@ -9,12 +9,14 @@ import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Spacing
+import XMonad.Layout.Tabbed
 import XMonad.Layout.ToggleLayouts
 import XMonad.StackSet
 import XMonad.Util.Dmenu
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
+import XMonad.Util.Themes
 
 myWorkspaces = ["\xF120", "\xf015", "3", "4", "5", "6", "7", "8", "\xf086"]
 
@@ -51,7 +53,7 @@ main = xmonad $ ewmh $ docks def
         noBorders $
         toggleLayouts Full $
 
-        onWorkspace (ws 9) (Tall 1 (3/100) (17/20)) $
+        onWorkspace (ws 9) (tabbedLeft shrinkText $ theme deiflTheme) $
         layoutHook def,
       manageHook = composeAll [
         manageHook def,
@@ -76,8 +78,8 @@ main = xmonad $ ewmh $ docks def
       ((myModMask .|. shiftMask, xK_Print), spawn "~/dotfiles/screenshot.sh region"),
 
       -- Volume
-      ((0, xK_XF86AudioLowerVolume), spawn "amixer set Master 2%- unmute"),
-      ((0, xK_XF86AudioRaiseVolume), spawn "amixer set Master 2%+ unmute"),
+      ((0, xK_XF86AudioLowerVolume), spawn "notify-send -t 250 \"Volume now $(amixer set Master 2%- unmute | grep -o \"[0-9]*%\" | head -n1)\""),
+      ((0, xK_XF86AudioRaiseVolume), spawn "notify-send -t 250 \"Volume now $(amixer set Master 2%+ unmute | grep -o \"[0-9]*%\" | head -n1)\""),
 
       -- Misc
       ((myModMask .|. shiftMask, xK_l),       spawn "echo -n '\x2' | socat - UNIX-CONNECT:/tmp/xidlehook.sock"),
@@ -98,6 +100,6 @@ main = xmonad $ ewmh $ docks def
       ((myModMask .|. shiftMask, xK_q), confirm "Exit XMonad" $ io $ exitWith ExitSuccess),
       ((myModMask, xK_Pause),           confirm "Shutdown" $ spawn "systemctl poweroff"),
 
-      ((myModMask .|. shiftMask, xK_r), spawn "xmonad --recompile"),
+      ((myModMask .|. shiftMask, xK_r), spawn "xmonad --recompile && notify-send -t 1000 'Recompiled!' 'xmonad was successfully recompiled'"),
       ((myModMask, xK_p),               spawn $ "j4-dmenu-desktop --dmenu 'dmenu " ++ (join myDmenuRun) ++ "'")
     ]

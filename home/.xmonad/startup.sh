@@ -22,5 +22,11 @@ xfce4-panel --disable-wm-check &
 xfce4-power-manager &
 
 chromium --app="https://chat.redox-os.org/" &
-sleep 10 # chromium does not handle stess well
+sleep 10 # a few programs don't handle stress well
 chromium --app="https://discordapp.com/channels/@me" &
+
+# await gpg-agent
+while ! systemctl is-active --user gpg-agent; do
+    sleep 1
+done
+st tmux new -s weechat -- mosh scaleway -- tmux attach -t weechat &
