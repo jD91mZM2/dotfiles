@@ -23,7 +23,7 @@ case "$1" in
                     if (( ${ymouse} >= ${mony} )); then
                         if (( ${ymouse} <= ${mony}+${monh} )); then
                             # We have found our monitor!
-                            maim -g "${monw}x${monh}+${monx}+${mony}" /tmp/screenshot
+                            maim -g "${monw}x${monh}+${monx}+${mony}" /tmp/screenshot.png
                         fi
                     fi
                 fi
@@ -32,14 +32,14 @@ case "$1" in
         # -----------------------------------------------------------------------------------
         ;;
     window)
-        maim -i "$(xdotool getactivewindow)" /tmp/screenshot
+        maim -i "$(xdotool getactivewindow)" /tmp/screenshot.png
         ;;
     wait)
         sleep 2
-        maim -s /tmp/screenshot
+        maim -s /tmp/screenshot.png
         ;;
     region)
-        maim -s /tmp/screenshot
+        maim -s /tmp/screenshot.png
         ;;
     *)
         echo "Invalid argument. Must be one of screen, window or region." >&2
@@ -47,6 +47,5 @@ case "$1" in
         ;;
 esac
 
-xclip -sel clip -t image/png /tmp/screenshot
-mpv /tmp/screenshot
-rm /tmp/screenshot
+xclip -sel clip -t image/png /tmp/screenshot.png
+mpv /tmp/screenshot.png

@@ -22,6 +22,9 @@
 
   # File system
   services.zfs.autoSnapshot.enable = true;
+  environment.pathsToLink = [
+    "/share/xfce4" # required by xfce4-panel
+  ];
 
   # systemd-boot
   boot.loader.efi.canTouchEfiVariables = true;

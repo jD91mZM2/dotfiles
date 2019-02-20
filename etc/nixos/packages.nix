@@ -5,12 +5,12 @@
 {
   # Settings
   nixpkgs.config.allowUnfreePredicate = (p:
-    pkgs.lib.hasPrefix "steam" p.name ||
-      pkgs.lib.hasPrefix "nvidia" p.name
+    pkgs.lib.hasPrefix "nvidia" p.name
   );
 
   # Services
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
+  services.upower.enable = true;
   services.locate = {
     enable = true;
     interval = "07:00 PM";
@@ -84,7 +84,6 @@
     multimc
     obs-studio
     pavucontrol
-    steam
     thunderbird
     virtmanager
     xfce.thunar
@@ -111,7 +110,6 @@
     xorg.xwininfo
 
     # Applications
-    acpi
     asciinema
     borgbackup
     cdrkit
