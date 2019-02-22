@@ -6,7 +6,7 @@
   # X server
   services.xserver = {
     enable = true;
-    layout = "us";
+    layout = "dvorak";
     xkbOptions = "compose:ralt";
 
     extraConfig = ''
