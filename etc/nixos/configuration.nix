@@ -11,9 +11,7 @@
 
     ./env.nix
     ./fonts.nix
-    ./hardware.nix
     ./killswitch.nix
-    ./monitors.nix
     ./openvpn.nix
     ./packages.nix
     ./services.nix

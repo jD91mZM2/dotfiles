@@ -149,8 +149,12 @@ in
 
   services.compton = {
     enable = true;
+    # See https://github.com/chjj/compton/issues/152
+    backend = "xrender";
+
     fade = true;
     fadeDelta = 5;
+    shadow = true;
     extraOptions = ''
       inactive-dim = 0.05;
       mark-ovredir-focused = false; # causes issues in xmonad
