@@ -34,12 +34,8 @@ case "$1" in
     window)
         maim -i "$(xdotool getactivewindow)" /tmp/screenshot.png
         ;;
-    wait)
-        sleep 2
-        maim -s /tmp/screenshot.png
-        ;;
     region)
-        maim -s /tmp/screenshot.png
+        maim -s /tmp/screenshot.png -d 2
         ;;
     *)
         echo "Invalid argument. Must be one of screen, window or region." >&2
