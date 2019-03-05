@@ -43,6 +43,11 @@ in
   nixpkgs.overlays = [
     (import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz))
   ];
+  home.file.".xprofile".text = ''
+    if [ -e ~/.profile ]; then
+      source ~/.profile
+    fi
+  '';
 
   # CLI
 
