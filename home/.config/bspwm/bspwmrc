@@ -1,0 +1,64 @@
+#!/bin/sh
+
+cd "$(dirname "$0")"
+
+if ! pgrep sxhkd; then
+    sxhkd &
+fi
+
+##################
+# BSPWM Settings #
+##################
+bspc wm -h off
+bspc config border_width              2
+bspc config focus_follows_pointer     true
+bspc config pointer_follows_focus     true
+bspc config pointer_follows_monitor   true
+bspc config remove_disabled_monitors  true
+bspc config remove_unplugged_monitors true
+bspc config window_gap                12
+
+bspc monitor -d "" "" "" "4" "5" "6" "7"
+bspc monitor next -d "" ""
+
+bspc desktop "^9" -f -l monocle
+bspc desktop "^1" -f
+
+bspc rule -a "Chromium-browser" desktop="^9"
+bspc rule -a "Liferea" desktop="^9"
+bspc rule -a "Daily" desktop="^9"
+bspc rule -a "Qemu-system-x86_64" desktop="^8"
+
+#####################
+# Program autostart #
+#####################
+(
+# Setup
+
+xsetroot -cursor_name left_ptr
+~/.fehbg
+
+# Always running
+
+~/dotfiles/lock-timer.sh slock &
+MONITOR="$(xrandr | grep "\<primary\>" | cut -d' ' -f1)" polybar main &
+export MONITOR="$(xrandr | grep "\<connected\>" | cut -d$'\n' -f2 | cut -d' ' -f 1)"
+[ -n "$MONITOR" ] && polybar secondary &
+nm-applet &
+
+# Applications
+
+liferea &
+thunderbird &
+xfce4-power-manager &
+
+bspc rule -a *:xterm-256color -o desktop="^1"
+st &
+
+chromium --app="https://chat.redox-os.org/" &
+sleep 10 # a few programs don't handle stress well
+chromium --app="https://discordapp.com/channels/@me" &
+
+bspc rule -a *:xterm-256color -o desktop="^9"
+st tmux new -s weechat -- mosh scaleway -- tmux attach -t weechat &
+) &

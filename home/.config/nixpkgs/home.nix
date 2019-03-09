@@ -170,4 +170,5 @@ in
     ];
   };
   services.dunst = import ./dunst.nix { inherit pkgs; };
+  services.udiskie.enable = true;
 }

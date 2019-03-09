@@ -45,7 +45,12 @@
           };
         };
       };
+      sessionCommands = ''
+        xrandr --output eDP-1-1 --pos 0x520 --primary --output DP-1-1 --pos 1366x0
+      '';
     };
+    windowManager.bspwm.enable = true;
+    windowManager.i3.enable = true;
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;

@@ -1,0 +1,126 @@
+# vim: set filetype=dosini:
+[colors]
+background = #70111111
+altbg = #900a0a0a
+altbg2 = #90050505
+
+focus = #f4c733
+warning = #cc3c18
+inactive = #7e8281
+
+[bar/main]
+monitor = ${env:MONITOR}
+background = ${colors.background}
+font-0 = "Font Awesome:size=12"
+font-1 = "Hack:size=12"
+font-2 = "Hack:size=8"
+
+wm-restack = true
+height = 40
+padding = 3
+
+modules-left = bspwm
+modules-center = date ip
+modules-right = alsa battery
+module-margin = 3
+tray-position = right
+
+[bar/secondary]
+monitor = ${env:MONITOR}
+background = ${colors.background}
+font-0 = "Font Awesome:size=12"
+font-1 = "Hack:size=12"
+font-2 = "Hack:size=8"
+
+wm-restack = true
+height = 40
+padding = 3
+
+modules-left = bspwm
+module-margin = 3
+
+[module/bspwm]
+type = internal/bspwm
+label-focused-foreground = ${colors.focus}
+label-focused-background = ${colors.altbg}
+label-urgent-foreground = ${colors.warning}
+label-empty =
+
+label-monitor-padding-left = 2
+label-monitor-padding-right = 3
+label-dimmed-padding-left = 2
+label-dimmed-padding-right = 3
+label-focused-padding-left = 2
+label-focused-padding-right = 3
+label-occupied-padding-left = 2
+label-occupied-padding-right = 3
+label-urgent-padding-left = 2
+label-urgent-padding-right = 3
+label-empty-padding-left = 2
+label-empty-padding-right = 3
+label-monocle-padding-left = 2
+label-monocle-padding-right = 3
+label-tiled-padding-left = 2
+label-tiled-padding-right = 3
+label-fullscreen-padding-left = 2
+label-fullscreen-padding-right = 3
+label-floating-padding-left = 2
+label-floating-padding-right = 3
+label-pseudotiled-padding-left = 2
+label-pseudotiled-padding-right = 3
+label-locked-padding-left = 2
+label-locked-padding-right = 3
+label-sticky-padding-left = 2
+label-sticky-padding-right = 3
+label-private-padding-left = 2
+label-private-padding-right = 3
+
+[module/date]
+type = internal/date
+date = %b %d
+time = %I:%M %p
+label = %date%  %{B#90050505}  %time%
+#                  ^^^^^^^^^ colors.altbg2
+label-background = ${colors.altbg}
+label-padding = 2
+interval = 30
+
+[module/ip]
+type = custom/script
+exec = printf "%-15s" "$(curl -s https://api.ipify.org)"
+label-font = 3
+tail = true
+interval = 60
+
+[module/alsa]
+type = internal/alsa
+format-volume = %{A:pavucontrol &:}<bar-volume>%{A} <ramp-volume>
+
+label-muted = 
+
+bar-volume-width = 10
+bar-volume-empty = █
+bar-volume-empty-foreground = ${colors.inactive}
+bar-volume-fill = █
+bar-volume-indicator =
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/battery]
+type = internal/battery
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 

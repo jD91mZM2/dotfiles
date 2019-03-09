@@ -5,19 +5,17 @@
 xsetroot -cursor_name left_ptr
 ~/.fehbg
 
-# Background
+# Always running
 
-systemctl start --user compton
-udiskie &
 ~/dotfiles/lock-timer.sh slock &
+polybar main &
+nm-applet &
 
-# Interactive
+# Applications
 
 liferea &
-nm-applet &
 st &
 thunderbird &
-xfce4-panel --disable-wm-check &
 xfce4-power-manager &
 
 chromium --app="https://chat.redox-os.org/" &

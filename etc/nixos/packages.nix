@@ -84,6 +84,7 @@
     multimc
     obs-studio
     pavucontrol
+    polybar
     thunderbird
     virtmanager
     xfce.thunar
