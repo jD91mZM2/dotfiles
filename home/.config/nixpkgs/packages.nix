@@ -41,7 +41,7 @@ let
       from = unstable.xidlehook;
       name = "xidlehook";
       src = ~/Coding/Rust/xidlehook;
-      hash = "1pdhbqnkgwp2v5zyin8z8049aq8c3kfk04v9wsbz8qla34rgi99s";
+      hash = "1sy7q875gg6as98lp6m15x9b3lhdikm9326lmqcs5fv3hhzvdlvy";
     }
     {
       from = unstable.powerline-rs;

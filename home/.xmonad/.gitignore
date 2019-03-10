@@ -1,6 +1,0 @@
-*
-!.gitignore
-!startup.sh
-!xmobar/
-!xmobar/*
-!xmonad.hs

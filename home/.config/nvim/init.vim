@@ -9,7 +9,6 @@ Plug 'floobits/floobits-neovim'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
@@ -57,6 +56,7 @@ call plug#end()
 " Settings
 set cursorline
 set expandtab
+set inccommand=split
 set mouse=a
 set nowrap
 set nrformats=alpha,octal,hex
@@ -138,6 +138,13 @@ command! SudoW silent exec 'w !sudo tee % > /dev/null' | echo 'Saved!'
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <LEADER>ji <Plug>(JavaComplete-Imports-Add)
 tnoremap <ESC><ESC> <C-\><C-N>
+nnoremap <C-N> :%s/\<<C-R><C-W>\>/<C-R><C-W>/g<LEFT><LEFT>
+vnoremap <C-N> y:%s/<C-R>"/<C-R>"/g<LEFT><LEFT>
+nnoremap <C-C>y "+y
+vnoremap <C-C>y "+y
+nnoremap <C-C>p "+p
+vnoremap @ :g/^/normal! @
+nnoremap <silent> <CR> :noh<CR>
 
 nnoremap <LEFT> :echoerr 'No using arrow keys! Bad!'<CR>
 nnoremap <RIGHT> :echoerr 'No using arrow keys! Bad!'<CR>

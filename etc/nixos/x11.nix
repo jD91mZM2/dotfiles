@@ -50,10 +50,5 @@
       '';
     };
     windowManager.bspwm.enable = true;
-    windowManager.i3.enable = true;
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-    };
   };
 }

@@ -27,12 +27,13 @@ bspc desktop "^1" -f
 bspc rule -a "Chromium-browser" desktop="^9"
 bspc rule -a "Liferea" desktop="^9"
 bspc rule -a "Daily" desktop="^9"
-bspc rule -a "Qemu-system-x86_64" desktop="^8"
+bspc rule -a "Qemu-system-x86_64" desktop="^8" follow=on
 
 #####################
 # Program autostart #
 #####################
 (
+cd
 # Setup
 
 xsetroot -cursor_name left_ptr

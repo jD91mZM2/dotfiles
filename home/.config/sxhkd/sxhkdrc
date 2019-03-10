@@ -4,15 +4,15 @@
 
 # terminal emulator
 super + shift + Return
-	st || xterm
+    st || xterm
 
 # program launcher
 super + p
-	j4-dmenu-desktop --dmenu 'dmenu -fn Hack-10 -i -sb "#a38b06" -l 15 -p "Run:"' || dmenu_run
+    j4-dmenu-desktop --dmenu 'dmenu -fn Hack-10 -i -sb "#a38b06" -l 15 -p "Run:"' || dmenu_run
 
 # make sxhkd reload its configuration files:
 super + Escape
-	pkill -USR1 -x sxhkd
+    pkill -USR1 -x sxhkd
 
 # copy a nonbreaking space to clipboard
 super + z
@@ -20,31 +20,31 @@ super + z
 
 # lock the screen with xidlehook
 super + shift + l
-    echo -n "\x2" | socat - UNIX-CONNECT:/tmp/xidlehook.sock
+    echo -ne "\x2" | socat - UNIX-CONNECT:/tmp/xidlehook.sock
 
 # shutdown the system
 super + Pause
-	[ "$(echo -e "Cancel\nShutdown" | dmenu)" = "Shutdown" ] && systemctl poweroff
+    [ "$(echo -e "Cancel\nShutdown" | dmenu)" = "Shutdown" ] && systemctl poweroff
 
 # quit bspwm normally
 super + shift + q
-	[ "$(echo -e "Cancel\nExit BSPWM" | dmenu)" = "Exit BSPWM" ] && bspc quit
+    [ "$(echo -e "Cancel\nExit BSPWM" | dmenu)" = "Exit BSPWM" ] && bspc quit
 
 # close and kill
 super + shift + {c,k}
-	bspc node -{c,k}
+    bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
 super + m
-	bspc desktop -l next
+    bspc desktop -l next
 
 # send the newest marked node to the newest preselected node
 super + y
-	bspc node newest.marked.local -n newest.!automatic.local
+    bspc node newest.marked.local -n newest.!automatic.local
 
 # swap the current node and the biggest node
 super + Return
-	bspc node -s biggest.local
+    bspc node -s biggest.local
 
 # volume settings
 XF86Audio{Raise,Lower}Volume
@@ -62,11 +62,11 @@ XF86AudioMute
 
 # set the window state
 super + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
 super + ctrl + {m,x,y,z}
-	bspc node -g {marked,locked,sticky,private}
+    bspc node -g {marked,locked,sticky,private}
 
 #################
 # Focus hotkeys #
@@ -74,19 +74,19 @@ super + ctrl + {m,x,y,z}
 
 # focus the next/previous node in the current desktop
 super + {j, k}
-	bspc node -f {next,prev}.local
+    bspc node -f {next,prev}.local
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+    bspc desktop -f {prev,next}.local
 
 # focus the next/previous monitor
 super + {w,e}
-	bspc monitor -f {prev,next}
+    bspc desktop -f {prev,next}.focused
 
 # focus on or send to the given desktop
 super + {_, shift + }{1-9,0}
-	bspc {desktop -f,node -d} "^{1-9,10}"
+    bspc {desktop -f,node -d} "^{1-9,10}"
 
 ###############################
 # Window preselection hotkeys #
@@ -94,32 +94,28 @@ super + {_, shift + }{1-9,0}
 
 # preselect the direction
 super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
+    bspc node -p {west,south,north,east}
 
 # preselect the ratio
 super + ctrl + {1-9}
-	bspc node -o 0.{1-9}
+    bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
 super + ctrl + space
-	bspc node -p cancel
+    bspc node -p cancel
 
 # cancel the preselection for the focused desktop
 super + ctrl + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+    bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 ############################
 # Window rearrange hotkeys #
 ############################
 
-# expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+# change the ratio
+super + {h,l}
+    bspc node -r 0.3
 
 # move a floating window
 super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+    bspc node -v {-20 0,0 20,0 -20,20 0}

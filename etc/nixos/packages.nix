@@ -1,7 +1,7 @@
 { pkgs, ... }:
-#let
-#  unstable = import <nixos-unstable> {};
-#in
+let
+  unstable = import <nixos-unstable> {};
+in
 {
   # Settings
   nixpkgs.config.allowUnfreePredicate = (p:
@@ -64,12 +64,6 @@
     dunst
     j4-dmenu-desktop
     networkmanagerapplet
-    ## XFCE Panel
-    xfce.exo
-    xfce.xfce4-battery-plugin
-    xfce.xfce4-pulseaudio-plugin
-    xfce.xfce4panel_gtk3
-    xfce.xfconf
 
     # Graphical - Applications
     abiword
@@ -174,9 +168,9 @@
     ghc
     gnumake
     nodejs
-    python3
     ruby
     rustup
+    unstable.python3
 
     # LaTeX stuff
     okular
