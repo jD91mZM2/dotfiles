@@ -19,7 +19,11 @@ bspc config remove_unplugged_monitors true
 bspc config window_gap                12
 
 bspc monitor -d "" "" "" "4" "5" "6" "7"
-bspc monitor next -d "" ""
+if bspc query -M next; then
+    bspc monitor next -d "" ""
+else
+    bspc monitor -a "" ""
+fi
 
 bspc desktop "^9" -f -l monocle
 bspc desktop "^1" -f
