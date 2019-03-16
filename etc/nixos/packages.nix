@@ -80,6 +80,7 @@ in
     pavucontrol
     polybar
     thunderbird
+    torbrowser
     virtmanager
     xfce.thunar
     xfce.xfce4-power-manager
