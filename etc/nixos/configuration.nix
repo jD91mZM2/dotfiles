@@ -18,13 +18,15 @@
     ./x11.nix
   ];
 
-  # File system
+  # General settings
+  boot.supportedFilesystems = [ "zfs" ];
+  hardware.bluetooth.enable = true;
   services.zfs.autoSnapshot.enable = true;
+  time.timeZone = "Europe/Stockholm";
 
   # systemd-boot
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
-  boot.supportedFilesystems = [ "zfs" ];
 
   # TTY settings
   i18n = {
@@ -32,9 +34,6 @@
     consoleKeyMap = "dvorak";
     defaultLocale = "en_US.UTF-8";
   };
-
-  # Time
-  time.timeZone = "Europe/Stockholm";
 
   # Networking
   networking.hostId = "05fbf074";
@@ -56,7 +55,7 @@
   # User settings
   users.extraUsers.user = {
     isNormalUser = true;
-    extraGroups = ["wheel" "docker" "libvirtd" "adbusers"];
+    extraGroups = ["wheel" "libvirtd" "adbusers"];
     shell = pkgs.zsh;
   };
 

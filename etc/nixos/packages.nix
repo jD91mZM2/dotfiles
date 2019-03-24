@@ -115,6 +115,7 @@ in
     (neovim.override {
       extraPython3Packages = p: with p; [ jedi ];
     })
+    nixops
     rclone
     sqlite
     tmux
