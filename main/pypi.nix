@@ -14,8 +14,6 @@ in python.mkDerivation rec {
     mkdir -p $out/bin
     cat > $out/bin/start <<EOF
       #!/bin/sh
-      mkdir "/home/hapPy/${name}" || true
-      cd "/home/hapPy/${name}"
       ${python.interpreter}/bin/python $out/src/main.py
     EOF
     chmod +x $out/bin/start
