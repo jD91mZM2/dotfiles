@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let
+  # Packages
   abottomod = (pkgs.callPackage ./pypi.nix {}) {
     name = "abottomod";
     src = ~/Coding/Python/abottomod;
@@ -9,7 +10,6 @@ let
     name = "timeywimey";
     src = ~/Coding/Python/timeywimey;
   };
-
   mcbotface = (pkgs.callPackage ./rust.nix {}) {
     name = "mcbotface";
     src = ~/Coding/Rust/mcbotface;
@@ -24,6 +24,23 @@ let
     '';
   };
 
+  # Misc
+  createServiceUser = { name, script }: {
+    users.users."${name}" = {
+      createHome = true;
+      home = "/var/lib/${name}";
+    };
+    systemd.services."${name}" = {
+      inherit script;
+      serviceConfig = {
+        User = name;
+        WorkingDirectory = "/var/lib/${name}";
+        Restart = "always";
+        RestartSec = "10s";
+      };
+      wantedBy = [ "multi-user.target" ];
+    };
+  };
   utils = pkgs.callPackage ./utils.nix {};
 in {
   # Deployment metadata
@@ -63,58 +80,10 @@ in {
     openssh.authorizedKeys.keyFiles = [ ~/.ssh/id_ed25519.pub ];
   };
 
-  # Discord bots
-  users.users.abottomod = {
-    createHome = true;
-    home = "/var/lib/abottomod";
-  };
-  systemd.services.abottomod = {
-    description = "A bot to moderate my discord server";
-    script = "${abottomod}/bin/start";
-    serviceConfig = {
-      User = "abottomod";
-      WorkingDirectory = "/var/lib/abottomod";
-    };
-    wantedBy = [ "multi-user.target" ];
-  };
-  users.users.timeywimey = {
-    createHome = true;
-    home = "/var/lib/timeywimey";
-  };
-  systemd.services.timeywimey = {
-    description = "TimeyWimey discord bot";
-    script = "${timeywimey}/bin/start";
-    serviceConfig = {
-      User = "timeywimey";
-      WorkingDirectory = "/var/lib/timeywimey";
-    };
-    wantedBy = [ "multi-user.target" ];
-  };
-  users.users.mcbotface = {
-    createHome = true;
-    home = "/var/lib/mcbotface";
-  };
-  systemd.services.mcbotface = {
-    description = "Mcbotface discord bot";
-    script = "${mcbotface}/bin/start";
-    serviceConfig = {
-      User = "mcbotface";
-      WorkingDirectory = "/var/lib/mcbotface";
-    };
-    wantedBy = [ "multi-user.target" ];
-  };
-
-  users.users.redox-world-map = {
-    createHome = true;
-    home = "/var/lib/redox-world-map";
-  };
-  systemd.services.redox-world-map = {
-    description = "Redox World Map";
-    script = "${redox-world-map}/bin/start";
-    serviceConfig = {
-      User = "redox-world-map";
-      WorkingDirectory = "/var/lib/redox-world-map";
-    };
-    wantedBy = [ "multi-user.target" ];
-  };
+  imports = [
+    (createServiceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
+    (createServiceUser { name = "timeywimey"; script = "${timeywimey}/bin/start"; })
+    (createServiceUser { name = "mcbotface"; script = "${mcbotface}/bin/start"; })
+    (createServiceUser { name = "redox-world-map"; script = "${redox-world-map}/bin/start"; })
+  ];
 }
