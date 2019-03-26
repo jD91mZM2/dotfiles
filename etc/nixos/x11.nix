@@ -50,6 +50,8 @@
           ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1-1 --pos 0x520 --primary --output DP-1-1 --pos 1366x0
         elif ${pkgs.xorg.xrandr}/bin/xrandr | grep "\<HDMI-1-1\>.*\<connected\>"; then
           ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1-1 --primary --output HDMI-1-1 --right-of eDP-1-1
+        else
+          ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1-1 --primary
         fi
       '';
     };

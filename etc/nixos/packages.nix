@@ -164,12 +164,14 @@ in
     cargo-edit
     cargo-release
     cargo-tree
+    carnix
     cmake
     gcc
     gdb
     ghc
     gnumake
     nodejs
+    pypi2nix
     ruby
     rustup
     unstable.python3

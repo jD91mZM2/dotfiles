@@ -18,8 +18,9 @@
     ./x11.nix
   ];
 
-  # General settings
+  # Misc. settings
   boot.supportedFilesystems = [ "zfs" ];
+  documentation.dev.enable = true;
   hardware.bluetooth.enable = true;
   services.zfs.autoSnapshot.enable = true;
   time.timeZone = "Europe/Stockholm";
