@@ -1,10 +1,13 @@
-name: src:
-{ pkgs, curl, python36Packages }:
+{ callPackage, curl, lib, python36Packages, stdenv }:
+
+{ name, src }:
 
 let
-  python = import (src + "/requirements.nix") { inherit pkgs; };
-in python.mkDerivation rec {
-  inherit name src;
+  python = callPackage (src + "/requirements.nix") {};
+  utils = callPackage ./utils.nix {};
+in python.mkDerivation {
+  inherit name;
+  src = utils.cleanSource src;
   buildInputs = builtins.attrValues python.packages;
   format = "other";
   installPhase = ''
@@ -13,7 +16,7 @@ in python.mkDerivation rec {
 
     mkdir -p $out/bin
     cat > $out/bin/start <<EOF
-      #!/bin/sh
+      #!${stdenv.shell}
       ${python.interpreter}/bin/python $out/src/main.py
     EOF
     chmod +x $out/bin/start

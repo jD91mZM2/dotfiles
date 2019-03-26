@@ -1,10 +1,30 @@
 { config, pkgs, ... }:
 
 let
-  abottomod = pkgs.callPackage (import ./pypi.nix "abottomod" ~/Coding/Python/abottomod) {};
-  timeywimey = pkgs.callPackage (import ./pypi.nix "timeywimey" ~/Coding/Python/timeywimey) {};
+  abottomod = (pkgs.callPackage ./pypi.nix {}) {
+    name = "abottomod";
+    src = ~/Coding/Python/abottomod;
+  };
+  timeywimey = (pkgs.callPackage ./pypi.nix {}) {
+    name = "timeywimey";
+    src = ~/Coding/Python/timeywimey;
+  };
 
-  mcbotface = pkgs.callPackage ./mcbotface.nix {};
+  mcbotface = (pkgs.callPackage ./rust.nix {}) {
+    name = "mcbotface";
+    src = ~/Coding/Rust/mcbotface;
+    buildInputs = with pkgs; [ pkgconfig openssl sqlite ];
+  };
+  redox-world-map = (pkgs.callPackage ./rust.nix {}) {
+    name = "redox-world-map";
+    src = ~/Coding/Web/redox-world-map;
+    buildInputs = with pkgs; [ pkgconfig openssl sqlite ];
+    wrapperHook = ''
+      ln -s $out/src/Rocket.toml . || true
+    '';
+  };
+
+  utils = pkgs.callPackage ./utils.nix {};
 in {
   # Deployment metadata
   deployment = {
@@ -33,11 +53,13 @@ in {
   };
 
   # General purpose users
+  security.sudo.wheelNeedsPassword = false;
   users.defaultUserShell = pkgs.zsh;
   users.users.user = {
     createHome = true;
     home = "/home/user";
     isNormalUser = true;
+    extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keyFiles = [ ~/.ssh/id_ed25519.pub ];
   };
 
@@ -47,7 +69,7 @@ in {
     home = "/var/lib/abottomod";
   };
   systemd.services.abottomod = {
-    description = "A bot to moderate my server";
+    description = "A bot to moderate my discord server";
     script = "${abottomod}/bin/start";
     serviceConfig = {
       User = "abottomod";
@@ -60,7 +82,7 @@ in {
     home = "/var/lib/timeywimey";
   };
   systemd.services.timeywimey = {
-    description = "The discord bot known as TimeyWimey";
+    description = "TimeyWimey discord bot";
     script = "${timeywimey}/bin/start";
     serviceConfig = {
       User = "timeywimey";
@@ -73,11 +95,25 @@ in {
     home = "/var/lib/mcbotface";
   };
   systemd.services.mcbotface = {
-    description = "Another private discord bot";
-    script = "${mcbotface}/bin/mcbotface";
+    description = "Mcbotface discord bot";
+    script = "${mcbotface}/bin/start";
     serviceConfig = {
       User = "mcbotface";
       WorkingDirectory = "/var/lib/mcbotface";
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
+
+  users.users.redox-world-map = {
+    createHome = true;
+    home = "/var/lib/redox-world-map";
+  };
+  systemd.services.redox-world-map = {
+    description = "Redox World Map";
+    script = "${redox-world-map}/bin/start";
+    serviceConfig = {
+      User = "redox-world-map";
+      WorkingDirectory = "/var/lib/redox-world-map";
     };
     wantedBy = [ "multi-user.target" ];
   };
