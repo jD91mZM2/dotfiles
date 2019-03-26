@@ -89,7 +89,7 @@ super + bracket{left,right}
 
 # focus the next/previous monitor
 super + {w,e}
-    bspc desktop -f {prev,next}.focused
+    bspc node -f {prev,next}.active.focused
 
 # focus on or send to the given desktop
 super + {_, shift + }{1-9,0}
