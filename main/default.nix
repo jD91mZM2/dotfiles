@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
+  config = import ./config.nix;
+
   # Packages
   abottomod = (pkgs.callPackage ./pypi.nix {}) {
     name = "abottomod";
@@ -24,11 +26,7 @@ let
     '';
   };
 
-  # Misc
-  ssh-keys = [ ~/.ssh/id_ed25519.pub ];
-  email = "me@krake.one";
-  name = "jD91mZM2";
-  secret = import ../secret.nix;
+  # Helpers
   createServiceUser = { name, script }: {
     users.users."${name}" = {
       createHome = true;
@@ -46,14 +44,14 @@ let
     };
   };
   createZncServers = servers: builtins.listToAttrs (map (server: let
-    url = builtins.getAttr server servers;
-  in {
-    name = server;
-    value = {
-      server = url;
-      modules = [ "simple_away" "sasl" ];
-    };
-  }) (builtins.attrNames servers));
+      url = builtins.getAttr server servers;
+    in {
+      name = server;
+      value = {
+        server = url;
+        modules = [ "simple_away" "sasl" ];
+      };
+    }) (builtins.attrNames servers));
 in {
   # Deployment metadata
   deployment = {
@@ -64,7 +62,7 @@ in {
     };
   };
 
-  # System config
+  # Program config
   programs.mosh.enable = true;
   programs.zsh = {
     enable = true;
@@ -89,93 +87,29 @@ in {
     home = "/home/user";
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keyFiles = ssh-keys;
+    openssh.authorizedKeys.keyFiles = config.ssh-keys;
   };
   environment.systemPackages = with pkgs; [
-      trash-cli
+    trash-cli
+    tree
   ];
 
   imports = [
+    ./web.nix
     (createServiceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
     (createServiceUser { name = "timeywimey"; script = "${timeywimey}/bin/start"; })
     (createServiceUser { name = "mcbotface"; script = "${mcbotface}/bin/start"; })
     (createServiceUser { name = "redox-world-map"; script = "${redox-world-map}/bin/start"; })
   ];
 
-  # Webserver
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 80 443 1337 ];
-  };
-  security.acme = {
-    # for testing certificates, toggle comment below:
-    # production = false;
-    certs."krake.one" = {
-      inherit email;
-      domain = "krake.one";
-      webroot = "/var/www/challenges";
-      postRun = ''
-        systemctl restart nginx
-      '';
-      extraDomains = {
-        "redox-os.club" = null;
-      };
-    };
-  };
-  services.nginx = {
-    enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
-    virtualHosts = {
-      "krake.one" = {
-        useACMEHost = "krake.one";
-        acmeRoot = "/var/www/challenges";
-        forceSSL = true;
-        default = true;
-        locations."/" = {
-          extraConfig = ''
-            return 302 https://jd91mzm2.github.io/;
-          '';
-        };
-      };
-      "krake.one:1337" = {
-        useACMEHost = "krake.one";
-        serverName = "krake.one";
-        onlySSL = true; # without this, ssl_certificate field is not generated
-        listen = [{
-          addr = "0.0.0.0";
-          port = 1337;
-          ssl = true;
-        }];
-        locations."/" = {
-          root = "/var/www/public";
-          extraConfig = ''
-            autoindex on;
-          '';
-        };
-      };
-      "redox-os.club" = {
-        useACMEHost = "krake.one";
-        forceSSL = true;
-        acmeRoot = "/var/www/challenges";
-        locations."/" = {
-          proxyPass = "http://localhost:22165";
-        };
-      };
-    };
-  };
-
-  # ZNC
-
+  # Services
   services.znc = {
     enable = true;
     openFirewall = true;
     confOptions = {
-      userName = name;
-      nick = name;
-      passBlock = secret.zncPassBlock;
+      userName = config.name;
+      nick = config.name;
+      passBlock = config.secret.zncPassBlock;
       networks = createZncServers {
         freenode = "chat.freenode.net";
         mozilla = "irc.mozilla.org";
