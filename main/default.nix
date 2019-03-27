@@ -41,7 +41,8 @@ let
       wantedBy = [ "multi-user.target" ];
     };
   };
-  utils = pkgs.callPackage ./utils.nix {};
+  ssh-keys = [ ~/.ssh/id_ed25519.pub ];
+  email = "me@krake.one";
 in {
   # Deployment metadata
   deployment = {
@@ -69,7 +70,7 @@ in {
     syntaxHighlighting.enable = true;
   };
 
-  # General purpose users
+  # Normal users
   security.sudo.wheelNeedsPassword = false;
   users.defaultUserShell = pkgs.zsh;
   users.users.user = {
@@ -77,8 +78,11 @@ in {
     home = "/home/user";
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keyFiles = [ ~/.ssh/id_ed25519.pub ];
+    openssh.authorizedKeys.keyFiles = ssh-keys;
   };
+  environment.systemPackages = with pkgs; [
+      trash-cli
+  ];
 
   imports = [
     (createServiceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
@@ -86,4 +90,69 @@ in {
     (createServiceUser { name = "mcbotface"; script = "${mcbotface}/bin/start"; })
     (createServiceUser { name = "redox-world-map"; script = "${redox-world-map}/bin/start"; })
   ];
+
+  # Webserver
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 443 1337 ];
+  };
+  security.acme = {
+    # for testing certificates, toggle comment below:
+    # production = false;
+    certs."krake.one" = {
+      inherit email;
+      domain = "krake.one";
+      webroot = "/var/www/challenges";
+      postRun = ''
+        systemctl restart nginx
+      '';
+      extraDomains = {
+        "redox-os.club" = null;
+      };
+    };
+  };
+  services.nginx = {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    virtualHosts = {
+      "krake.one" = {
+        useACMEHost = "krake.one";
+        acmeRoot = "/var/www/challenges";
+        forceSSL = true;
+        default = true;
+        locations."/" = {
+          extraConfig = ''
+            return 302 https://jd91mzm2.github.io/;
+          '';
+        };
+      };
+      "krake.one:1337" = {
+        useACMEHost = "krake.one";
+        serverName = "krake.one";
+        onlySSL = true; # without this, ssl_certificate field is not generated
+        listen = [{
+          addr = "0.0.0.0";
+          port = 1337;
+          ssl = true;
+        }];
+        locations."/" = {
+          root = "/var/www/public";
+          extraConfig = ''
+            autoindex on;
+          '';
+        };
+      };
+      "redox-os.club" = {
+        useACMEHost = "krake.one";
+        forceSSL = true;
+        acmeRoot = "/var/www/challenges";
+        locations."/" = {
+          proxyPass = "http://localhost:22165";
+        };
+      };
+    };
+  };
 }
