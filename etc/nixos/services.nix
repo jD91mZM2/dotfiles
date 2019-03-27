@@ -39,7 +39,7 @@
         set -e
         cd ~/backup
 
-        borg create ".::$(date)" ~/Coding/ ~/dotfiles ~/Dropbox ~/Pictures \
+        borg create ".::$(date)" ~/Coding/ ~/dotfiles ~/servers ~/Dropbox ~/Pictures \
           --progress \
           --stats \
           --compression lz4

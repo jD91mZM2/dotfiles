@@ -1,22 +1,25 @@
 { pkgs, lib }:
 let
   unstable = import <nixos-unstable> {};
-  excludeTarget = source: builtins.filterSource (path: _type: path != (toString (source + "/target"))) source;
-  rust = pkgs.latest.rustChannels.beta; # beta because the mozilla rust overlay for stable seems broken
+  excludeTarget = source: lib.cleanSource (lib.cleanSourceWith {
+    filter = (path: _type: path != (toString (source + "/target")));
+    src = source;
+  });
+  rust = pkgs.latest.rustChannels.stable;
   buildRustPackage = pkgs.rustPlatform.buildRustPackage.override {
-    inherit rust;
+    rust = {
+      cargo = rust.cargo;
+      rustc = rust.rust;
+    };
   };
-  # See https://github.com/NixOS/nixpkgs/issues/25863#issuecomment-302633494
-  RUSTFLAGS="-L ${rust.rust}/lib/rustlib/x86_64-unknown-linux-gnu/lib/";
 
   rustSoftware = map
-    ({ from ? null, name, src, hash }: buildRustPackage (
+    ({ from ? null, name, src, hash, cargoBuildFlags ? null }: buildRustPackage (
       {
         name = "${name}-local";
         src = excludeTarget src;
         cargoSha256 = hash;
         doCheck = false;
-        inherit RUSTFLAGS;
       } // (if from == null
         then {}
         else
@@ -29,6 +32,9 @@ let
             postFixup = null;
             #postInstall = null;
           } from)
+        ) // (if cargoBuildFlags == null
+        then {}
+        else { inherit cargoBuildFlags; }
         )
     )) [
     {
@@ -42,6 +48,7 @@ let
       name = "xidlehook";
       src = ~/Coding/Rust/xidlehook;
       hash = "1sy7q875gg6as98lp6m15x9b3lhdikm9326lmqcs5fv3hhzvdlvy";
+      cargoBuildFlags = ["--bins"];
     }
     {
       from = unstable.powerline-rs;
