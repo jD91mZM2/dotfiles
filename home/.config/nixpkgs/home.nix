@@ -154,7 +154,8 @@ in
 
   services.compton = {
     enable = true;
-    # See https://github.com/chjj/compton/issues/152
+    # Apparently, using (intel + xrandr to configure multiple monitors + glx
+    # backend) seems to cause all kinds of weird issues.
     backend = "xrender";
 
     fade = true;
@@ -162,7 +163,6 @@ in
     shadow = true;
     extraOptions = ''
       inactive-dim = 0.05;
-      mark-ovredir-focused = false; # causes issues in xmonad
       focus-exclude = [ "class_g = 'xterm-256color'" ];
     '';
     opacityRule = [

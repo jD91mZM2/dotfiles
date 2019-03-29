@@ -5,14 +5,6 @@
 
   hardware.cpu.intel.updateMicrocode = true;
   hardware.opengl.driSupport32Bit = true;
-  hardware.nvidia = {
-    modesetting.enable = true;
-    optimus_prime = {
-      enable = true;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:4:0:0";
-    };
-  };
 
   # Sound
   hardware.pulseaudio = {
@@ -27,7 +19,7 @@
     layout = "dvorak";
     xkbOptions = "compose:ralt";
 
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "intel" ];
     dpi = 96;
 
     # Touchpad:
@@ -46,12 +38,12 @@
         };
       };
       sessionCommands = ''
-        if ${pkgs.xorg.xrandr}/bin/xrandr | grep "\<DP-1-1\>.*\<connected\>"; then
-          ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1-1 --pos 0x520 --primary --output DP-1-1 --pos 1366x0
-        elif ${pkgs.xorg.xrandr}/bin/xrandr | grep "\<HDMI-1-1\>.*\<connected\>"; then
-          ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1-1 --primary --output HDMI-1-1 --right-of eDP-1-1
+        if ${pkgs.xorg.xrandr}/bin/xrandr | grep "\<DP1\>.*\<connected\>"; then
+          ${pkgs.xorg.xrandr}/bin/xrandr --output eDP1 --pos 0x520 --primary --output DP1 --auto --pos 1366x0
+        elif ${pkgs.xorg.xrandr}/bin/xrandr | grep "\<HDMI1\>.*\<connected\>"; then
+          ${pkgs.xorg.xrandr}/bin/xrandr --output eDP1 --primary --output HDMI1 --auto --right-of eDP1
         else
-          ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1-1 --primary
+          ${pkgs.xorg.xrandr}/bin/xrandr --output eDP1 --primary
         fi
       '';
     };

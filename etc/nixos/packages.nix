@@ -3,11 +3,6 @@ let
   unstable = import <nixos-unstable> {};
 in
 {
-  # Settings
-  nixpkgs.config.allowUnfreePredicate = (p:
-    pkgs.lib.hasPrefix "nvidia" p.name
-  );
-
   # Services
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
   services.upower.enable = true;
