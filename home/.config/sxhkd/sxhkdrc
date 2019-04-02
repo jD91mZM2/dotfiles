@@ -38,8 +38,8 @@ super + shift + q
     [ "$(echo -e "Cancel\nExit BSPWM" | dmenu)" = "Exit BSPWM" ] && bspc quit
 
 # close and kill
-super + shift + {c,k}
-    bspc node -{c,k}
+super + shift + {c,x}
+    bspc node -{c,x}
 
 # alternate between the tiled and monocle layout
 super + m

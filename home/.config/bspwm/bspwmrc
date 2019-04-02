@@ -12,7 +12,7 @@ fi
 bspc wm -h off
 bspc config border_width              2
 bspc config focus_follows_pointer     true
-bspc config pointer_follows_focus     true
+#bspc config pointer_follows_focus     true
 bspc config pointer_follows_monitor   true
 bspc config remove_disabled_monitors  true
 bspc config remove_unplugged_monitors true
