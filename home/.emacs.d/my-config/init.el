@@ -29,6 +29,12 @@
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
 
+;; # Keybindings
+(keyboard-translate ?\C-x ?\C-z) ; See https://www.emacswiki.org/emacs/DvorakKeyboard
+(keyboard-translate ?\C-z ?\C-x)
+
+(global-set-key (kbd "C-M-r") 'eval-buffer)
+
 ;; ------------------------------
 ;;       Configure packages
 ;; ------------------------------

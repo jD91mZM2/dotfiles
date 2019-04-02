@@ -16,6 +16,8 @@
 (use-package evil-collection
   :config
   (evil-collection-init))
+(use-package evil-magit
+  :bind ("C-s" . 'magit-status))
 (use-package evil-surround
   :config
   (global-evil-surround-mode 1))
@@ -39,7 +41,7 @@
     (neotree)
     (select-window (window-right (neo-global--get-window))))
   (if (daemonp)
-    (add-hook 'server-switch-hook 'neotree-no-focus)  ; emacs
+    (add-hook 'server-switch-hook 'neotree-no-focus)   ; emacs
     (add-hook 'emacs-startup-hook 'neotree-no-focus))) ; emacsclient
 (use-package nix-mode)
 (use-package powerline
