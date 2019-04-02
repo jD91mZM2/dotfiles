@@ -55,7 +55,6 @@ in
     enable = true;
     matchBlocks = import ./ssh-hosts.nix;
   };
-
   programs.git = {
     enable = true;
     userName = "jD91mZM2";
@@ -78,7 +77,6 @@ in
       cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
     '';
   };
-
   programs.bash = {
     enable = true;
     shellAliases = aliases;
@@ -105,6 +103,8 @@ in
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=10"
     '';
   };
+  programs.emacs.enable = true;
+
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
@@ -113,6 +113,7 @@ in
     maxCacheTtl = 86400;
     maxCacheTtlSsh = 86400;
   };
+  services.emacs.enable = true;
 
   # Graphical
 

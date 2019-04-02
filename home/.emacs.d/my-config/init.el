@@ -15,7 +15,8 @@
 (setq inhibit-startup-screen t)
 
 ;; Transparency!
-(set-frame-parameter (selected-frame) 'alpha 90)
+(add-to-list 'default-frame-alist '(alpha . 90)) ; default frame settings
+(set-frame-parameter (selected-frame) 'alpha 90) ; for current session
 
 ;; Load file templates
 (load "templates.el")

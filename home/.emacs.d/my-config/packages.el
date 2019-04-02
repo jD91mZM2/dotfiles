@@ -1,8 +1,3 @@
-(use-package airline-themes
-  :after base16-theme
-  :config
-  (load-theme 'airline-base16-gui-dark t)
-  (airline-themes-set-modeline))
 (use-package base16-theme
   :config
   (load-theme 'base16-tomorrow-night t)
@@ -40,13 +35,16 @@
   :after evil
   :config
   (setq-default neotree-smart-open t)
-  (add-hook
-   'emacs-startup-hook
-   (lambda ()
-     (neotree)
-     (select-window (window-right (neo-global--get-window))))))
+  (defun neotree-no-focus ()
+    (neotree)
+    (select-window (window-right (neo-global--get-window))))
+  (if (daemonp)
+    (add-hook 'server-switch-hook 'neotree-no-focus)  ; emacs
+    (add-hook 'emacs-startup-hook 'neotree-no-focus))) ; emacsclient
 (use-package nix-mode)
-(use-package nixos-options)
+(use-package powerline
+  :config
+  (powerline-center-evil-theme))
 (use-package ranger)
 (use-package rust-mode)
 (use-package swiper)

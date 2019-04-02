@@ -88,7 +88,7 @@ in
           rev = "b3d0d4fbdf86d9b3eda06f42a5bdf261b1f7d1d1";
 
           sha256 = "1z08abn9g01nnr1v4m4p8gp1j8cwlvcadgpjb7ngjy8ghrk8g0sh";
-        } + "/build/base16-default-dark-theme.h");
+        } + "/build/base16-tomorrow-night-theme.h");
         shell = ./st/tmux.sh;
       });
     })
@@ -105,7 +105,7 @@ in
     borgbackup
     cdrkit
     docker_compose
-    elinks
+    emacs
     grml-zsh-config
     (neovim.override {
       extraPython3Packages = p: with p; [ jedi ];

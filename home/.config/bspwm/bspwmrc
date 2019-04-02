@@ -33,6 +33,7 @@ bspc rule -a "Liferea" desktop="^9"
 bspc rule -a "Daily" desktop="^9"
 bspc rule -a "Qemu-system-x86_64" desktop="^8" follow=on
 bspc rule -a "okular" desktop="^8" follow=on
+bspc rule -a "Emacs" state=tiled
 
 #####################
 # Program autostart #

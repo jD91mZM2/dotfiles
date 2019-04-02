@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   environment.variables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
+    EDITOR = "emacsclient -c -a emacs";
+    VISUAL = "emacsclient -t -a emacs";
 
     RUST_BACKTRACE = "1";
 

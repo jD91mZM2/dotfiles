@@ -1,8 +1,0 @@
-(
-(load "utils.el")
-(dolist (file (directory-files (relative "templates") t nil t))
-  (define-auto-insert
-    '("test" . "Automatically generated skeleton")
-    '((with-temp-buffer
-      (insert-file-contents file)
-      (buffer-string)))))
