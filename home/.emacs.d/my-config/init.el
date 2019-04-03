@@ -30,10 +30,13 @@
 (global-hl-line-mode 1)
 
 ;; # Keybindings
-(keyboard-translate ?\C-x ?\C-z) ; See https://www.emacswiki.org/emacs/DvorakKeyboard
-(keyboard-translate ?\C-z ?\C-x)
+;; See https://www.emacswiki.org/emacs/DvorakKeyboard. To avoid all
+;; conflicts (evil uses C-z by default), this translates the keys
+;; earlier in the stack. Using keyboard-translate, however, is not
+;; possible because it does not work well with emacsclient.
+(define-key key-translation-map (kbd "C-t") (kbd "C-x"))
 
-(global-set-key (kbd "C-M-r") 'eval-buffer)
+(define-key lisp-mode-map (kbd "C-M-r") 'eval-buffer)
 
 ;; ------------------------------
 ;;       Configure packages

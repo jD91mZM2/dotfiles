@@ -1,10 +1,13 @@
+(use-package auctex :pin gnu)
 (use-package base16-theme
   :config
   (load-theme 'base16-tomorrow-night t)
   (modify-face 'trailing-whitespace "#000000" (plist-get base16-tomorrow-night-colors :base08)))
 (use-package company
   :config
-  (company-mode 1))
+  (global-company-mode 1)
+  (setq company-idle-delay 0))
+(use-package company-auctex)
 (use-package company-lsp)
 (use-package evil
   :init
