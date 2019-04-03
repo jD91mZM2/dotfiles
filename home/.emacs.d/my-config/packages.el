@@ -1,4 +1,3 @@
-(use-package auctex :pin gnu)
 (use-package base16-theme
   :config
   (load-theme 'base16-tomorrow-night t)
@@ -30,19 +29,18 @@
 (use-package json-mode)
 (use-package lsp-mode
   :after rust-mode
-  :config
-  (add-hook 'rust-mode-hook 'lsp))
+  :hook (rust-mode . lsp))
 (use-package lsp-ui
-  :after lsp-ui
-  :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  :after lsp-mode
+  :hook (lsp-mode . lsp-ui-mode))
 (use-package neotree
   :after evil
   :config
   (setq-default neotree-smart-open t)
   (defun neotree-no-focus ()
     (neotree)
-    (select-window (window-right (neo-global--get-window))))
+    (neotree-find)
+    (other-window 1))
   (if (daemonp)
     (add-hook 'server-switch-hook 'neotree-no-focus)   ; emacs
     (add-hook 'emacs-startup-hook 'neotree-no-focus))) ; emacsclient
@@ -53,3 +51,6 @@
 (use-package ranger)
 (use-package rust-mode)
 (use-package swiper)
+(use-package tex
+  :ensure auctex ; I have no idea why using use-package auctex does not work
+  :pin gnu)

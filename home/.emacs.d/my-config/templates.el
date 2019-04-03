@@ -1,4 +1,4 @@
-(load "utils.el")
+(load "utils")
 (auto-insert-mode 1)
 (setq auto-insert-directory (relative "templates/"))
 (setq auto-insert-query nil)

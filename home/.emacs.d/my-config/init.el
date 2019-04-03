@@ -19,7 +19,7 @@
 (set-frame-parameter (selected-frame) 'alpha 90) ; for current session
 
 ;; Load file templates
-(load "templates.el")
+(load "templates")
 
 ;; # Editing options
 (setq-default indent-tabs-mode nil)
@@ -36,7 +36,7 @@
 ;; possible because it does not work well with emacsclient.
 (define-key key-translation-map (kbd "C-t") (kbd "C-x"))
 
-(define-key lisp-mode-map (kbd "C-M-r") 'eval-buffer)
+(define-key emacs-lisp-mode-map (kbd "C-M-r") 'eval-buffer)
 
 ;; ------------------------------
 ;;       Configure packages
@@ -53,4 +53,4 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 (setq use-package-always-pin "melpa")
-(load "packages.el")
+(load "packages")
