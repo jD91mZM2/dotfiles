@@ -25,6 +25,8 @@
 (setq-default indent-tabs-mode nil)
 (setq-default show-trailing-whitespace t)
 (setq-default tab-width 4)
+(modify-syntax-entry ?_ "w") ; Make _ a word character, like it is in vim
+
 (electric-pair-mode 1)
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
