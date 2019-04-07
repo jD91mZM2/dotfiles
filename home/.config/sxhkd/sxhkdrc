@@ -95,10 +95,10 @@ super + {w,e}
     bspc node -f {prev,next}.active.focused
 
 # focus on the given desktop
+# unlike `desktop -f`, in a monocle view this keeps the current
+# window focused
 super + {1-9,0}
-    # unlike `desktop -f`, in a monocle view this keeps the current
-    # window focused
-    bspc node -f "@^{1-9,10}:"
+    desktop="^{1-9,10}"; bspc node -f "@$desktop:" || bspc desktop -f "$desktop"
 
 # send current node to the given desktop
 super + shift + {1-9,0}
