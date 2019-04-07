@@ -63,6 +63,9 @@ XF86AudioMute
         notify-send "Muted" -t 500; \
     fi
 
+~Up; ~Up; ~Down; ~Down; ~Left; ~Right; ~Left; ~Right; ~b; ~a
+    xdg-open "https://youtu.be/dQw4w9WgXcQ"
+
 ########################
 # Window state hotkeys #
 ########################
@@ -91,9 +94,15 @@ super + bracket{left,right}
 super + {w,e}
     bspc node -f {prev,next}.active.focused
 
-# focus on or send to the given desktop
-super + {_, shift + }{1-9,0}
-    bspc {desktop -f,node -d} "^{1-9,10}"
+# focus on the given desktop
+super + {1-9,0}
+    # unlike `desktop -f`, in a monocle view this keeps the current
+    # window focused
+    bspc node -f "@^{1-9,10}:"
+
+# send current node to the given desktop
+super + shift + {1-9,0}
+    bspc node -d "^{1-9,10}"
 
 ###############################
 # Window preselection hotkeys #
