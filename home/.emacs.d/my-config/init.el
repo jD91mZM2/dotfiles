@@ -25,20 +25,28 @@
 (setq-default indent-tabs-mode nil)
 (setq-default show-trailing-whitespace t)
 (setq-default tab-width 4)
+(setq-default truncate-lines t)
+(setq-default vc-follow-symlinks t)
 (modify-syntax-entry ?_ "w") ; Make _ a word character, like it is in vim
 
 (electric-pair-mode 1)
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
+(show-paren-mode 1)
 
 ;; # Keybindings
 ;; See https://www.emacswiki.org/emacs/DvorakKeyboard. To avoid all
-;; conflicts (evil uses C-z by default), this translates the keys
-;; earlier in the stack. Using keyboard-translate, however, is not
-;; possible because it does not work well with emacsclient.
+;; conflicts, this translates the keys earlier in the stack. Using
+;; keyboard-translate, however, is not possible because it does not
+;; work well with emacsclient.
 (define-key key-translation-map (kbd "C-t") (kbd "C-x"))
 
-(define-key emacs-lisp-mode-map (kbd "C-M-r") 'eval-buffer)
+(defun my/set-compile (cmd)
+  "Function used in packages.el to set the compilation command to a custom one"
+  (set (make-local-variable 'compile-command) cmd))
+
+(define-key global-map (kbd "C-c c") 'recompile)
+(define-key emacs-lisp-mode-map (kbd "C-c c") 'eval-buffer)
 
 ;; ------------------------------
 ;;       Configure packages
