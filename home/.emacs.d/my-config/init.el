@@ -13,6 +13,7 @@
 
 (setq make-backup-files nil)
 (setq inhibit-startup-screen t)
+(setq bookmark-save-flag 1)
 
 ;; Transparency!
 (add-to-list 'default-frame-alist '(alpha . 90)) ; default frame settings

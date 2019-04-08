@@ -11,6 +11,8 @@
   (setq company-idle-delay 0))
 (use-package company-auctex)
 (use-package company-lsp)
+(use-package dockerfile-mode
+  :mode "Dockerfile\\'")
 (use-package evil
   :init
   (setq-default evil-want-keybinding nil)
@@ -20,7 +22,6 @@
   :config
   (evil-mode 1)
   (evil-define-key 'normal global-map "gt" 'switch-to-buffer)
-  (advice-add 'evil-quit :around (lambda (&rest _orig) (kill-buffer nil)))
 
   ;; Disable search after duration
   (defvar my/stop-hl-timer-last nil)
@@ -35,8 +36,8 @@
   (evil-collection-init))
 (use-package evil-magit
   :after evil
-  :config
-  (evil-define-key 'normal global-map (kbd "C-s") 'magit-status))
+  :bind ("C-c g" . magit-status)
+  :demand t)
 (use-package evil-surround
   :config
   (global-evil-surround-mode 1))
@@ -57,17 +58,6 @@
   :custom
   (lsp-ui-doc-max-width 50)
   (lsp-ui-doc-max-height 20))
-(use-package neotree
-  :after evil
-  :config
-  (setq-default neotree-smart-open t)
-  (defun neotree-no-focus ()
-    (neotree)
-    (neotree-find)
-    (other-window 1))
-  (if (daemonp)
-      (add-hook 'server-switch-hook 'neotree-no-focus) ; emacs
-    (add-hook 'emacs-startup-hook 'neotree-no-focus))) ; emacsclient
 (use-package nix-mode
   :after lsp-mode
   :mode "\\.nix\\'"
@@ -79,6 +69,11 @@
 (use-package powerline
   :config
   (powerline-center-evil-theme))
+(use-package ranger
+  :demand t
+  :bind ("C-c r" . ranger)
+  :config
+  (ranger-override-dired-mode t))
 (use-package rust-mode
   :mode "\\.rs\\'"
   :config
