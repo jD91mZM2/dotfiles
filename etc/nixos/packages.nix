@@ -167,6 +167,7 @@ in
     gnumake
     nodejs
     pypi2nix
+    python36Packages.python-language-server
     ruby
     rustup
     unstable.python3

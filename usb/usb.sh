@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cd "$(basedir "$1")"
+cd "$(dirname "$1")"
 nix build -f "<nixpkgs/nixos>" config.system.build.isoImage -I nixos-config=usb.nix

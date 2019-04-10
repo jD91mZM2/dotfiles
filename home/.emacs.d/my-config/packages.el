@@ -31,6 +31,11 @@
     (setq my/stop-hl-timer-last
           (run-at-time 1 nil (lambda () (evil-ex-nohighlight)))))
   (advice-add 'evil-ex-search-activate-highlight :after 'my/stop-hl-timer))
+(use-package evil-args
+  :after evil
+  :config
+  (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
+  (define-key evil-outer-text-objects-map "a" 'evil-outer-arg))
 (use-package evil-collection
   :config
   (evil-collection-init))
@@ -49,9 +54,10 @@
 (use-package json-mode
   :mode "\\.json\\'")
 (use-package lsp-mode
-  :hook ((rust-mode nix-mode) . lsp)
+  :hook ((nix-mode python-mode rust-mode) . lsp)
   :config
-  (setq lsp-prefer-flymake nil))
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-auto-guess-root t))
 (use-package lsp-ui
   :after lsp-mode
   :hook (lsp-mode . lsp-ui-mode)
@@ -73,6 +79,7 @@
   :demand t
   :bind ("C-c r" . ranger)
   :config
+  (setq ranger-show-hidden nil)
   (ranger-override-dired-mode t))
 (use-package rust-mode
   :mode "\\.rs\\'"
