@@ -11,6 +11,11 @@
   (setq company-idle-delay 0))
 (use-package company-auctex)
 (use-package company-lsp)
+(use-package counsel
+  :demand t
+  :bind ("C-c f" . counsel-imenu)
+  :config
+  (counsel-mode 1))
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
 (use-package evil

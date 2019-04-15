@@ -159,7 +159,6 @@ in
     cargo-edit
     cargo-release
     cargo-tree
-    carnix
     cmake
     gcc
     gdb
@@ -167,10 +166,11 @@ in
     gnumake
     nodejs
     pypi2nix
-    python36Packages.python-language-server
     ruby
     rustup
+    unstable.carnix
     unstable.python3
+    unstable.python36Packages.python-language-server
 
     # LaTeX stuff
     okular

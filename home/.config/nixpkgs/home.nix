@@ -36,7 +36,7 @@ in
 {
   programs.home-manager = {
     enable = true;
-    path = https://github.com/rycee/home-manager/archive/master.tar.gz;
+    path = https://github.com/rycee/home-manager/archive/release-18.09.tar.gz;
   };
   home.sessionVariables = import ./env.nix;
   home.packages = (import ./packages.nix { inherit pkgs lib; });

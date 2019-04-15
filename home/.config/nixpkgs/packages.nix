@@ -47,7 +47,7 @@ let
       from = unstable.xidlehook;
       name = "xidlehook";
       src = ~/Coding/Rust/xidlehook;
-      hash = "1sy7q875gg6as98lp6m15x9b3lhdikm9326lmqcs5fv3hhzvdlvy";
+      hash = "148p7r9xmc0nc0d4qyxhh29xqcb5axwqwcxcrkgd41f32c3g44dc";
       cargoBuildFlags = ["--bins"];
     }
     {
