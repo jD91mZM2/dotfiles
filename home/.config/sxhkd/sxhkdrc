@@ -20,7 +20,7 @@ super + z
 
 # lock the screen with xidlehook
 super + shift + l
-    echo -ne "\x2" | socat - UNIX-CONNECT:/tmp/xidlehook.sock
+    xidlehook-client --trigger --socket /tmp/xidlehook.sock
 
 Print
     ~/dotfiles/screenshot.sh screen
@@ -92,7 +92,7 @@ super + bracket{left,right}
 
 # focus the next/previous monitor
 super + {w,e}
-    bspc node -f {prev,next}.active.focused
+    bspc node -f "@{prev,next}.active:"
 
 # focus on the given desktop
 # unlike `desktop -f`, in a monocle view this keeps the current

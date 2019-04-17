@@ -69,6 +69,8 @@
   :custom
   (lsp-ui-doc-max-width 50)
   (lsp-ui-doc-max-height 20))
+(use-package neotree
+  :bind ("C-c t" . neotree-toggle))
 (use-package nix-mode
   :after lsp-mode
   :mode "\\.nix\\'"
@@ -80,12 +82,6 @@
 (use-package powerline
   :config
   (powerline-center-evil-theme))
-(use-package ranger
-  :demand t
-  :bind ("C-c r" . ranger)
-  :config
-  (setq ranger-show-hidden nil)
-  (ranger-override-dired-mode t))
 (use-package rust-mode
   :mode "\\.rs\\'"
   :config

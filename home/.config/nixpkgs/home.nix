@@ -3,6 +3,7 @@
 let
   aliases = {
     clear = "clear; echo -ne \"\\e[3J\"";
+    e = "emacsclient -n";
     git = "hub";
     ls = "ls -CF --color=auto";
     nix-shell = "nix-shell --command zsh";
@@ -36,7 +37,7 @@ in
 {
   programs.home-manager = {
     enable = true;
-    path = https://github.com/rycee/home-manager/archive/release-18.09.tar.gz;
+    path = https://github.com/rycee/home-manager/archive/release-19.03.tar.gz;
   };
   home.sessionVariables = import ./env.nix;
   home.packages = (import ./packages.nix { inherit pkgs lib; });
@@ -96,14 +97,18 @@ in
       ${bashConfig}
 
       powerline() {
-        PS1="$(powerline-rs --shell zsh $?)"
+        local exit_code="$?"
+        if [[ "$TERM" == eterm* ]]; then
+            PS1="''${PWD/$HOME/~} %% "
+        else
+            PS1="$(powerline-rs --shell zsh "$exit_code")"
+        fi
       }
       precmd_functions+=(powerline)
 
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=10"
     '';
   };
-  programs.emacs.enable = true;
 
   services.gpg-agent = {
     enable = true;
@@ -113,7 +118,6 @@ in
     maxCacheTtl = 86400;
     maxCacheTtlSsh = 86400;
   };
-  services.emacs.enable = true;
 
   # Graphical
 

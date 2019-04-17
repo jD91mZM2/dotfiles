@@ -15,7 +15,7 @@ font-0 = "Font Awesome:size=12"
 font-1 = "Hack:size=12"
 font-2 = "Hack:size=8"
 
-wm-restack = true
+wm-restack = bspwm
 height = 40
 padding = 3
 
@@ -32,7 +32,7 @@ font-0 = "Font Awesome:size=12"
 font-1 = "Hack:size=12"
 font-2 = "Hack:size=8"
 
-wm-restack = true
+wm-restack = bspwm
 height = 40
 padding = 3
 
@@ -44,36 +44,36 @@ type = internal/bspwm
 label-focused-foreground = ${colors.focus}
 label-focused-background = ${colors.altbg}
 label-urgent-foreground = ${colors.warning}
-label-empty =
 
-label-monitor-padding-left = 2
-label-monitor-padding-right = 3
-label-dimmed-padding-left = 2
-label-dimmed-padding-right = 3
-label-focused-padding-left = 2
-label-focused-padding-right = 3
-label-occupied-padding-left = 2
-label-occupied-padding-right = 3
-label-urgent-padding-left = 2
-label-urgent-padding-right = 3
-label-empty-padding-left = 2
-label-empty-padding-right = 3
-label-monocle-padding-left = 2
-label-monocle-padding-right = 3
-label-tiled-padding-left = 2
-label-tiled-padding-right = 3
-label-fullscreen-padding-left = 2
-label-fullscreen-padding-right = 3
-label-floating-padding-left = 2
-label-floating-padding-right = 3
-label-pseudotiled-padding-left = 2
-label-pseudotiled-padding-right = 3
-label-locked-padding-left = 2
-label-locked-padding-right = 3
-label-sticky-padding-left = 2
-label-sticky-padding-right = 3
-label-private-padding-left = 2
-label-private-padding-right = 3
+ws-icon-0 = Terminal;
+ws-icon-1 = Editor;
+ws-icon-2 = Main;
+ws-icon-3 = 4;
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = Misc;
+ws-icon-8 = Message;
+
+label-empty =
+label-focused = %icon%
+label-urgent = %icon%
+label-occupied = %icon%
+
+label-monitor-padding = 3
+label-dimmed-padding = 3
+label-focused-padding = 3
+label-occupied-padding = 3
+label-urgent-padding = 3
+label-empty-padding = 3
+label-monocle-padding = 3
+label-tiled-padding = 3
+label-fullscreen-padding = 3
+label-floating-padding = 3
+label-pseudotiled-padding = 3
+label-locked-padding = 3
+label-sticky-padding = 3
+label-private-padding = 3
 
 [module/date]
 type = internal/date

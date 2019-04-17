@@ -18,22 +18,22 @@ bspc config remove_disabled_monitors  true
 bspc config remove_unplugged_monitors true
 bspc config window_gap                12
 
-bspc monitor -d "" "" "" "4" "5" "6" "7"
+bspc monitor -d "Terminal" "Editor" "Main" "4" "5" "6" "7"
 if bspc query -M next; then
-    bspc monitor next -d "" ""
+    bspc monitor next -d "Misc" "Message"
 else
-    bspc monitor -a "" ""
+    bspc monitor -a "Misc" "Message"
 fi
 
-bspc desktop "^9" -f -l monocle
-bspc desktop "^1" -f
+bspc desktop "Message" -f -l monocle
+bspc desktop "Terminal" -f
 
-bspc rule -a "Chromium-browser" desktop="^9"
-bspc rule -a "Liferea" desktop="^9"
-bspc rule -a "Daily" desktop="^9"
-bspc rule -a "Qemu-system-x86_64" desktop="^8" follow=on
-bspc rule -a "okular" desktop="^8" follow=on
-bspc rule -a "Emacs" state=tiled
+bspc rule -a "Chromium-browser" desktop="Message"
+bspc rule -a "Liferea" desktop="Message"
+bspc rule -a "Daily" desktop="Message"
+bspc rule -a "Qemu-system-x86_64" desktop="Misc" follow=on
+bspc rule -a "okular" desktop="Misc" follow=on
+bspc rule -a "Emacs" state=tiled desktop="Editor"
 
 #####################
 # Program autostart #
@@ -59,10 +59,11 @@ liferea &
 thunderbird &
 xfce4-power-manager &
 
-bspc rule -a *:xterm-256color -o desktop="^1"
+bspc rule -a *:xterm-256color -o desktop="Terminal"
 st &
 sleep 1 # wait for terminal to statup
-bspc rule -a *:xterm-256color -o desktop="^9"
+emacs &
+bspc rule -a *:xterm-256color -o desktop="Message"
 st tmux new -s irc weechat &
 
 chromium --app="https://chat.redox-os.org/" &

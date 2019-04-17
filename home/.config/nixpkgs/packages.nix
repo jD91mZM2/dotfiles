@@ -7,10 +7,8 @@ let
   });
   rust = pkgs.latest.rustChannels.stable;
   buildRustPackage = pkgs.rustPlatform.buildRustPackage.override {
-    rust = {
-      cargo = rust.cargo;
-      rustc = rust.rust;
-    };
+    cargo = rust.cargo;
+    rustc = rust.rust;
   };
 
   rustSoftware = map

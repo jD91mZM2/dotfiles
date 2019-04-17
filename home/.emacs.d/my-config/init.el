@@ -46,8 +46,32 @@
   "Function used in packages.el to set the compilation command to a custom one"
   (set (make-local-variable 'compile-command) cmd))
 
-(define-key global-map (kbd "C-c c") 'recompile)
 (define-key emacs-lisp-mode-map (kbd "C-c c") 'eval-buffer)
+(global-set-key (kbd "C-c b") 'bookmark-bmenu-list)
+(global-set-key (kbd "C-c c") 'recompile)
+
+;; Shell madness
+(global-set-key (kbd "C-c s") (lambda ()
+                                (interactive)
+                                (term (or (getenv "SHELL" ) "/bin/sh"))))
+(add-hook 'term-mode-hook
+          (defun my/term-hook ()
+            (setq show-trailing-whitespace nil)))
+(add-hook 'eshell-mode-hook
+          (defun my/eshell-hook ()
+            (evil-define-key 'insert eshell-mode-map (kbd "C-d")
+              (lambda ()
+                (interactive)
+                (unless (eshell-send-eof-to-process)
+                  (kill-buffer))))))
+
+;; # Set up emacsclient the way I want it
+(setq confirm-kill-emacs 'y-or-n-p)
+(server-start)
+(add-hook 'server-switch-hook
+          (defun my/server-switch-hook ()
+            ; Ask xdotool to switch to the emacs window
+            (call-process "xdotool" nil nil nil "windowactivate" (frame-parameter nil 'outer-window-id))))
 
 ;; ------------------------------
 ;;       Configure packages
