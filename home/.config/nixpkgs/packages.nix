@@ -56,4 +56,19 @@ let
     }
   ];
 in
-  with pkgs; rustSoftware
+  with pkgs; (rustSoftware ++ [
+    (superTuxKart.overrideAttrs (old: rec {
+      version = "0.10.0";
+      srcs = [
+        (pkgs.fetchFromGitHub {
+            owner = "supertuxkart";
+            repo = "stk-code";
+            rev = "892b9b3f3964d2e6b54b3426385433f7d497c914";
+            sha256 = "1drkynb4sxhmj511y6dswb1kygbivff0nsib26kgwr69f1agiwmw";
+            name = "stk-code";
+        })
+        (builtins.elemAt old.srcs 1)
+      ];
+      patches = [];
+    }))
+  ])
