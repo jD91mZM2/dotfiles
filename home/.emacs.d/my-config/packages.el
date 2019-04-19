@@ -6,9 +6,12 @@
   (modify-face 'trailing-whitespace "#000000" (my/get-color :base08))
   (modify-face 'line-number-current-line (my/get-color :base00) (my/get-color :base03)))
 (use-package company
+  :after evil
   :config
   (global-company-mode 1)
-  (setq company-idle-delay 0))
+  (setq company-idle-delay 0)
+  (evil-define-key 'insert 'company-mode-hook (kbd "C-n") 'company-select-next-if-tooltip-visible-or-complete-selection)
+  (evil-define-key 'insert 'company-mode-hook (kbd "C-p") 'company-select-previous))
 (use-package company-auctex)
 (use-package company-lsp)
 (use-package counsel
@@ -70,7 +73,13 @@
   (lsp-ui-doc-max-width 50)
   (lsp-ui-doc-max-height 20))
 (use-package neotree
-  :bind ("C-c t" . neotree-toggle))
+  :bind ("C-c t" . neotree-toggle)
+  :custom ((neo-smart-open t)
+           (neo-show-hidden-files t))
+  :config
+  (advice-add 'neo-open-file :after
+              (defun my/neotree-open (_orig &rest _args)
+                  (neotree-hide))))
 (use-package nix-mode
   :after lsp-mode
   :mode "\\.nix\\'"
