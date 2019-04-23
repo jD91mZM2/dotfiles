@@ -87,11 +87,12 @@ interval = 30
 
 [module/ip]
 type = custom/script
-exec = printf "%-15s" "$(curl -s https://api.ipify.org)"
+exec = ./ip.sh
 click-left = bspc rule -a xterm-256color -o desktop="^8" follow=on; st ~/Coding/Scripting/public/print-ip.sh &
+click-right = kill -USR1 %pid%
+double-click-left = kill -USR2 %pid%
 label-font = 3
 tail = true
-interval = 60
 
 [module/alsa]
 type = internal/alsa
