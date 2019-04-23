@@ -1,10 +1,11 @@
-;; ------------------------------
-;;   Configure general options
-;; ------------------------------
-
 (add-to-list 'load-path (locate-user-emacs-file "my-config") t)
 
-;; # Emacs options
+;;  _____                                        _   _
+;; | ____|_ __ ___   __ _  ___ ___    ___  _ __ | |_(_) ___  _ __  ___
+;; |  _| | '_ ` _ \ / _` |/ __/ __|  / _ \| '_ \| __| |/ _ \| '_ \/ __|
+;; | |___| | | | | | (_| | (__\__ \ | (_) | |_) | |_| | (_) | | | \__ \
+;; |_____|_| |_| |_|\__,_|\___|___/  \___/| .__/ \__|_|\___/|_| |_|___/
+;;                                        |_|
 
 ;; Prevent emacs from writing stuff to this file. All customization
 ;; options should be set from here, and all packages should be set
@@ -34,6 +35,9 @@
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
 (show-paren-mode 1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;; # Keybindings
 ;; See https://www.emacswiki.org/emacs/DvorakKeyboard. To avoid all
@@ -49,11 +53,15 @@
 (define-key emacs-lisp-mode-map (kbd "C-c c") 'eval-buffer)
 (global-set-key (kbd "C-c b") 'bookmark-bmenu-list)
 (global-set-key (kbd "C-c c") 'recompile)
-
-;; Shell madness
 (global-set-key (kbd "C-c s") (lambda ()
                                 (interactive)
                                 (term (or (getenv "SHELL" ) "/bin/sh"))))
+(global-set-key (kbd "C-c a") (lambda (start end)
+                                (interactive "r")
+                                (shell-command-on-region start end "figlet" (current-buffer) t)
+                                (comment-region (mark) (point))))
+
+;; Shell madness
 (add-hook 'term-mode-hook
           (defun my/term-hook ()
             (setq show-trailing-whitespace nil)))
@@ -73,9 +81,13 @@
             ; Ask xdotool to switch to the emacs window
             (call-process "xdotool" nil nil nil "windowactivate" (frame-parameter nil 'outer-window-id))))
 
-;; ------------------------------
-;;       Configure packages
-;; ------------------------------
+;;  ____            _
+;; |  _ \ __ _  ___| | ____ _  __ _  ___  ___
+;; | |_) / _` |/ __| |/ / _` |/ _` |/ _ \/ __|
+;; |  __/ (_| | (__|   < (_| | (_| |  __/\__ \
+;; |_|   \__,_|\___|_|\_\__,_|\__, |\___||___/
+;;                            |___/
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (setq package-enable-at-startup nil)

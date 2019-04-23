@@ -1,3 +1,4 @@
+# -*- mode: sh -*-
 ###################
 # General hotkeys #
 ###################
@@ -63,7 +64,7 @@ XF86AudioMute
         notify-send "Muted" -t 500; \
     fi
 
-~Up; ~Up; ~Down; ~Down; ~Left; ~Right; ~Left; ~Right; ~b; ~a
+super + Up; Up; Down; Down; Left; Right; Left; Right; b; a
     xdg-open "https://youtu.be/dQw4w9WgXcQ"
 
 ########################

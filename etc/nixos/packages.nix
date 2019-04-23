@@ -106,6 +106,7 @@ in
     cdrkit
     docker_compose
     emacs
+    figlet
     grml-zsh-config
     (neovim.override {
       extraPython3Packages = p: with p; [ jedi ];

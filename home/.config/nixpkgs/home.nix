@@ -167,8 +167,7 @@ in
     fadeDelta = 5;
     shadow = true;
     extraOptions = ''
-      inactive-dim = 0.05;
-      focus-exclude = [ "class_g = 'xterm-256color'" ];
+      inactive-dim = 0.1;
     '';
     opacityRule = [
       "90:class_g = 'xterm-256color'"
