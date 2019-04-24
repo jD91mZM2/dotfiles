@@ -20,6 +20,7 @@ in
       enableCompletion = true;
       interactiveShellInit = ''
         source "${pkgs.autojump}/share/autojump/autojump.bash"
+        eval "$("${pkgs.direnv}/bin/direnv" hook bash)"
       '';
     };
     zsh = {
@@ -31,6 +32,7 @@ in
       interactiveShellInit = ''
         source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
         source "${pkgs.autojump}/share/autojump/autojump.zsh"
+        eval "$("${pkgs.direnv}/bin/direnv" hook zsh)"
       '';
     };
   };
@@ -104,6 +106,7 @@ in
     asciinema
     borgbackup
     cdrkit
+    direnv
     docker_compose
     emacs
     figlet

@@ -81,6 +81,8 @@
   :custom ((neo-smart-open t)
            (neo-show-hidden-files t))
   :config
+  (add-hook 'neotree-mode-hook (defun neotree-hook ()
+                            (display-line-numbers-mode -1)))
   (advice-add 'neo-open-file :after
               (defun my/neotree-open (_orig &rest _args)
                   (neotree-hide))))
