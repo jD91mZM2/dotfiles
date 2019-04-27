@@ -21,6 +21,9 @@
          ("C-c i" . counsel-info-lookup-symbol))
   :config
   (counsel-mode 1))
+(use-package direnv
+  :config
+  (direnv-mode 1))
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
 (use-package evil
@@ -31,6 +34,7 @@
   (setq-default evil-ex-search-persistent-highlight nil)
   :config
   (evil-mode 1)
+  (global-undo-tree-mode -1)
   (evil-global-set-key 'normal "gt" 'switch-to-buffer)
   (evil-global-set-key 'normal "gcc" 'comment-or-uncomment-region)
   (evil-global-set-key 'normal "gcw" 'delete-trailing-whitespace)
@@ -106,6 +110,10 @@
   :mode "\\.rs\\'"
   :config
   (add-hook 'rust-mode-hook (lambda () (my/set-compile "cargo check"))))
+(use-package sublimity
+  :config
+  (require 'sublimity-scroll)
+  (sublimity-mode 1))
 (use-package tex
   :ensure auctex ; I have no idea why using use-package auctex does not work
   :pin gnu)

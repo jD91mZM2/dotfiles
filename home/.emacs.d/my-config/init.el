@@ -15,6 +15,7 @@
 (setq make-backup-files nil)
 (setq inhibit-startup-screen t)
 (setq bookmark-save-flag 1)
+(setq mouse-wheel-progressive-speed nil)
 
 ;; Transparency!
 (add-to-list 'default-frame-alist '(alpha . 90)) ; default frame settings
@@ -25,6 +26,7 @@
 
 ;; # Editing options
 (setq-default indent-tabs-mode nil)
+(setq-default require-final-newline t)
 (setq-default show-trailing-whitespace t)
 (setq-default tab-width 4)
 (setq-default truncate-lines t)
