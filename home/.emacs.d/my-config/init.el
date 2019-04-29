@@ -12,7 +12,9 @@
 ;; using use-package.
 (setq custom-file "/dev/null")
 
-(setq make-backup-files nil)
+(setq backup-directory-alist `((".*" . ,(locate-user-emacs-file "backups/"))))
+(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t)))
+
 (setq inhibit-startup-screen t)
 (setq bookmark-save-flag 1)
 (setq mouse-wheel-progressive-speed nil)
@@ -33,7 +35,6 @@
 (setq-default vc-follow-symlinks t)
 (modify-syntax-entry ?_ "w") ; Make _ a word character, like it is in vim
 
-(electric-pair-mode 1)
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
 (show-paren-mode 1)

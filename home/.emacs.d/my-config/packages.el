@@ -106,10 +106,19 @@
   :config
   (projectile-mode 1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+(use-package ranger
+  :bind ("C-c r" . ranger)
+  :custom ((ranger-override-dired 'ranger)
+           (ranger-override-dired-mode t)))
 (use-package rust-mode
   :mode "\\.rs\\'"
   :config
   (add-hook 'rust-mode-hook (lambda () (my/set-compile "cargo check"))))
+(use-package smartparens
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode 1)
+  (setq sp-ignore-modes-list (delete 'minibuffer-inactive-mode sp-ignore-modes-list)))
 (use-package sublimity
   :config
   (require 'sublimity-scroll)
@@ -117,3 +126,5 @@
 (use-package tex
   :ensure auctex ; I have no idea why using use-package auctex does not work
   :pin gnu)
+(use-package yaml-mode
+  :mode "\\.yml\\'")
