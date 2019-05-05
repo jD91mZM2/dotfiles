@@ -55,22 +55,24 @@ in
     numix-icon-theme-circle
     xorg.xcursorthemes
 
-    # Graphical - System
+    # Graphical - WM
     compton
     dmenu
     dunst
+    feh
     j4-dmenu-desktop
     networkmanagerapplet
 
-    # Graphical - Applications
+    # Graphical
     abiword
     chromium
-    duplicity
     firefox
     gimp
+    gnome3.zenity
     inkscape
     keepassxc
     liferea
+    maim
     mpv
     multimc
     obs-studio
@@ -81,6 +83,8 @@ in
     virtmanager
     xfce.thunar
     xfce.xfce4-power-manager
+    xorg.xev
+    xorg.xwininfo
     (st.override {
       conf = builtins.readFile (substituteAll {
         src = ./st/config.h;
@@ -95,14 +99,7 @@ in
       });
     })
 
-    # Graphical - Utils
-    feh
-    gnome3.zenity
-    maim
-    xorg.xev
-    xorg.xwininfo
-
-    # Applications
+    # Command line
     asciinema
     borgbackup
     cdrkit
@@ -110,17 +107,16 @@ in
     docker_compose
     emacs
     figlet
+    gitAndTools.hub
     grml-zsh-config
-    (neovim.override {
-      extraPython3Packages = p: with p; [ jedi ];
-    })
     nixops
     rclone
     sqlite
+    stow
     tmux
     weechat
 
-    # Utils
+    # Must have utils
     ascii
     autojump
     bc
@@ -132,7 +128,6 @@ in
     file
     gist
     git
-    gitAndTools.hub
     gnupg
     htop
     httpie
@@ -169,7 +164,6 @@ in
     gdb
     ghc
     gnumake
-    nodejs
     pypi2nix
     ruby
     rustup
