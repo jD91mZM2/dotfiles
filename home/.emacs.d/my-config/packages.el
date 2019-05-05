@@ -114,11 +114,6 @@
   :mode "\\.rs\\'"
   :config
   (add-hook 'rust-mode-hook (lambda () (my/set-compile "cargo check"))))
-(use-package smartparens
-  :config
-  (require 'smartparens-config)
-  (smartparens-global-mode 1)
-  (setq sp-ignore-modes-list (delete 'minibuffer-inactive-mode sp-ignore-modes-list)))
 (use-package sublimity
   :config
   (require 'sublimity-scroll)

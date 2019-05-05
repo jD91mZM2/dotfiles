@@ -1,6 +1,5 @@
 { pkgs ? import <nixpkgs> {} }:
-with pkgs;
 
-stdenv.mkShell {
+pkgs.mkShell {
   buildInputs = [];
 }

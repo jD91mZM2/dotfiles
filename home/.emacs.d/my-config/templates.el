@@ -4,4 +4,4 @@
 (setq auto-insert-query nil)
 (dolist (file (directory-files (relative "templates") nil nil t))
   (unless (or (string= file ".") (string= file ".."))
-    (define-auto-insert (regexp-quote file) file)))
+    (define-auto-insert (concat (regexp-quote file) "\\'") file)))

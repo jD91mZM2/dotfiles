@@ -27,20 +27,25 @@
 (load "templates")
 
 ;; # Editing options
+(setq-default c-basic-offset 4)
 (setq-default indent-tabs-mode nil)
 (setq-default require-final-newline t)
 (setq-default show-trailing-whitespace t)
 (setq-default tab-width 4)
 (setq-default truncate-lines t)
 (setq-default vc-follow-symlinks t)
-(modify-syntax-entry ?_ "w") ; Make _ a word character, like it is in vim
 
+(add-hook 'after-change-major-mode-hook
+          (defun my/major-hook ()
+            (modify-syntax-entry ?_ "w"))) ; Make _ a word character in all syntaxes, like it is in vim
+
+(electric-pair-mode 1)
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
-(show-paren-mode 1)
 (menu-bar-mode -1)
-(tool-bar-mode -1)
 (scroll-bar-mode -1)
+(show-paren-mode 1)
+(tool-bar-mode -1)
 
 ;; # Keybindings
 ;; See https://www.emacswiki.org/emacs/DvorakKeyboard. To avoid all
