@@ -40,8 +40,11 @@ in
     path = https://github.com/rycee/home-manager/archive/release-19.03.tar.gz;
   };
   home.sessionVariables = import ./env.nix;
-  home.packages = (import ./packages.nix { inherit pkgs lib; });
-  nixpkgs.overlays = [
+  home.packages = (import ./packages.nix { inherit pkgs lib; }) ++ [
+    superTuxKart
+    supertux-editor
+  ];
+  nixpkgs.overlays = (import ./overlays.nix) ++ [
     (import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz))
   ];
   home.file.".xprofile".text = ''

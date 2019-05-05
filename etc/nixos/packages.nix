@@ -163,6 +163,7 @@ in
     cargo-edit
     cargo-release
     cargo-tree
+    clang
     cmake
     gcc
     gdb
