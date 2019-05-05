@@ -64,27 +64,13 @@ in
     networkmanagerapplet
 
     # Graphical
-    abiword
-    chromium
+    emacs
     firefox
     gimp
     gnome3.zenity
-    inkscape
-    keepassxc
-    liferea
-    maim
-    mpv
-    multimc
-    obs-studio
-    pavucontrol
     polybar
-    thunderbird
-    torbrowser
     virtmanager
-    xfce.thunar
     xfce.xfce4-power-manager
-    xorg.xev
-    xorg.xwininfo
     (st.override {
       conf = builtins.readFile (substituteAll {
         src = ./st/config.h;
@@ -100,21 +86,11 @@ in
     })
 
     # Command line
-    asciinema
     borgbackup
-    cdrkit
     direnv
-    docker_compose
-    emacs
-    figlet
-    gitAndTools.hub
-    grml-zsh-config
-    nixops
     rclone
-    sqlite
     stow
     tmux
-    weechat
 
     # Must have utils
     ascii
@@ -123,7 +99,6 @@ in
     bind
     binutils
     efibootmgr
-    fd
     ffmpeg
     file
     gist
@@ -140,7 +115,6 @@ in
     patchelf
     pciutils
     rename
-    ripgrep
     socat
     sshfs
     trash-cli
@@ -152,29 +126,6 @@ in
     xdotool
     youtube-dl
     zip
-
-    # Languages
-    cabal-install
-    cargo-edit
-    cargo-release
-    cargo-tree
-    clang
-    cmake
-    gcc
-    gdb
-    ghc
-    gnumake
-    pypi2nix
-    ruby
-    rustup
-    unstable.carnix
-    unstable.python3
-    unstable.python36Packages.python-language-server
-
-    # LaTeX stuff
-    okular
-    poppler_utils
-    texlive.combined.scheme-full
 
     # Daemons
     udiskie

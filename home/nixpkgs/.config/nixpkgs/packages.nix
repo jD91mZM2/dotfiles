@@ -1,59 +1,73 @@
-{ pkgs, lib }:
+{ pkgs }:
+
+# Most of my installed applications are nowadays installed through
+# here. The line between what I want as a "system package" and a "user
+# package" is incredibly blurry, but I am currently going with the
+# following definition:
+
+# Can I live without it temporarily, should I need to debug my user
+# config or log in as a different user?
+# Answer is "preferrably no"? It's a system package.
+
 let
   unstable = import <nixos-unstable> {};
-  excludeTarget = source: lib.cleanSource (lib.cleanSourceWith {
-    filter = (path: _type: path != (toString (source + "/target")));
-    src = source;
-  });
-  rust = pkgs.latest.rustChannels.stable;
-  buildRustPackage = pkgs.rustPlatform.buildRustPackage.override {
-    cargo = rust.cargo;
-    rustc = rust.rust;
-  };
-
-  rustSoftware = map
-    ({ from ? null, name, src, hash, cargoBuildFlags ? null }: buildRustPackage (
-      {
-        name = "${name}-local";
-        src = excludeTarget src;
-        cargoSha256 = hash;
-        doCheck = false;
-      } // (if from == null
-        then {}
-        else
-          # Inherit these attribute, *if* they exist
-          (builtins.intersectAttrs {
-            buildInputs = null;
-            cargoBuildFlags = null;
-            meta = null;
-            nativeBuildInputs = null;
-            postFixup = null;
-            #postInstall = null;
-          } from)
-        ) // (if cargoBuildFlags == null
-        then {}
-        else { inherit cargoBuildFlags; }
-        )
-    )) [
-    {
-      from = unstable.termplay;
-      name = "termplay";
-      src = ~/Coding/Rust/termplay;
-      hash = "0nr4xii09z6djdj9586b5mpncp7n3xlng65czz3g777ylwj0f7v2";
-    }
-    {
-      from = unstable.xidlehook;
-      name = "xidlehook";
-      src = ~/Coding/Rust/xidlehook;
-      hash = "148p7r9xmc0nc0d4qyxhh29xqcb5axwqwcxcrkgd41f32c3g44dc";
-      cargoBuildFlags = ["--bins"];
-    }
-    {
-      from = unstable.powerline-rs;
-      name = "powerline-rs";
-      src = ~/Coding/Rust/powerline-rs;
-      hash = "1sr9vbfk5bb3n0lv93y19in1clyvbj0w3p1gmp4sbw8lx84zwxhc";
-    }
-  ];
 in
-  with pkgs; rustSoftware
+  with pkgs; [
+    # My software
+    powerline-rs
+    termplay
+    xidlehook
+
+    # Graphical applications
+    abiword
+    chromium
+    inkscape
+    keepassxc
+    liferea
+    maim
+    mpv
+    multimc
+    obs-studio
+    pavucontrol
+    thunderbird
+    torbrowser
+    xorg.xev
+    xorg.xwininfo
+
+    # Command line applications
+    asciinema
+    cdrkit
+    docker_compose
+    fd
+    figlet
+    gitAndTools.hub
+    nixops
+    ripgrep
+    sqlite
+    weechat
+
+    # Languages
+    cabal-install
+    cargo-edit
+    cargo-release
+    cargo-tree
+    cmake
+    gcc
+    gdb
+    ghc
+    gnumake
+    pypi2nix
+    ruby
+    rustup
+    unstable.carnix
+    unstable.python3
+    unstable.python36Packages.python-language-server
+
+    # LaTeX stuff
+    okular
+    poppler_utils
+    texlive.combined.scheme-full
+
+    # Everything else
+    superTuxKart
+  ]

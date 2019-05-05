@@ -39,48 +39,29 @@ in
     enable = true;
     path = https://github.com/rycee/home-manager/archive/release-19.03.tar.gz;
   };
+
   home.sessionVariables = import ./env.nix;
-  home.packages = (import ./packages.nix { inherit pkgs lib; }) ++ [
-    superTuxKart
-    supertux-editor
-  ];
-  nixpkgs.overlays = (import ./overlays.nix) ++ [
+
+  nixpkgs.overlays = [
     (import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz))
+    (import ./overlays/mine.nix)
+    (import ./overlays/supertuxkart.nix)
   ];
+  home.packages = import ./packages.nix { inherit pkgs; };
+
   home.file.".xprofile".text = ''
     if [ -e ~/.profile ]; then
       source ~/.profile
     fi
   '';
 
-  # CLI
+  #   ____ _     ___
+  #  / ___| |   |_ _|
+  # | |   | |    | |
+  # | |___| |___ | |
+  #  \____|_____|___|
 
-  programs.ssh = {
-    enable = true;
-    matchBlocks = import ./ssh-hosts.nix;
-  };
-  programs.git = {
-    enable = true;
-    userName = "jD91mZM2";
-    userEmail = "me@krake.one";
-
-    signing = {
-      key = "BC5DAE4EC168B1F9B94C98503055D54729A72666";
-      signByDefault = true;
-    };
-    extraConfig = ''
-      [pull]
-      rebase = true;
-      [diff]
-      tool = nvimdifftool
-      [difftool "nvimdifftool"]
-      cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-      [merge]
-      tool = nvimdifftool
-      [mergetool "nvimdifftool"]
-      cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-    '';
-  };
+  # Shells
   programs.bash = {
     enable = true;
     shellAliases = aliases;
@@ -113,6 +94,35 @@ in
     '';
   };
 
+  # Misc
+  programs.ssh = {
+    enable = true;
+    matchBlocks = import ./ssh-hosts.nix;
+  };
+  programs.git = {
+    enable = true;
+    userName = "jD91mZM2";
+    userEmail = "me@krake.one";
+
+    signing = {
+      key = "BC5DAE4EC168B1F9B94C98503055D54729A72666";
+      signByDefault = true;
+    };
+    extraConfig = ''
+      [pull]
+      rebase = true;
+      [diff]
+      tool = nvimdifftool
+      [difftool "nvimdifftool"]
+      cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+      [merge]
+      tool = nvimdifftool
+      [mergetool "nvimdifftool"]
+      cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+    '';
+  };
+
+  # Services
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
@@ -122,8 +132,14 @@ in
     maxCacheTtlSsh = 86400;
   };
 
-  # Graphical
+  #   ____                 _     _           _
+  #  / ___|_ __ __ _ _ __ | |__ (_) ___ __ _| |
+  # | |  _| '__/ _` | '_ \| '_ \| |/ __/ _` | |
+  # | |_| | | | (_| | |_) | | | | | (_| (_| | |
+  #  \____|_|  \__,_| .__/|_| |_|_|\___\__,_|_|
+  #                 |_|
 
+  # Configs
   xresources = {
     extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
       owner = "chriskempson";
@@ -160,6 +176,7 @@ in
     };
   };
 
+  # Services
   services.compton = {
     enable = true;
     # Apparently, using (intel + xrandr to configure multiple monitors + glx

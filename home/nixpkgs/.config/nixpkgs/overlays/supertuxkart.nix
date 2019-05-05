@@ -1,4 +1,5 @@
-[(self: super: {
+self: super:
+{
   superTuxKart = super.superTuxKart.overrideAttrs (old: {
     name = "supertuxkart-overlay";
     version = "1.0.0";
@@ -39,4 +40,4 @@
       maintainers = [];
     };
   };
-})]
+}
