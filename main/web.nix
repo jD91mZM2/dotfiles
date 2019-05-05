@@ -3,10 +3,6 @@
 let
   config = import ./config.nix;
 in {
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 80 443 1337 ];
-  };
   security.acme = {
     # for testing certificates, toggle comment below:
     # production = false;

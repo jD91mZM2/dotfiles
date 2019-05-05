@@ -62,6 +62,9 @@ in {
     };
   };
 
+  # System config
+  networking.firewall.enable = false;
+
   # Program config
   programs.mosh.enable = true;
   programs.zsh = {
@@ -81,6 +84,7 @@ in {
 
   # Normal users
   security.sudo.wheelNeedsPassword = false;
+  services.openssh.gatewayPorts = "clientspecified";
   users.defaultUserShell = pkgs.zsh;
   users.users.user = {
     createHome = true;
