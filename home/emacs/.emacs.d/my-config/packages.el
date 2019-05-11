@@ -26,6 +26,10 @@
   (direnv-mode 1))
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
+(use-package edit-server ;; https://www.emacswiki.org/emacs/Edit_with_Emacs
+  :config
+  (setq edit-server-new-frame nil)
+  (edit-server-start))
 (use-package evil
   :init
   (setq-default evil-want-keybinding nil)
@@ -64,6 +68,7 @@
   (global-evil-surround-mode 1))
 (use-package flycheck
   :hook (lsp-ui-mode . flycheck-mode))
+(use-package htmlize)
 (use-package ivy
   :config
   (ivy-mode 1))
@@ -98,6 +103,7 @@
    (make-lsp-client :new-connection (lsp-stdio-connection "nix-lsp")
                     :major-modes '(nix-mode)
                     :server-id 'nix)))
+(use-package org)
 (use-package powerline
   :config
   (powerline-center-evil-theme))
