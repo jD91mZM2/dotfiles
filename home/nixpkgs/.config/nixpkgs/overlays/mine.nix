@@ -48,7 +48,7 @@ in {
     from = unstable.xidlehook;
     name = "xidlehook";
     src = ~/Coding/Rust/xidlehook;
-    hash = "148p7r9xmc0nc0d4qyxhh29xqcb5axwqwcxcrkgd41f32c3g44dc";
+    hash = "0fl3r4y2wp514hp3qpq6h0rj95jv25n86w0mwdia7wvjaw0157wg";
     cargoBuildFlags = ["--bins"];
   };
   powerline-rs = rustSoftware {
