@@ -10,25 +10,27 @@
       iptables -F OUTPUT
 
       # Allow DNS servers
-      iptables -A INPUT -d 1.1.1.1 -j ACCEPT
+      iptables -A INPUT -s 1.1.1.1 -j ACCEPT
       iptables -A OUTPUT -d 1.1.1.1 -j ACCEPT
-      iptables -A INPUT -d 1.0.0.1 -j ACCEPT
+      iptables -A INPUT -s 1.0.0.1 -j ACCEPT
       iptables -A OUTPUT -d 1.0.0.1 -j ACCEPT
 
-      # Allow new connections to Private Internet Access, port 1197
-      iptables -A INPUT -p udp --dport 1197 -j ACCEPT
+      # Allow new connections to Private Internet Access, port 1197 or legacy TCP IP
+      iptables -A INPUT -p udp --sport 1197 -j ACCEPT
       iptables -A OUTPUT -p udp --dport 1197 -j ACCEPT
+      iptables -A INPUT -p tcp -s 46.246.123.24 -j ACCEPT
+      iptables -A OUTPUT -p tcp -d 46.246.123.24 -j ACCEPT
 
       # Allow connections over VPN interface
       iptables -A INPUT -i tun+ -j ACCEPT
       iptables -A OUTPUT -o tun+ -j ACCEPT
 
       # Allow local connections/local ips
-      iptables -A INPUT -d 10.0.0.0/8 -j ACCEPT
+      iptables -A INPUT -s 10.0.0.0/8 -j ACCEPT
       iptables -A OUTPUT -d 10.0.0.0/8 -j ACCEPT
-      iptables -A INPUT -d 172.16.0.0/12 -j ACCEPT
+      iptables -A INPUT -s 172.16.0.0/12 -j ACCEPT
       iptables -A OUTPUT -d 172.16.0.0/12 -j ACCEPT
-      iptables -A INPUT -d 192.168.0.0/16 -j ACCEPT
+      iptables -A INPUT -s 192.168.0.0/16 -j ACCEPT
       iptables -A OUTPUT -d 192.168.0.0/16 -j ACCEPT
 
       # Allow localhost
