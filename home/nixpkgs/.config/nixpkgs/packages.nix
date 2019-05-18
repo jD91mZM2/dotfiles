@@ -27,8 +27,10 @@ in
     maim
     mpv
     multimc
+    musescore
     obs-studio
     pavucontrol
+    superTuxKart
     thunderbird
     torbrowser
     xorg.xev
@@ -61,13 +63,11 @@ in
     rustup
     unstable.carnix
     unstable.python3
-    unstable.python36Packages.python-language-server
+    #unstable.python36Packages.python-language-server
+    python36Packages.python-language-server
 
     # LaTeX stuff
     okular
     poppler_utils
     texlive.combined.scheme-full
-
-    # Everything else
-    superTuxKart
   ]
