@@ -42,6 +42,9 @@
   (evil-global-set-key 'normal "gt" 'switch-to-buffer)
   (evil-global-set-key 'normal "gcc" 'comment-or-uncomment-region)
   (evil-global-set-key 'normal "gcw" 'delete-trailing-whitespace)
+  (evil-global-set-key 'normal "D" (lambda () (interactive)
+                                     (beginning-of-line)
+                                     (kill-line)))
 
   ;; Disable search after duration
   (defvar my/stop-hl-timer-last nil)
@@ -102,7 +105,11 @@
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection "nix-lsp")
                     :major-modes '(nix-mode)
-                    :server-id 'nix)))
+                    :server-id 'nix))
+  (define-key nix-mode-map (kbd "<tab>") (lambda () (interactive) (insert "  ")))
+  (define-key nix-mode-map (kbd "C-x C-e") (lambda (start end)
+                                             (interactive "r")
+                                             (shell-command-on-region start end "nix-instantiate --eval -"))))
 (use-package org)
 (use-package powerline
   :config

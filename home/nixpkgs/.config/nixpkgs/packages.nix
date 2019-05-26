@@ -12,7 +12,16 @@
 let
   unstable = import <nixos-unstable> {};
 in
-  with pkgs; [
+  # Unstable packages
+  (with unstable; [
+    firefox
+    superTuxKart
+  ])
+
+  ++
+
+  # Stable packages
+  (with pkgs; [
     # My software
     powerline-rs
     termplay
@@ -30,8 +39,8 @@ in
     musescore
     obs-studio
     pavucontrol
-    superTuxKart
     thunderbird
+    tigervnc
     torbrowser
     xorg.xev
     xorg.xwininfo
@@ -53,21 +62,20 @@ in
     cargo-edit
     cargo-release
     cargo-tree
+    carnix
     cmake
     gcc
     gdb
     ghc
     gnumake
     pypi2nix
+    python3
+    python36Packages.python-language-server
     ruby
     rustup
-    unstable.carnix
-    unstable.python3
-    #unstable.python36Packages.python-language-server
-    python36Packages.python-language-server
 
     # LaTeX stuff
     okular
     poppler_utils
     texlive.combined.scheme-full
-  ]
+  ])

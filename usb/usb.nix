@@ -8,4 +8,7 @@
   ];
 
   boot.supportedFilesystems = [ "zfs" ];
+
+  i18n.consoleKeyMap = "dvorak";
+  services.xserver.layout = "dvorak";
 }

@@ -10,21 +10,36 @@ let
     rsynca = "rsync -avzhP";
   };
   bashConfig = builtins.replaceStrings [ "  " ] [ "\t" ] ''
-      eval "$(dircolors "${dircolors}")"
+    eval "$(dircolors "${dircolors}")"
 
-      forward() {
-        if [ -z "$1" ] || [ -z "$2" ]; then
-          echo "forward <remote> <port>"
-          return
-        fi
-        cat <<-EOF
-        Remote port being forwarded over SSH!
+    SSH_PORT_REMINDER="$(cat <<-EOF
 
-        If it doesn't seem to work, make sure the remote's sshd_config
-        specifies "GatewayPorts" to either "yes" or "clientspecified".
-        EOF
-        ssh "$1" -R ":''${2}:localhost:$2" -- sleep infinity
-      }
+      If it doesn't seem to work, make sure the remote's sshd_config
+      specifies "GatewayPorts" to either "yes" or "clientspecified".
+      EOF
+    )"
+
+    forward() {
+      usage="forward <remote> <port>"
+      : "''${1:?$usage}"
+      : "''${2:?$usage}"
+      cat <<-EOF
+      Remote port being forwarded over SSH!
+      $SSH_PORT_REMINDER
+      EOF
+      ssh "$1" -R ":''${2}:localhost:$2" -- sleep infinity
+    }
+
+    backward() {
+      usage="backward <remote> <port>"
+      : "''${1:?$usage}"
+      : "''${2:?$usage}"
+      cat <<-EOF
+      Local port being forwarded to a remote application over SSH!
+      $SSH_PORT_REMINDER
+      EOF
+      ssh "$1" -R ":''${2}:localhost:$2" -- sleep infinity
+    }
   '';
   dircolors = pkgs.fetchFromGitHub {
     owner = "dotphiles";
@@ -45,7 +60,6 @@ in
   nixpkgs.overlays = [
     (import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz))
     (import ./overlays/mine.nix)
-    (import ./overlays/supertuxkart.nix)
   ];
   home.packages = import ./packages.nix { inherit pkgs; };
 
@@ -101,6 +115,7 @@ in
   };
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userName = "jD91mZM2";
     userEmail = "me@krake.one";
 

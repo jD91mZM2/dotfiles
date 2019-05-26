@@ -18,11 +18,16 @@
     ./x11.nix
   ];
 
-  # Misc. settings
+  # ZFS
   boot.supportedFilesystems = [ "zfs" ];
+  services.zfs = {
+    autoSnapshot.enable = true;
+    autoScrub.enable = true;
+  };
+
+  # Misc. settings
   documentation.dev.enable = true;
   hardware.bluetooth.enable = true;
-  services.zfs.autoSnapshot.enable = true;
   time.timeZone = "Europe/Stockholm";
 
   # systemd-boot
