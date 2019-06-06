@@ -34,6 +34,7 @@
 (setq-default tab-width 4)
 (setq-default truncate-lines t)
 (setq-default vc-follow-symlinks t)
+(setq-default display-line-numbers-type 'relative)
 
 (add-hook 'after-change-major-mode-hook
           (defun my/major-hook ()

@@ -60,8 +60,13 @@
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg))
 (use-package evil-collection
+  :after evil
   :config
   (evil-collection-init))
+(use-package evil-easymotion
+  :after evil
+  :config
+  (evilem-default-keybindings "SPC"))
 (use-package evil-magit
   :after evil
   :bind ("C-c g" . magit-status)
@@ -71,7 +76,7 @@
   (global-evil-surround-mode 1))
 (use-package flycheck
   :hook (lsp-ui-mode . flycheck-mode))
-(use-package htmlize)
+(use-package htmlize) ;; For org mode
 (use-package ivy
   :config
   (ivy-mode 1))
@@ -102,8 +107,9 @@
   :after lsp-mode
   :mode "\\.nix\\'"
   :config
+  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection "nix-lsp")
+   (make-lsp-client :new-connection (lsp-stdio-connection '("nix-lsp"))
                     :major-modes '(nix-mode)
                     :server-id 'nix))
   (define-key nix-mode-map (kbd "<tab>") (lambda () (interactive) (insert "  ")))

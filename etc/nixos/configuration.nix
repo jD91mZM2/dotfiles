@@ -28,6 +28,7 @@
   # Misc. settings
   documentation.dev.enable = true;
   hardware.bluetooth.enable = true;
+  system.autoUpgrade.enable = true;
   time.timeZone = "Europe/Stockholm";
 
   # systemd-boot
