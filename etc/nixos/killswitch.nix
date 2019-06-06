@@ -15,11 +15,9 @@
       iptables -A INPUT -s 1.0.0.1 -j ACCEPT
       iptables -A OUTPUT -d 1.0.0.1 -j ACCEPT
 
-      # Allow new connections to Private Internet Access, port 1197 or legacy TCP IP
-      iptables -A INPUT -p udp --sport 1197 -j ACCEPT
-      iptables -A OUTPUT -p udp --dport 1197 -j ACCEPT
-      iptables -A INPUT -p tcp -s 46.246.123.24 -j ACCEPT
-      iptables -A OUTPUT -p tcp -d 46.246.123.24 -j ACCEPT
+      # Allow new connections to NordVPN, and all other UDP connections over port 1194
+      iptables -A INPUT -p udp --sport 1194 -j ACCEPT
+      iptables -A OUTPUT -p udp --dport 1194 -j ACCEPT
 
       # Allow connections over VPN interface
       iptables -A INPUT -i tun+ -j ACCEPT

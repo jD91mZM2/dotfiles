@@ -8,69 +8,53 @@ quoteSubst() {
   printf %s "${REPLY%$'\n'}"
 }
 
-setup() {
-    : "${1:?}"
-    : "${2:?}"
-    echo -n "Output directory for $1 [./openvpn-${1,,}]: "
-    read -r output
-    if [ -z "$output" ]; then
-        output="openvpn-${1,,}"
-    fi
-    output="$(realpath "$output")"
+echo -n "Output directory for [/etc/openvpn]: "
+read -r output
+if [ -z "$output" ]; then
+    output="/etc/openvpn"
+fi
+output="$(realpath "$output")"
 
-    if [ -e "$output" ]; then
-        echo "Output directory already exists"
-        exit
-    fi
-
+if [ -e "$output" ]; then
+    echo "Output directory already exists"
+    [ "$1" != "reuse" ] && exit
+else
     file="$(mktemp)"
-    wget "$2" -O "$file"
+    wget "https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip" -O "$file"
     unzip -q "$file" -d "$output"
+fi
 
-    pushd "$output" > /dev/null
+pushd "$output" > /dev/null
 
-    echo -n "Configure with automatic login? [Y/n] "
-    read -r autologinstr
-    autologin="false"
-    if [ -z "$autologinstr" ] || [ "$autologinstr" == "y" ]; then
-        autologin="true"
+echo -n "Configure with automatic login? [Y/n] "
+read -r autologinstr
+autologin="false"
+if [ -z "$autologinstr" ] || [ "$autologinstr" == "y" ]; then
+    autologin="true"
+fi
+echo "Automatic login: $autologin"
+
+for file in */*.ovpn; do
+    chmod 0644 "$file"
+
+    if [ "$autologin" == "true" ]; then
+        echo "auth-user-pass $output/passwd" >> "$file"
     fi
-    echo "Automatic login: $autologin"
+done
 
-    for old_file in *.ovpn; do
-        file="$(echo -n "$old_file" | sed -e 's/ /_/g' -e 's/\.ovpn$/\.conf/')"
-        mv "$old_file" "$file"
-        chmod 0644 "$file"
+if [ "$autologin" == "false" ]; then
+    exit
+fi
 
-        sed 's/\(crl-verify \)\(crl.rsa.4096.pem\)/\1'"$(quoteSubst "$output")"'\/\2/' -i "$file"
-        sed 's/\(ca \)\(ca.rsa.4096.crt\)/\1'"$(quoteSubst "$output")"'\/\2/' -i "$file"
+if [ -z "$username" ] || [ -z "$password" ]; then
+    echo -n "Username: "
+    read -r -e username
+    echo -n "Password: "
+    read -r -s password
+    echo
+fi
 
-        if [ "$autologin" == "true" ]; then
-            echo "auth-user-pass $output/passwd" >> "$file"
-        fi
-    done
+printf "%s\n%s" "$username" "$password" > passwd
+chmod 0600 passwd
 
-    if [ "$autologin" == "false" ]; then
-        exit
-    fi
-
-    if [ -z "$username" ] || [ -z "$password" ]; then
-        echo -n "PIA Username: "
-        read -r username
-        echo -n "PIA Password: "
-        stty -echo
-        read -r password
-        stty echo
-        echo
-    fi
-
-    printf "%s\n%s" "$username" "$password" > passwd
-    chmod 0600 passwd
-
-    popd > /dev/null
-}
-
-clear
-setup "UDP" "https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip"
-clear
-setup "TCP" "https://www.privateinternetaccess.com/openvpn/openvpn-ip-tcp.zip"
+popd > /dev/null
