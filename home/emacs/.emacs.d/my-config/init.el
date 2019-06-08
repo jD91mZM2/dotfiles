@@ -15,8 +15,9 @@
 (setq backup-directory-alist `((".*" . ,(locate-user-emacs-file "backups/"))))
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t)))
 
+(setq bookmark-save-flag t)
+(setq delete-by-moving-to-trash t)
 (setq inhibit-startup-screen t)
-(setq bookmark-save-flag 1)
 (setq mouse-wheel-progressive-speed nil)
 
 ;; Transparency!
@@ -65,10 +66,6 @@
 (global-set-key (kbd "C-c s") (lambda ()
                                 (interactive)
                                 (term (or (getenv "SHELL" ) "/bin/sh"))))
-(global-set-key (kbd "C-c a") (lambda (start end)
-                                (interactive "r")
-                                (shell-command-on-region start end "figlet" (current-buffer) t)
-                                (comment-region (mark) (point))))
 
 ;; Shell madness
 (add-hook 'term-mode-hook

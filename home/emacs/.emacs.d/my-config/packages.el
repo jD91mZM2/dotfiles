@@ -26,6 +26,7 @@
   (direnv-mode 1))
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")
+(use-package edit-indirect) ;; For editing blocks inside markdown!
 (use-package edit-server ;; https://www.emacswiki.org/emacs/Edit_with_Emacs
   :config
   (setq edit-server-new-frame nil)
@@ -39,12 +40,21 @@
   :config
   (evil-mode 1)
   (global-undo-tree-mode -1)
-  (evil-global-set-key 'normal "gt" 'switch-to-buffer)
-  (evil-global-set-key 'normal "gcc" 'comment-or-uncomment-region)
-  (evil-global-set-key 'normal "gcw" 'delete-trailing-whitespace)
-  (evil-global-set-key 'normal "D" (lambda () (interactive)
-                                     (beginning-of-line)
-                                     (kill-line)))
+  (evil-global-set-key 'normal (kbd "gt") 'switch-to-buffer)
+  (evil-global-set-key 'normal (kbd "gcc") 'comment-or-uncomment-region)
+  (evil-global-set-key 'normal (kbd "gcw") 'delete-trailing-whitespace)
+  (evil-global-set-key 'normal (kbd "D") (lambda () (interactive)
+                                           (beginning-of-line)
+                                           (kill-line)))
+  (evil-global-set-key 'normal (kbd "gca")
+                       (lambda (start end)
+                         (interactive "r")
+                         (shell-command-on-region start end "figlet" (current-buffer) t)
+                         (comment-region (mark) (point))))
+  (evil-global-set-key 'insert (kbd "C-c d")
+                       (lambda ()
+                         (interactive)
+                         (insert (format-time-string "%Y-%m-%d"))))
 
   ;; Disable search after duration
   (defvar my/stop-hl-timer-last nil)
