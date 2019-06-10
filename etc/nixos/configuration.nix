@@ -11,8 +11,6 @@
 
     ./env.nix
     ./fonts.nix
-    ./killswitch.nix
-    ./openvpn.nix
     ./packages.nix
     ./services.nix
     ./x11.nix
@@ -46,13 +44,6 @@
   networking.hostId = "05fbf074";
   networking.hostName = "compotar";
   networking.networkmanager.enable = true;
-  networking.nameservers = ["1.1.1.1" "1.0.0.1"];
-  ## Manually overwrite /etc/resolv.conf because openresolv tries to add my ISP's DNS
-  environment.etc."resolv.conf".text = ''
-    ${builtins.concatStringsSep
-        "\n"
-        (map (ip: "nameserver " + ip) config.networking.nameservers)}
-  '';
 
   # Mime type for wasm, see https://github.com/mdn/webassembly-examples/issues/5
   environment.etc."mime.types".text = ''
