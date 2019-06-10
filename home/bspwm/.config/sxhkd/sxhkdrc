@@ -23,6 +23,7 @@ super + z
 super + shift + l
     xidlehook-client --trigger --socket /tmp/xidlehook.sock
 
+# screenshotting
 Print
     ~/dotfiles/screenshot.sh screen
 super + Print
@@ -40,7 +41,7 @@ super + shift + q
 
 # close and kill
 super + shift + {c,x}
-    bspc node -{c,x}
+    bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
 super + m
@@ -64,6 +65,7 @@ XF86AudioMute
         notify-send "Muted" -t 500; \
     fi
 
+# secret
 super + Up; Up; Down; Down; Left; Right; Left; Right; b; a
     xdg-open "https://youtu.be/dQw4w9WgXcQ"
 

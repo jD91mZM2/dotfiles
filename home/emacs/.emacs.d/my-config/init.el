@@ -41,6 +41,9 @@
           (defun my/major-hook ()
             (modify-syntax-entry ?_ "w"))) ; Make _ a word character in all syntaxes, like it is in vim
 
+(add-hook 'text-mode-hook (defun my/text-hook ()
+                            (auto-fill-mode 1)))
+
 (electric-pair-mode 1)
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)

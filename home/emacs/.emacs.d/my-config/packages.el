@@ -37,6 +37,8 @@
   (setq-default evil-want-C-u-scroll t)
   (setq-default evil-search-module 'evil-search)
   (setq-default evil-ex-search-persistent-highlight nil)
+  :hook
+  ('ses-mode . 'evil-local-mode)
   :config
   (evil-mode 1)
   (global-undo-tree-mode -1)
@@ -56,14 +58,16 @@
                          (interactive)
                          (insert (format-time-string "%Y-%m-%d"))))
 
-  ;; Disable search after duration
+  ;; Disable search highlights after short duration
   (defvar my/stop-hl-timer-last nil)
   (defun my/stop-hl-timer (_)
     (when my/stop-hl-timer-last
       (cancel-timer my/stop-hl-timer-last))
     (setq my/stop-hl-timer-last
           (run-at-time 1 nil (lambda () (evil-ex-nohighlight)))))
-  (advice-add 'evil-ex-search-activate-highlight :after 'my/stop-hl-timer))
+  (advice-add 'evil-ex-search-activate-highlight :after 'my/stop-hl-timer)
+
+  (evil-set-initial-state 'ses-mode 'emacs))
 (use-package evil-args
   :after evil
   :config
@@ -108,7 +112,7 @@
   :custom ((neo-smart-open t)
            (neo-show-hidden-files t))
   :config
-  (add-hook 'neotree-mode-hook (defun neotree-hook ()
+  (add-hook 'neotree-mode-hook (defun my/neotree-hook ()
                             (display-line-numbers-mode -1)))
   (advice-add 'neo-open-file :after
               (defun my/neotree-open (_orig &rest _args)

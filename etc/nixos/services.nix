@@ -10,7 +10,7 @@
         cd ~/Dropbox
 
         # --update: Sync only if the timestamp is newer
-        rclone copy --update . "Dropbox:"
+        rclone sync --update . "Dropbox:"
         rclone copy --update "Dropbox:" .
       '';
       serviceConfig = {
@@ -23,7 +23,14 @@
       timerConfig = {
         OnBootSec = "1min";
         OnUnitActiveSec = "1h";
-        Unit = "dropbox.service";
+      };
+      wantedBy = [ "multi-user.target" ];
+    };
+    paths.dropbox = {
+      enable = true;
+      description = "Dropbox sync on local changes";
+      pathConfig = {
+        PathModified = "/home/user/Dropbox";
       };
       wantedBy = [ "multi-user.target" ];
     };
