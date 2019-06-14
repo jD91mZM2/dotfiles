@@ -45,6 +45,8 @@
         else
           ${pkgs.xorg.xrandr}/bin/xrandr --output eDP1 --primary
         fi
+
+        ${pkgs.xorg.xinput}/bin/xinput disable "$(${pkgs.xorg.xinput}/bin/xinput | awk -F= '/Touchpad/ { print int($2) }')"
       '';
     };
     windowManager.bspwm.enable = true;

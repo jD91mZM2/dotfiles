@@ -56,11 +56,6 @@ in
   };
 
   home.sessionVariables = import ./env.nix;
-
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz))
-    (import ./overlays/mine.nix)
-  ];
   home.packages = import ./packages.nix { inherit pkgs; };
 
   home.file.".xprofile".text = ''

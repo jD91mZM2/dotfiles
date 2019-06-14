@@ -65,6 +65,10 @@ XF86AudioMute
         notify-send "Muted" -t 500; \
     fi
 
+# fixup monitors
+super + Home
+    ~/.config/bspwm/monitor-setup.sh
+
 # secret
 super + Up; Up; Down; Down; Left; Right; Left; Right; b; a
     xdg-open "https://youtu.be/dQw4w9WgXcQ"
@@ -101,7 +105,12 @@ super + {w,e}
 # unlike `desktop -f`, in a monocle view this keeps the current
 # window focused
 super + {1-9,0}
-    desktop="^{1-9,10}"; bspc node -f "@$desktop:" || bspc desktop -f "$desktop"
+    desktop="^{1-9,10}"; \
+    if [ -z "$(bspc query -N -d "^3")"]; then \
+        bspc node "@$desktop:" -f; \
+    else \
+        bspc desktop "$desktop" -f; \
+    fi
 
 # send current node to the given desktop
 super + shift + {1-9,0}

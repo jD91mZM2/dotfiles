@@ -116,7 +116,6 @@ in
     pciutils
     rename
     socat
-    sshfs
     trash-cli
     tree
     units

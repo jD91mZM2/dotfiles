@@ -17,12 +17,7 @@ bspc config remove_disabled_monitors  true
 bspc config remove_unplugged_monitors true
 bspc config window_gap                12
 
-bspc monitor -d "Terminal" "Editor" "Main" "4" "5" "6" "7"
-if bspc query -M next; then
-    bspc monitor next -d "Misc" "Message"
-else
-    bspc monitor -a "Misc" "Message"
-fi
+~/.config/bspwm/monitor-setup.sh
 
 bspc desktop "Message" -f -l monocle
 bspc desktop "Terminal" -f
@@ -47,9 +42,6 @@ xsetroot -cursor_name left_ptr
 # Always running
 
 ~/dotfiles/lock-timer.sh slock &
-MONITOR="$(xrandr | grep "\<primary\>" | cut -d' ' -f1)" polybar main &
-export MONITOR="$(xrandr | grep "\<connected\>" | cut -d$'\n' -f2 | cut -d' ' -f 1)"
-[ -n "$MONITOR" ] && polybar secondary &
 nm-applet &
 
 # Applications
