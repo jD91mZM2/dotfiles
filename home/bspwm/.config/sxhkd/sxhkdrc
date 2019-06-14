@@ -106,7 +106,7 @@ super + {w,e}
 # window focused
 super + {1-9,0}
     desktop="^{1-9,10}"; \
-    if [ -z "$(bspc query -N -d "^3")"]; then \
+    if [ -n "$(bspc query -N -d "^$desktop")"]; then \
         bspc node "@$desktop:" -f; \
     else \
         bspc desktop "$desktop" -f; \
