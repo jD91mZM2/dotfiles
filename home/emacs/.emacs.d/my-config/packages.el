@@ -17,7 +17,7 @@
 (use-package company-lsp)
 (use-package counsel
   :demand t
-  :bind (("C-c f" . counsel-imenu)
+  :bind (("C-c j" . counsel-imenu)
          ("C-c i" . counsel-info-lookup-symbol))
   :config
   (counsel-mode 1))
@@ -126,10 +126,14 @@
    (make-lsp-client :new-connection (lsp-stdio-connection '("nix-lsp"))
                     :major-modes '(nix-mode)
                     :server-id 'nix))
-  (define-key nix-mode-map (kbd "<tab>") (lambda () (interactive) (insert "  ")))
-  (define-key nix-mode-map (kbd "C-x C-e") (lambda (start end)
+  (setq nix-mode-use-smie t)
+  (define-key nix-mode-map (kbd "C-M-x") (lambda (start end)
                                              (interactive "r")
-                                             (shell-command-on-region start end "nix-instantiate --eval -"))))
+                                             (shell-command-on-region start end "nix-instantiate --eval -")))
+  (define-key nix-mode-map (kbd "C-c m") (lambda ()
+                                           (interactive)
+                                           (split-window-right)
+                                           (man "configuration.nix"))))
 (use-package org)
 (use-package powerline
   :config
