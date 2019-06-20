@@ -109,7 +109,6 @@ in {
   # Services
   services.znc = {
     enable = true;
-    openFirewall = true;
     confOptions = {
       userName = config.name;
       nick = config.name;
