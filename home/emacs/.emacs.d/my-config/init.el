@@ -68,6 +68,10 @@
 (global-set-key (kbd "C-c c") 'recompile)
 (global-set-key (kbd "C-c s") (lambda ()
                                 (interactive)
+                                (when (get-buffer "*terminal*")
+                                  ;; kill-buffer will ask if it has a
+                                  ;; running process
+                                  (kill-buffer "*terminal*"))
                                 (term (or (getenv "SHELL" ) "/bin/sh"))))
 
 ;; Shell madness
@@ -88,7 +92,9 @@
 (add-hook 'server-switch-hook
           (defun my/server-switch-hook ()
             ; Ask xdotool to switch to the emacs window
-            (call-process "xdotool" nil nil nil "windowactivate" (frame-parameter nil 'outer-window-id))))
+            (let ((window-id (frame-parameter nil 'outer-window-id)))
+              (when window-id
+                (call-process "xdotool" nil 0 nil "windowactivate" window-id)))))
 
 ;;  ____            _
 ;; |  _ \ __ _  ___| | ____ _  __ _  ___  ___
