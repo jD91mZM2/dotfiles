@@ -20,7 +20,7 @@ height = 40
 padding = 3
 
 modules-left = bspwm
-modules-center = date ip
+modules-center = date
 modules-right = alsa battery
 module-margin = 3
 tray-position = right
@@ -84,15 +84,6 @@ label = %date%  %{B#90050505}  %time%
 label-background = ${colors.altbg}
 label-padding = 2
 interval = 30
-
-[module/ip]
-type = custom/script
-exec = ~/.config/polybar/ip.sh
-click-left = bspc rule -a xterm-256color -o desktop="^8" follow=on; st ~/Coding/Scripting/public/print-ip.sh &
-click-right = kill -USR1 %pid%
-double-click-left = kill -USR2 %pid%
-label-font = 3
-tail = true
 
 [module/alsa]
 type = internal/alsa
