@@ -50,12 +50,12 @@ liferea &
 thunderbird &
 xfce4-power-manager &
 
-bspc rule -a *:xterm-256color -o desktop="Terminal"
-st &
+bspc rule -a kitty -o desktop="Terminal"
+kitty &
 sleep 1 # wait for terminal to statup
 emacs &
-bspc rule -a *:xterm-256color -o desktop="Message"
-st tmux new -s irc weechat &
+bspc rule -a kitty -o desktop="Message"
+kitty weechat &
 
 chromium --app="https://chat.redox-os.org/" &
 sleep 10 # chrome doesn't handle stress well apparently

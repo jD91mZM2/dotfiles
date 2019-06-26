@@ -5,7 +5,7 @@
 
 # terminal emulator
 super + shift + Return
-    st || xterm
+    if which kitty; then kitty; else xterm; fi
 
 # program launcher
 super + p

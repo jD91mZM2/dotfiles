@@ -45,7 +45,8 @@
   (evil-global-set-key 'normal (kbd "gt") 'switch-to-buffer)
   (evil-global-set-key 'normal (kbd "gcc") 'comment-or-uncomment-region)
   (evil-global-set-key 'normal (kbd "gcw") 'delete-trailing-whitespace)
-  (evil-global-set-key 'normal (kbd "D") (lambda () (interactive)
+  (evil-global-set-key 'normal (kbd "D") (lambda ()
+                                           (interactive)
                                            (beginning-of-line)
                                            (kill-line)))
   (evil-global-set-key 'normal (kbd "gca")
@@ -53,10 +54,18 @@
                          (interactive "r")
                          (shell-command-on-region start end "figlet" (current-buffer) t)
                          (comment-region (mark) (point))))
+  (evil-global-set-key 'normal (kbd "gyf") (lambda ()
+                                             (interactive)
+                                             (kill-new (buffer-file-name))))
   (evil-global-set-key 'insert (kbd "C-c d")
                        (lambda ()
                          (interactive)
                          (insert (format-time-string "%Y-%m-%d"))))
+
+  (evil-global-set-key 'insert (kbd "C-c n")
+                       (lambda (num)
+                         (interactive "nInput start number: ")
+                         (kmacro-set-counter num)))
 
   ;; Disable search highlights after short duration
   (defvar my/stop-hl-timer-last nil)

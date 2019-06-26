@@ -68,22 +68,10 @@ in
     firefox
     gimp
     gnome3.zenity
+    kitty
     polybar
     virtmanager
     xfce.xfce4-power-manager
-    (st.override {
-      conf = builtins.readFile (substituteAll {
-        src = ./st/config.h;
-        colorscheme = builtins.readFile (fetchFromGitHub {
-          owner = "honza";
-          repo = "base16-st";
-          rev = "b3d0d4fbdf86d9b3eda06f42a5bdf261b1f7d1d1";
-
-          sha256 = "1z08abn9g01nnr1v4m4p8gp1j8cwlvcadgpjb7ngjy8ghrk8g0sh";
-        } + "/build/base16-tomorrow-night-theme.h");
-        shell = ./st/tmux.sh;
-      });
-    })
 
     # Command line
     borgbackup

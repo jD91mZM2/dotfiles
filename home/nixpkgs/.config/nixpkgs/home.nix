@@ -20,9 +20,8 @@ let
     )"
 
     forward() {
-      usage="forward <remote> <port>"
-      : "''${1:?$usage}"
-      : "''${2:?$usage}"
+      : "''${1:?forward <remote> <port>}"
+      : "''${2:?forward <remote> <port>}"
       cat <<-EOF
       Remote port being forwarded over SSH!
       $SSH_PORT_REMINDER
@@ -31,14 +30,13 @@ let
     }
 
     backward() {
-      usage="backward <remote> <port>"
-      : "''${1:?$usage}"
-      : "''${2:?$usage}"
+      : "''${1:backward <remote> <port>}"
+      : "''${2:backward <remote> <port>}"
       cat <<-EOF
       Local port being forwarded to a remote application over SSH!
       $SSH_PORT_REMINDER
       EOF
-      ssh "$1" -R ":''${2}:localhost:$2" -- sleep infinity
+      ssh "$1" -L ":''${2}:localhost:$2" -- sleep infinity
     }
   '';
   dircolors = pkgs.fetchFromGitHub {
@@ -63,6 +61,15 @@ in
       source ~/.profile
     fi
   '';
+
+  # Add kitty theme here, but don't add kitty config. Pinging
+  # home-manager on every tiny config change isn't desirable here.
+  home.file.".config/kitty/theme.conf".source = (pkgs.fetchFromGitHub {
+    owner = "kdrag0n";
+    repo = "base16-kitty";
+    rev = "858b3e36549e0415623218caa6f0a8d7a1f5edab";
+    sha256 = "0x449q9b75fql1hp9ryak7jd63x47480x1k9fgvasdgg0bpdm03k";
+  }) + "/colors/base16-default-dark.conf";
 
   #   ____ _     ___
   #  / ___| |   |_ _|
@@ -199,9 +206,6 @@ in
     extraOptions = ''
       inactive-dim = 0.1;
     '';
-    opacityRule = [
-      "90:class_g = 'xterm-256color'"
-    ];
   };
   services.dunst = import ./dunst.nix { inherit pkgs; };
   services.udiskie.enable = true;
