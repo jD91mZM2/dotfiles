@@ -48,10 +48,14 @@ in
     # Command line applications
     asciinema
     cdrkit
+    ctags
     docker_compose
     fd
+    ffmpeg
     figlet
     gitAndTools.hub
+    ncftp
+    neofetch
     nixops
     ripgrep
     sqlite

@@ -87,7 +87,6 @@ in
     bind
     binutils
     efibootmgr
-    ffmpeg
     file
     gist
     git
@@ -97,8 +96,6 @@ in
     manpages
     mosh
     ncdu
-    ncftp
-    neofetch
     nix-index
     patchelf
     pciutils
