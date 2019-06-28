@@ -69,7 +69,7 @@ in
     repo = "base16-kitty";
     rev = "858b3e36549e0415623218caa6f0a8d7a1f5edab";
     sha256 = "0x449q9b75fql1hp9ryak7jd63x47480x1k9fgvasdgg0bpdm03k";
-  }) + "/colors/base16-default-dark.conf";
+  }) + "/colors/base16-tomorrow-night.conf";
 
   #   ____ _     ___
   #  / ___| |   |_ _|
