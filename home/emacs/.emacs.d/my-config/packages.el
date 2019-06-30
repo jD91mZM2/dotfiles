@@ -37,8 +37,6 @@
   (setq-default evil-want-C-u-scroll t)
   (setq-default evil-search-module 'evil-search)
   (setq-default evil-ex-search-persistent-highlight nil)
-  :hook
-  ('ses-mode . 'evil-local-mode)
   :config
   (evil-mode 1)
   (global-undo-tree-mode -1)
@@ -58,9 +56,15 @@
                                              (interactive)
                                              (kill-new (buffer-file-name))))
   (evil-global-set-key 'insert (kbd "C-c d")
-                       (lambda ()
-                         (interactive)
-                         (insert (format-time-string "%Y-%m-%d"))))
+                       (lambda (prefix)
+                         (interactive "P")
+                         (insert (format-time-string
+                                  (if prefix
+                                      (let* ((seconds (car (current-time-zone)))
+                                             (minutes (/ seconds 60))
+                                             (hours   (/ minutes 60)))
+                                        (concat "%FT%T" (format "%+.2d:%.2d" hours (% minutes 60))))
+                                    "%F")))))
 
   (evil-global-set-key 'insert (kbd "C-c n")
                        (lambda (num)
