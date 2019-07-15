@@ -5,11 +5,11 @@ in
 {
   # Services
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
-  services.upower.enable = true;
   services.locate = {
     enable = true;
     interval = "07:00 PM";
   };
+  services.upower.enable = true;
 
   # More involved programs
   programs = {

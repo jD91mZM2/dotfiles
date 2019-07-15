@@ -145,8 +145,10 @@
                                              (shell-command-on-region start end "nix-instantiate --eval -")))
   (define-key nix-mode-map (kbd "C-c m") (lambda ()
                                            (interactive)
-                                           (split-window-right)
-                                           (man "configuration.nix"))))
+                                           (let ((original-notify Man-notify-method))
+                                             (setq Man-notify-method 'pushy)
+                                             (man "configuration.nix")
+                                             (setq Man-notify-method original-notify)))))
 (use-package org)
 (use-package powerline
   :config
