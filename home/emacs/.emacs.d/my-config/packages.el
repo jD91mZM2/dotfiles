@@ -6,6 +6,9 @@
   (modify-face 'trailing-whitespace (my/get-color :base00) (my/get-color :base08))
   (modify-face 'line-number-current-line (my/get-color :base05) (my/get-color :base00) nil t)
   (modify-face 'line-number (my/get-color :base04) (my/get-color :base00)))
+(use-package cargo
+  :after rust-mode
+  :hook (rust-mode . cargo-minor-mode))
 (use-package company
   :after evil
   :config
@@ -103,6 +106,8 @@
   (global-evil-surround-mode 1))
 (use-package flycheck
   :hook (lsp-ui-mode . flycheck-mode))
+(use-package gist
+  :bind ("C-c y" . gist-region-private))
 (use-package htmlize) ;; For org mode
 (use-package ivy
   :config
@@ -145,6 +150,7 @@
                                              (shell-command-on-region start end "nix-instantiate --eval -")))
   (define-key nix-mode-map (kbd "C-c m") (lambda ()
                                            (interactive)
+                                           (load "man")
                                            (let ((original-notify Man-notify-method))
                                              (setq Man-notify-method 'pushy)
                                              (man "configuration.nix")
@@ -165,7 +171,12 @@
 (use-package rust-mode
   :mode "\\.rs\\'"
   :config
-  (add-hook 'rust-mode-hook (lambda () (my/set-compile "cargo check"))))
+  ;; Bitshifts cause unbalanced parentheses, so this undefines those characters
+  (modify-syntax-entry ?< "." rust-mode-syntax-table)
+  (modify-syntax-entry ?> "." rust-mode-syntax-table))
+(use-package rust-playground
+  :after rust-mode
+  :commands (rust-playground rust-playground-mode))
 (use-package sublimity
   :config
   (require 'sublimity-scroll)

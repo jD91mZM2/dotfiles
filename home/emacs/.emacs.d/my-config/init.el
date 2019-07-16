@@ -59,10 +59,6 @@
 ;; work well with emacsclient.
 (define-key key-translation-map (kbd "C-t") (kbd "C-x"))
 
-(defun my/set-compile (cmd)
-  "Function used in packages.el to set the compilation command to a custom one"
-  (set (make-local-variable 'compile-command) cmd))
-
 (define-key emacs-lisp-mode-map (kbd "C-c c") 'eval-buffer)
 (global-set-key (kbd "C-c b") 'bookmark-bmenu-list)
 (global-set-key (kbd "C-c c") 'recompile)
