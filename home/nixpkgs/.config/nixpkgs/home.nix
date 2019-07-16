@@ -46,6 +46,8 @@ let
 
     sha256 = "0h95s5gvn08m4y11gb82anx8s9s2ywaks15idawxdg5bibjav79l";
   } + "/themes/dotphiles/dircolors/dircolors.base16.dark";
+
+  secret = import ./secret.nix;
 in
 {
   programs.home-manager = {
@@ -113,7 +115,7 @@ in
   # Misc
   programs.ssh = {
     enable = true;
-    matchBlocks = import ./ssh-hosts.nix;
+    matchBlocks = secret.sshHosts;
   };
   programs.git = {
     enable = true;
@@ -125,18 +127,11 @@ in
       key = "BC5DAE4EC168B1F9B94C98503055D54729A72666";
       signByDefault = true;
     };
-    extraConfig = ''
-      [pull]
-      rebase = true;
-      [diff]
-      tool = nvimdifftool
-      [difftool "nvimdifftool"]
-      cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-      [merge]
-      tool = nvimdifftool
-      [mergetool "nvimdifftool"]
-      cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-    '';
+    extraConfig = {
+      pull = {
+        rebase = true;
+      };
+    } // secret.gitConfig;
   };
 
   # Services
