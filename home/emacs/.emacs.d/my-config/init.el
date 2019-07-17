@@ -62,13 +62,7 @@
 (define-key emacs-lisp-mode-map (kbd "C-c c") 'eval-buffer)
 (global-set-key (kbd "C-c b") 'bookmark-bmenu-list)
 (global-set-key (kbd "C-c c") 'recompile)
-(global-set-key (kbd "C-c s") (lambda ()
-                                (interactive)
-                                (when (get-buffer "*terminal*")
-                                  ;; kill-buffer will ask if it has a
-                                  ;; running process
-                                  (kill-buffer "*terminal*"))
-                                (term (or (getenv "SHELL" ) "/bin/sh"))))
+(global-set-key (kbd "C-c s") 'eshell)
 
 ;; Shell madness
 (add-hook 'term-mode-hook

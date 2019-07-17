@@ -1,11 +1,23 @@
 (use-package base16-theme
   :config
   (load-theme 'base16-tomorrow-night t)
-  (defun my/get-color (base)
-    (plist-get base16-tomorrow-night-colors base))
-  (modify-face 'trailing-whitespace (my/get-color :base00) (my/get-color :base08))
-  (modify-face 'line-number-current-line (my/get-color :base05) (my/get-color :base00) nil t)
-  (modify-face 'line-number (my/get-color :base04) (my/get-color :base00)))
+  (defun my/reload-dark ()
+    (load-theme 'base16-tomorrow-night t)
+    (defun my/get-color (base)
+      (plist-get base16-tomorrow-night-colors base))
+    (modify-face 'trailing-whitespace (my/get-color :base00) (my/get-color :base08))
+    (modify-face 'line-number-current-line (my/get-color :base05) (my/get-color :base00) nil t)
+    (modify-face 'line-number (my/get-color :base04) (my/get-color :base00)))
+  (my/reload-dark)
+  (defun blind-me ()
+    (interactive)
+    (if (custom-theme-enabled-p 'base16-tomorrow-night)
+        (progn
+          (disable-theme 'base16-tomorrow-night)
+          (load-theme 'base16-tomorrow t))
+      (progn
+        (disable-theme 'base16-tomorrow)
+        (my/reload-dark)))))
 (use-package cargo
   :after rust-mode
   :hook (rust-mode . cargo-minor-mode))

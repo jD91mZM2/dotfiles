@@ -128,9 +128,7 @@ in
       signByDefault = true;
     };
     extraConfig = {
-      pull = {
-        rebase = true;
-      };
+      pull.rebase = true;
     } // secret.gitConfig;
   };
 
