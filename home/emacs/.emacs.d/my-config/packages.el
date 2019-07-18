@@ -181,14 +181,25 @@
   :custom ((ranger-override-dired 'ranger)
            (ranger-override-dired-mode t)))
 (use-package rust-mode
-  :mode "\\.rs\\'"
-  :config
-  ;; Bitshifts cause unbalanced parentheses, so this undefines those characters
-  (modify-syntax-entry ?< "." rust-mode-syntax-table)
-  (modify-syntax-entry ?> "." rust-mode-syntax-table))
+  :mode "\\.rs\\'")
 (use-package rust-playground
   :after rust-mode
   :commands (rust-playground rust-playground-mode))
+(use-package smartparens
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode 1)
+  (show-smartparens-global-mode 1)
+  (setq sp-ignore-modes-list (remove 'minibuffer-inactive-mode sp-ignore-modes-list))
+  (evil-define-motion my/matching-paren (num)
+    :type inclusive
+    (let* ((expr (sp-get-paired-expression))
+           (begin (plist-get expr :beg))
+           (end (- (plist-get expr :end) 1)))
+      (if (eq (point) end)
+          (goto-char begin)
+        (goto-char end))))
+  (evil-global-set-key 'motion (kbd "%") 'my/matching-paren))
 (use-package sublimity
   :config
   (require 'sublimity-scroll)

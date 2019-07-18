@@ -48,12 +48,10 @@
 (add-hook 'text-mode-hook (defun my/text-hook ()
                             (auto-fill-mode 1)))
 
-(electric-pair-mode 1)
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(show-paren-mode 1)
 (tool-bar-mode -1)
 
 ;; # Keybindings
