@@ -186,11 +186,16 @@
   :after rust-mode
   :commands (rust-playground rust-playground-mode))
 (use-package smartparens
+  :after evil
   :config
   (require 'smartparens-config)
   (smartparens-global-mode 1)
   (show-smartparens-global-mode 1)
+
+  ;; Allow using smartparens from minibuffer
   (setq sp-ignore-modes-list (remove 'minibuffer-inactive-mode sp-ignore-modes-list))
+
+  ;; Configure evil to use smartparens for %
   (evil-define-motion my/matching-paren (num)
     :type inclusive
     (let* ((expr (sp-get-paired-expression))
@@ -199,7 +204,16 @@
       (if (eq (point) end)
           (goto-char begin)
         (goto-char end))))
-  (evil-global-set-key 'motion (kbd "%") 'my/matching-paren))
+  (evil-global-set-key 'motion (kbd "%") 'my/matching-paren)
+
+  ;; Create double newline on enter
+  (defun my/newline-indent (&rest _ignored)
+    "Call when newline is pressed - this will only add one newline"
+    (newline)
+    (indent-according-to-mode)
+    (forward-line -1)
+    (indent-according-to-mode))
+  (sp-local-pair 'prog-mode "{" nil :post-handlers '((my/newline-indent "RET"))))
 (use-package sublimity
   :config
   (require 'sublimity-scroll)
