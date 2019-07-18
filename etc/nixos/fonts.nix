@@ -6,9 +6,7 @@
     comic-relief
     font-awesome-ttf
     hack-font
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
+    symbola
   ];
   fonts.fontconfig.defaultFonts.monospace = [ "Hack" ];
 }

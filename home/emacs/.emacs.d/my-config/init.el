@@ -15,6 +15,10 @@
 (setq backup-directory-alist `((".*" . ,(locate-user-emacs-file "backups/"))))
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t)))
 
+;; Fonts
+(when (member "Symbola" (font-family-list))
+  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+
 (setq bookmark-save-flag t)
 (setq delete-by-moving-to-trash t)
 (setq inhibit-startup-screen t)
