@@ -1,7 +1,7 @@
 {
   PATH = "$PATH:$HOME/.cargo/bin";
 
-  EDITOR = "env -u TMPDIR emacsclient -c"; # nix-shell sets $TMPDIR which messes up emacsclient's search
+  EDITOR = "env -u TMPDIR emacsclient"; # nix-shell sets $TMPDIR which messes up emacsclient's search
   VISUAL = "env -u TMPDIR emacsclient -t";
 
   RUST_BACKTRACE = "1";

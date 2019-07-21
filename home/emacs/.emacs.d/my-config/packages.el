@@ -200,10 +200,11 @@
     :type inclusive
     (let* ((expr (sp-get-paired-expression))
            (begin (plist-get expr :beg))
-           (end (- (plist-get expr :end) 1)))
+           (next (plist-get expr :end))
+           (end (if next (- next 1) nil)))
       (if (eq (point) end)
           (goto-char begin)
-        (goto-char end))))
+        (when end (goto-char end)))))
   (evil-global-set-key 'motion (kbd "%") 'my/matching-paren)
 
   ;; Create double newline on enter

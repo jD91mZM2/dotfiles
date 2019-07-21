@@ -66,7 +66,6 @@ in
     # Graphical
     emacs
     firefox
-    gimp
     gnome3.zenity
     kitty
     polybar

@@ -31,6 +31,7 @@ in
     # Graphical applications
     abiword
     chromium
+    gimp
     inkscape
     keepassxc
     liferea
