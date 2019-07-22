@@ -31,7 +31,7 @@
 ;; Load file templates
 (load "templates")
 
-;; # Editing options
+;; Editing options
 (setq-default c-basic-offset 4)
 (setq-default indent-tabs-mode nil)
 (setq-default require-final-newline t)
@@ -54,7 +54,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-;; # Keybindings
+;; Keybindings
 ;; See https://www.emacswiki.org/emacs/DvorakKeyboard. To avoid all
 ;; conflicts, this translates the keys earlier in the stack. Using
 ;; keyboard-translate, however, is not possible because it does not
@@ -65,6 +65,14 @@
 (global-set-key (kbd "C-c b") 'bookmark-bmenu-list)
 (global-set-key (kbd "C-c c") 'recompile)
 (global-set-key (kbd "C-c s") 'eshell)
+
+;; Commands
+(define-minor-mode keep-centered-mode "Keep recentering the screen all the time why not")
+
+(add-hook 'post-command-hook
+          (defun my/keep-centered-hook ()
+            (when keep-centered-mode
+              (recenter nil))))
 
 ;; Shell madness
 (add-hook 'term-mode-hook
@@ -78,7 +86,7 @@
                 (unless (eshell-send-eof-to-process)
                   (kill-buffer))))))
 
-;; # Set up emacsclient the way I want it
+;; Set up emacsclient the way I want it
 (setq confirm-kill-emacs 'y-or-n-p)
 (server-start)
 (add-hook 'server-switch-hook
