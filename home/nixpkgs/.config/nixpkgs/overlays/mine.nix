@@ -13,7 +13,7 @@ let
   };
 
   rustSoftware = (
-    { from ? null, name, src, hash, cargoBuildFlags ? null }:
+    { from ? null, name, src, hash, extra ? {} }:
     buildRustPackage (builtins.foldl' (x: y: x // y) {} [
       (if from == null
         then {}
@@ -35,6 +35,8 @@ let
         cargoSha256 = hash;
         doCheck = false;
       })
+
+      extra
     ])
   );
 in {
@@ -44,12 +46,16 @@ in {
     src = ~/Coding/Rust/termplay;
     hash = "0nr4xii09z6djdj9586b5mpncp7n3xlng65czz3g777ylwj0f7v2";
   };
-  xidlehook = rustSoftware {
+  xidlehook = rustSoftware rec {
     from = unstable.xidlehook;
     name = "xidlehook";
     src = ~/Coding/Rust/xidlehook;
-    hash = "0fl3r4y2wp514hp3qpq6h0rj95jv25n86w0mwdia7wvjaw0157wg";
-    cargoBuildFlags = ["--bins"];
+    hash = "0van6s1f6kqdjxgmzcx3k6c7f1ap4dfcvxh19fad656mprc60pb2";
+    extra = {
+        buildInputs = with self; [ xorg.xlibsWrapper xorg.libXScrnSaver libpulseaudio ];
+        nativeBuildInputs = from.nativeBuildInputs ++ (with self; [ python3 ]);
+        cargoBuildFlags = ["--bins"];
+    };
   };
   powerline-rs = rustSoftware {
     from = unstable.powerline-rs;
