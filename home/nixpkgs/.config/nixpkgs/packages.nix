@@ -75,8 +75,10 @@ in
     ghc
     gnumake
     pypi2nix
-    python3
-    python36Packages.python-language-server
+    (python3.withPackages (p: with p; [
+      python-language-server
+      tkinter
+    ]))
     ruby
     rustup
 

@@ -69,7 +69,8 @@
                          (comment-region (mark) (point))))
   (evil-global-set-key 'normal (kbd "gyf") (lambda ()
                                              (interactive)
-                                             (kill-new (buffer-file-name))))
+                                             (kill-new (buffer-file-name))
+                                             (message "%s" (buffer-file-name))))
   (evil-global-set-key 'insert (kbd "C-c d")
                        (lambda (prefix)
                          (interactive "P")
@@ -214,7 +215,9 @@
     (indent-according-to-mode)
     (forward-line -1)
     (indent-according-to-mode))
-  (sp-local-pair 'prog-mode "{" nil :post-handlers '((my/newline-indent "RET"))))
+  (sp-local-pair 'prog-mode "{" nil :post-handlers '((my/newline-indent "RET")))
+  (sp-local-pair 'prog-mode "(" nil :post-handlers '((my/newline-indent "RET")))
+  (sp-local-pair 'prog-mode "[" nil :post-handlers '((my/newline-indent "RET"))))
 (use-package sublimity
   :config
   (require 'sublimity-scroll)
