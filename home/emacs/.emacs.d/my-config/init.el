@@ -1,5 +1,13 @@
 (add-to-list 'load-path (locate-user-emacs-file "my-config") t)
 
+(defun my/relative (path)
+  "Convert a relative path to an absolute one"
+  (expand-file-name path (file-name-directory (or
+                                               ;; When loading the file
+                                               load-file-name
+                                               ;; When evaluating the file
+                                               buffer-file-name))))
+
 ;;  _____                                        _   _
 ;; | ____|_ __ ___   __ _  ___ ___    ___  _ __ | |_(_) ___  _ __  ___
 ;; |  _| | '_ ` _ \ / _` |/ __/ __|  / _ \| '_ \| __| |/ _ \| '_ \/ __|
@@ -14,6 +22,7 @@
 
 (setq backup-directory-alist `((".*" . ,(locate-user-emacs-file "backups/"))))
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t)))
+(setq eshell-aliases-file (my/relative "eshell/aliases"))
 
 ;; Fonts
 (when (member "Symbola" (font-family-list))

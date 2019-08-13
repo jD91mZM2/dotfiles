@@ -121,6 +121,24 @@
   :hook (lsp-ui-mode . flycheck-mode))
 (use-package gist
   :bind ("C-c y" . gist-region-private))
+(use-package go-mode
+  :config
+  (defun goimports ()
+    (interactive)
+    (when (derived-mode-p 'go-mode)
+      (let ((old-pos (point))
+            (old-buffer (current-buffer)))
+        (let ((new-content (with-temp-buffer
+                             (insert-buffer old-buffer)
+                             (when (eq (shell-command-on-region (buffer-end 0) (buffer-end 1)
+                                                                "goimports" (current-buffer) t
+                                                                "GoImports Errors" t)
+                                       0)
+                               (buffer-string)))))
+          (when new-content
+            (delete-region (buffer-end 0) (buffer-end 1))
+            (insert new-content)
+            (goto-char old-pos)))))))
 (use-package htmlize) ;; For org mode
 (use-package ivy
   :config
@@ -128,7 +146,7 @@
 (use-package json-mode
   :mode "\\.json\\'")
 (use-package lsp-mode
-  :hook ((nix-mode python-mode rust-mode) . lsp)
+  :hook ((go-mode nix-mode python-mode rust-mode) . lsp)
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-auto-guess-root t))

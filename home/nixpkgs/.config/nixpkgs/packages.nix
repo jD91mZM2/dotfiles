@@ -15,6 +15,9 @@ in
   # Unstable packages
   (with unstable; [
     firefox
+    go
+    gotools
+    just
     olive-editor # <- THIS IS AMAZING
     superTuxKart
   ])
