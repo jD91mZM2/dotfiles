@@ -55,7 +55,7 @@
             (modify-syntax-entry ?_ "w"))) ; Make _ a word character in all syntaxes, like it is in vim
 
 (add-hook 'text-mode-hook (defun my/text-hook ()
-                            (auto-fill-mode 1)))
+                            (auot-fill-mode 1)))
 
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
@@ -75,25 +75,17 @@
 (global-set-key (kbd "C-c c") 'recompile)
 (global-set-key (kbd "C-c s") 'eshell)
 
-;; Commands
 (define-minor-mode keep-centered-mode "Keep recentering the screen all the time why not")
 
+;; Hooks
 (add-hook 'post-command-hook
           (defun my/keep-centered-hook ()
             (when keep-centered-mode
               (recenter nil))))
 
-;; Shell madness
 (add-hook 'term-mode-hook
           (defun my/term-hook ()
             (setq show-trailing-whitespace nil)))
-(add-hook 'eshell-mode-hook
-          (defun my/eshell-hook ()
-            (evil-define-key 'insert eshell-mode-map (kbd "C-d")
-              (lambda ()
-                (interactive)
-                (unless (eshell-send-eof-to-process)
-                  (kill-buffer))))))
 
 ;; Set up emacsclient the way I want it
 (setq confirm-kill-emacs 'y-or-n-p)

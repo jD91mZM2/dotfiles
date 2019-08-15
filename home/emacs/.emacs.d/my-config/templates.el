@@ -1,5 +1,3 @@
-(load "utils")
-
 (auto-insert-mode 1)
 
 (setq auto-insert-directory (my/relative "templates"))

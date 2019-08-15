@@ -87,6 +87,14 @@
                          (interactive "nInput start number: ")
                          (kmacro-set-counter num)))
 
+  (add-hook 'eshell-mode-hook
+            (defun my/eshell-hook ()
+              (evil-define-key 'insert eshell-mode-map (kbd "C-d")
+                (lambda ()
+                  (interactive)
+                  (unless (eshell-send-eof-to-process)
+                    (kill-buffer))))))
+
   ;; Disable search highlights after short duration
   (defvar my/stop-hl-timer-last nil)
   (defun my/stop-hl-timer (_)
