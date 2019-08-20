@@ -11,29 +11,24 @@ inactive = #7e8281
 [bar/main]
 monitor = ${env:MONITOR}
 background = ${colors.background}
-font-0 = "Font Awesome:size=12"
-font-1 = "Hack:size=12"
-font-2 = "Hack:size=8"
-
+font-0 = "Font Awesome:size=12;2"
+font-1 = "Hack:size=10;1"
 wm-restack = bspwm
-height = 40
+height = 30
 padding = 3
 
 modules-left = bspwm
-modules-center = date
-modules-right = alsa battery
-module-margin = 3
+modules-right = date alsa battery
+module-margin = 1
 tray-position = right
 
 [bar/secondary]
 monitor = ${env:MONITOR}
 background = ${colors.background}
-font-0 = "Font Awesome:size=12"
-font-1 = "Hack:size=12"
-font-2 = "Hack:size=8"
-
+font-0 = "Font Awesome:size=12;2"
+font-1 = "Hack:size=10;1"
 wm-restack = bspwm
-height = 40
+height = 30
 padding = 3
 
 modules-left = bspwm
@@ -79,15 +74,13 @@ label-private-padding = 3
 type = internal/date
 date = %b %d
 time = %I:%M %p
-label = %date%  %{B#90050505}  %time%
-#                  ^^^^^^^^^ colors.altbg2
-label-background = ${colors.altbg}
-label-padding = 2
+label = %date% %time%
+label-background = ${colors.background}
 interval = 30
 
 [module/alsa]
 type = internal/alsa
-format-volume = %{A:pavucontrol &:}<bar-volume>%{A} <ramp-volume>
+format-volume = <ramp-volume>
 
 label-muted = 
 
