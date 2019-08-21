@@ -21,6 +21,8 @@
 (use-package cargo
   :after rust-mode
   :hook (rust-mode . cargo-minor-mode))
+(use-package chess
+  :pin gnu)
 (use-package company
   :after evil
   :config
@@ -164,6 +166,8 @@
   :custom
   (lsp-ui-doc-max-width 50)
   (lsp-ui-doc-max-height 20))
+(use-package nasm-mode
+  :hook (asm-mode . nasm-mode))
 (use-package neotree
   :bind ("C-c t" . neotree-toggle)
   :custom ((neo-smart-open t)

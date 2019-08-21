@@ -62,6 +62,7 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
+(xterm-mouse-mode 1)
 
 ;; Keybindings
 ;; See https://www.emacswiki.org/emacs/DvorakKeyboard. To avoid all
@@ -108,6 +109,10 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (setq package-enable-at-startup nil)
 (package-initialize)
+
+;; https://www.reddit.com/r/emacs/comments/cdei4p/failed_to_download_gnu_archive_bad_request/?utm_source=share&utm_medium=web2x
+;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
