@@ -61,6 +61,7 @@ in
     gitAndTools.hub
     ncftp
     neofetch
+    nix-review
     nixops
     ripgrep
     sqlite

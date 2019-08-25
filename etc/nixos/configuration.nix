@@ -63,7 +63,7 @@
   # User settings
   users.users.user = {
     isNormalUser = true;
-    extraGroups = ["wheel" "libvirtd" "adbusers"];
+    extraGroups = [ "wheel" "libvirtd" "adbusers" ];
     shell = pkgs.zsh;
   };
 
