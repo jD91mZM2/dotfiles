@@ -30,6 +30,8 @@ in
     powerline-rs
     termplay
     xidlehook
+    # Other local overlays
+    clangd
 
     # Graphical applications
     abiword
