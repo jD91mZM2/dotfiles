@@ -217,8 +217,17 @@
 (use-package rust-playground
   :after rust-mode
   :commands (rust-playground rust-playground-mode))
+(use-package slime
+  :after slime-company
+  :config
+  (setq inferior-lisp-program "sbcl --noinform")
+  (slime-setup '(slime-fancy slime-company)))
+(use-package slime-company)
 (use-package smartparens
   :after evil
+  :demand t
+  :bind (("C-M-l" . sp-forward-slurp-sexp)
+         ("C-M-h" . sp-forward-barf-sexp))
   :config
   (require 'smartparens-config)
   (smartparens-global-mode 1)

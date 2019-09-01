@@ -87,6 +87,7 @@ in
     ]))
     ruby
     rustup
+    sbcl
 
     # LaTeX stuff
     okular
