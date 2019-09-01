@@ -22,7 +22,6 @@
 
 (setq backup-directory-alist `((".*" . ,(locate-user-emacs-file "backups/"))))
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t)))
-(setq eshell-aliases-file (my/relative "eshell/aliases"))
 
 ;; Fonts
 (when (member "Symbola" (font-family-list))
@@ -87,6 +86,15 @@
 (add-hook 'term-mode-hook
           (defun my/term-hook ()
             (setq show-trailing-whitespace nil)))
+
+;; Commands
+(defun eshell/e (file)
+  (interactive)
+  (find-file file))
+(defun touch ()
+  (interactive)
+  (set-buffer-modified-p t)
+  (save-buffer))
 
 ;; Set up emacsclient the way I want it
 (setq confirm-kill-emacs 'y-or-n-p)

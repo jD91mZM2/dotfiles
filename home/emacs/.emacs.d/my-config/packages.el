@@ -156,6 +156,7 @@
 (use-package json-mode
   :mode "\\.json\\'")
 (use-package lsp-mode
+  :bind ("C-c e" . lsp-extend-selection)
   :hook ((go-mode nix-mode python-mode rust-mode) . lsp)
   :config
   (setq lsp-prefer-flymake nil)
@@ -184,7 +185,7 @@
   :config
   (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("env" "RUST_LOG=trace" "rnix-lsp"))
+   (make-lsp-client :new-connection (lsp-stdio-connection '("bash" "-c" "env RUST_LOG=trace rnix-lsp 2> /tmp/nix-lsp.log"))
                     :major-modes '(nix-mode)
                     :server-id 'nix))
   (setq nix-mode-use-smie t)
