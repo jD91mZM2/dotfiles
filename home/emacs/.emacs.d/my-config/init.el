@@ -105,8 +105,8 @@
             (let ((window-id (frame-parameter nil 'outer-window-id)))
               (when window-id
                 (condition-case nil
-                    (call-process "xdotool" nil 0 nil "windowactivate" window-id)
-                  (message "Failed to execute xdotool, ignoring"))))))
+                    (call-process "a" nil 0 nil "windowactivate" window-id)
+                  ('file-missing (message "Failed to execute xdotool, ignoring")))))))
 
 ;;  ____            _
 ;; |  _ \ __ _  ___| | ____ _  __ _  ___  ___
