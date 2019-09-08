@@ -3,6 +3,11 @@ let
   unstable = import <nixos-unstable> {};
 in
 {
+  # System overlays
+  nixpkgs.overlays = [
+    (import ../../home/nixpkgs/.config/nixpkgs/overlays/unmerged.nix)
+  ];
+
   # Services
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
   services.locate = {
@@ -48,11 +53,7 @@ in
   # Packages
   environment.systemPackages = with pkgs; [
     # Graphical - Look & Feel
-    adapta-backgrounds
-    adapta-gtk-theme
     libsForQt5.qtstyleplugins # uniform QT/GTK look
-    numix-icon-theme
-    numix-icon-theme-circle
     xorg.xcursorthemes
 
     # Graphical - WM

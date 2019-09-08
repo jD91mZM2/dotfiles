@@ -177,12 +177,12 @@ in
       package = pkgs.cantarell-fonts;
     };
     iconTheme = {
-      name = "Numix-Circle";
-      package = pkgs.numix-icon-theme-circle;
+      name = "Yaru";
+      package = pkgs.yaru-theme;
     };
     theme = {
-      name = "Adapta-Nokto-Eta";
-      package = pkgs.adapta-gtk-theme;
+      name = "Yaru-dark";
+      package = pkgs.yaru-theme;
     };
   };
 

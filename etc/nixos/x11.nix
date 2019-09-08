@@ -32,8 +32,12 @@
         greeters.gtk = {
           enable = true;
           theme = {
-            name = "Adapta";
-            package = pkgs.adapta-gtk-theme;
+            name = "Yaru-dark";
+            package = pkgs.yaru-theme;
+          };
+          iconTheme = {
+            name = "Yaru";
+            package = pkgs.yaru-theme;
           };
         };
       };
