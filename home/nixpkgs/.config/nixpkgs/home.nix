@@ -30,8 +30,8 @@ let
     }
 
     backward() {
-      : "''${1:backward <remote> <port>}"
-      : "''${2:backward <remote> <port>}"
+      : "''${1:?backward <remote> <port>}"
+      : "''${2:?backward <remote> <port>}"
       cat <<-EOF
       Local port being forwarded to a remote application over SSH!
       $SSH_PORT_REMINDER
