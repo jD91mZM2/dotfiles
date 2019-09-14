@@ -15,6 +15,7 @@ in {
       '';
       extraDomains = {
         "redox-os.club" = null;
+        "cloud.krake.one" = null;
       };
     };
   };
@@ -23,6 +24,17 @@ in {
     hiddenServices."rickroll".map = [
       { port = 80; toPort = 11694; }
     ];
+  };
+  services.nextcloud = {
+    autoUpdateApps.enable = true;
+    config = {
+      adminpassFile = "/root/nextcloud-passwd";
+      adminuser = config.name;
+    };
+    enable = true;
+    hostName = "cloud.krake.one";
+    https = true;
+    nginx.enable = true;
   };
   services.nginx = {
     enable = true;
@@ -58,9 +70,12 @@ in {
           '';
         };
       };
-      "krake.one:11694" = {
+      "cloud.krake.one" = {
         useACMEHost = "krake.one";
-        serverName = "krake.one";
+        forceSSL = true;
+        acmeRoot = "/var/www/challenges";
+      };
+      "krake.one:11694" = {
         listen = [{
           # Domain only accessible from TOR
           addr = "127.0.0.1";
