@@ -1,71 +1,65 @@
 { pkgs, ... }:
+let
+  home = "/home/user";
+in
 {
+  # General things
+  services.dbus.packages = with pkgs; [ gnome3.dconf ];
+  services.locate = {
+    enable = true;
+    interval = "07:00 PM";
+  };
+  services.upower.enable = true;
+
+  # Backup
+  services.zfs = {
+    autoSnapshot = {
+      enable = true;
+
+      # I never use these anyway, as everything I throw away goes in a
+      # trashcan.
+      frequent = 2;
+      hourly = 5;
+      daily = 3;
+      weekly = 2;
+      monthly = 0;
+    };
+    autoScrub.enable = true;
+  };
+  services.borgbackup.jobs.main = let
+    repo = "${home}/backup";
+  in {
+    paths = map (s: "${home}/${s}") [ "Coding" "dotfiles" "servers" "Dropbox" "Pictures" "Documents" ];
+    inherit repo;
+    doInit = true;
+    encryption = {
+      mode = "repokey";
+      passCommand = "cat /root/borg-passphrase";
+    };
+    startAt = "04:00 PM";
+    prune.keep = {
+      daily = 7;
+      weekly = 4;
+      monthly = 2;
+    };
+    postCreate = ''
+      echo "\$archiveName = $archiveName"
+      ${pkgs.rclone}/bin/rclone sync -v "${repo}" BackBlaze:jD91mZM2-backups
+      ${pkgs.rclone}/bin/rclone cleanup -v BackBlaze:jD91mZM2-backups
+    '';
+  };
+
+  # Custom services
   systemd = {
     services.dropbox = {
-      description = "Dropbox sync (rclone)";
-      path = with pkgs; [ rclone ];
+      description = "Backup Nextcloud to Dropbox";
+      startAt = "hourly";
       script = ''
         #!/bin/sh
         set -e
-        cd ~/Dropbox
 
-        # --update: Sync only if the timestamp is newer
-        rclone sync --update . "Dropbox:"
-        rclone copy --update "Dropbox:" .
+        ${pkgs.rclone}/bin/rclone sync -v "${home}/Nextcloud" "Dropbox:"
       '';
-      serviceConfig = {
-        User = "user";
-      };
-    };
-    timers.dropbox = {
-      enable = true;
-      description = "Dropbox sync timer (rclone)";
-      timerConfig = {
-        OnBootSec = "1min";
-        OnUnitActiveSec = "1h";
-      };
-      wantedBy = [ "multi-user.target" ];
-    };
-    paths.dropbox = {
-      enable = true;
-      description = "Dropbox sync on local changes";
-      pathConfig = {
-        PathModified = "/home/user/Dropbox";
-      };
-      wantedBy = [ "multi-user.target" ];
-    };
-
-    services.backup = {
-      description = "Daily Backup";
-      path = with pkgs; [ borgbackup coreutils rclone ];
-      environment = {
-        BORG_PASSPHRASE = (import ./secret.nix).backup_passphrase;
-      };
-      script = ''
-        #!/bin/sh
-        set -e
-        cd ~/backup
-
-        borg create ".::$(date)" ~/Coding/ ~/dotfiles ~/servers ~/Dropbox ~/Pictures \
-          --progress \
-          --stats \
-          --compression lz4
-        borg prune . --keep-daily 7
-        rclone sync -v . "BackBlaze Backup:jD91mZM2-backups"
-      '';
-      serviceConfig = {
-        User = "user";
-      };
-    };
-    timers.backup = {
-      enable = true;
-      description = "Automatically perform a backup of important files every day";
-      timerConfig = {
-        OnCalendar = "*-*-* 16:00:00";
-        Persistent = true;
-        Unit = "backup.service";
-      };
-      wantedBy = [ "multi-user.target" ];
     };
   };
 }

@@ -201,5 +201,6 @@ in
     '';
   };
   services.dunst = import ./dunst.nix { inherit pkgs; };
+  services.nextcloud-client.enable = true;
   services.udiskie.enable = true;
 }

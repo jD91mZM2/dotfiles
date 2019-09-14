@@ -8,14 +8,6 @@ in
     (import ../../home/nixpkgs/.config/nixpkgs/overlays/unmerged.nix)
   ];
 
-  # Services
-  services.dbus.packages = with pkgs; [ gnome3.dconf ];
-  services.locate = {
-    enable = true;
-    interval = "07:00 PM";
-  };
-  services.upower.enable = true;
-
   # More involved programs
   programs = {
     adb.enable = true;

@@ -17,22 +17,7 @@
     ./x11.nix
   ];
 
-  # ZFS
   boot.supportedFilesystems = [ "zfs" ];
-  services.zfs = {
-    autoSnapshot = {
-      enable = true;
-
-      # I never use these anyway, as everything I throw away goes in a
-      # trashcan.
-      frequent = 2;
-      hourly = 5;
-      daily = 3;
-      weekly = 2;
-      monthly = 0;
-    };
-    autoScrub.enable = true;
-  };
 
   # Misc. settings
   documentation.dev.enable = true;
