@@ -2,7 +2,7 @@
 # prevents cargo from being cached. Using carnix would be better, if only it
 # worked as reliably as cargo itself.
 
-{ callPackage, binutils, lib, rsync, stdenv }:
+{ callPackage, binutils-unwrapped, lib, rsync, stdenv }:
 
 { name, src, buildInputs ? [], wrapperHook ? "" }:
 
@@ -11,7 +11,7 @@ let
   moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
   moz_pkgs = import <nixpkgs> { overlays = [ moz_overlay ]; };
   rustChan = (moz_pkgs.rustChannelOf {
-    date = "2019-02-28";
+    date = "2019-07-06";
     channel = "nightly";
   });
 in stdenv.mkDerivation {
@@ -29,7 +29,7 @@ in stdenv.mkDerivation {
 
       ${rsync}/bin/rsync -rE --del --exclude target $out/src .
 
-      export PATH="${rustChan.rust}/bin:${stdenv.cc}/bin:${binutils}/bin:\$PATH"
+      export PATH="${lib.makeBinPath (buildInputs ++ [rustChan.rust stdenv.cc binutils-unwrapped])}:\$PATH"
       export LIBRARY_PATH="${lib.makeLibraryPath buildInputs}"
       # below vars are expanded at build time:
       export PKG_CONFIG_PATH="$PKG_CONFIG_PATH"

@@ -94,6 +94,7 @@ in {
     openssh.authorizedKeys.keyFiles = config.ssh-keys;
   };
   environment.systemPackages = with pkgs; [
+    kitty.terminfo
     trash-cli
     tree
   ];
