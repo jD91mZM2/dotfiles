@@ -29,7 +29,7 @@ in
   services.borgbackup.jobs.main = let
     repo = "${home}/backup";
   in {
-    paths = map (s: "${home}/${s}") [ "Coding" "dotfiles" "servers" "Dropbox" "Pictures" "Documents" ];
+    paths = map (s: "${home}/${s}") [ "Coding" "dotfiles" "servers" "Nextcloud" "Pictures" ];
     inherit repo;
     doInit = true;
     encryption = {
