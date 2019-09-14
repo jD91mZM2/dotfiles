@@ -12,17 +12,12 @@ let
     name = "timeywimey";
     src = ~/Coding/Python/timeywimey;
   };
-  mcbotface = (pkgs.callPackage ./rust.nix {}) {
-    name = "mcbotface";
-    src = ~/Coding/Rust/mcbotface;
-    buildInputs = with pkgs; [ pkgconfig openssl sqlite ];
-  };
   redox-world-map = (pkgs.callPackage ./rust.nix {}) {
     name = "redox-world-map";
     src = ~/Coding/Web/redox-world-map;
     buildInputs = with pkgs; [ pkgconfig openssl sqlite ];
     wrapperHook = ''
-      ln -s $out/src/Rocket.toml . || true
+      ln -sf $out/src/Rocket.toml .
     '';
   };
 
@@ -64,6 +59,11 @@ in {
 
   # System config
   networking.firewall.enable = false;
+  nix.gc = {
+    automatic = true;
+    dates = "monthly";
+    options = "-d";
+  };
 
   # Program config
   programs.mosh.enable = true;
@@ -103,7 +103,6 @@ in {
     ./web.nix
     (createServiceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
     (createServiceUser { name = "timeywimey"; script = "${timeywimey}/bin/start"; })
-    (createServiceUser { name = "mcbotface"; script = "${mcbotface}/bin/start"; })
     (createServiceUser { name = "redox-world-map"; script = "${redox-world-map}/bin/start"; })
   ];
 

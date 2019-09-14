@@ -78,6 +78,15 @@ in {
         acmeRoot = "/var/www/challenges";
         locations."/" = {
           proxyPass = "http://localhost:22165";
+          extraConfig = ''
+            error_page 502 /drop/502.html;
+          '';
+        };
+        locations."/drop" = {
+          proxyPass = "https://krake.one:1337/";
+          extraConfig = ''
+            internal;
+          '';
         };
       };
     };
