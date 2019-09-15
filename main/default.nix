@@ -3,16 +3,25 @@
 let
   config = import ./config.nix;
 
-  # Packages
-  abottomod = (pkgs.callPackage ./pypi.nix {}) {
+  #  ____            _
+  # |  _ \ __ _  ___| | ____ _  __ _  ___  ___
+  # | |_) / _` |/ __| |/ / _` |/ _` |/ _ \/ __|
+  # |  __/ (_| | (__|   < (_| | (_| |  __/\__ \
+  # |_|   \__,_|\___|_|\_\__,_|\__, |\___||___/
+  #                            |___/
+
+  buildPypiPackage = pkgs.callPackage ./builders/pypi.nix {};
+  buildRustPackage = pkgs.callPackage ./builders/rust.nix {};
+
+  abottomod = buildPypiPackage {
     name = "abottomod";
     src = ~/Coding/Python/abottomod;
   };
-  timeywimey = (pkgs.callPackage ./pypi.nix {}) {
+  timeywimey = buildPypiPackage {
     name = "timeywimey";
     src = ~/Coding/Python/timeywimey;
   };
-  redox-world-map = (pkgs.callPackage ./rust.nix {}) {
+  redox-world-map = buildRustPackage {
     name = "redox-world-map";
     src = ~/Coding/Web/redox-world-map;
     buildInputs = with pkgs; [ pkgconfig openssl sqlite ];
@@ -21,7 +30,13 @@ let
     '';
   };
 
-  # Helpers
+  #  _   _      _
+  # | | | | ___| |_ __   ___ _ __ ___
+  # | |_| |/ _ \ | '_ \ / _ \ '__/ __|
+  # |  _  |  __/ | |_) |  __/ |  \__ \
+  # |_| |_|\___|_| .__/ \___|_|  |___/
+  #              |_|
+
   createServiceUser = { name, script }: {
     users.users."${name}" = {
       createHome = true;
@@ -48,7 +63,12 @@ let
       };
     }) (builtins.attrNames servers));
 in {
-  # Deployment metadata
+  #  __  __      _            _       _
+  # |  \/  | ___| |_ __ _  __| | __ _| |_ __ _
+  # | |\/| |/ _ \ __/ _` |/ _` |/ _` | __/ _` |
+  # | |  | |  __/ || (_| | (_| | (_| | || (_| |
+  # |_|  |_|\___|\__\__,_|\__,_|\__,_|\__\__,_|
+
   deployment = {
     targetEnv = "digitalOcean";
     digitalOcean = {
@@ -82,7 +102,12 @@ in {
     syntaxHighlighting.enable = true;
   };
 
-  # Normal users
+  #  _   _
+  # | | | |___  ___ _ __ ___
+  # | | | / __|/ _ \ '__/ __|
+  # | |_| \__ \  __/ |  \__ \
+  #  \___/|___/\___|_|  |___/
+
   security.sudo.wheelNeedsPassword = false;
   services.openssh.gatewayPorts = "clientspecified";
   users.defaultUserShell = pkgs.zsh;
@@ -95,6 +120,7 @@ in {
   };
   environment.systemPackages = with pkgs; [
     file
+    htop
     kitty.terminfo
     sqlite
     trash-cli
@@ -104,12 +130,18 @@ in {
   imports = [
     ./email.nix
     ./web.nix
+
     (createServiceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
     (createServiceUser { name = "timeywimey"; script = "${timeywimey}/bin/start"; })
     (createServiceUser { name = "redox-world-map"; script = "${redox-world-map}/bin/start"; })
   ];
 
-  # Services
+  #  ____                  _
+  # / ___|  ___ _ ____   _(_) ___ ___  ___
+  # \___ \ / _ \ '__\ \ / / |/ __/ _ \/ __|
+  #  ___) |  __/ |   \ V /| | (_|  __/\__ \
+  # |____/ \___|_|    \_/ |_|\___\___||___/
+
   services.znc = {
     enable = true;
     confOptions = {

@@ -3,6 +3,12 @@
 let
   config = import ./config.nix;
 in {
+  #  _____ _     ____
+  # |_   _| |   / ___|
+  #   | | | |   \___ \
+  #   | | | |___ ___) |
+  #   |_| |_____|____/
+
   security.acme = {
     # for testing certificates, toggle comment below:
     # production = false;
@@ -33,23 +39,13 @@ in {
       '';
     };
   };
-  services.tor = {
-    enable = true;
-    hiddenServices."rickroll".map = [
-      { port = 80; toPort = 11694; }
-    ];
-  };
-  services.nextcloud = {
-    autoUpdateApps.enable = true;
-    config = {
-      adminpassFile = "/root/nextcloud-passwd";
-      adminuser = config.name;
-    };
-    enable = true;
-    hostName = "cloud.krake.one";
-    https = true;
-    nginx.enable = true;
-  };
+
+  #  __  __       _
+  # |  \/  | __ _(_)_ __    ___  ___ _ ____   _____ _ __
+  # | |\/| |/ _` | | '_ \  / __|/ _ \ '__\ \ / / _ \ '__|
+  # | |  | | (_| | | | | | \__ \  __/ |   \ V /  __/ |
+  # |_|  |_|\__,_|_|_| |_| |___/\___|_|    \_/ \___|_|
+
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
@@ -127,5 +123,29 @@ in {
         };
       };
     };
+  };
+
+  #   ___  _   _
+  #  / _ \| |_| |__   ___ _ __
+  # | | | | __| '_ \ / _ \ '__|
+  # | |_| | |_| | | |  __/ |
+  #  \___/ \__|_| |_|\___|_|
+
+  services.tor = {
+    enable = true;
+    hiddenServices."rickroll".map = [
+      { port = 80; toPort = 11694; }
+    ];
+  };
+  services.nextcloud = {
+    autoUpdateApps.enable = true;
+    config = {
+      adminpassFile = "/root/nextcloud-passwd";
+      adminuser = config.name;
+    };
+    enable = true;
+    hostName = "cloud.krake.one";
+    https = true;
+    nginx.enable = true;
   };
 }
