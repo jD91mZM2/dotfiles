@@ -68,7 +68,10 @@
                        (lambda (start end)
                          (interactive "r")
                          (shell-command-on-region start end "figlet" (current-buffer) t)
-                         (comment-region (mark) (point))))
+
+                         (whitespace-cleanup-region (region-beginning) (region-end))
+                         (comment-region (region-beginning) (region-end))
+                         (indent-region-line-by-line (region-beginning) (region-end))))
   (evil-global-set-key 'normal (kbd "gyf") (lambda ()
                                              (interactive)
                                              (kill-new (buffer-file-name))
