@@ -57,12 +57,7 @@ in
 
   home.sessionVariables = import ./env.nix;
   home.packages = import ./packages.nix { inherit pkgs; };
-
-  home.file.".xprofile".text = ''
-    if [ -e ~/.profile ]; then
-      source ~/.profile
-    fi
-  '';
+  home.keyboard = null;
 
   # Add kitty theme here, but don't add kitty config. Pinging
   # home-manager on every tiny config change isn't desirable here.
@@ -150,6 +145,18 @@ in
   #                 |_|
 
   # Configs
+  xsession = {
+    enable = true;
+    pointerCursor = {
+      package = pkgs.xorg.xcursorthemes;
+      name = "whiteglass";
+      size = 16;
+    };
+    windowManager.command = ''
+      ${pkgs.sxhkd}/bin/sxhkd &
+      ${pkgs.bspwm}/bin/bspwm
+    '';
+  };
   xresources = {
     extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
       owner = "chriskempson";
@@ -159,9 +166,6 @@ in
       sha256 = "1nnj5py5n0m8rkq3ic01wzyzkgl3g9a8q5dc5pcgj3qr47hhddbw";
     } + "/xresources/base16-default-dark.Xresources");
     properties = {
-      "Xcursor.theme" = "whiteglass";
-      "Xcursor.size" = 16;
-
       "XTerm.termName" = "xterm-256color";
       "XTerm.vt100.faceName" = "Hack:size=10";
 
@@ -184,6 +188,10 @@ in
       name = "Yaru-dark";
       package = pkgs.yaru-theme;
     };
+  };
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
   };
 
   # Services

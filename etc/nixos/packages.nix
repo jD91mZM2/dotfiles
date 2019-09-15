@@ -44,10 +44,6 @@ in
 
   # Packages
   environment.systemPackages = with pkgs; [
-    # Graphical - Look & Feel
-    libsForQt5.qtstyleplugins # uniform QT/GTK look
-    xorg.xcursorthemes
-
     # Graphical - WM
     compton
     dmenu

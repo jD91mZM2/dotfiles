@@ -1,11 +1,13 @@
 {
+  # Override PATH
   PATH = "$PATH:$HOME/.cargo/bin";
 
+  # Standard configs
   EDITOR = "env -u TMPDIR emacsclient"; # nix-shell sets $TMPDIR which messes up emacsclient's search
   VISUAL = "env -u TMPDIR emacsclient -t";
 
+  # Program configs
   RUST_BACKTRACE = "1";
-
   GOPATH="$HOME/Coding/Go";
 
   # https://github.com/electron/electron/issues/8455

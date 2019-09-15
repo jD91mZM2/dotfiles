@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 let
-  ssh-scan = pkgs.writers.writeBashBin "ssh-scan" ''
+  ssh-scan = pkgs.writeShellScriptBin "ssh-scan" ''
     if [ "$EUID" -ne 0 ]; then
       echo "Results are sometimes inconsistent without root, run:"
       echo "$ sudo ssh-scan"

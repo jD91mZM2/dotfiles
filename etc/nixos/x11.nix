@@ -16,6 +16,7 @@
   # X server
   services.xserver = {
     enable = true;
+    enableCtrlAltBackspace = true;
     layout = "dvorak";
     xkbOptions = "compose:ralt";
 
@@ -54,5 +55,6 @@
       '';
     };
     windowManager.bspwm.enable = true;
+    desktopManager.xterm.enable = false;
   };
 }

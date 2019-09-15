@@ -9,7 +9,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    ./env.nix
     ./fonts.nix
     ./packages.nix
     ./services.nix
