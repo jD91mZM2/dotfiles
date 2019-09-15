@@ -102,6 +102,7 @@ in {
   ];
 
   imports = [
+    ./email.nix
     ./web.nix
     (createServiceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
     (createServiceUser { name = "timeywimey"; script = "${timeywimey}/bin/start"; })

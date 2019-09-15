@@ -6,17 +6,31 @@ in {
   security.acme = {
     # for testing certificates, toggle comment below:
     # production = false;
+
+    # Explicitly set this directory because it's used by email stuff
+    directory = "/var/lib/acme";
+
     certs."krake.one" = {
-      domain = "krake.one";
       email = config.email;
       webroot = "/var/www/challenges";
       postRun = ''
-        systemctl restart nginx
+        systemctl reload nginx
       '';
       extraDomains = {
         "redox-os.club" = null;
         "cloud.krake.one" = null;
       };
+    };
+    certs."mail.krake.one" = {
+      email = config.email;
+      webroot = "/var/www/challenges";
+
+      # https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/blob/v2.2.1/mail-server/nginx.nix#L39-41
+      postRun = ''
+        systemctl reload nginx
+        systemctl reload postfix
+        systemctl reload dovecot2
+      '';
     };
   };
   services.tor = {
@@ -47,6 +61,7 @@ in {
         useACMEHost = "krake.one";
         acmeRoot = "/var/www/challenges";
         forceSSL = true;
+
         default = true;
         locations."/" = {
           extraConfig = ''
@@ -58,6 +73,7 @@ in {
         useACMEHost = "krake.one";
         serverName = "krake.one";
         onlySSL = true;
+
         listen = [{
           addr = "0.0.0.0";
           port = 1337;
@@ -72,8 +88,13 @@ in {
       };
       "cloud.krake.one" = {
         useACMEHost = "krake.one";
-        forceSSL = true;
         acmeRoot = "/var/www/challenges";
+        forceSSL = true;
+      };
+      "mail.krake.one" = {
+        useACMEHost = "mail.krake.one";
+        acmeRoot = "/var/www/challenges";
+        forceSSL = true;
       };
       "krake.one:11694" = {
         listen = [{
@@ -89,8 +110,9 @@ in {
       };
       "redox-os.club" = {
         useACMEHost = "krake.one";
-        forceSSL = true;
         acmeRoot = "/var/www/challenges";
+        forceSSL = true;
+
         locations."/" = {
           proxyPass = "http://localhost:22165";
           extraConfig = ''
