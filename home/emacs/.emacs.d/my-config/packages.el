@@ -153,6 +153,7 @@
             (insert new-content)
             (goto-char old-pos)))))))
 (use-package htmlize) ;; For org mode
+(use-package hydra)
 (use-package ivy
   :config
   (ivy-mode 1))
@@ -261,6 +262,26 @@
   (sp-local-pair 'prog-mode "{" nil :post-handlers '((my/newline-indent "RET")))
   (sp-local-pair 'prog-mode "(" nil :post-handlers '((my/newline-indent "RET")))
   (sp-local-pair 'prog-mode "[" nil :post-handlers '((my/newline-indent "RET"))))
+(use-package string-inflection
+  :after transient
+  :config
+  (defhydra my/string-inflection-keys (global-map "C-c")
+    "
+Toggle string casing
+--------------------
+[_s_]: snake%(quote _)case
+[_S_]: SCREAMING%(quote _)SNAKE%(quote _)CASE
+[_k_]: kebab-case
+[_c_]: camelCase
+[_C_]: PascalCase
+"
+    ("_" string-inflection-cycle "Cycle common")
+    ("-" string-inflection-all-cycle "Cycle all" :bind nil)
+    ("s" string-inflection-underscore :bind nil)
+    ("S" string-inflection-upcase :bind nil)
+    ("k" string-inflection-kebab-case :bind nil)
+    ("c" string-inflection-lower-camelcase :bind nil)
+    ("C" string-inflection-camelcase :bind nil)))
 (use-package sublimity
   :config
   (require 'sublimity-scroll)
