@@ -4,7 +4,7 @@
 
 let
   python = callPackage (src + "/requirements.nix") {};
-  utils = callPackage ./utils.nix {};
+  utils = callPackage ../utils.nix {};
 in python.mkDerivation {
   inherit name;
   src = utils.cleanSource src;

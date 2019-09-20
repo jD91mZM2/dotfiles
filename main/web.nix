@@ -24,7 +24,6 @@ in {
       '';
       extraDomains = {
         "redox-os.club" = null;
-        "cloud.krake.one" = null;
       };
     };
     certs."mail.krake.one" = {
@@ -82,11 +81,6 @@ in {
           '';
         };
       };
-      "cloud.krake.one" = {
-        useACMEHost = "krake.one";
-        acmeRoot = "/var/www/challenges";
-        forceSSL = true;
-      };
       "mail.krake.one" = {
         useACMEHost = "mail.krake.one";
         acmeRoot = "/var/www/challenges";
@@ -136,16 +130,5 @@ in {
     hiddenServices."rickroll".map = [
       { port = 80; toPort = 11694; }
     ];
-  };
-  services.nextcloud = {
-    autoUpdateApps.enable = true;
-    config = {
-      adminpassFile = "/root/nextcloud-passwd";
-      adminuser = config.name;
-    };
-    enable = true;
-    hostName = "cloud.krake.one";
-    https = true;
-    nginx.enable = true;
   };
 }

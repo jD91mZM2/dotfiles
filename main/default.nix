@@ -127,13 +127,19 @@ in {
     tree
   ];
 
+  disabledModules = [ "services/networking/syncthing.nix" ];
   imports = [
+    # Files
     ./email.nix
     ./web.nix
 
+    # Generated services
     (createServiceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
     (createServiceUser { name = "timeywimey"; script = "${timeywimey}/bin/start"; })
     (createServiceUser { name = "redox-world-map"; script = "${redox-world-map}/bin/start"; })
+
+    # Unstable modules
+    <nixos-unstable/nixos/modules/services/networking/syncthing.nix>
   ];
 
   #  ____                  _
@@ -142,6 +148,26 @@ in {
   #  ___) |  __/ |   \ V /| | (_|  __/\__ \
   # |____/ \___|_|    \_/ |_|\___\___||___/
 
+  services.syncthing = {
+    enable = true;
+    declarative = {
+      overrideDevices = true;
+      devices = {
+        computer = {
+          id = "ILTIRMY-JT4SGSQ-AWETWCV-SLQYHE6-CY2YGAS-P3EGWY6-LSP7H4Z-F7ZQIAN";
+          introducer = true;
+        };
+        phone = {
+          id = "O7H6BPC-PKQPTT4-T4SEA7K-VI7HJ4K-J7ZJO5K-NWLNAK5-RBVCSBU-EXDHSA3";
+        };
+      };
+      overrideFolders = false;
+    };
+    relay = {
+      enable = true;
+      providedBy = "krake.one on DigitalOcean";
+    };
+  };
   services.znc = {
     enable = true;
     confOptions = {
