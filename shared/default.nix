@@ -1,4 +1,8 @@
-{ callPackage }:
+{
+  pkgs ? import <nixpkgs> {},
+  callPackage ? pkgs.callPackage,
+  ...
+}:
 
 {
   consts = import ./consts.nix;

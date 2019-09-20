@@ -27,7 +27,7 @@ in
   nix.nixPath = [
     "dotfiles=${shared.consts.dotfiles}"
     "nixos-config=${shared.consts.dotfiles}/etc/nixos/configuration.nix"
-  ] ++ options.nix.nixPath.default;
+  ] ++ (lib.filter (key: !(lib.hasPrefix "nixos-config=" key)) options.nix.nixPath.default);
 
   boot.supportedFilesystems = [ "zfs" ];
 
