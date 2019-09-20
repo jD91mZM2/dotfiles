@@ -13,5 +13,9 @@ let
   );
 in
 {
-  yaru-theme = (for-commit "b5af6bd2509ba4fe5e4eea83b190e81cc2720176" "12gkz1gggrxdp0gw6bfqc2fhcsqqvf3zn929llgdshyjb0pbmac8").yaru-theme;
+  yaru-theme-latest = (
+    for-commit
+      "817e74524f5582de19e94bd348a91aa5466a6faa"
+      "1h8fzvvipiidj1gzmdgb776l7wkxq5wj22niilhx01m43v8sn4iq"
+  ).yaru-theme;
 }
