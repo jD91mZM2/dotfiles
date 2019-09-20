@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  config = import ./config.nix;
+  shared = pkgs.callPackage <dotfiles/shared> {};
 
   #  ____            _
   # |  _ \ __ _  ___| | ____ _  __ _  ___  ___
@@ -116,7 +116,7 @@ in {
     home = "/home/user";
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keyFiles = config.ssh-keys;
+    openssh.authorizedKeys.keyFiles = shared.consts.sshKeys;
   };
   environment.systemPackages = with pkgs; [
     file
@@ -171,9 +171,9 @@ in {
   services.znc = {
     enable = true;
     confOptions = {
-      userName = config.name;
-      nick = config.name;
-      passBlock = config.secret.zncPassBlock;
+      userName = shared.consts.name;
+      nick = shared.consts.name;
+      passBlock = shared.consts.secret.zncPassBlock;
       networks = createZncServers {
         freenode = "chat.freenode.net";
         mozilla = "irc.mozilla.org";

@@ -2,8 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ options, pkgs, lib, ... }:
 
+let
+  shared = pkgs.callPackage <dotfiles/shared> {};
+in
 {
   disabledModules = [ "services/networking/syncthing.nix" ];
   imports = [
@@ -20,6 +23,11 @@
     # Unstable modules
     <nixos-unstable/nixos/modules/services/networking/syncthing.nix>
   ];
+
+  nix.nixPath = [
+    "dotfiles=${shared.consts.dotfiles}"
+    "nixos-config=${shared.consts.dotfiles}/etc/nixos/configuration.nix"
+  ] ++ options.nix.nixPath.default;
 
   boot.supportedFilesystems = [ "zfs" ];
 
@@ -51,7 +59,7 @@
   '';
 
   # User settings
-  users.users.user = {
+  users.users."${shared.consts.user}" = {
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" "adbusers" ];
     shell = pkgs.zsh;

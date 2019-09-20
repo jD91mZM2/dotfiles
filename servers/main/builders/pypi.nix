@@ -3,11 +3,12 @@
 { name, src }:
 
 let
+  shared = callPackage <dotfiles/shared> {};
+
   python = callPackage (src + "/requirements.nix") {};
-  utils = callPackage ../utils.nix {};
 in python.mkDerivation {
   inherit name;
-  src = utils.cleanSource src;
+  src = shared.utils.cleanSource src;
   buildInputs = builtins.attrValues python.packages;
   format = "other";
   installPhase = ''

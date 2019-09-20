@@ -7,7 +7,8 @@
 { name, src, buildInputs ? [], wrapperHook ? "" }:
 
 let
-  utils = callPackage ../utils.nix {};
+  shared = callPackage <dotfiles/shared> {};
+
   moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
   moz_pkgs = import <nixpkgs> { overlays = [ moz_overlay ]; };
   rustChan = (moz_pkgs.rustChannelOf {
@@ -16,7 +17,7 @@ let
   });
 in stdenv.mkDerivation {
   inherit name buildInputs;
-  src = utils.cleanSource src;
+  src = shared.utils.cleanSource src;
   doConfigure = false;
   dontBuild = true;
   installPhase = ''

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  config = import ./config.nix;
+  shared = pkgs.callPackage <dotfiles/shared> {};
 in {
   #  _____ _     ____
   # |_   _| |   / ___|
@@ -17,7 +17,7 @@ in {
     directory = "/var/lib/acme";
 
     certs."krake.one" = {
-      email = config.email;
+      email = shared.consts.email;
       webroot = "/var/www/challenges";
       postRun = ''
         systemctl reload nginx
@@ -27,7 +27,7 @@ in {
       };
     };
     certs."mail.krake.one" = {
-      email = config.email;
+      email = shared.consts.email;
       webroot = "/var/www/challenges";
 
       # https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/blob/v2.2.1/mail-server/nginx.nix#L39-41

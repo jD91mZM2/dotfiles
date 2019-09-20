@@ -47,7 +47,7 @@ let
     sha256 = "0h95s5gvn08m4y11gb82anx8s9s2ywaks15idawxdg5bibjav79l";
   } + "/themes/dotphiles/dircolors/dircolors.base16.dark";
 
-  secret = import ./secret.nix;
+  shared = pkgs.callPackage <dotfiles/shared> {};
 in
 {
   programs.home-manager = {
@@ -110,13 +110,13 @@ in
   # Misc
   programs.ssh = {
     enable = true;
-    matchBlocks = secret.sshHosts;
+    matchBlocks = shared.consts.secret.sshHosts;
   };
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = "jD91mZM2";
-    userEmail = "me@krake.one";
+    userName = shared.consts.name;
+    userEmail = shared.consts.email;
 
     signing = {
       key = "BC5DAE4EC168B1F9B94C98503055D54729A72666";
@@ -124,7 +124,7 @@ in
     };
     extraConfig = {
       pull.rebase = true;
-    } // secret.gitConfig;
+    } // shared.consts.secret.gitConfig;
   };
 
   # Services

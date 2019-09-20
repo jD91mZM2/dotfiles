@@ -2,10 +2,8 @@ self: super:
 
 let
   unstable = import <nixos-unstable> { overlays = []; };
-  excludeTarget = source: self.lib.cleanSource (self.lib.cleanSourceWith {
-    filter = (path: _type: path != (toString (source + "/target")));
-    src = source;
-  });
+  shared = self.callPackage <dotfiles/shared> {};
+
   rust = self.latest.rustChannels.stable;
   buildRustPackage = self.rustPlatform.buildRustPackage.override {
     cargo = rust.cargo;
@@ -31,7 +29,7 @@ let
 
       ({
         name = "${name}-local";
-        src = excludeTarget src;
+        src = shared.utils.cleanSource src;
         cargoSha256 = hash;
         doCheck = false;
       })

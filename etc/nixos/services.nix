@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  home = "/home/user";
+  shared = pkgs.callPackage <dotfiles/shared> {};
 in
 {
   # General things
@@ -16,8 +16,8 @@ in
     enable = true;
 
     # Run as local user
-    user = "user";
-    dataDir = "/home/user/.local/share/Syncthing";
+    user = shared.consts.user;
+    dataDir = "${shared.consts.home}/.local/share/Syncthing";
 
     declarative = {
       overrideDevices = true;
@@ -33,7 +33,7 @@ in
       overrideFolders = true;
       folders.main = {
         enable = true;
-        path = "/home/user/Sync";
+        path = "/${shared.consts.home}/Sync";
         devices = [ "droplet" "phone" ];
       };
     };
@@ -55,9 +55,9 @@ in
     autoScrub.enable = true;
   };
   services.borgbackup.jobs.main = let
-    repo = "${home}/backup";
+    repo = "${shared.consts.home}/backup";
   in {
-    paths = map (s: "${home}/${s}") [ "Coding" "dotfiles" "servers" "Nextcloud" "Pictures" ];
+    paths = map (s: "${shared.consts.home}/${s}") [ "Coding" "dotfiles" "servers" "Nextcloud" "Pictures" ];
     inherit repo;
     doInit = true;
     encryption = {
@@ -86,7 +86,7 @@ in
         #!/bin/sh
         set -e
 
-        ${pkgs.rclone}/bin/rclone sync -v "${home}/Nextcloud" "Dropbox:"
+        ${pkgs.rclone}/bin/rclone sync -v "${shared.consts.home}/Nextcloud" "Dropbox:"
       '';
     };
   };

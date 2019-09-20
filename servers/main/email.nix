@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  config = import ./config.nix;
+  shared = pkgs.callPackage <dotfiles/shared> {};
   acmeRoot = "/var/lib/acme";
 in
 {
@@ -23,7 +23,7 @@ in
 
     loginAccounts = {
       "me@krake.one" = {
-        hashedPassword = config.secret.emailPass;
+        hashedPassword = shared.consts.secret.emailPass;
 
         # Really, really, old email address. Don't judge.
         aliases = [ "legolord208@krake.one" ];
