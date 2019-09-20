@@ -11,6 +11,34 @@ in
   };
   services.upower.enable = true;
 
+  # Syncthing
+  services.syncthing = {
+    enable = true;
+
+    # Run as local user
+    user = "user";
+    dataDir = "/home/user/.local/share/Syncthing";
+
+    declarative = {
+      overrideDevices = true;
+      devices = {
+        droplet = {
+          id = "4JBUWER-ECEJGT7-XH6NFJB-F4WBHP2-CPREUK6-ETHPHHU-LXGPP3O-IAYLNAI";
+          addresses = [ "tcp://krake.one:22000" ];
+        };
+        phone = {
+          id = "O7H6BPC-PKQPTT4-T4SEA7K-VI7HJ4K-J7ZJO5K-NWLNAK5-RBVCSBU-EXDHSA3";
+        };
+      };
+      overrideFolders = true;
+      folders.main = {
+        enable = true;
+        path = "/home/user/Sync";
+        devices = [ "droplet" "phone" ];
+      };
+    };
+  };
+
   # Backup
   services.zfs = {
     autoSnapshot = {

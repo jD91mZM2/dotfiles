@@ -64,11 +64,14 @@
 (xterm-mouse-mode 1)
 
 ;; Keybindings
-;; See https://www.emacswiki.org/emacs/DvorakKeyboard. To avoid all
-;; conflicts, this translates the keys earlier in the stack. Using
-;; keyboard-translate, however, is not possible because it does not
-;; work well with emacsclient.
+
+;; Swap C-t and C-x to make it easier on dvorak. `key-translation-map`
+;; is applied early in the stack of keymaps and will work virtually
+;; everywhere. Using keyboard-translate is recommended by
+;; https://www.emacswiki.org/emacs/DvorakKeyboard, however, it does
+;; not work well with emacsclient.
 (define-key key-translation-map (kbd "C-t") (kbd "C-x"))
+(define-key key-translation-map (kbd "C-x") (kbd "C-t"))
 
 (define-key emacs-lisp-mode-map (kbd "C-c c") 'eval-buffer)
 (global-set-key (kbd "C-c b") 'bookmark-bmenu-list)

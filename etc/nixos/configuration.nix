@@ -2,18 +2,23 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
+  disabledModules = [ "services/networking/syncthing.nix" ];
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
+    # Files
     ./fonts.nix
     ./packages.nix
     ./services.nix
     ./sudo.nix
     ./x11.nix
+
+    # Unstable modules
+    <nixos-unstable/nixos/modules/services/networking/syncthing.nix>
   ];
 
   boot.supportedFilesystems = [ "zfs" ];
