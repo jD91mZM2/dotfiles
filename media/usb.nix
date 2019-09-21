@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 {
   imports = [
     # Base on top of the regular KDE USB

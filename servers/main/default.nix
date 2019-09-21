@@ -77,58 +77,11 @@ in {
     };
   };
 
-  # System config
-  networking.firewall.enable = false;
-  nix.gc = {
-    automatic = true;
-    dates = "monthly";
-    options = "-d";
-  };
-
-  # Program config
-  programs.mosh.enable = true;
-  programs.zsh = {
-    enable = true;
-    autosuggestions.enable = true;
-    promptInit = ''
-      powerline() {
-        PS1="$(${pkgs.powerline-rs}/bin/powerline-rs --shell zsh "$?")"
-      }
-      precmd_functions+=(powerline)
-    '';
-    interactiveShellInit = ''
-      . ${pkgs.grml-zsh-config}/etc/zsh/zshrc
-    '';
-    syntaxHighlighting.enable = true;
-  };
-
-  #  _   _
-  # | | | |___  ___ _ __ ___
-  # | | | / __|/ _ \ '__/ __|
-  # | |_| \__ \  __/ |  \__ \
-  #  \___/|___/\___|_|  |___/
-
-  security.sudo.wheelNeedsPassword = false;
-  services.openssh.gatewayPorts = "clientspecified";
-  users.defaultUserShell = pkgs.zsh;
-  users.users.user = {
-    createHome = true;
-    home = "/home/user";
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keyFiles = shared.consts.sshKeys;
-  };
-  environment.systemPackages = with pkgs; [
-    file
-    htop
-    kitty.terminfo
-    sqlite
-    trash-cli
-    tree
-  ];
-
   disabledModules = [ "services/networking/syncthing.nix" ];
   imports = [
+    # Shared base settings
+    ../base.nix
+
     # Files
     ./email.nix
     ./web.nix

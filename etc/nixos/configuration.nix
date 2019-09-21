@@ -22,7 +22,17 @@ in
 
     # Unstable modules
     <nixos-unstable/nixos/modules/services/networking/syncthing.nix>
+
+    # External modules
+    (builtins.fetchGit {
+      url = "https://github.com/cleverca22/nixos-configs";
+      rev = "76260ad60cd99d40ab25df1400b0663d48e736db";
+      ref = "master";
+    } + "/qemu.nix")
   ];
+
+  # Thanks, @clever! /blob/76260ad60cd99d40ab25df1400b0663d48e736db/qemu.nix
+  qemu-user.aarch64 = true;
 
   nix.nixPath = [
     "dotfiles=${shared.consts.dotfiles}"
