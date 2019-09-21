@@ -2,6 +2,7 @@
 
 let
   shared = pkgs.callPackage <dotfiles/shared> {};
+  generators = import <dotfiles/shared/generators.nix>;
 
   #  ____            _
   # |  _ \ __ _  ___| | ____ _  __ _  ___  ___
@@ -10,18 +11,11 @@ let
   # |_|   \__,_|\___|_|\_\__,_|\__, |\___||___/
   #                            |___/
 
-  buildPypiPackage = pkgs.callPackage ./builders/pypi.nix {};
-  buildRustPackage = pkgs.callPackage ./builders/rust.nix {};
-
-  abottomod = buildPypiPackage {
-    name = "abottomod";
-    src = ~/Coding/Python/abottomod;
-  };
-  timeywimey = buildPypiPackage {
+  timeywimey = shared.builders.buildPypiPackage {
     name = "timeywimey";
     src = ~/Coding/Python/timeywimey;
   };
-  redox-world-map = buildRustPackage {
+  redox-world-map = shared.builders.buildRustPackage {
     name = "redox-world-map";
     src = ~/Coding/Web/redox-world-map;
     buildInputs = with pkgs; [ pkgconfig openssl sqlite ];
@@ -37,22 +31,6 @@ let
   # |_| |_|\___|_| .__/ \___|_|  |___/
   #              |_|
 
-  createServiceUser = { name, script }: {
-    users.users."${name}" = {
-      createHome = true;
-      home = "/var/lib/${name}";
-    };
-    systemd.services."${name}" = {
-      inherit script;
-      serviceConfig = {
-        User = name;
-        WorkingDirectory = "/var/lib/${name}";
-        Restart = "always";
-        RestartSec = "10s";
-      };
-      wantedBy = [ "multi-user.target" ];
-    };
-  };
   createZncServers = servers: builtins.listToAttrs (map (server: let
       url = builtins.getAttr server servers;
     in {
@@ -87,9 +65,8 @@ in {
     ./web.nix
 
     # Generated services
-    (createServiceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
-    (createServiceUser { name = "timeywimey"; script = "${timeywimey}/bin/start"; })
-    (createServiceUser { name = "redox-world-map"; script = "${redox-world-map}/bin/start"; })
+    (generators.serviceUser { name = "timeywimey"; script = "${timeywimey}/bin/start"; })
+    (generators.serviceUser { name = "redox-world-map"; script = "${redox-world-map}/bin/start"; })
 
     # Unstable modules
     <nixos-unstable/nixos/modules/services/networking/syncthing.nix>

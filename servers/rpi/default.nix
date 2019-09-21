@@ -2,6 +2,13 @@
 
 let
   shared = pkgs.callPackage <dotfiles/shared> {};
+  generators = import <dotfiles/shared/generators.nix>;
+
+  # Packages
+  abottomod = shared.builders.buildPypiPackage {
+    name = "abottomod";
+    src = ~/Coding/Python/abottomod;
+  };
 in
 {
   deployment = {
@@ -17,6 +24,8 @@ in
 
     # Generated hardware configuration
     ./hardware-configuration.nix
+
+    (generators.serviceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
   ];
 
   # Bootloader - need sd-image-aarch64 to create new generations?
