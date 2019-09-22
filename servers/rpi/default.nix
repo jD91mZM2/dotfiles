@@ -2,7 +2,6 @@
 
 let
   shared = pkgs.callPackage <dotfiles/shared> {};
-  generators = import <dotfiles/shared/generators.nix>;
 
   # Packages
   abottomod = shared.builders.buildPypiPackage {
@@ -25,9 +24,6 @@ in
 
     # Generated hardware configuration
     ./hardware-configuration.nix
-
-    # Service users
-    (generators.serviceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
   ];
 
   # Bootloader - need sd-image-aarch64 to create new generations?
@@ -43,6 +39,9 @@ in
   networking.networkmanager.enable = true;
 
   # Services
+  custom.services = {
+    abottomod.script = "${abottomod}/bin/start";
+  };
   services.syncthing = {
     declarative.devices.droplet = {
       id = "4JBUWER-ECEJGT7-XH6NFJB-F4WBHP2-CPREUK6-ETHPHHU-LXGPP3O-IAYLNAI";

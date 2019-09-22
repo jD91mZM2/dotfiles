@@ -2,7 +2,6 @@
 
 let
   shared = pkgs.callPackage <dotfiles/shared> {};
-  generators = import <dotfiles/shared/generators.nix>;
 
   # Packages
   timeywimey = shared.builders.buildPypiPackage {
@@ -47,13 +46,13 @@ in {
     # Files
     ./email.nix
     ./web.nix
-
-    # Generated services
-    (generators.serviceUser { name = "timeywimey"; script = "${timeywimey}/bin/start"; })
-    (generators.serviceUser { name = "redox-world-map"; script = "${redox-world-map}/bin/start"; })
   ];
 
   # Services
+  custom.services = {
+    timeywimey.script = "${timeywimey}/bin/start";
+    redox-world-map.script = "${redox-world-map}/bin/start";
+  };
   services.syncthing = {
     declarative.devices.rpi.id = "AJEYZR5-OVJCWLD-SF37XSB-M2YSGMA-M7W33PW-S7JRWZM-ZLD6F33-KPSI3QD";
     relay = {

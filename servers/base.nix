@@ -3,6 +3,11 @@ let
   shared = pkgs.callPackage <dotfiles/shared> {};
 in
 {
+  imports = [
+    # Custom modules
+    <dotfiles/shared/modules/services.nix>
+  ];
+
   # Language settings
   i18n.consoleKeyMap = "dvorak";
   services.xserver.layout = "dvorak";
