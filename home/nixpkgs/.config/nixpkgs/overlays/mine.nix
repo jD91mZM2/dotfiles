@@ -4,15 +4,15 @@ let
   unstable = import <nixos-unstable> { overlays = []; };
   shared = self.callPackage <dotfiles/shared> {};
 
-  rust = self.latest.rustChannels.stable;
-  buildRustPackage = self.rustPlatform.buildRustPackage.override {
-    cargo = rust.cargo;
-    rustc = rust.rust;
+  rust = self.latest.rustChannels.stable.rust;
+  rustPlatform = self.makeRustPlatform {
+    cargo = rust;
+    rustc = rust;
   };
 
   rustSoftware = (
     { from ? null, name, src, hash, extra ? {} }:
-    buildRustPackage (builtins.foldl' (x: y: x // y) {} [
+    rustPlatform.buildRustPackage (builtins.foldl' (x: y: x // y) {} [
       (if from == null
         then {}
 

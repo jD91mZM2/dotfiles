@@ -133,9 +133,14 @@
 (use-package flycheck
   :hook (lsp-ui-mode . flycheck-mode))
 (use-package gist
-  :bind ("C-c y" . gist-region-private))
+  :commands (gist-region-private)
+  :init
+  (defun gist (start end)
+    (interactive "r")
+    (gist-region-private start end)))
 (use-package go-mode
-  :config
+  :mode "\\.go\\'"
+  :init
   (defun goimports ()
     (interactive)
     (when (derived-mode-p 'go-mode)
@@ -203,7 +208,9 @@
                                              (setq Man-notify-method 'pushy)
                                              (man "configuration.nix")
                                              (setq Man-notify-method original-notify)))))
-(use-package org)
+(use-package org
+  :mode "\\.org\\'"
+  :commands (org-mode))
 (use-package powerline
   :config
   (powerline-center-evil-theme))
@@ -222,6 +229,8 @@
   :after rust-mode
   :commands (rust-playground rust-playground-mode))
 (use-package slime
+  :mode "\\.lisp\\'"
+  :commands slime
   :after slime-company
   :config
   (setq inferior-lisp-program "sbcl --noinform")
@@ -287,6 +296,7 @@ Toggle string casing
   (require 'sublimity-scroll)
   (sublimity-mode 1))
 (use-package tex
+  :mode "\\.tex\\'"
   :ensure auctex ; I have no idea why using use-package auctex does not work
   :pin gnu)
 (use-package yaml-mode
