@@ -15,4 +15,7 @@
       }
     )
   );
+  without = exclude: attrs: lib.filterAttrs
+    (key: _value: !(lib.elem key exclude))
+    attrs;
 }

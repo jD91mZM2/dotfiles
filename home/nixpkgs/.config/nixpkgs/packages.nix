@@ -52,9 +52,9 @@ in
     xorg.xev
     xorg.xwininfo
 
-    # Command line applications
+    # Must have utils
+    ascii
     asciinema
-    borgbackup
     cdrkit
     ctags
     docker_compose
@@ -66,10 +66,15 @@ in
     neofetch
     nix-review
     nixops
+    pv
     rclone
+    rename
     ripgrep
     sqlite
     weechat
+    youtube-dl
+    tree
+    units
 
     # Languages
     cabal-install

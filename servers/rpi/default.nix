@@ -26,7 +26,7 @@ in
     ./hardware-configuration.nix
   ];
 
-  # Bootloader - need sd-image-aarch64 to create new generations?
+  # Bootloader
   boot.loader.grub.enable = false;
   boot.loader.raspberryPi = {
     enable = true;
@@ -43,10 +43,7 @@ in
     abottomod.script = "${abottomod}/bin/start";
   };
   services.syncthing = {
-    declarative.devices.droplet = {
-      id = "4JBUWER-ECEJGT7-XH6NFJB-F4WBHP2-CPREUK6-ETHPHHU-LXGPP3O-IAYLNAI";
-      addresses = [ "tcp://krake.one:22000" ];
-    };
+    declarative.devices = shared.utils.without [ "rpi" ] shared.consts.syncthingDevices;
     relay = {
       enable = true;
       port = 443;

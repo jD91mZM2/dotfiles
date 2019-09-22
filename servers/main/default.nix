@@ -45,7 +45,7 @@ in {
     redox-world-map.script = "${redox-world-map}/bin/start";
   };
   services.syncthing = {
-    declarative.devices.rpi.id = "AJEYZR5-OVJCWLD-SF37XSB-M2YSGMA-M7W33PW-S7JRWZM-ZLD6F33-KPSI3QD";
+    declarative.devices = shared.utils.without [ "droplet" ] shared.consts.syncthingDevices;
     relay = {
       enable = true;
       providedBy = "krake.one on DigitalOcean";

@@ -8,7 +8,10 @@ let
   shared = pkgs.callPackage <dotfiles/shared> {};
 in
 {
-  disabledModules = [ "services/networking/syncthing.nix" ];
+  disabledModules = [
+    "system/boot/binfmt.nix"
+    "services/networking/syncthing.nix"
+  ];
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -22,17 +25,8 @@ in
 
     # Unstable modules
     <nixos-unstable/nixos/modules/services/networking/syncthing.nix>
-
-    # External modules
-    (builtins.fetchGit {
-      url = "https://github.com/cleverca22/nixos-configs";
-      rev = "76260ad60cd99d40ab25df1400b0663d48e736db";
-      ref = "master";
-    } + "/qemu.nix")
+    <nixos-unstable/nixos/modules/system/boot/binfmt.nix>
   ];
-
-  # Thanks, @clever! /blob/76260ad60cd99d40ab25df1400b0663d48e736db/qemu.nix
-  qemu-user.aarch64 = true;
 
   nix.nixPath = [
     "dotfiles=${shared.consts.dotfiles}"
@@ -40,6 +34,12 @@ in
   ] ++ (lib.filter (key: !(lib.hasPrefix "nixos-config=" key)) options.nix.nixPath.default);
 
   boot.supportedFilesystems = [ "zfs" ];
+
+  # These systems will be able to be emulated transparently. Enabling
+  # aarch64 will allow me to run aarch64 executables (using
+  # qemu-aarch64 behind the scenes). If I were to enable windows here,
+  # all .exe files will be handled using WINE.
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # Misc. settings
   documentation.dev.enable = true;

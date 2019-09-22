@@ -66,7 +66,6 @@ in
     tmux
 
     # Must have utils
-    ascii
     autojump
     bc
     bind
@@ -84,16 +83,12 @@ in
     nix-index
     patchelf
     pciutils
-    rename
     socat
     trash-cli
-    tree
-    units
     unzip
     wget
     xclip
     xdotool
-    youtube-dl
     zip
 
     # Daemons

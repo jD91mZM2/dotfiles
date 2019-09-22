@@ -21,19 +21,19 @@ in
 
     declarative = {
       overrideDevices = true;
-      devices = {
-        droplet = {
-          id = "4JBUWER-ECEJGT7-XH6NFJB-F4WBHP2-CPREUK6-ETHPHHU-LXGPP3O-IAYLNAI";
-          addresses = [ "tcp://krake.one:22000" ];
-        };
-        rpi.id = "AJEYZR5-OVJCWLD-SF37XSB-M2YSGMA-M7W33PW-S7JRWZM-ZLD6F33-KPSI3QD";
-        phone.id = "O7H6BPC-PKQPTT4-T4SEA7K-VI7HJ4K-J7ZJO5K-NWLNAK5-RBVCSBU-EXDHSA3";
-      };
+      devices = shared.utils.without [ "computer" ] shared.consts.syncthingDevices;
       overrideFolders = true;
       folders.main = {
         enable = true;
-        path = "/${shared.consts.home}/Sync";
+        path = "/${shared.consts.home}/Sync/main";
         devices = [ "droplet" "rpi" "phone" ];
+      };
+      # For when I don't feel comfortable putting my whole password
+      # vault on a device...
+      folders.untrustworthy = {
+        enable = true;
+        path = "/${shared.consts.home}/Sync/untrustworthy";
+        devices = [ "droplet" "rpi" "phone" "school" ];
       };
     };
   };

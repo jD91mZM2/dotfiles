@@ -8,4 +8,18 @@ rec {
   sshKeys = [ ~/.ssh/id_ed25519.pub ];
 
   secret = import ./secret.nix;
+
+  syncthingDevices = {
+    computer = {
+      id = "ILTIRMY-JT4SGSQ-AWETWCV-SLQYHE6-CY2YGAS-P3EGWY6-LSP7H4Z-F7ZQIAN";
+      introducer = true;
+    };
+    droplet = {
+        id = "4JBUWER-ECEJGT7-XH6NFJB-F4WBHP2-CPREUK6-ETHPHHU-LXGPP3O-IAYLNAI";
+        addresses = [ "tcp://krake.one:22000" ];
+    };
+    phone.id = "O7H6BPC-PKQPTT4-T4SEA7K-VI7HJ4K-J7ZJO5K-NWLNAK5-RBVCSBU-EXDHSA3";
+    rpi.id = "AJEYZR5-OVJCWLD-SF37XSB-M2YSGMA-M7W33PW-S7JRWZM-ZLD6F33-KPSI3QD";
+    school.id = "6YYJM7K-ZP3CXHB-P4KU6CF-PVF4RG4-MFGBGXG-CUGZ26X-Z42TS6Q-BVHWKQP";
+  };
 }
