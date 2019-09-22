@@ -62,10 +62,7 @@ in
     xfce.xfce4-power-manager
 
     # Command line
-    borgbackup
     direnv
-    rclone
-    stow
     tmux
 
     # Must have utils

@@ -54,6 +54,7 @@ in
 
     # Command line applications
     asciinema
+    borgbackup
     cdrkit
     ctags
     docker_compose
@@ -65,6 +66,7 @@ in
     neofetch
     nix-review
     nixops
+    rclone
     ripgrep
     sqlite
     weechat
