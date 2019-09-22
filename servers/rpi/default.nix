@@ -21,10 +21,12 @@ in
   imports = [
     # Shared base settings
     ../base.nix
+    ../syncthing.nix
 
     # Generated hardware configuration
     ./hardware-configuration.nix
 
+    # Service users
     (generators.serviceUser { name = "abottomod"; script = "${abottomod}/bin/start"; })
   ];
 
@@ -39,4 +41,16 @@ in
   # Enable NetworkManager
   networking.wireless.enable = false; # disable default wireless support
   networking.networkmanager.enable = true;
+
+  # Services
+  services.syncthing = {
+    declarative.devices.droplet = {
+      id = "4JBUWER-ECEJGT7-XH6NFJB-F4WBHP2-CPREUK6-ETHPHHU-LXGPP3O-IAYLNAI";
+      addresses = [ "tcp://krake.one:22000" ];
+    };
+    relay = {
+      enable = true;
+      port = 443;
+    };
+  };
 }
