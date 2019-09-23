@@ -209,8 +209,9 @@
                                              (man "configuration.nix")
                                              (setq Man-notify-method original-notify)))))
 (use-package org
-  :mode "\\.org\\'"
-  :commands (org-mode))
+  :mode ("\\.org\\'". org-mode)
+  :commands (org-mode)
+  :hook (org-mode . org-indent-mode))
 (use-package powerline
   :config
   (powerline-center-evil-theme))
