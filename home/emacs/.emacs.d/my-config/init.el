@@ -78,14 +78,15 @@
 (global-set-key (kbd "C-c c") 'recompile)
 (global-set-key (kbd "C-c s") 'eshell)
 
-(define-minor-mode keep-centered-mode "Keep recentering the screen all the time why not")
-
-;; Hooks
-(add-hook 'post-command-hook
+(define-minor-mode keep-centered-mode
+  "Keep recentering the screen all the time why not"
+  :init-value nil
+  (add-hook 'post-command-hook
           (defun my/keep-centered-hook ()
             (when keep-centered-mode
-              (recenter nil))))
+              (recenter nil)))))
 
+;; Hooks
 (add-hook 'term-mode-hook
           (defun my/term-hook ()
             (setq show-trailing-whitespace nil)))

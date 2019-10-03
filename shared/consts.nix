@@ -5,7 +5,7 @@ rec {
   user = "user";
   home = "/home/${user}";
   dotfiles = "${home}/dotfiles";
-  sshKeys = [ ~/.ssh/id_ed25519.pub ];
+  sshKeys = [ "${home}/.ssh/id_ed25519.pub" ];
 
   secret = import ./secret.nix;
 
