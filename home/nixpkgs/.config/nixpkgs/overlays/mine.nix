@@ -44,17 +44,20 @@ in {
     src = ~/Coding/Rust/termplay;
     hash = "0nr4xii09z6djdj9586b5mpncp7n3xlng65czz3g777ylwj0f7v2";
   };
-  xidlehook = rustSoftware rec {
-    from = unstable.xidlehook;
-    name = "xidlehook";
-    src = ~/Coding/Rust/xidlehook;
-    hash = "0van6s1f6kqdjxgmzcx3k6c7f1ap4dfcvxh19fad656mprc60pb2";
-    extra = {
-        buildInputs = with self; [ xorg.xlibsWrapper xorg.libXScrnSaver libpulseaudio ];
-        nativeBuildInputs = from.nativeBuildInputs ++ (with self; [ python3 ]);
-        cargoBuildFlags = ["--bins"];
-    };
-  };
+  # xidlehook is currently going through some rewriting and is not
+  # stable enough for me to use yet.
+  #
+  # xidlehook = rustSoftware rec {
+  #   from = unstable.xidlehook;
+  #   name = "xidlehook";
+  #   src = ~/Coding/Rust/xidlehook;
+  #   hash = "0van6s1f6kqdjxgmzcx3k6c7f1ap4dfcvxh19fad656mprc60pb2";
+  #   extra = {
+  #       buildInputs = with self; [ xorg.xlibsWrapper xorg.libXScrnSaver libpulseaudio ];
+  #       nativeBuildInputs = from.nativeBuildInputs ++ (with self; [ python3 ]);
+  #       cargoBuildFlags = ["--bins"];
+  #   };
+  # };
   powerline-rs = rustSoftware {
     from = unstable.powerline-rs;
     name = "powerline-rs";

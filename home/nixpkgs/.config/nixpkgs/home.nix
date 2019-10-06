@@ -11,33 +11,6 @@ let
   };
   bashConfig = builtins.replaceStrings [ "  " ] [ "\t" ] ''
     eval "$(dircolors "${dircolors}")"
-
-    SSH_PORT_REMINDER="$(cat <<-EOF
-
-      If it doesn't seem to work, make sure the remote's sshd_config
-      specifies "GatewayPorts" to either "yes" or "clientspecified".
-      EOF
-    )"
-
-    forward() {
-      : "''${1:?forward <remote> <port>}"
-      : "''${2:?forward <remote> <port>}"
-      cat <<-EOF
-      Remote port being forwarded over SSH!
-      $SSH_PORT_REMINDER
-      EOF
-      ssh "$1" -R ":''${2}:localhost:$2" -- sleep infinity
-    }
-
-    backward() {
-      : "''${1:?backward <remote> <port>}"
-      : "''${2:?backward <remote> <port>}"
-      cat <<-EOF
-      Local port being forwarded to a remote application over SSH!
-      $SSH_PORT_REMINDER
-      EOF
-      ssh "$1" -L ":''${2}:localhost:$2" -- sleep infinity
-    }
   '';
   dircolors = pkgs.fetchFromGitHub {
     owner = "dotphiles";

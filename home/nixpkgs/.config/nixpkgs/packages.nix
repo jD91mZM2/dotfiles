@@ -11,7 +11,45 @@
 
 let
   unstable = import <nixos-unstable> {};
+
+  reminder = ''
+
+      If it doesn't seem to work, make sure the remote's sshd_config
+      specifies "GatewayPorts" to either "yes" or "clientspecified".
+  '';
+  forward = let
+    usage = "forward <remote> <port>";
+  in pkgs.writeShellScriptBin "forward" ''
+      : "''${1:?${usage}}"
+      : "''${2:?${usage}}"
+      cat <<-EOF
+      Remote port being forwarded over SSH!
+      ${reminder}
+      EOF
+
+      ssh "$1" -R ":''${2}:localhost:$2" -- sleep infinity
+  '';
+  backward = let
+    usage = "backward <remote> <port>";
+  in pkgs.writeShellScriptBin "backward" ''
+      : "''${1:?${usage}}"
+      : "''${2:?${usage}}"
+      cat <<-EOF
+      Local port being forwarded to a remote application over SSH!
+      ${reminder}
+      EOF
+
+      ssh "$1" -L ":''${2}:localhost:$2" -- sleep infinity
+  '';
 in
+  # Convenient bash aliases
+  [
+    forward
+    backward
+  ]
+
+  ++
+
   # Unstable packages
   (with unstable; [
     firefox
@@ -81,7 +119,6 @@ in
     cargo-edit
     cargo-release
     cargo-tree
-    carnix
     cmake
     gcc
     gdb
