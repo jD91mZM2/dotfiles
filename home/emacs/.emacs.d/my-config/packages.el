@@ -18,9 +18,6 @@
       (progn
         (disable-theme 'base16-tomorrow)
         (my/reload-dark)))))
-(use-package cargo
-  :after rust-mode
-  :hook (rust-mode . cargo-minor-mode))
 (use-package chess
   :pin gnu)
 (use-package company
@@ -29,7 +26,10 @@
   (global-company-mode 1)
   (setq company-idle-delay 0)
   (evil-define-key 'insert 'company-mode-hook (kbd "C-n") 'company-select-next-if-tooltip-visible-or-complete-selection)
-  (evil-define-key 'insert 'company-mode-hook (kbd "C-p") 'company-select-previous))
+  (evil-define-key 'insert 'company-mode-hook (kbd "C-p") 'company-select-previous)
+  (evil-global-set-key 'normal (kbd "gs")
+                       (evil-define-operator my/sort (beg end)
+                         (sort-lines nil beg end))))
 (use-package company-auctex)
 (use-package company-lsp)
 (use-package counsel
@@ -191,7 +191,7 @@
   :mode "\\.json\\'")
 (use-package lsp-mode
   :bind ("C-c e" . lsp-extend-selection)
-  :hook ((go-mode nix-mode python-mode rust-mode) . lsp)
+  :hook ((go-mode nix-mode python-mode rustic-mode) . lsp)
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-auto-guess-root t))
@@ -203,16 +203,6 @@
   (lsp-ui-doc-max-height 20))
 (use-package nasm-mode
   :hook (asm-mode . nasm-mode))
-(use-package neotree
-  :bind ("C-c t" . neotree-toggle)
-  :custom ((neo-smart-open t)
-           (neo-show-hidden-files t))
-  :config
-  (add-hook 'neotree-mode-hook (defun my/neotree-hook ()
-                            (display-line-numbers-mode -1)))
-  (advice-add 'neo-open-file :after
-              (defun my/neotree-open (_orig &rest _args)
-                  (neotree-hide))))
 (use-package nix-mode
   :after lsp-mode
   :mode "\\.nix\\'"
@@ -250,10 +240,10 @@
   :bind ("C-c r" . ranger)
   :custom ((ranger-override-dired 'ranger)
            (ranger-override-dired-mode t)))
-(use-package rust-mode
-  :mode "\\.rs\\'")
+(use-package rustic
+  :mode ("\\.rs\\'" . rustic-mode))
 (use-package rust-playground
-  :after rust-mode
+  :after rustic-mode
   :commands (rust-playground rust-playground-mode))
 (use-package slime
   :mode "\\.lisp\\'"
