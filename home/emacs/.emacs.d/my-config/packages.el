@@ -232,10 +232,13 @@
   :config
   (powerline-center-evil-theme))
 (use-package projectile
+  :after projectile-ripgrep
+  :demand t
   :custom (projectile-completion-system 'ivy)
   :config
   (projectile-mode 1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+(use-package projectile-ripgrep)
 (use-package ranger
   :bind ("C-c r" . ranger)
   :custom ((ranger-override-dired 'ranger)
@@ -246,9 +249,9 @@
   :after rustic-mode
   :commands (rust-playground rust-playground-mode))
 (use-package slime
+  :after slime-company
   :mode "\\.lisp\\'"
   :commands slime
-  :after slime-company
   :config
   (setq inferior-lisp-program "sbcl --noinform")
   (slime-setup '(slime-fancy slime-company)))

@@ -7,7 +7,7 @@ let
     git = "hub";
     ls = "ls -CF --color=auto";
     nix-shell = "nix-shell --command zsh";
-    rsynca = "rsync -avzhP";
+    rsynca = "rsync -avzhP --delete";
   };
   bashConfig = builtins.replaceStrings [ "  " ] [ "\t" ] ''
     eval "$(dircolors "${dircolors}")"
