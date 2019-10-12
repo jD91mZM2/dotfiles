@@ -65,8 +65,12 @@ XF86AudioMute
         notify-send "Muted" -t 500; \
     fi
 
-# fixup monitors
+# focus mode
 super + Home
+    ~/.config/bspwm/focus-mode.sh
+
+# fixup monitors
+super + shift + Home
     ~/.config/bspwm/monitor-setup.sh
 
 # secret

@@ -32,12 +32,12 @@ bspc rule -a "Emacs" state=tiled desktop="Editor"
 #####################
 # Program autostart #
 #####################
+
 (
 cd
 # Setup
 
 xsetroot -cursor_name left_ptr
-~/.fehbg
 
 # Always running
 

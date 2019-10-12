@@ -115,31 +115,31 @@
   :config
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
-  (evil-global-set-key 'normal (kbd "M-n")
-                       (lambda ()
-                         "Interchange the next two arguments, leaving the point at the end of the latter"
-                         (interactive)
-                         (destructuring-bind (start1 end1 _) (evil-inner-arg)
-                           ;; Get the text of the first argument
-                           (let ((text1 (buffer-substring-no-properties start1 end1)))
-                             (evil-forward-arg 1)
+  (evil-define-key 'normal 'prog-mode-map (kbd "M-n")
+    (lambda ()
+      "Interchange the next two arguments, leaving the point at the end of the latter"
+      (interactive)
+      (destructuring-bind (start1 end1 _) (evil-inner-arg)
+        ;; Get the text of the first argument
+        (let ((text1 (buffer-substring-no-properties start1 end1)))
+          (evil-forward-arg 1)
 
-                             ;; Get the text of the second argument
-                             (let ((text2 (destructuring-bind (start2 end2 _) (evil-inner-arg)
-                                            (buffer-substring-no-properties start2 end2))))
+          ;; Get the text of the second argument
+          (let ((text2 (destructuring-bind (start2 end2 _) (evil-inner-arg)
+                         (buffer-substring-no-properties start2 end2))))
 
-                               ;; Replace the first
-                               (delete-region start1 end1)
-                               (save-excursion
-                                 (goto-char start1)
-                                 (insert text2)))
+            ;; Replace the first
+            (delete-region start1 end1)
+            (save-excursion
+              (goto-char start1)
+              (insert text2)))
 
-                             ;; Re-obtain text (because marks probably changed) and replace second
-                             (destructuring-bind (start2 end2 _) (evil-inner-arg)
-                               (delete-region start2 end2)
-                               (goto-char start2)
-                               (save-excursion
-                                 (insert text1))))))))
+          ;; Re-obtain text (because marks probably changed) and replace second
+          (destructuring-bind (start2 end2 _) (evil-inner-arg)
+            (delete-region start2 end2)
+            (goto-char start2)
+            (save-excursion
+              (insert text1))))))))
 (use-package evil-collection
   :after evil
   :config
@@ -244,7 +244,10 @@
   :custom ((ranger-override-dired 'ranger)
            (ranger-override-dired-mode t)))
 (use-package rustic
-  :mode ("\\.rs\\'" . rustic-mode))
+  :after smartparens-mode
+  :mode ("\\.rs\\'" . rustic-mode)
+  :config
+  (sp-local-pair 'rustic-mode "<" ">"))
 (use-package rust-playground
   :after rustic-mode
   :commands (rust-playground rust-playground-mode))

@@ -29,6 +29,9 @@ else
     bspc monitor primary -d ${m1[@]} ${m2[@]}
 fi
 
+# Update background
+feh --bg-fill ~/Pictures/Backgrounds/background.jpg --no-fehbg
+
 # Adopt nodes that aren't on any desktops now
 bspc desktop -f "^9"
 bspc wm -o
