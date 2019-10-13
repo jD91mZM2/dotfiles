@@ -65,9 +65,9 @@ in
   # Stable packages
   (with pkgs; [
     # My software
-    powerline-rs
-    termplay
-    xidlehook
+    local.powerline-rs
+    local.termplay
+    local.xidlehook
     # Other local overlays
     clangd
 
