@@ -65,9 +65,9 @@ in
   # Stable packages
   (with pkgs; [
     # My software
-    local.powerline-rs
     local.termplay
     local.xidlehook
+    local.xidlehook-client
     # Other local overlays
     clangd
 
@@ -102,17 +102,21 @@ in
     gitAndTools.hub
     ncftp
     neofetch
-    nix-review
     nixops
+    powerline-rs
     pv
     rclone
     rename
     ripgrep
     sqlite
-    weechat
-    youtube-dl
     tree
     units
+    weechat
+    youtube-dl
+
+    # Nix stuff
+    (import (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
+    nix-review
 
     # Languages
     cabal-install
@@ -124,6 +128,7 @@ in
     gdb
     ghc
     gnumake
+    nodejs
     pypi2nix
     (python3.withPackages (p: with p; [
       python-language-server
