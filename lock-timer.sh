@@ -26,7 +26,7 @@ xidlehook \
   --not-when-fullscreen \
   --not-when-audio \
   --socket /tmp/xidlehook.sock \
-  --timer normal 300 \
+  --timer 300 \
     'xrandr --output "$(xrandr | grep primary | cut -d " " -f 1)" --brightness .1' \
     'xrandr --output "$(xrandr | grep primary | cut -d " " -f 1)" --brightness 1' \
-  --timer primary 10 "$lock" ""
+  --timer 10 "$lock" ""

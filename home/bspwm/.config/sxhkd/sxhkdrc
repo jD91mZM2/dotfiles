@@ -21,7 +21,7 @@ super + z
 
 # lock the screen with xidlehook
 super + shift + l
-    xidlehook-client --trigger --socket /tmp/xidlehook.sock
+    xidlehook-client --socket /tmp/xidlehook.sock control --action trigger --timer 1
 
 # screenshotting
 Print
