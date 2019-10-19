@@ -12,7 +12,9 @@ let
         export RUSTC="${rust}/bin/rustc"
         "${rust}/bin/cargo" run -q \
           --manifest-path ${path}/Cargo.toml \
-          ${self.lib.escapeShellArgs args}
+          ${self.lib.escapeShellArgs args} -- \
+          `# ''${@@Q} quotes shell parameters: https://unix.stackexchange.com/a/458983` \
+          ''${@@Q}
       EOF
       )"
     '';
