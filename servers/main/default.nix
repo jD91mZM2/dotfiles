@@ -4,6 +4,10 @@ let
   shared = pkgs.callPackage <dotfiles/shared> {};
 
   # Packages
+  abottomod = shared.builders.buildPypiPackage {
+    name = "abottomod";
+    src = ~/Coding/Python/abottomod;
+  };
   timeywimey = shared.builders.buildPypiPackage {
     name = "timeywimey";
     src = ~/Coding/Python/timeywimey;
@@ -41,6 +45,7 @@ in {
 
   # Services
   custom.services = {
+    abottomod.script = "${abottomod}/bin/start";
     timeywimey.script = "${timeywimey}/bin/start";
     redox-world-map.script = "${redox-world-map}/bin/start";
   };

@@ -8,10 +8,9 @@ let
   shared = pkgs.callPackage <dotfiles/shared> {};
 in
 {
-  disabledModules = [
-    "system/boot/binfmt.nix"
-    "services/networking/syncthing.nix"
-  ];
+  # disabledModules = [
+  #   "my/module/here.nix"
+  # ];
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -24,8 +23,7 @@ in
     ./x11.nix
 
     # Unstable modules
-    <nixos-unstable/nixos/modules/services/networking/syncthing.nix>
-    <nixos-unstable/nixos/modules/system/boot/binfmt.nix>
+    # <nixos-unstable/nixos/my/module/here.nix>
   ];
 
   nix.nixPath = [

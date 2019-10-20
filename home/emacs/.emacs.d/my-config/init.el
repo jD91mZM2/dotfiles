@@ -119,10 +119,6 @@
 ;; |_|   \__,_|\___|_|\_\__,_|\__, |\___||___/
 ;;                            |___/
 
-;; https://www.reddit.com/r/emacs/comments/cdei4p/failed_to_download_gnu_archive_bad_request/?utm_source=share&utm_medium=web2x
-;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (setq package-enable-at-startup nil)

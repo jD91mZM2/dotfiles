@@ -2,12 +2,6 @@
 
 let
   shared = pkgs.callPackage <dotfiles/shared> {};
-
-  # Packages
-  abottomod = shared.builders.buildPypiPackage {
-    name = "abottomod";
-    src = ~/Coding/Python/abottomod;
-  };
 in
 {
   deployment = {
@@ -39,9 +33,6 @@ in
   networking.networkmanager.enable = true;
 
   # Services
-  custom.services = {
-    abottomod.script = "${abottomod}/bin/start";
-  };
   services.syncthing = {
     declarative.devices = shared.utils.without [ "rpi" ] shared.consts.syncthingDevices;
     relay = {

@@ -160,11 +160,11 @@ in
     };
     iconTheme = {
       name = "Yaru";
-      package = pkgs.yaru-theme-latest;
+      package = pkgs.yaru-theme;
     };
     theme = {
       name = "Yaru-dark";
-      package = pkgs.yaru-theme-latest;
+      package = pkgs.yaru-theme;
     };
   };
   qt = {

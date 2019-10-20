@@ -52,29 +52,26 @@ in
 
   # Unstable packages
   (with unstable; [
-    firefox
-    go
-    gotools
-    just
-    olive-editor # <- THIS IS AMAZING
-    superTuxKart
   ])
 
   ++
 
   # Stable packages
   (with pkgs; [
-    # My software
-    local.termplay
-    local.xidlehook
-    local.xidlehook-client
-    # Other local overlays
+    # Local overlays
     clangd
+
+    # My software
+    powerline-rs
+    termplay
+    xidlehook
 
     # Graphical applications
     abiword
+    firefox
     chromium
     gimp
+    olive-editor # <- THIS IS AMAZING
     inkscape
     keepassxc
     liferea
@@ -89,6 +86,7 @@ in
     torbrowser
     xorg.xev
     xorg.xwininfo
+    superTuxKart
 
     # Must have utils
     ascii
@@ -103,7 +101,6 @@ in
     ncftp
     neofetch
     nixops
-    powerline-rs
     pv
     rclone
     rename
@@ -112,10 +109,12 @@ in
     tree
     units
     weechat
+    just
     youtube-dl
 
     # Nix stuff
     (import (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
+    (import (builtins.fetchTarball https://github.com/kolloch/crate2nix/archive/master.tar.gz) {})
     nix-review
 
     # Languages
@@ -128,13 +127,15 @@ in
     gdb
     ghc
     gnumake
+    go
+    gotools
     nodejs
     pypi2nix
     (python3.withPackages (p: with p; [
       python-language-server
       tkinter
     ]))
-    ruby
+    # ruby
     rustup
     sbcl
 

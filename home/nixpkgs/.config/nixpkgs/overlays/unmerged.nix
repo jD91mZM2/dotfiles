@@ -13,7 +13,7 @@ let
   );
 in
 {
-  yaru-theme-latest = (
+  yaru-theme = (
     for-commit
       "817e74524f5582de19e94bd348a91aa5466a6faa"
       "1h8fzvvipiidj1gzmdgb776l7wkxq5wj22niilhx01m43v8sn4iq"
