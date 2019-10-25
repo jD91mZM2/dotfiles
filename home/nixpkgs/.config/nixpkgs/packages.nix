@@ -90,10 +90,7 @@ in
 
     # Must have utils
     ascii
-    asciinema
-    cdrkit
     ctags
-    docker_compose
     fd
     ffmpeg
     figlet
@@ -109,8 +106,13 @@ in
     tree
     units
     weechat
-    just
     youtube-dl
+
+    # Other CLI utils
+    asciinema
+    cdrkit
+    docker_compose
+    pandoc
 
     # Nix stuff
     (import (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
