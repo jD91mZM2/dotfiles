@@ -1,7 +1,4 @@
 { pkgs, ... }:
-let
-  unstable = import <nixos-unstable> {};
-in
 {
   # System overlays
   nixpkgs.overlays = [

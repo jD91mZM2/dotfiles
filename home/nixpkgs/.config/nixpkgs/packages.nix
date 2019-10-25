@@ -10,8 +10,6 @@
 # Answer is "preferrably no"? It's a system package.
 
 let
-  unstable = import <nixos-unstable> {};
-
   reminder = ''
 
       If it doesn't seem to work, make sure the remote's sshd_config
@@ -51,7 +49,7 @@ in
   ++
 
   # Unstable packages
-  (with unstable; [
+  (with pkgs.unstable; [
   ])
 
   ++
@@ -62,7 +60,7 @@ in
     clangd
 
     # My software
-    powerline-rs
+    unmerged.powerline-rs
     termplay
     (callPackage (builtins.fetchTarball https://gitlab.com/jD91mZM2/xidlehook/-/archive/master.tar.gz) {})
 
