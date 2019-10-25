@@ -64,7 +64,7 @@ in
     # My software
     powerline-rs
     termplay
-    xidlehook
+    (callPackage (builtins.fetchTarball https://gitlab.com/jD91mZM2/xidlehook/-/archive/master.tar.gz) {})
 
     # Graphical applications
     abiword
@@ -115,6 +115,7 @@ in
     # Nix stuff
     (import (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
     (import (builtins.fetchTarball https://github.com/kolloch/crate2nix/archive/master.tar.gz) {})
+    (import (builtins.fetchTarball https://github.com/nix-community/pypi2nix/archive/master.tar.gz) {})
     nix-review
 
     # Languages
@@ -130,7 +131,6 @@ in
     go
     gotools
     nodejs
-    pypi2nix
     (python3.withPackages (p: with p; [
       python-language-server
       tkinter

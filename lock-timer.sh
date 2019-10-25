@@ -24,7 +24,7 @@ EOF
 
 xidlehook \
   --not-when-fullscreen \
-  --not-when-audio \
+  `# --not-when-audio` \
   --socket /tmp/xidlehook.sock \
   --timer 300 \
     'xrandr --output "$(xrandr | grep primary | cut -d " " -f 1)" --brightness .1' \

@@ -14,7 +14,6 @@ in
   imports = [
     # Shared base settings
     ../base.nix
-    ../syncthing.nix
 
     # Generated hardware configuration
     ./hardware-configuration.nix
@@ -34,7 +33,12 @@ in
 
   # Services
   services.syncthing = {
-    declarative.devices = shared.utils.without [ "rpi" ] shared.consts.syncthingDevices;
+    enable = true;
+    declarative = {
+      overrideDevices = true;
+      overrideFolders = false;
+      devices = shared.utils.without [ "rpi" ] shared.consts.syncthingDevices;
+    };
     relay = {
       enable = true;
       port = 443;

@@ -13,9 +13,6 @@ in {
     # for testing certificates, toggle comment below:
     # production = false;
 
-    # Explicitly set this directory because it's used by email stuff
-    directory = "/var/lib/acme";
-
     certs."krake.one" = {
       email = shared.consts.email;
       webroot = "/var/www/challenges";

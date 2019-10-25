@@ -318,9 +318,8 @@ Toggle string casing
   :config
   (require 'sublimity-scroll)
   (sublimity-mode 1))
-(use-package tex
-  :mode "\\.tex\\'"
-  :ensure auctex ; I have no idea why using use-package auctex does not work
+(use-package auctex
+  :mode ("\\.tex\\'" . LaTeX-mode)
   :pin gnu)
 (use-package yaml-mode
   :mode "\\.yml\\'")

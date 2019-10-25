@@ -4,7 +4,7 @@
   cleanSource = (
     let
       excludes = [
-        ''^(.*\/)?target(\/.*)?$''
+        ''^(.*/)?target(/.*)?$''
         ''^.*\.sqlite$''
       ];
       shouldKeep = path: lib.all (regex: builtins.match regex path == null) excludes;

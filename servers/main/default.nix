@@ -32,15 +32,16 @@ in {
     };
   };
 
-  disabledModules = [ "services/networking/syncthing.nix" ];
   imports = [
     # Shared base settings
     ../base.nix
-    ../syncthing.nix
 
     # Files
     ./email.nix
     ./web.nix
+
+    # Unstable modules
+    # <nixos-unstable/nixos/modules/services/monitoring/do-agent.nix>
   ];
 
   # Services
@@ -50,12 +51,18 @@ in {
     redox-world-map.script = "${redox-world-map}/bin/start";
   };
   services.syncthing = {
-    declarative.devices = shared.utils.without [ "droplet" ] shared.consts.syncthingDevices;
+    enable = true;
+    declarative = {
+      overrideDevices = true;
+      overrideFolders = false;
+      devices = shared.utils.without [ "droplet" ] shared.consts.syncthingDevices;
+    };
     relay = {
       enable = true;
       providedBy = "krake.one on DigitalOcean";
     };
   };
+  # services.do-agent.enable = true;
   services.znc = {
     enable = true;
     useLegacyConfig = false;
