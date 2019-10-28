@@ -21,7 +21,6 @@
 (use-package chess
   :pin gnu)
 (use-package company
-  :after evil
   :config
   (global-company-mode 1)
   (setq company-idle-delay 0)
@@ -34,8 +33,6 @@
 (use-package company-lsp)
 (use-package counsel
   :demand t
-  :bind (("C-c j" . counsel-imenu)
-         ("C-c i" . counsel-info-lookup-symbol))
   :config
   (counsel-mode 1))
 (use-package direnv
@@ -49,6 +46,8 @@
   (setq edit-server-new-frame nil)
   (edit-server-start))
 (use-package evil
+  :demand t
+  :command evil-global-set-key
   :init
   (setq-default evil-want-keybinding nil)
   (setq-default evil-want-C-u-scroll t)
@@ -64,7 +63,7 @@
                                            (interactive)
                                            (beginning-of-line)
                                            (kill-line)))
-  (evil-global-set-key 'normal (kbd "gca")
+  (evil-global-set-key 'visual (kbd "gca")
                        (lambda (start end)
                          (interactive "r")
                          (shell-command-on-region start end "figlet" (current-buffer) t)
@@ -72,6 +71,10 @@
                          (whitespace-cleanup-region (region-beginning) (region-end))
                          (comment-region (region-beginning) (region-end))
                          (indent-region-line-by-line (region-beginning) (region-end))))
+  (evil-global-set-key 'visual (kbd "gc=")
+                       (lambda (start end)
+                         (interactive "r")
+                         (align-regexp start end "\\(\\s-*\\)=")))
   (evil-global-set-key 'normal (kbd "gyf") (lambda ()
                                              (interactive)
                                              (kill-new (buffer-file-name))
@@ -165,6 +168,7 @@
     (gist-region-private start end)))
 (use-package go-mode
   :mode "\\.go\\'"
+  :hook (go-mode . lsp)
   :init
   (defun goimports ()
     (interactive)
@@ -187,11 +191,14 @@
 (use-package ivy
   :config
   (ivy-mode 1))
+(use-package imenu-list
+  :bind ("C-c i" . imenu-list-smart-toggle))
 (use-package json-mode
   :mode "\\.json\\'")
 (use-package lsp-mode
   :bind ("C-c e" . lsp-extend-selection)
-  :hook ((go-mode nix-mode python-mode rustic-mode) . lsp)
+  :commands lsp
+  :hook (python-mode . lsp)
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-auto-guess-root t))
@@ -201,10 +208,16 @@
   :custom
   (lsp-ui-doc-max-width 50)
   (lsp-ui-doc-max-height 20))
+(use-package markdown-mode
+  :hook (markdown-mode . flycheck-mode)
+  :mode "\\.md\\'"
+  :custom
+  (markdown-header-scaling t))
 (use-package nasm-mode
   :hook (asm-mode . nasm-mode))
 (use-package nix-mode
   :after lsp-mode
+  :hook (nix-mode . lsp)
   :mode "\\.nix\\'"
   :config
   (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
@@ -244,7 +257,7 @@
   :custom ((ranger-override-dired 'ranger)
            (ranger-override-dired-mode t)))
 (use-package rustic
-  :after smartparens-mode
+  :hook (rustic-mode . lsp)
   :mode ("\\.rs\\'" . rustic-mode)
   :config
   (sp-local-pair 'rustic-mode "<" ">"))
@@ -262,6 +275,7 @@
 (use-package smartparens
   :after evil
   :demand t
+  :commands sp-local-pairs
   :bind (("C-M-l" . sp-forward-slurp-sexp)
          ("C-M-h" . sp-forward-barf-sexp))
   :config

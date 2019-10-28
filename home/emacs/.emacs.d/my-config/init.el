@@ -41,13 +41,14 @@
 
 ;; Editing options
 (setq-default c-basic-offset 4)
+(setq-default display-line-numbers-type 'relative)
+(setq-default glasses-uncapitalize-p t)
 (setq-default indent-tabs-mode nil)
 (setq-default require-final-newline t)
 (setq-default show-trailing-whitespace t)
 (setq-default tab-width 4)
 (setq-default truncate-lines t)
 (setq-default vc-follow-symlinks t)
-(setq-default display-line-numbers-type 'relative)
 
 (add-hook 'after-change-major-mode-hook
           (defun my/major-hook ()

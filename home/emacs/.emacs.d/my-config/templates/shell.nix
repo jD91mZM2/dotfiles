@@ -2,8 +2,8 @@
 
 pkgs.mkShell {
   # Things to be put in $PATH
-  nativeBuildInputs = [];
+  nativeBuildInputs = with pkgs; [];
 
   # Libraries to be installed
-  buildInputs = [];
+  buildInputs = with pkgs; [];
 }
