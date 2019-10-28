@@ -60,8 +60,10 @@ in
     clangd
 
     # My software
-    unmerged.powerline-rs
     termplay
+    unmerged.git-subcopy
+    unmerged.powerline-rs
+    unmerged.scaff
     (callPackage (builtins.fetchTarball https://gitlab.com/jD91mZM2/xidlehook/-/archive/master.tar.gz) {})
 
     # Graphical applications
@@ -113,9 +115,10 @@ in
     pandoc
 
     # Nix stuff
-    (import (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
-    (import (builtins.fetchTarball https://github.com/kolloch/crate2nix/archive/master.tar.gz) {})
-    (import (builtins.fetchTarball https://github.com/nix-community/pypi2nix/archive/master.tar.gz) {})
+    (callPackage (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
+    (callPackage (builtins.fetchTarball https://github.com/kolloch/crate2nix/archive/master.tar.gz) {})
+    (callPackage (builtins.fetchTarball https://github.com/nix-community/pypi2nix/archive/master.tar.gz) {})
+    nix-prefetch-scripts
     nix-review
 
     # Languages
@@ -130,6 +133,8 @@ in
     gnumake
     go
     gotools
+    mdl
+    multimarkdown
     nodejs
     (python3.withPackages (p: with p; [
       python-language-server
