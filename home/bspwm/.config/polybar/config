@@ -1,44 +1,43 @@
-# vim: set filetype=dosini:
 [colors]
 background = #70111111
-altbg = #900a0a0a
-altbg2 = #90050505
+altbg      = #900a0a0a
+altbg2     = #90050505
 
-focus = #f4c733
-warning = #cc3c18
+focus    = #f4c733
+warning  = #cc3c18
 inactive = #7e8281
 
 [bar/main]
-monitor = ${env:MONITOR}
+monitor    = ${env:MONITOR}
 background = ${colors.background}
-font-0 = "Hack:size=10;2"
-font-1 = "Font Awesome 5 Free Solid:size=10;2"
+font-0     = "Hack:size=10;2"
+font-1     = "Font Awesome 5 Free Solid:size=10;2"
 wm-restack = bspwm
-height = 30
-padding = 3
+height     = 30
+padding    = 3
 
-modules-left = bspwm
+modules-left  = bspwm
 modules-right = date alsa battery
 module-margin = 1
 tray-position = right
 
 [bar/secondary]
-monitor = ${env:MONITOR}
+monitor    = ${env:MONITOR}
 background = ${colors.background}
-font-0 = "Hack:size=10;2"
-font-1 = "Font Awesome 5 Free Solid:size=10;2"
+font-0     = "Hack:size=10;2"
+font-1     = "Font Awesome 5 Free Solid:size=10;2"
 wm-restack = bspwm
-height = 30
-padding = 3
+height     = 30
+padding    = 3
 
-modules-left = bspwm
+modules-left  = bspwm
 module-margin = 3
 
 [module/bspwm]
-type = internal/bspwm
+type                     = internal/bspwm
 label-focused-foreground = ${colors.focus}
 label-focused-background = ${colors.altbg}
-label-urgent-foreground = ${colors.warning}
+label-urgent-foreground  = ${colors.warning}
 
 ws-icon-0 = Terminal;
 ws-icon-1 = Editor;
@@ -50,53 +49,53 @@ ws-icon-6 = 7;7
 ws-icon-7 = Misc;
 ws-icon-8 = Message;
 
-label-empty =
-label-focused = %icon%
-label-urgent = %icon%
+label-empty    =
+label-focused  = %icon%
+label-urgent   = %icon%
 label-occupied = %icon%
 
-label-monitor-padding = 2
-label-dimmed-padding = 2
-label-focused-padding = 2
-label-occupied-padding = 2
-label-urgent-padding = 2
-label-empty-padding = 2
-label-monocle-padding = 2
-label-tiled-padding = 2
-label-fullscreen-padding = 2
-label-floating-padding = 2
+label-monitor-padding     = 2
+label-dimmed-padding      = 2
+label-focused-padding     = 2
+label-occupied-padding    = 2
+label-urgent-padding      = 2
+label-empty-padding       = 2
+label-monocle-padding     = 2
+label-tiled-padding       = 2
+label-fullscreen-padding  = 2
+label-floating-padding    = 2
 label-pseudotiled-padding = 2
-label-locked-padding = 2
-label-sticky-padding = 2
-label-private-padding = 2
+label-locked-padding      = 2
+label-sticky-padding      = 2
+label-private-padding     = 2
 
 [module/date]
-type = internal/date
-date = %b %d
-time = %I:%M %p
-label = %date% %time%
+type             = internal/date
+date             = %b %d
+time             = %I:%M %p
+label            = %date% %time%
 label-background = ${colors.background}
-interval = 30
+interval         = 30
 
 [module/alsa]
-type = internal/alsa
+type          = internal/alsa
 format-volume = <ramp-volume>
 
 label-muted = 
 
-bar-volume-width = 10
-bar-volume-empty = █
+bar-volume-width            = 10
+bar-volume-empty            = █
 bar-volume-empty-foreground = ${colors.inactive}
-bar-volume-fill = █
-bar-volume-indicator =
+bar-volume-fill             = █
+bar-volume-indicator        =
 
 ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
 
 [module/battery]
-type = internal/battery
-format-charging = <animation-charging> <label-charging>
+type               = internal/battery
+format-charging    = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 
 animation-charging-0 = 

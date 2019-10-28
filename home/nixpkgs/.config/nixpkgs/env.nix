@@ -8,7 +8,7 @@
 
   # Program configs
   RUST_BACKTRACE = "1";
-  GOPATH="$HOME/Coding/Go";
+  GOPATH = "$HOME/Coding/Go";
 
   # https://github.com/electron/electron/issues/8455
   ELECTRON_FORCE_WINDOW_MENU_BAR = "1";

@@ -32,9 +32,9 @@
   };
   virtualisation = {
     docker = {
-      enable = true;
+      enable           = true;
       autoPrune.enable = true;
-      storageDriver = "zfs";
+      storageDriver    = "zfs";
     };
     libvirtd.enable = true;
   };

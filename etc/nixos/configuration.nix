@@ -41,18 +41,18 @@ in
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # Misc. settings
-  documentation.dev.enable = true;
+  documentation.dev.enable  = true;
   hardware.bluetooth.enable = true;
   system.autoUpgrade.enable = true;
-  time.timeZone = "Europe/Stockholm";
+  time.timeZone             = "Europe/Stockholm";
 
   # systemd-boot
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable      = true;
 
   # TTY settings
   i18n = {
-    consoleFont = "Lat2-Terminus16";
+    consoleFont   = "Lat2-Terminus16";
     consoleKeyMap = "dvorak";
     defaultLocale = "en_US.UTF-8";
   };
@@ -70,8 +70,8 @@ in
   # User settings
   users.users."${shared.consts.user}" = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" "adbusers" ];
-    shell = pkgs.zsh;
+    extraGroups  = [ "wheel" "libvirtd" "adbusers" ];
+    shell        = pkgs.zsh;
   };
 
   # This value determines the NixOS release with which your system is to be

@@ -46,10 +46,10 @@ in
       # I never use these anyway, as everything I throw away goes in a
       # trashcan.
       frequent = 2;
-      hourly = 5;
-      daily = 3;
-      weekly = 2;
-      monthly = 0;
+      hourly   = 5;
+      daily    = 3;
+      weekly   = 2;
+      monthly  = 0;
     };
     autoScrub.enable = true;
   };
@@ -65,8 +65,8 @@ in
     };
     startAt = "04:00 PM";
     prune.keep = {
-      daily = 7;
-      weekly = 4;
+      daily   = 7;
+      weekly  = 4;
       monthly = 2;
     };
     postCreate = ''

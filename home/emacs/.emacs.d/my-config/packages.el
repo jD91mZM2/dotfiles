@@ -1,50 +1,7 @@
-(use-package base16-theme
-  :config
-  (load-theme 'base16-tomorrow-night t)
-  (defun my/reload-dark ()
-    (load-theme 'base16-tomorrow-night t)
-    (defun my/get-color (base)
-      (plist-get base16-tomorrow-night-colors base))
-    (modify-face 'trailing-whitespace (my/get-color :base00) (my/get-color :base08))
-    (modify-face 'line-number-current-line (my/get-color :base05) (my/get-color :base00) nil t)
-    (modify-face 'line-number (my/get-color :base04) (my/get-color :base00)))
-  (my/reload-dark)
-  (defun blind-me ()
-    (interactive)
-    (if (custom-theme-enabled-p 'base16-tomorrow-night)
-        (progn
-          (disable-theme 'base16-tomorrow-night)
-          (load-theme 'base16-tomorrow t))
-      (progn
-        (disable-theme 'base16-tomorrow)
-        (my/reload-dark)))))
-(use-package chess
-  :pin gnu)
-(use-package company
-  :config
-  (global-company-mode 1)
-  (setq company-idle-delay 0)
-  (evil-define-key 'insert 'company-mode-hook (kbd "C-n") 'company-select-next-if-tooltip-visible-or-complete-selection)
-  (evil-define-key 'insert 'company-mode-hook (kbd "C-p") 'company-select-previous))
-(use-package company-auctex)
-(use-package company-lsp)
-(use-package counsel
-  :demand t
-  :config
-  (counsel-mode 1))
-(use-package direnv
-  :config
-  (direnv-mode 1))
-(use-package dockerfile-mode
-  :mode "Dockerfile\\'")
-(use-package edit-indirect) ;; For editing blocks inside markdown!
-(use-package edit-server ;; https://www.emacswiki.org/emacs/Edit_with_Emacs
-  :config
-  (setq edit-server-new-frame nil)
-  (edit-server-start))
+;; Evil mode, definitions used by packages below
 (use-package evil
   :demand t
-  :command (evil-define-key evil-global-set-key)
+  :commands (evil-define-key evil-define-motion evil-global-set-key)
   :init
   (setq-default evil-want-keybinding nil)
   (setq-default evil-want-C-u-scroll t)
@@ -63,8 +20,13 @@
                          (comment-region (region-beginning) (region-end))
                          (indent-region-line-by-line (region-beginning) (region-end))))
   (evil-global-set-key 'normal (kbd "gc=")
-                       (evil-define-operator my/align (beg end)
+                       (evil-define-operator my/align-eq (beg end)
+                         ;; Align equal
                          (align-regexp beg end "\\(\\s-*\\)=")))
+  (evil-global-set-key 'normal (kbd "g c SPC")
+                       (evil-define-operator my/align-word (beg end)
+                         ;; Align all non-whitespace characters preceeded by at least 2 spaces
+                         (align-regexp beg end "\\(\\s-+\\)\\s-[^\\s-]" nil nil t)))
   (evil-global-set-key 'normal (kbd "gs")
                        (evil-define-operator my/sort (beg end)
                          (sort-lines nil beg end)))
@@ -116,8 +78,54 @@
   (advice-add 'evil-ex-search-activate-highlight :after 'my/stop-hl-timer)
 
   (evil-set-initial-state 'ses-mode 'emacs))
+
+;; Other packages
+
+(use-package base16-theme
+  :config
+  (load-theme 'base16-tomorrow-night t)
+  (defun my/reload-dark ()
+    (load-theme 'base16-tomorrow-night t)
+    (defun my/get-color (base)
+      (plist-get base16-tomorrow-night-colors base))
+    (modify-face 'trailing-whitespace (my/get-color :base00) (my/get-color :base08))
+    (modify-face 'line-number-current-line (my/get-color :base05) (my/get-color :base00) nil t)
+    (modify-face 'line-number (my/get-color :base04) (my/get-color :base00)))
+  (my/reload-dark)
+  (defun blind-me ()
+    (interactive)
+    (if (custom-theme-enabled-p 'base16-tomorrow-night)
+        (progn
+          (disable-theme 'base16-tomorrow-night)
+          (load-theme 'base16-tomorrow t))
+      (progn
+        (disable-theme 'base16-tomorrow)
+        (my/reload-dark)))))
+(use-package chess
+  :pin gnu)
+(use-package company
+  :config
+  (global-company-mode 1)
+  (setq company-idle-delay 0)
+  (evil-define-key 'insert 'company-mode-hook (kbd "C-n") 'company-select-next-if-tooltip-visible-or-complete-selection)
+  (evil-define-key 'insert 'company-mode-hook (kbd "C-p") 'company-select-previous))
+(use-package company-auctex)
+(use-package company-lsp)
+(use-package counsel
+  :demand t
+  :config
+  (counsel-mode 1))
+(use-package direnv
+  :config
+  (direnv-mode 1))
+(use-package dockerfile-mode
+  :mode "Dockerfile\\'")
+(use-package edit-indirect) ;; For editing blocks inside markdown!
+(use-package edit-server ;; https://www.emacswiki.org/emacs/Edit_with_Emacs
+  :config
+  (setq edit-server-new-frame nil)
+  (edit-server-start))
 (use-package evil-args
-  :after evil
   :config
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
@@ -147,15 +155,12 @@
             (save-excursion
               (insert text1))))))))
 (use-package evil-collection
-  :after evil
   :config
   (evil-collection-init))
 (use-package evil-easymotion
-  :after evil
   :config
   (evilem-default-keybindings "SPC"))
 (use-package evil-magit
-  :after evil
   :bind ("C-c g" . magit-status)
   :demand t)
 (use-package evil-surround
@@ -275,7 +280,6 @@
   (slime-setup '(slime-fancy slime-company)))
 (use-package slime-company)
 (use-package smartparens
-  :after evil
   :demand t
   :commands sp-local-pairs
   :bind (("C-M-l" . sp-forward-slurp-sexp)

@@ -43,16 +43,17 @@ in {
   # |_|  |_|\__,_|_|_| |_| |___/\___|_|    \_/ \___|_|
 
   services.nginx = {
-    enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
+    enable                   = true;
+    recommendedGzipSettings  = true;
+    recommendedOptimisation  = true;
     recommendedProxySettings = true;
-    recommendedTlsSettings = true;
+    recommendedTlsSettings   = true;
+
     virtualHosts = {
       "krake.one" = {
         useACMEHost = "krake.one";
-        acmeRoot = "/var/www/challenges";
-        forceSSL = true;
+        acmeRoot    = "/var/www/challenges";
+        forceSSL    = true;
 
         default = true;
         locations."/" = {
@@ -63,13 +64,13 @@ in {
       };
       "krake.one:1337" = {
         useACMEHost = "krake.one";
-        serverName = "krake.one";
-        onlySSL = true;
+        serverName  = "krake.one";
+        onlySSL     = true;
 
         listen = [{
           addr = "0.0.0.0";
           port = 1337;
-          ssl = true;
+          ssl  = true;
         }];
         locations."/" = {
           root = "/var/www/public";
@@ -80,8 +81,8 @@ in {
       };
       "mail.krake.one" = {
         useACMEHost = "mail.krake.one";
-        acmeRoot = "/var/www/challenges";
-        forceSSL = true;
+        acmeRoot    = "/var/www/challenges";
+        forceSSL    = true;
       };
       "krake.one:11694" = {
         listen = [{
@@ -97,8 +98,8 @@ in {
       };
       "redox-os.club" = {
         useACMEHost = "krake.one";
-        acmeRoot = "/var/www/challenges";
-        forceSSL = true;
+        acmeRoot    = "/var/www/challenges";
+        forceSSL    = true;
 
         locations."/" = {
           proxyPass = "http://localhost:22165";

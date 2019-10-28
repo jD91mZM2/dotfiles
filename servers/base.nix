@@ -16,15 +16,15 @@ in
   networking.firewall.enable = false;
   nix.gc = {
     automatic = true;
-    dates = "monthly";
-    options = "-d";
+    dates     = "monthly";
+    options   = "-d";
   };
 
   # OpenSSH settings
   services.openssh = {
-    enable = true;
-    forwardX11 = true;
-    gatewayPorts = "clientspecified";
+    enable                 = true;
+    forwardX11             = true;
+    gatewayPorts           = "clientspecified";
     passwordAuthentication = false;
   };
 

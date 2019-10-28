@@ -10,24 +10,24 @@ fi
 # BSPWM Settings #
 ##################
 bspc wm -h off
-bspc config border_width              1
-bspc config focus_follows_pointer     true
-bspc config pointer_follows_monitor   true
-bspc config remove_disabled_monitors  true
-bspc config remove_unplugged_monitors true
-bspc config window_gap                12
+bspc config  border_width               1
+bspc config  focus_follows_pointer      true
+bspc config  pointer_follows_monitor    true
+bspc config  remove_disabled_monitors   true
+bspc config  remove_unplugged_monitors  true
+bspc config  window_gap                 12
 
 ~/.config/bspwm/monitor-setup.sh
 
 bspc desktop "Message" -f -l monocle
 bspc desktop "Terminal" -f
 
-bspc rule -a "Chromium-browser" desktop="Message"
-bspc rule -a "Liferea" desktop="Message"
-bspc rule -a "Daily" desktop="Message"
-bspc rule -a "Qemu-system-x86_64" desktop="Misc" follow=on
-bspc rule -a "okular" desktop="Misc" follow=on
-bspc rule -a "Emacs" state=tiled desktop="Editor"
+bspc rule -a "Chromium-browser"    desktop="Message"
+bspc rule -a "Liferea"             desktop="Message"
+bspc rule -a "Daily"               desktop="Message"
+bspc rule -a "Qemu-system-x86_64"  desktop="Misc"  follow=on
+bspc rule -a "okular"              desktop="Misc"  follow=on
+bspc rule -a "Emacs"               desktop="Editor"  state=tiled
 
 #####################
 # Program autostart #

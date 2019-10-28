@@ -5,7 +5,7 @@ let
 in
 {
   deployment = {
-    targetEnv = "none";
+    targetEnv  = "none";
     targetHost = "192.168.2.42";
   };
 
@@ -22,9 +22,9 @@ in
   # Bootloader
   boot.loader.grub.enable = false;
   boot.loader.raspberryPi = {
-    enable = true;
+    enable       = true;
     uboot.enable = true;
-    version = 3;
+    version      = 3;
   };
 
   # Enable NetworkManager
@@ -37,11 +37,11 @@ in
     declarative = {
       overrideDevices = true;
       overrideFolders = false;
-      devices = shared.utils.without [ "rpi" ] shared.consts.syncthingDevices;
+      devices         = shared.utils.without [ "rpi" ] shared.consts.syncthingDevices;
     };
     relay = {
       enable = true;
-      port = 443;
+      port   = 443;
     };
   };
 }

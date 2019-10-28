@@ -6,15 +6,15 @@ let
   # Packages
   abottomod = shared.builders.buildPypiPackage {
     name = "abottomod";
-    src = ~/Coding/Python/abottomod;
+    src  = ~/Coding/Python/abottomod;
   };
   timeywimey = shared.builders.buildPypiPackage {
     name = "timeywimey";
-    src = ~/Coding/Python/timeywimey;
+    src  = ~/Coding/Python/timeywimey;
   };
   redox-world-map = shared.builders.buildRustPackage {
-    name = "redox-world-map";
-    src = ~/Coding/Web/redox-world-map;
+    name        = "redox-world-map";
+    src         = ~/Coding/Web/redox-world-map;
     buildInputs = with pkgs; [ pkgconfig openssl sqlite ];
     wrapperHook = ''
       ln -sf $out/src/Rocket.toml .
@@ -28,7 +28,7 @@ in {
     targetEnv = "digitalOcean";
     digitalOcean = {
       region = "ams3";
-      size = "s-1vcpu-1gb";
+      size   = "s-1vcpu-1gb";
     };
   };
 
@@ -46,8 +46,8 @@ in {
 
   # Services
   custom.services = {
-    abottomod.script = "${abottomod}/bin/start";
-    timeywimey.script = "${timeywimey}/bin/start";
+    abottomod.script       = "${abottomod}/bin/start";
+    timeywimey.script      = "${timeywimey}/bin/start";
     redox-world-map.script = "${redox-world-map}/bin/start";
   };
   services.syncthing = {
@@ -55,10 +55,10 @@ in {
     declarative = {
       overrideDevices = true;
       overrideFolders = false;
-      devices = shared.utils.without [ "droplet" ] shared.consts.syncthingDevices;
+      devices         = shared.utils.without [ "droplet" ] shared.consts.syncthingDevices;
     };
     relay = {
-      enable = true;
+      enable     = true;
       providedBy = "krake.one on DigitalOcean";
     };
   };
@@ -77,7 +77,7 @@ in {
         Port = 5000;
         IPv4 = true;
         IPv6 = true;
-        SSL = true;
+        SSL  = true;
       };
       User."${shared.consts.name}" = {
         Admin = true;

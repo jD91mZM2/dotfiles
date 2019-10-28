@@ -5,7 +5,7 @@
 }:
 
 {
-  consts = import ./consts.nix;
-  utils = callPackage ./utils.nix {};
+  consts   = import ./consts.nix;
+  utils    = callPackage ./utils.nix {};
   builders = callPackage ./builders {};
 }
