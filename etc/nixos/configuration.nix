@@ -16,6 +16,7 @@ in
     ./hardware-configuration.nix
 
     # Files
+    ./cachix.nix
     ./fonts.nix
     ./packages.nix
     ./services.nix
