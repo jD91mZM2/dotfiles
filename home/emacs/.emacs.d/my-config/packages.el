@@ -25,10 +25,7 @@
   (global-company-mode 1)
   (setq company-idle-delay 0)
   (evil-define-key 'insert 'company-mode-hook (kbd "C-n") 'company-select-next-if-tooltip-visible-or-complete-selection)
-  (evil-define-key 'insert 'company-mode-hook (kbd "C-p") 'company-select-previous)
-  (evil-global-set-key 'normal (kbd "gs")
-                       (evil-define-operator my/sort (beg end)
-                         (sort-lines nil beg end))))
+  (evil-define-key 'insert 'company-mode-hook (kbd "C-p") 'company-select-previous))
 (use-package company-auctex)
 (use-package company-lsp)
 (use-package counsel
@@ -47,7 +44,7 @@
   (edit-server-start))
 (use-package evil
   :demand t
-  :command evil-global-set-key
+  :command (evil-define-key evil-global-set-key)
   :init
   (setq-default evil-want-keybinding nil)
   (setq-default evil-want-C-u-scroll t)
@@ -56,6 +53,27 @@
   :config
   (evil-mode 1)
   (global-undo-tree-mode -1)
+
+  ;; Useful operators
+  (evil-global-set-key 'normal (kbd "gca")
+                       (evil-define-operator my/figlet (beg end)
+                         (shell-command-on-region beg end "figlet" (current-buffer) t)
+
+                         (whitespace-cleanup-region (region-beginning) (region-end))
+                         (comment-region (region-beginning) (region-end))
+                         (indent-region-line-by-line (region-beginning) (region-end))))
+  (evil-global-set-key 'normal (kbd "gc=")
+                       (evil-define-operator my/align (beg end)
+                         (align-regexp beg end "\\(\\s-*\\)=")))
+  (evil-global-set-key 'normal (kbd "gs")
+                       (evil-define-operator my/sort (beg end)
+                         (sort-lines nil beg end)))
+  (evil-global-set-key 'normal (kbd "gyf") (lambda ()
+                                             (interactive)
+                                             (kill-new (buffer-file-name))
+                                             (message "%s" (buffer-file-name))))
+
+  ;; Other useful shorthands
   (evil-global-set-key 'normal (kbd "gt") 'switch-to-buffer)
   (evil-global-set-key 'normal (kbd "gcc") 'comment-or-uncomment-region)
   (evil-global-set-key 'normal (kbd "gcw") 'delete-trailing-whitespace)
@@ -63,22 +81,8 @@
                                            (interactive)
                                            (beginning-of-line)
                                            (kill-line)))
-  (evil-global-set-key 'visual (kbd "gca")
-                       (lambda (start end)
-                         (interactive "r")
-                         (shell-command-on-region start end "figlet" (current-buffer) t)
 
-                         (whitespace-cleanup-region (region-beginning) (region-end))
-                         (comment-region (region-beginning) (region-end))
-                         (indent-region-line-by-line (region-beginning) (region-end))))
-  (evil-global-set-key 'visual (kbd "gc=")
-                       (lambda (start end)
-                         (interactive "r")
-                         (align-regexp start end "\\(\\s-*\\)=")))
-  (evil-global-set-key 'normal (kbd "gyf") (lambda ()
-                                             (interactive)
-                                             (kill-new (buffer-file-name))
-                                             (message "%s" (buffer-file-name))))
+  ;; Insert mode shortcuts
   (evil-global-set-key 'insert (kbd "C-c d")
                        (lambda (prefix)
                          (interactive "P")
@@ -89,7 +93,6 @@
                                              (hours   (/ minutes 60)))
                                         (concat "%FT%T" (format "%+.2d:%.2d" hours (% minutes 60))))
                                     "%F")))))
-
   (evil-global-set-key 'insert (kbd "C-c n")
                        (lambda (num)
                          (interactive "nInput start number: ")
@@ -216,7 +219,6 @@
 (use-package nasm-mode
   :hook (asm-mode . nasm-mode))
 (use-package nix-mode
-  :after lsp-mode
   :hook (nix-mode . lsp)
   :mode "\\.nix\\'"
   :config
@@ -226,9 +228,9 @@
                     :major-modes '(nix-mode)
                     :server-id 'nix))
   (setq nix-mode-use-smie t)
-  (define-key nix-mode-map (kbd "C-M-x") (lambda (start end)
+  (define-key nix-mode-map (kbd "C-M-x") (lambda (beg end)
                                              (interactive "r")
-                                             (shell-command-on-region start end "nix-instantiate --eval -")))
+                                             (shell-command-on-region beg end "nix-instantiate --eval -")))
   (define-key nix-mode-map (kbd "C-c m") (lambda ()
                                            (interactive)
                                            (load "man")
