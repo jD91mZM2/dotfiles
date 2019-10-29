@@ -254,7 +254,8 @@
 (use-package projectile
   :after projectile-ripgrep
   :demand t
-  :custom (projectile-completion-system 'ivy)
+  :custom ((projectile-completion-system 'ivy)
+           (projectile-project-search-path '("~/" "~/Coding/Rust/" "~/Coding/Rust/external/")))
   :config
   (projectile-mode 1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
