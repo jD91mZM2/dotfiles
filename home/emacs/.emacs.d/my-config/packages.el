@@ -107,10 +107,24 @@
   :config
   (global-company-mode 1)
   (setq company-idle-delay 0)
-  (evil-define-key 'insert 'company-mode-hook (kbd "C-n") 'company-select-next-if-tooltip-visible-or-complete-selection)
-  (evil-define-key 'insert 'company-mode-hook (kbd "C-p") 'company-select-previous))
-(use-package company-auctex)
-(use-package company-lsp)
+  (evil-define-key 'insert 'company-active-map (kbd "C-n") 'company-select-next-if-tooltip-visible-or-complete-selection)
+  (evil-define-key 'insert 'company-active-map (kbd "C-p") 'company-select-previous)
+  ;; <tab>    = Tab key when using graphical emacs
+  ;; TAB      = Tab key when using C-i or terminal emacs
+  ;; <return> = Return key when using graphical emacs
+  ;; RET      = Return key when using C-m or terminal emacs
+  (evil-define-key 'insert 'company-active-map (kbd "<tab>") 'company-indent-or-complete-common)
+  (evil-define-key 'insert 'company-active-map (kbd "TAB") 'company-indent-or-complete-common)
+  (evil-define-key 'insert 'company-active-map (kbd "C-<return>") 'company-complete-selection)
+  (evil-define-key 'insert 'company-active-map (kbd "C-RET") 'company-complete-selection))
+(use-package company-auctex
+  :after company)
+(use-package company-lsp
+  :after company)
+(use-package company-math
+  :after company
+  :config
+  (setq-default company-backends (cons 'company-math-symbols-unicode (default-value 'company-backends))))
 (use-package counsel
   :demand t
   :config
