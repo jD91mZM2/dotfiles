@@ -19,30 +19,40 @@
                          (whitespace-cleanup-region (region-beginning) (region-end))
                          (comment-region (region-beginning) (region-end))
                          (indent-region-line-by-line (region-beginning) (region-end))))
-  (evil-global-set-key 'normal (kbd "gc=")
-                       (evil-define-operator my/align-eq (beg end)
-                         ;; Align equal
-                         (align-regexp beg end "\\(\\s-*\\)=")))
-  (evil-global-set-key 'normal (kbd "g c SPC")
-                       (evil-define-operator my/align-word (beg end)
-                         ;; Align all non-whitespace characters preceeded by at least 2 spaces
-                         (align-regexp beg end "\\(\\s-+\\)\\s-[^\\s-]" nil nil t)))
   (evil-global-set-key 'normal (kbd "gs")
                        (evil-define-operator my/sort (beg end)
                          (sort-lines nil beg end)))
-  (evil-global-set-key 'normal (kbd "gyf") (lambda ()
-                                             (interactive)
-                                             (kill-new (buffer-file-name))
-                                             (message "%s" (buffer-file-name))))
+  (evil-global-set-key 'normal (kbd "gcc")
+                       (evil-define-operator my/comment (beg end)
+                         (comment-or-uncomment-region beg end)))
+
+  ;; Alignment stuff
+  (defmacro my/define-align (key function regexp docstring)
+    `(evil-global-set-key 'normal (kbd ,(concat "gc=" key))
+                       (evil-define-operator ,function (beg end)
+                         ,docstring
+                         (align-regexp beg end ,regexp nil nil t))))
+  (my/define-align "=" my/align-eq "\\(\\s-*\\)="
+                   "Align equal marks")
+  (my/define-align "," my/align-comma ",\\(\\s-*\\)[^[:space:]\n]"
+                   "Align all non-whitespace characters after a comma")
+  (my/define-align ":" my/align-colon ":\\(\\s-*\\)[^[:space:]\n]"
+                   "Align all non-whitespace characters after a colon")
+  (my/define-align " SPC" my/align-word "\\(\\s-+\\)\\s-[^[:space]\n]"
+                   "Align all non-whitespace characters preceeded by at least 2 spaces")
+
 
   ;; Other useful shorthands
   (evil-global-set-key 'normal (kbd "gt") 'switch-to-buffer)
-  (evil-global-set-key 'normal (kbd "gcc") 'comment-or-uncomment-region)
   (evil-global-set-key 'normal (kbd "gcw") 'delete-trailing-whitespace)
   (evil-global-set-key 'normal (kbd "D") (lambda ()
                                            (interactive)
                                            (beginning-of-line)
                                            (kill-line)))
+  (evil-global-set-key 'normal (kbd "gyf") (lambda ()
+                                             (interactive)
+                                             (kill-new (buffer-file-name))
+                                             (message "%s" (buffer-file-name))))
 
   ;; Insert mode shortcuts
   (evil-global-set-key 'insert (kbd "C-c d")
