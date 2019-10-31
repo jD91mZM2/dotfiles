@@ -32,11 +32,11 @@
                        (evil-define-operator ,function (beg end)
                          ,docstring
                          (align-regexp beg end ,regexp nil nil t))))
-  (my/define-align "=" my/align-eq "\\(\\s-*\\)="
-                   "Align equal marks")
+  (my/define-align "=" my/align-symbols "\\(\\s-*\\)[=/]+"
+                   "Align equal marks and comments")
   (my/define-align "," my/align-comma ",\\(\\s-*\\)[^[:space:]\n]"
                    "Align all non-whitespace characters after a comma")
-  (my/define-align ":" my/align-colon ":\\(\\s-*\\)[^[:space:]\n]"
+  (my/define-align ":" my/align-colon ":\\(\\s-+\\)[^[:space:]\n]"
                    "Align all non-whitespace characters after a colon")
   (my/define-align " SPC" my/align-word "\\(\\s-+\\)\\s-[^[:space]\n]"
                    "Align all non-whitespace characters preceeded by at least 2 spaces")
@@ -114,19 +114,18 @@
 (use-package chess
   :pin gnu)
 (use-package company
+  :commands (company-select-next company-select-previous)
   :config
   (global-company-mode 1)
   (setq company-idle-delay 0)
-  (evil-define-key 'insert 'company-active-map (kbd "C-n") 'company-select-next-if-tooltip-visible-or-complete-selection)
-  (evil-define-key 'insert 'company-active-map (kbd "C-p") 'company-select-previous)
-  ;; <tab>    = Tab key when using graphical emacs
-  ;; TAB      = Tab key when using C-i or terminal emacs
+
+  (define-key company-mode-map (kbd "M-/") 'company-indent-or-complete-common)
   ;; <return> = Return key when using graphical emacs
   ;; RET      = Return key when using C-m or terminal emacs
-  (evil-define-key 'insert 'company-active-map (kbd "<tab>") 'company-indent-or-complete-common)
-  (evil-define-key 'insert 'company-active-map (kbd "TAB") 'company-indent-or-complete-common)
-  (evil-define-key 'insert 'company-active-map (kbd "C-<return>") 'company-complete-selection)
-  (evil-define-key 'insert 'company-active-map (kbd "C-RET") 'company-complete-selection))
+  (define-key company-active-map (kbd "C-<return>") 'company-complete-selection)
+  (define-key company-active-map (kbd "C-RET") 'company-complete-selection)
+  (define-key company-active-map (kbd "C-n") 'company-select-next-if-tooltip-visible-or-complete-selection)
+  (define-key company-active-map (kbd "C-p") 'company-select-prev))
 (use-package company-auctex
   :after company)
 (use-package company-lsp
@@ -153,7 +152,7 @@
   :config
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
-  (evil-define-key 'normal 'prog-mode-map (kbd "M-n")
+  (evil-define-key 'normal prog-mode-map (kbd "M-n")
     (lambda ()
       "Interchange the next two arguments, leaving the point at the end of the latter"
       (interactive)
@@ -368,3 +367,19 @@ Toggle string casing
   :pin gnu)
 (use-package yaml-mode
   :mode "\\.yml\\'")
+(use-package yasnippet
+  :demand t
+  :config
+  (setq yas-snippet-dirs (list (my/relative "snippets")))
+  (yas-global-mode 1)
+
+  ;; Don't use TAB to trigger yasnippet
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "M-/") yas-maybe-expand)
+
+  ;; Don't use TAB for yasnippet navigation
+  (define-key yas-keymap (kbd "<tab>") nil)
+  (define-key yas-keymap (kbd "TAB") nil)
+  (define-key yas-keymap (kbd "C-n") (yas-filtered-definition 'yas-next-field-or-maybe-expand))
+  (define-key yas-keymap (kbd "C-p") (yas-filtered-definition 'yas-prev-field)))

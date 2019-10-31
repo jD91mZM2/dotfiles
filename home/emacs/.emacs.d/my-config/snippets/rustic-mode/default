@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Implement `Default` function for Rust
+# key: default
+# --
+
+impl Default for $0 {
+    fn default() -> Self {
+        Self {
+            $1
+        }
+    }
+}
+impl $0 {
+    /// Construct a new instance, same as `Self::default()`
+    fn new() -> Self {
+        Self::default()
+    }
+}
