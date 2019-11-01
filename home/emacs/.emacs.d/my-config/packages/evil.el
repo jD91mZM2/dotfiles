@@ -24,11 +24,11 @@
   (evil-global-set-key 'normal (kbd "gs,")
                        (evil-define-operator my/sort-fields (beg end)
                          ;; Invert casing
-                         (my/util/replace-region beg end (my/invert-case (buffer-substring-no-properties beg end)))
+                         (my/util/replace-region beg end (my/util/invert-case (buffer-substring-no-properties beg end)))
                          ;; Sort fields
                          (sort-regexp-fields nil "[a-zA-Z]+" "\\&" beg end)
                          ;; Invert casing back
-                         (my/util/replace-region beg end (my/invert-case (buffer-substring-no-properties beg end)))))
+                         (my/util/replace-region beg end (my/util/invert-case (buffer-substring-no-properties beg end)))))
   (evil-global-set-key 'normal (kbd "gcc")
                        (evil-define-operator my/comment (beg end)
                          (comment-or-uncomment-region beg end)))
@@ -45,7 +45,7 @@
                    "Align all non-whitespace characters after a comma")
   (my/define-align ":" my/align-colon ":\\(\\s-+\\)[^[:space:]\n]"
                    "Align all non-whitespace characters after a colon")
-  (my/define-align " SPC" my/align-word "\\(\\s-+\\)\\s-[^[:space]\n]"
+  (my/define-align " SPC" my/align-word "\\(\\s-+\\)\\s-[^[:space:]\n]"
                    "Align all non-whitespace characters preceeded by at least 2 spaces")
 
 

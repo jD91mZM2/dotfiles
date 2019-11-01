@@ -1,118 +1,6 @@
 (add-to-list 'load-path (locate-user-emacs-file "my-config") t)
 
-(defun my/relative (path)
-  "Convert a relative path to an absolute one"
-  (expand-file-name path (file-name-directory (or
-                                               ;; When loading the file
-                                               load-file-name
-                                               ;; When evaluating the file
-                                               buffer-file-name))))
-
-;;  _____                                        _   _
-;; | ____|_ __ ___   __ _  ___ ___    ___  _ __ | |_(_) ___  _ __  ___
-;; |  _| | '_ ` _ \ / _` |/ __/ __|  / _ \| '_ \| __| |/ _ \| '_ \/ __|
-;; | |___| | | | | | (_| | (__\__ \ | (_) | |_) | |_| | (_) | | | \__ \
-;; |_____|_| |_| |_|\__,_|\___|___/  \___/| .__/ \__|_|\___/|_| |_|___/
-;;                                        |_|
-
-;; Prevent emacs from writing stuff to this file. All customization
-;; options should be set from here, and all packages should be set
-;; using use-package.
-(setq custom-file "/dev/null")
-
-(setq backup-directory-alist `((".*" . ,(locate-user-emacs-file "backups/"))))
-(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t)))
-
-;; Fonts
-(when (member "Symbola" (font-family-list))
-  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
-
-(setq bookmark-save-flag t)
-(setq delete-by-moving-to-trash t)
-(setq inhibit-startup-screen t)
-(setq mouse-wheel-progressive-speed nil)
-
-;; Transparency!
-(add-to-list 'default-frame-alist '(alpha . 90)) ; default frame settings
-(set-frame-parameter (selected-frame) 'alpha 90) ; for current session
-
-;; Load file templates
-(load "templates")
-
-;; Editing options
-(setq-default c-basic-offset 4)
-(setq-default display-line-numbers-type 'relative)
-(setq-default glasses-uncapitalize-p t)
-(setq-default indent-tabs-mode nil)
-(setq-default require-final-newline t)
-(setq-default show-trailing-whitespace t)
-(setq-default tab-width 4)
-(setq-default truncate-lines t)
-(setq-default vc-follow-symlinks t)
-
-(add-hook 'after-change-major-mode-hook
-          (defun my/major-hook ()
-            (modify-syntax-entry ?_ "w"))) ; Make _ a word character in all syntaxes, like it is in vim
-
-(add-hook 'text-mode-hook (defun my/text-hook ()
-                            (auto-fill-mode 1)))
-
-(desktop-save-mode 1)
-(global-display-line-numbers-mode 1)
-(global-hl-line-mode 1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(xterm-mouse-mode 1)
-
-;; Keybindings
-
-;; Swap C-t and C-x to make it easier on dvorak. `key-translation-map`
-;; is applied early in the stack of keymaps and will work virtually
-;; everywhere. Using keyboard-translate is recommended by
-;; https://www.emacswiki.org/emacs/DvorakKeyboard, however, it does
-;; not work well with emacsclient.
-(define-key key-translation-map (kbd "C-t") (kbd "C-x"))
-(define-key key-translation-map (kbd "C-x") (kbd "C-t"))
-
-(define-key emacs-lisp-mode-map (kbd "C-c c") 'eval-buffer)
-(global-set-key (kbd "C-c b") 'bookmark-bmenu-list)
-(global-set-key (kbd "C-c c") 'recompile)
-(global-set-key (kbd "C-c s") 'eshell)
-
-(define-minor-mode keep-centered-mode
-  "Keep recentering the screen all the time why not"
-  :init-value nil
-  (add-hook 'post-command-hook
-          (defun my/keep-centered-hook ()
-            (when keep-centered-mode
-              (recenter nil)))))
-
-;; Hooks
-(add-hook 'term-mode-hook
-          (defun my/term-hook ()
-            (setq show-trailing-whitespace nil)))
-
-;; Commands
-(defun eshell/e (file)
-  (interactive)
-  (find-file file))
-(defun touch ()
-  (interactive)
-  (set-buffer-modified-p t)
-  (save-buffer))
-
-;; Set up emacsclient the way I want it
-(setq confirm-kill-emacs 'y-or-n-p)
-(server-start)
-(add-hook 'server-switch-hook
-          (defun my/server-switch-hook ()
-            ; Ask xdotool to switch to the emacs window
-            (let ((window-id (frame-parameter nil 'outer-window-id)))
-              (when window-id
-                (condition-case nil
-                    (call-process "xdotool" nil 0 nil "windowactivate" window-id)
-                  ('file-missing (message "Failed to execute xdotool, ignoring")))))))
+(load "utils")
 
 ;;  ____            _
 ;; |  _ \ __ _  ___| | ____ _  __ _  ___  ___
@@ -136,3 +24,167 @@
 
 (load "utils")
 (load "packages")
+
+;;  _____                                        _   _
+;; | ____|_ __ ___   __ _  ___ ___    ___  _ __ | |_(_) ___  _ __  ___
+;; |  _| | '_ ` _ \ / _` |/ __/ __|  / _ \| '_ \| __| |/ _ \| '_ \/ __|
+;; | |___| | | | | | (_| | (__\__ \ | (_) | |_) | |_| | (_) | | | \__ \
+;; |_____|_| |_| |_|\__,_|\___|___/  \___/| .__/ \__|_|\___/|_| |_|___/
+;;                                        |_|
+
+;; Prevent emacs from writing stuff to this file. All customization
+;; options should be set from here, and all packages should be set
+;; using use-package.
+(setq custom-file "/dev/null")
+
+(setq backup-directory-alist `((".*" . ,(locate-user-emacs-file "backups/"))))
+(setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t)))
+
+;; General options
+(setq-default bookmark-save-flag t)
+(setq-default delete-by-moving-to-trash t)
+(setq-default inhibit-startup-screen t)
+(setq-default mouse-wheel-progressive-speed nil)
+
+;; Load file templates
+(load "templates")
+
+;; Editing options
+(setq-default c-basic-offset 4)
+(setq-default indent-tabs-mode nil)
+(setq-default require-final-newline t)
+(setq-default tab-width 4)
+(setq-default truncate-lines t)
+(setq-default vc-follow-symlinks t)
+
+;;  ____  _         _ _
+;; / ___|| |_ _   _| (_)_ __   __ _
+;; \___ \| __| | | | | | '_ \ / _` |
+;;  ___) | |_| |_| | | | | | | (_| |
+;; |____/ \__|\__, |_|_|_| |_|\__, |
+;;            |___/           |___/
+
+(setq-default display-line-numbers-type 'relative)
+(setq-default glasses-uncapitalize-p t)
+(setq-default show-trailing-whitespace t)
+
+(global-display-line-numbers-mode 1)
+(global-hl-line-mode 1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+
+;; Fonts
+(when (member "Symbola" (font-family-list))
+  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+
+;; Transparency!
+(add-to-list 'default-frame-alist '(alpha . 90)) ; default frame settings
+(set-frame-parameter (selected-frame) 'alpha 90) ; for current session
+
+(desktop-save-mode 1)
+(xterm-mouse-mode 1)
+
+;;  _  __          _     _           _
+;; | |/ /___ _   _| |__ (_)_ __   __| |___
+;; | ' // _ \ | | | '_ \| | '_ \ / _` / __|
+;; | . \  __/ |_| | |_) | | | | | (_| \__ \
+;; |_|\_\___|\__, |_.__/|_|_| |_|\__,_|___/
+;;           |___/
+
+;; Swap C-t and C-x to make it easier on dvorak. `key-translation-map`
+;; is applied early in the stack of keymaps and will work virtually
+;; everywhere. Using keyboard-translate is recommended by
+;; https://www.emacswiki.org/emacs/DvorakKeyboard, however, it does
+;; not work well with emacsclient.
+(define-key key-translation-map (kbd "C-t") (kbd "C-x"))
+(define-key key-translation-map (kbd "C-x") (kbd "C-t"))
+
+(define-key emacs-lisp-mode-map (kbd "C-c c") 'eval-buffer)
+(global-set-key (kbd "C-c b") 'bookmark-bmenu-list)
+(global-set-key (kbd "C-c c") 'recompile)
+(global-set-key (kbd "C-c s") 'eshell)
+
+;;  __  __           _ _  __         _          _                 _
+;; |  \/  | ___   __| (_)/ _|_   _  | |__   ___| |__   __ ___   _(_) ___  _ __
+;; | |\/| |/ _ \ / _` | | |_| | | | | '_ \ / _ \ '_ \ / _` \ \ / / |/ _ \| '__|
+;; | |  | | (_) | (_| | |  _| |_| | | |_) |  __/ | | | (_| |\ V /| | (_) | |
+;; |_|  |_|\___/ \__,_|_|_|  \__, | |_.__/ \___|_| |_|\__,_| \_/ |_|\___/|_|
+;;                           |___/
+
+(add-hook 'after-change-major-mode-hook
+          (defun my/major-hook ()
+            (modify-syntax-entry ?_ "w"))) ; Make _ a word character in all syntaxes, like it is in vim
+
+(add-hook 'text-mode-hook (defun my/text-hook ()
+                            (auto-fill-mode 1)))
+
+(add-hook 'term-mode-hook
+          (defun my/term-hook ()
+            (setq show-trailing-whitespace nil)))
+
+
+;;   ____                                          _
+;;  / ___|___  _ __ ___  _ __ ___   __ _ _ __   __| |___
+;; | |   / _ \| '_ ` _ \| '_ ` _ \ / _` | '_ \ / _` / __|
+;; | |__| (_) | | | | | | | | | | | (_| | | | | (_| \__ \
+;;  \____\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_|___/
+
+;; Minor modes
+
+(define-minor-mode keep-centered-mode
+  "Keep recentering the screen all the time why not"
+  :init-value nil
+  (add-hook 'post-command-hook
+            (defun my/keep-centered-hook ()
+              (when keep-centered-mode
+                (recenter nil)))))
+
+;; Eshell commands
+
+(defun eshell/e (file)
+  "Eshell alias to open a file inside emacs"
+  (interactive)
+  (find-file file))
+
+;; Other commands
+
+(defun blind-me ()
+  "Toggle light theme for when the sun's too bright"
+  (interactive)
+  (if (custom-theme-enabled-p 'base16-tomorrow-night)
+      (progn
+        (disable-theme 'base16-tomorrow-night)
+        (load-theme 'base16-tomorrow t))
+    (progn
+      (disable-theme 'base16-tomorrow)
+      (my/reload-dark))))
+
+(defun touch ()
+  "Touch the current file"
+  (interactive)
+  (set-buffer-modified-p t)
+  (save-buffer))
+
+(defun uuid ()
+  "Insert a new random UUID"
+  (interactive)
+  (insert (uuid-string)))
+
+;;  _____                               _ _            _
+;; | ____|_ __ ___   __ _  ___ ___  ___| (_) ___ _ __ | |_
+;; |  _| | '_ ` _ \ / _` |/ __/ __|/ __| | |/ _ \ '_ \| __|
+;; | |___| | | | | | (_| | (__\__ \ (__| | |  __/ | | | |_
+;; |_____|_| |_| |_|\__,_|\___|___/\___|_|_|\___|_| |_|\__|
+
+;; Set up emacsclient the way I want it
+(setq confirm-kill-emacs 'y-or-n-p)
+(server-start)
+(add-hook 'server-switch-hook
+          (defun my/server-switch-hook ()
+            ;; Ask xdotool to switch to the emacs window
+            (let ((window-id (frame-parameter nil 'outer-window-id)))
+              (when window-id
+                (condition-case nil
+                    (call-process "xdotool" nil 0 nil "windowactivate" window-id)
+                  ('file-missing (message "Failed to execute xdotool, ignoring")))))))

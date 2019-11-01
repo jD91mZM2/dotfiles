@@ -1,0 +1,12 @@
+# -*- mode: snippet; require-final-newline: nil; -*-
+# name: thing.set_property(...)
+# key: set
+# --
+
+/// Setter for the inner $1
+pub fn set_$1<T>(&mut self, $1: T)
+where
+    T: Into<$2>
+{
+    self.$1 = $1.into()$0;
+}

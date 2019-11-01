@@ -1,5 +1,5 @@
-# -*- mode: snippet -*-
-# name: Rust struct definition
+# -*- mode: snippet; require-final-newline: nil; -*-
+# name: struct Thing { ... }
 # key: struct
 # --
 

@@ -1,5 +1,5 @@
-# -*- mode: snippet -*-
-# name: Implement `Default` function for Rust
+# -*- mode: snippet; require-final-newline: nil; -*-
+# name: impl Default
 # key: default
 # --
 
@@ -11,8 +11,8 @@ impl Default for $1 {
     }
 }
 impl $1 {
-    /// Construct a new instance, same as \`Self::default()\`
+    /// Construct a new instance, same as \`$1::default()\`
     pub fn new() -> Self {
-        Self::default()
+        Self::default()$0
     }
 }
