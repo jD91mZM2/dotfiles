@@ -9,7 +9,7 @@ pub struct $1 {
 impl $1 {
     pub fn new() -> Self {
         Self {
-            $0
+            ${2:$(replace-regexp-in-string "\\\\([a-zA-Z]+: [a-zA-Z]+\\\\).*" "\\\\1::default()," yas-text)}
         }
     }
 }

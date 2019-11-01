@@ -19,9 +19,17 @@
                          (whitespace-cleanup-region (region-beginning) (region-end))
                          (comment-region (region-beginning) (region-end))
                          (indent-region-line-by-line (region-beginning) (region-end))))
-  (evil-global-set-key 'normal (kbd "gs")
-                       (evil-define-operator my/sort (beg end)
+  (evil-global-set-key 'normal (kbd "gss")
+                       (evil-define-operator my/sort-lines (beg end)
                          (sort-lines nil beg end)))
+  (evil-global-set-key 'normal (kbd "gs,")
+                       (evil-define-operator my/sort-fields (beg end)
+                         ;; Invert casing
+                         (my/util/replace-region beg end (my/invert-case (buffer-substring-no-properties beg end)))
+                         ;; Sort fields
+                         (sort-regexp-fields nil "[a-zA-Z]+" "\\&" beg end)
+                         ;; Invert casing back
+                         (my/util/replace-region beg end (my/invert-case (buffer-substring-no-properties beg end)))))
   (evil-global-set-key 'normal (kbd "gcc")
                        (evil-define-operator my/comment (beg end)
                          (comment-or-uncomment-region beg end)))
@@ -29,9 +37,9 @@
   ;; Alignment stuff
   (defmacro my/define-align (key function regexp docstring)
     `(evil-global-set-key 'normal (kbd ,(concat "gc=" key))
-                       (evil-define-operator ,function (beg end)
-                         ,docstring
-                         (align-regexp beg end ,regexp nil nil t))))
+                          (evil-define-operator ,function (beg end)
+                            ,docstring
+                            (align-regexp beg end ,regexp nil nil t))))
   (my/define-align "=" my/align-symbols "\\(\\s-*\\)[=/]+"
                    "Align equal marks and comments")
   (my/define-align "," my/align-comma ",\\(\\s-*\\)[^[:space:]\n]"
@@ -91,6 +99,9 @@
 
 ;; Other packages
 
+(use-package aggressive-indent
+  :config
+  (global-aggressive-indent-mode 1))
 (use-package base16-theme
   :config
   (load-theme 'base16-tomorrow-night t)
@@ -119,7 +130,10 @@
   (global-company-mode 1)
   (setq company-idle-delay 0)
 
-  (define-key company-mode-map (kbd "M-/") 'company-indent-or-complete-common)
+  ;; <tab>    = Tab key when using graphical emacs
+  ;; TAB      = Tab key when using C-i or terminal emacs
+  (define-key company-mode-map (kbd "M-<tab>") 'company-indent-or-complete-common)
+  (define-key company-mode-map (kbd "M-TAB") 'company-indent-or-complete-common)
   ;; <return> = Return key when using graphical emacs
   ;; RET      = Return key when using C-m or terminal emacs
   (define-key company-active-map (kbd "C-<return>") 'company-complete-selection)
@@ -153,30 +167,31 @@
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
   (evil-define-key 'normal prog-mode-map (kbd "M-n")
-    (lambda ()
+    (defun my/transpose-args ()
       "Interchange the next two arguments, leaving the point at the end of the latter"
       (interactive)
-      (destructuring-bind (start1 end1 _) (evil-inner-arg)
+      (destructuring-bind (beg1 end1 _) (evil-inner-arg)
         ;; Get the text of the first argument
-        (let ((text1 (buffer-substring-no-properties start1 end1)))
+        (let ((text1 (buffer-substring-no-properties beg1 end1)))
           (evil-forward-arg 1)
 
           ;; Get the text of the second argument
-          (let ((text2 (destructuring-bind (start2 end2 _) (evil-inner-arg)
-                         (buffer-substring-no-properties start2 end2))))
+          (let ((text2 (destructuring-bind (beg2 end2 _) (evil-inner-arg)
+                         (buffer-substring-no-properties beg2 end2))))
 
             ;; Replace the first
-            (delete-region start1 end1)
-            (save-excursion
-              (goto-char start1)
-              (insert text2)))
+            (my/util/replace-region beg1 end1 text2)
 
-          ;; Re-obtain text (because marks probably changed) and replace second
-          (destructuring-bind (start2 end2 _) (evil-inner-arg)
-            (delete-region start2 end2)
-            (goto-char start2)
-            (save-excursion
-              (insert text1))))))))
+            ;; Re-obtain text (because marks probably changed) and replace second
+            (destructuring-bind (beg2 end2 _) (evil-inner-arg)
+              (my/util/replace-region beg2 end2 text1)))))))
+  (evil-define-key 'normal prog-mode-map (kbd "M-p")
+    (lambda ()
+      "Interchange the next two arguments, leaving the point at the end of the latter"
+      (interactive)
+      (evil-backward-arg 1)
+      (my/transpose-args)
+      (evil-backward-arg 1))))
 (use-package evil-collection
   :config
   (evil-collection-init))
@@ -371,15 +386,4 @@ Toggle string casing
   :demand t
   :config
   (setq yas-snippet-dirs (list (my/relative "snippets")))
-  (yas-global-mode 1)
-
-  ;; Don't use TAB to trigger yasnippet
-  (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "M-/") yas-maybe-expand)
-
-  ;; Don't use TAB for yasnippet navigation
-  (define-key yas-keymap (kbd "<tab>") nil)
-  (define-key yas-keymap (kbd "TAB") nil)
-  (define-key yas-keymap (kbd "C-n") (yas-filtered-definition 'yas-next-field-or-maybe-expand))
-  (define-key yas-keymap (kbd "C-p") (yas-filtered-definition 'yas-prev-field)))
+  (yas-global-mode 1))

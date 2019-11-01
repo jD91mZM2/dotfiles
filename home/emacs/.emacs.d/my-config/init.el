@@ -57,6 +57,7 @@
 (add-hook 'text-mode-hook (defun my/text-hook ()
                             (auto-fill-mode 1)))
 
+(desktop-save-mode 1)
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
 (menu-bar-mode -1)
@@ -132,4 +133,6 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 (setq use-package-always-pin "melpa")
+
+(load "utils")
 (load "packages")

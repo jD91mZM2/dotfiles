@@ -3,16 +3,16 @@
 # key: default
 # --
 
-impl Default for $0 {
+impl Default for $1 {
     fn default() -> Self {
         Self {
-            $1
+            $0
         }
     }
 }
-impl $0 {
-    /// Construct a new instance, same as `Self::default()`
-    fn new() -> Self {
+impl $1 {
+    /// Construct a new instance, same as \`Self::default()\`
+    pub fn new() -> Self {
         Self::default()
     }
 }
