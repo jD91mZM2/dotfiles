@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil; -*-
+# name: use crate::{package};
+# key: use
+# --
+
+use $1::{
+    $0,
+};

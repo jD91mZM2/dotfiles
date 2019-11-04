@@ -1,0 +1,17 @@
+# -*- mode: snippet; require-final-newline: nil; -*-
+# name: impl Deref
+# key: deref
+# --
+
+impl Deref for $1 {
+    type Target = $2;
+
+    fn deref(&self) -> &Self::Target {
+        &$3$0
+    }
+}
+impl DerefMut for $1 {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut $3
+    }
+}

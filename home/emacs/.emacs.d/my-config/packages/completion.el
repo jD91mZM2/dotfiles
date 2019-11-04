@@ -26,5 +26,5 @@
 (use-package yasnippet
   :demand t
   :config
-  (setq yas-snippet-dirs (list (my/util/relative "snippets")))
+  (setq yas-snippet-dirs (list (my/util/relative "../snippets")))
   (yas-global-mode 1))

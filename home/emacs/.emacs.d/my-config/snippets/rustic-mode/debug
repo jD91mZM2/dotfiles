@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil; -*-
+# name: impl Debug
+# key: debug
+# --
+
+impl fmt::Debug for $1 {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self.$0)
+    }
+}

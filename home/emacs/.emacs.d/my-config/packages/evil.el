@@ -10,6 +10,14 @@
   (evil-mode 1)
   (global-undo-tree-mode -1)
 
+  (defun my/with-inverted-case (beg end inner)
+    ;; Invert casing
+    (my/util/replace-region beg end (my/util/invert-case (buffer-substring-no-properties beg end)))
+    ;; Execute inner function
+    (funcall inner)
+    ;; Invert casing back
+    (my/util/replace-region beg end (my/util/invert-case (buffer-substring-no-properties beg end))))
+
   ;; Useful operators
   (evil-global-set-key 'normal (kbd "gca")
                        (evil-define-operator my/figlet (beg end)
@@ -20,22 +28,19 @@
                          (indent-region-line-by-line (region-beginning) (region-end))))
   (evil-global-set-key 'normal (kbd "gss")
                        (evil-define-operator my/sort-lines (beg end)
-                         (sort-lines nil beg end)))
+                         (my/with-inverted-case beg end (lambda ()
+                                                          (sort-lines nil beg end)))))
   (evil-global-set-key 'normal (kbd "gs,")
                        (evil-define-operator my/sort-fields (beg end)
-                         ;; Invert casing
-                         (my/util/replace-region beg end (my/util/invert-case (buffer-substring-no-properties beg end)))
-                         ;; Sort fields
-                         (sort-regexp-fields nil "[a-zA-Z]+" "\\&" beg end)
-                         ;; Invert casing back
-                         (my/util/replace-region beg end (my/util/invert-case (buffer-substring-no-properties beg end)))))
+                         (my/with-inverted-case beg end (lambda ()
+                                                          (sort-regexp-fields nil "[a-zA-Z]+" "\\&" beg end)))))
   (evil-global-set-key 'normal (kbd "gcc")
                        (evil-define-operator my/comment (beg end)
                          (comment-or-uncomment-region beg end)))
 
   ;; Alignment stuff
   (defmacro my/define-align (key function regexp docstring)
-    `(evil-global-set-key 'normal (kbd ,(concat "gc=" key))
+    `(evil-global-set-key 'normal (kbd ,(concat "g=" key))
                           (evil-define-operator ,function (beg end)
                             ,docstring
                             (align-regexp beg end ,regexp nil nil t))))
