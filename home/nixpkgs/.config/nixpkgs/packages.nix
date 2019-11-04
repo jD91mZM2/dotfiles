@@ -75,7 +75,6 @@ in
     inkscape
     keepassxc
     liferea
-    maim
     mpv
     multimc
     musescore
@@ -112,6 +111,7 @@ in
     asciinema
     cdrkit
     docker_compose
+    imagemagick
     pandoc
 
     # Nix stuff
