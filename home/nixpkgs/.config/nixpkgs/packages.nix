@@ -113,6 +113,7 @@ in
     docker_compose
     imagemagick
     pandoc
+    whois
 
     # Nix stuff
     (callPackage (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix

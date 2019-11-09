@@ -9,16 +9,17 @@
 ;; |_|   \__,_|\___|_|\_\__,_|\__, |\___||___/
 ;;                            |___/
 
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(setq package-enable-at-startup nil)
-(package-initialize)
+(eval-when-compile
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  (setq package-enable-at-startup nil)
+  (package-initialize)
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
 
-(require 'use-package)
+  (require 'use-package))
 (setq use-package-always-ensure t)
 (setq use-package-always-pin "melpa")
 
@@ -123,6 +124,9 @@
           (defun my/term-hook ()
             (setq show-trailing-whitespace nil)))
 
+(add-hook 'desktop-after-read-hook
+          (defun my/desktop-read-hook ()
+            (clean-buffer-list)))
 
 ;;   ____                                          _
 ;;  / ___|___  _ __ ___  _ __ ___   __ _ _ __   __| |___
