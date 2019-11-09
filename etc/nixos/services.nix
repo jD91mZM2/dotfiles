@@ -56,14 +56,13 @@ in
   services.borgbackup.jobs.main = let
     repo = "${shared.consts.home}/backup";
   in {
-    paths = map (s: "${shared.consts.home}/${s}") [ "Coding" "dotfiles" "servers" "Nextcloud" "Pictures" ];
+    paths = map (s: "${shared.consts.home}/${s}") [ "dotfiles" "Coding" "Pictures" "Sync" ];
     inherit repo;
-    doInit = true;
     encryption = {
       mode = "repokey";
       passCommand = "cat /root/borg-passphrase";
     };
-    startAt = "04:00 PM";
+    startAt = "16:00";
     prune.keep = {
       daily   = 7;
       weekly  = 4;
