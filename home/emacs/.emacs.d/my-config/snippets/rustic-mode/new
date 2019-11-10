@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil; -*-
+# name: fn new() -> Self
+# key: new
+# --
+
+/// Construct a new instance, same as \`$1::default()\`
+pub fn new() -> Self {
+    Self::default()$0
+}
