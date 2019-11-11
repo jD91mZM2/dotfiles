@@ -1,11 +1,20 @@
-[colors]
-background = #70111111
-altbg      = #900a0a0a
-altbg2     = #90050505
+# Colors taken from dracula:
+# https://github.com/dracula/dracula-theme
+# One tiny difference: Background opacity
 
-focus    = #f4c733
-warning  = #cc3c18
-inactive = #7e8281
+[colors]
+background   = #90282a36
+current-line = #7044475a
+selection    = #44475a
+foreground   = #f8f8f2
+comment      = #6272a4
+cyan         = #8be9fd
+green        = #50fa7b
+orange       = #ffb86c
+pink         = #ff79c6
+purple       = #bd93f9
+red          = #ff5555
+yellow       = #f1fa8c
 
 [bar/main]
 monitor    = ${env:MONITOR}
@@ -35,9 +44,9 @@ module-margin = 3
 
 [module/bspwm]
 type                     = internal/bspwm
-label-focused-foreground = ${colors.focus}
-label-focused-background = ${colors.altbg}
-label-urgent-foreground  = ${colors.warning}
+label-focused-foreground = ${colors.orange}
+label-focused-background = ${colors.current-line}
+label-urgent-foreground  = ${colors.red}
 
 ws-icon-0 = Terminal;
 ws-icon-1 = Editor;
@@ -85,7 +94,7 @@ label-muted = 
 
 bar-volume-width            = 10
 bar-volume-empty            = █
-bar-volume-empty-foreground = ${colors.inactive}
+bar-volume-empty-foreground = ${colors.comment}
 bar-volume-fill             = █
 bar-volume-indicator        =
 
