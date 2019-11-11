@@ -55,7 +55,6 @@
 (setq-default indent-tabs-mode nil)
 (setq-default require-final-newline t)
 (setq-default tab-width 4)
-(setq-default truncate-lines t)
 (setq-default vc-follow-symlinks t)
 
 ;;  ____  _         _ _
@@ -152,17 +151,6 @@
   (find-file file))
 
 ;; Other commands
-
-(defun blind-me ()
-  "Toggle light theme for when the sun's too bright"
-  (interactive)
-  (if (custom-theme-enabled-p 'base16-tomorrow-night)
-      (progn
-        (disable-theme 'base16-tomorrow-night)
-        (load-theme 'base16-tomorrow t))
-    (progn
-      (disable-theme 'base16-tomorrow)
-      (my/reload-dark))))
 
 (defun touch ()
   "Touch the current file"

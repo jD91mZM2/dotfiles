@@ -12,13 +12,14 @@ let
   bashConfig = builtins.replaceStrings [ "  " ] [ "\t" ] ''
     eval "$(dircolors "${dircolors}")"
   '';
-  dircolors = pkgs.fetchFromGitHub {
-    owner  = "dotphiles";
-    repo   = "dotzsh";
-    rev    = "2.1.3";
 
-    sha256 = "0h95s5gvn08m4y11gb82anx8s9s2ywaks15idawxdg5bibjav79l";
-  } + "/themes/dotphiles/dircolors/dircolors.base16.dark";
+  dircolors = pkgs.fetchFromGitHub {
+    owner  = "joshbenham";
+    repo   = "linux-dotfiles";
+    rev    = "67641154e7befa67527f73a6cbf64b36e15641ca";
+
+    sha256 = "0hvnbc2wlx6j0p4k1znx72ma9rnvf55b9mcfays3pdn80qsx9s8q";
+  } + "/dircolors/Dracula.dircolors";
 
   shared = pkgs.callPackage <dotfiles/shared> {};
 in
@@ -36,11 +37,12 @@ in
     # Add kitty theme here, but don't add kitty config. Pinging
     # home-manager on every tiny config change isn't desirable here.
     ".config/kitty/theme.conf".source = (pkgs.fetchFromGitHub {
-      owner  = "kdrag0n";
-      repo   = "base16-kitty";
-      rev    = "858b3e36549e0415623218caa6f0a8d7a1f5edab";
-      sha256 = "0x449q9b75fql1hp9ryak7jd63x47480x1k9fgvasdgg0bpdm03k";
-    }) + "/colors/base16-tomorrow-night.conf";
+      owner  = "dracula";
+      repo   = "kitty";
+      rev    = "5986829ce6897f0775529b6fbe9169f909ef209f";
+
+      sha256 = "0xv8klvrwd68k589i4kihdl3mkgkaflh7j6iaxig6p52rw18636y";
+    }) + "/dracula.conf";
 
     "Pictures/Backgrounds/background.jpg".source = pkgs.my-background;
     "Pictures/Backgrounds/background-focus.jpg".source = pkgs.my-background-focus;
@@ -81,7 +83,7 @@ in
       }
       precmd_functions+=(powerline)
 
-      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=10"
+      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=#${shared.theme.current-line},fg=#${shared.theme.comment}"
     '';
   };
 
@@ -136,21 +138,22 @@ in
     '';
   };
   xresources = {
-    extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
-      owner  = "chriskempson";
-      repo   = "base16-xresources";
-      rev    = "79e6e1de591f7444793fd8ed38b67ce7fce25ab6";
+    # (...)s around the expression just for my editor's sake.
+      extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
+        owner  = "dracula";
+        repo   = "xresources";
+        rev    = "ca0d05cf2b7e5c37104c6ad1a3f5378b72c705db";
 
-      sha256 = "1nnj5py5n0m8rkq3ic01wzyzkgl3g9a8q5dc5pcgj3qr47hhddbw";
-    } + "/xresources/base16-default-dark.Xresources");
-    properties = {
-      "XTerm.termName"          = "xterm-256color";
-      "XTerm.vt100.faceName"    = "Hack:size=10";
+        sha256 = "0ywkf2bzxkr45a0nmrmb2j3pp7igx6qvq6ar0kk7d5wigmkr9m5n";
+      } + "/Xresources");
+      properties = {
+        "XTerm.termName"          = "xterm-256color";
+        "XTerm.vt100.faceName"    = "Hack:size=10";
 
-      # Sixel stuff
-      "XTerm*decTerminalID"     = "vt340";
-      "XTerm*numColorRegisters" = 256;
-    };
+        # Sixel stuff
+        "XTerm*decTerminalID"     = "vt340";
+        "XTerm*numColorRegisters" = 256;
+      };
   };
   gtk = {
     enable = true;

@@ -6,18 +6,10 @@
 
 ;; Styling
 
-(use-package base16-theme
+(use-package dracula-theme
   :demand t
   :config
-  (load-theme 'base16-tomorrow-night t)
-  (defun my/reload-dark ()
-    (load-theme 'base16-tomorrow-night t)
-    (defun my/get-color (base)
-      (plist-get base16-tomorrow-night-colors base))
-    (modify-face 'trailing-whitespace (my/get-color :base00) (my/get-color :base08))
-    (modify-face 'line-number-current-line (my/get-color :base05) (my/get-color :base00) nil t)
-    (modify-face 'line-number (my/get-color :base04) (my/get-color :base00)))
-  (my/reload-dark))
+  (load-theme 'dracula t))
 
 (use-package powerline
   :demand t

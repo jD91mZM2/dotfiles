@@ -1,4 +1,8 @@
 { pkgs, ... }:
+
+let
+  shared = pkgs.callPackage <dotfiles/shared> {};
+in
 {
   enable = true;
   iconTheme = {
@@ -39,20 +43,20 @@
     };
 
     urgency_low = {
-      background  = "#101010";
-      foreground  = "#ffffff";
+      background  = "#${shared.theme.background}";
+      foreground  = "#${shared.theme.comment}";
       frame_color = "#101010";
       timeout     = 10;
     };
     urgency_normal = {
-      background  = "#000000";
-      foreground  = "#ffffff";
+      background  = "#${shared.theme.background}";
+      foreground  = "#${shared.theme.foreground}";
       frame_color = "#000000";
       timeout     = 10;
     };
     urgency_critical = {
-      background  = "#900000";
-      foreground  = "#ffffff";
+      background  = "#${shared.theme.current-line}";
+      foreground  = "#${shared.theme.red}";
       frame_color = "#900000";
       timeout     = 0;
     };
