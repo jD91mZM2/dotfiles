@@ -33,7 +33,7 @@
   (evil-global-set-key 'normal (kbd "gs,")
                        (evil-define-operator my/sort-fields (beg end)
                          (my/with-inverted-case beg end (lambda ()
-                                                          (sort-regexp-fields nil "[a-zA-Z]+" "\\&" beg end)))))
+                                                          (sort-regexp-fields nil "[a-zA-Z0-9-_]+" "\\&" beg end)))))
   (evil-global-set-key 'normal (kbd "gcc")
                        (evil-define-operator my/comment (beg end)
                          (comment-or-uncomment-region beg end)))
