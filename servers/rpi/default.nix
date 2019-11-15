@@ -39,9 +39,5 @@ in
       overrideFolders = false;
       devices         = shared.utils.without [ "rpi" ] shared.consts.syncthingDevices;
     };
-    relay = {
-      enable = true;
-      port   = 443;
-    };
   };
 }
