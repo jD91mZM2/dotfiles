@@ -19,7 +19,7 @@ done
 env MONITOR=${monitors[0]} polybar main &
 
 # Update desktops
-m1=("Terminal" "Editor" "Main" "4" "5" "6" "7")
+m1=("Terminal" "Editor" "Primary" "Secondary" "5" "6" "7")
 m2=("Misc" "Message")
 if [ -n "$(bspc query -M primary#next)" ]; then
     bspc monitor primary#next  -d ${m2[@]}

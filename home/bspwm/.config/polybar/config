@@ -50,8 +50,8 @@ label-urgent-foreground  = ${colors.red}
 
 ws-icon-0 = Terminal;
 ws-icon-1 = Editor;
-ws-icon-2 = Main;
-ws-icon-3 = 4;
+ws-icon-2 = Primary;
+ws-icon-3 = Secondary;
 ws-icon-4 = 5;5
 ws-icon-5 = 6;6
 ws-icon-6 = 7;7
