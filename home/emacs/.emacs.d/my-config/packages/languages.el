@@ -102,11 +102,6 @@
   :custom ((org-startup-indented t)
            (org-startup-folded nil)))
 
-;; Python
-(use-package python-mode
-  :mode "\\.py\\'"
-  :hook (python-mode . lsp))
-
 ;; Rust
 (use-package rustic
   :hook (rustic-mode . lsp)

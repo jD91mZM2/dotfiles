@@ -44,7 +44,7 @@ module-margin = 3
 
 [module/bspwm]
 type                     = internal/bspwm
-label-focused-foreground = ${colors.orange}
+label-focused-foreground = ${colors.purple}
 label-focused-background = ${colors.current-line}
 label-urgent-foreground  = ${colors.red}
 

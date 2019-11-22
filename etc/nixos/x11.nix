@@ -34,11 +34,11 @@
           enable = true;
           theme = {
             name = "Yaru-dark";
-            package = pkgs.unmerged.yaru-theme;
+            package = pkgs.yaru-dracula-theme;
           };
           iconTheme = {
             name = "Yaru";
-            package = pkgs.unmerged.yaru-theme;
+            package = pkgs.yaru-dracula-theme;
           };
         };
       };

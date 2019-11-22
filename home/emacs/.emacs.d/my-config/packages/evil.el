@@ -33,7 +33,7 @@
   (evil-global-set-key 'normal (kbd "gs,")
                        (evil-define-operator my/sort-fields (beg end)
                          (my/with-inverted-case beg end (lambda ()
-                                                          (sort-regexp-fields nil "[a-zA-Z0-9-_]+" "\\&" beg end)))))
+                                                          (sort-regexp-fields nil "[^,[:space:]\n]+" "\\&" beg end)))))
   (evil-global-set-key 'normal (kbd "gcc")
                        (evil-define-operator my/comment (beg end)
                          (comment-or-uncomment-region beg end)))
@@ -44,7 +44,7 @@
                           (evil-define-operator ,function (beg end)
                             ,docstring
                             (align-regexp beg end ,regexp nil nil t))))
-  (my/define-align "=" my/align-symbols "\\(\\s-*\\)\\(=\\|/\\{2,\\}\\)"
+  (my/define-align "=" my/align-symbols "\\(\\s-*\\)\\(=\\| #\\|//\\)"
                    "Align equal marks and comments")
   (my/define-align "," my/align-comma ",\\(\\s-*\\)[^[:space:]\n]"
                    "Align all non-whitespace characters after a comma")

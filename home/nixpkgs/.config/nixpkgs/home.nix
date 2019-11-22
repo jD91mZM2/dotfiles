@@ -44,8 +44,8 @@ in
       sha256 = "0xv8klvrwd68k589i4kihdl3mkgkaflh7j6iaxig6p52rw18636y";
     }) + "/dracula.conf";
 
-    "Pictures/Backgrounds/background.jpg".source = pkgs.my-background;
-    "Pictures/Backgrounds/background-focus.jpg".source = pkgs.my-background-focus;
+    "Pictures/Backgrounds/background.jpg".source = pkgs.background;
+    "Pictures/Backgrounds/background-focus.jpg".source = pkgs.background-focus;
   };
 
   #   ____ _     ___
@@ -163,11 +163,11 @@ in
     };
     iconTheme = {
       name    = "Yaru";
-      package = pkgs.unmerged.yaru-theme;
+      package = pkgs.yaru-dracula-theme;
     };
     theme = {
       name    = "Yaru-dark";
-      package = pkgs.unmerged.yaru-theme;
+      package = pkgs.yaru-dracula-theme;
     };
   };
   qt = {

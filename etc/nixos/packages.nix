@@ -1,9 +1,11 @@
 { pkgs, ... }:
 {
   # System overlays
-  nixpkgs.overlays = [
-    (import ../../home/nixpkgs/.config/nixpkgs/overlays/unmerged.nix)
-  ];
+  nixpkgs.overlays = let
+    dir = ../../home/nixpkgs/.config/nixpkgs/overlays;
+    names = builtins.attrNames (builtins.readDir dir);
+  in
+    (map (name: import (dir + "/${name}")) names);
 
   # More involved programs
   programs = {
