@@ -68,10 +68,9 @@ in
 
     # Graphical applications
     abiword
-    firefox
     chromium
+    firefox
     gimp
-    olive-editor # <- THIS IS AMAZING
     inkscape
     keepassxc
     liferea
@@ -79,13 +78,14 @@ in
     multimc
     musescore
     obs-studio
+    olive-editor # <- THIS IS AMAZING
     pavucontrol
+    superTuxKart
     thunderbird
     tigervnc
     torbrowser
     xorg.xev
     xorg.xwininfo
-    superTuxKart
 
     # Must have utils
     ascii
