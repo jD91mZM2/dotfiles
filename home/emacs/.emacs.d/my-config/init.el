@@ -92,13 +92,13 @@
 ;; |_|\_\___|\__, |_.__/|_|_| |_|\__,_|___/
 ;;           |___/
 
-;; Swap C-t and C-x to make it easier on dvorak. `key-translation-map`
-;; is applied early in the stack of keymaps and will work virtually
-;; everywhere. Using keyboard-translate is recommended by
-;; https://www.emacswiki.org/emacs/DvorakKeyboard, however, it does
-;; not work well with emacsclient.
-(define-key key-translation-map (kbd "C-t") (kbd "C-x"))
-(define-key key-translation-map (kbd "C-x") (kbd "C-t"))
+;; Swap C-t and C-x to make it easier on dvorak. This is applied
+;; earliest possible and will work basically everywhere. It doesn't
+;; work in all emacsclient-sessions, unlike `key-translation-map', but
+;; it does solve some rare issues with the latter alternative that
+;; makes it worth battling the quirks.
+(keyboard-translate ?\C-t ?\C-x)
+(keyboard-translate ?\C-x ?\C-t)
 
 (define-key emacs-lisp-mode-map (kbd "C-c c") 'eval-buffer)
 (global-set-key (kbd "C-c b") 'bookmark-bmenu-list)
