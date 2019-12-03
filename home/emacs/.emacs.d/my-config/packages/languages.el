@@ -33,6 +33,10 @@
   :mode ("\\.tex\\'" . LaTeX-mode)
   :pin gnu)
 
+;; Dhall
+(use-package dhall-mode
+  :mode "\\.dhall\\'")
+
 ;; Dockerfile
 (use-package dockerfile-mode
   :mode "Dockerfile\\'")

@@ -128,6 +128,8 @@ in
     cargo-release
     cargo-tree
     cmake
+    dhall
+    dhall-json
     gcc
     gdb
     ghc
