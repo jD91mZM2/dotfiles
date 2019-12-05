@@ -44,6 +44,22 @@ in {
     # <nixos-unstable/nixos/modules/services/monitoring/do-agent.nix>
   ];
 
+  # Backup
+  services.borgbackup.jobs.main = let
+    repo = "/var/lib/backup";
+  in {
+    paths   = "/var/lib";
+    exclude = [ repo ];
+    inherit repo;
+    encryption.mode = "none";
+    startAt         = "daily";
+    postHook        = ''
+      echo "\$archiveName = $archiveName"
+      ${pkgs.rclone}/bin/rclone sync -v "${repo}" "BackBlaze:jD91mZM2-backups/droplet-main"
+      ${pkgs.rclone}/bin/rclone cleanup -v "BackBlaze:jD91mZM2-backups/droplet-main"
+    '';
+  };
+
   # Services
   custom.services = {
     abottomod.script       = "${abottomod}/bin/start";
@@ -110,6 +126,14 @@ in {
           };
         Pass.password = shared.consts.secret.zncPassBlock;
       };
+    };
+  };
+  services.bitwarden_rs = {
+    enable = true;
+    config = {
+      signupsAllowed = false;
+      adminToken = shared.consts.secret.bitwardenAdmin;
+      rocketPort = 27057;
     };
   };
 }

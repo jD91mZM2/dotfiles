@@ -70,8 +70,8 @@ in
     };
     postCreate = ''
       echo "\$archiveName = $archiveName"
-      ${pkgs.rclone}/bin/rclone sync -v "${repo}" BackBlaze:jD91mZM2-backups
-      ${pkgs.rclone}/bin/rclone cleanup -v BackBlaze:jD91mZM2-backups
+      ${pkgs.rclone}/bin/rclone sync -v "${repo}" "BackBlaze:jD91mZM2-backups/primary"
+      ${pkgs.rclone}/bin/rclone cleanup -v "BackBlaze:jD91mZM2-backups/primary"
     '';
   };
 

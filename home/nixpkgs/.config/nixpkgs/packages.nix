@@ -68,6 +68,7 @@ in
 
     # Graphical applications
     abiword
+    bitwarden
     chromium
     firefox
     gimp

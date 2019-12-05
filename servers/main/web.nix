@@ -20,6 +20,7 @@ in {
         systemctl reload nginx
       '';
       extraDomains = {
+        "vault.krake.one" = null;
         "redox-os.club" = null;
       };
     };
@@ -83,6 +84,15 @@ in {
         useACMEHost = "mail.krake.one";
         acmeRoot    = "/var/www/challenges";
         forceSSL    = true;
+      };
+      "vault.krake.one" = {
+        useACMEHost = "krake.one";
+        acmeRoot    = "/var/www/challenges";
+        forceSSL    = true;
+
+        locations."/" = {
+          proxyPass = "http://localhost:27057";
+        };
       };
       "krake.one:11694" = {
         listen = [{

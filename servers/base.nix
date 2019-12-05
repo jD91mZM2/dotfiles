@@ -49,6 +49,7 @@ in
     file
     htop
     kitty.terminfo
+    rclone
     sqlite
     trash-cli
     tree
