@@ -4,7 +4,7 @@
   :hook (lsp-ui-mode . flycheck-mode))
 (use-package lsp-mode
   :bind ("C-c e" . lsp-extend-selection)
-  :commands lsp
+  :commands (lsp lsp-register-client)
   :hook (python-mode . lsp)
   :config
   (setq lsp-prefer-flymake nil)
@@ -83,11 +83,11 @@
   :hook (nix-mode . lsp)
   :mode "\\.nix\\'"
   :config
-  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection '("bash" "-c" "env RUST_LOG=trace rnix-lsp 2> /tmp/nix-lsp.log"))
                     :major-modes '(nix-mode)
                     :server-id 'nix))
+  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
   (setq nix-mode-use-smie t)
   (define-key nix-mode-map (kbd "C-M-x") (lambda (beg end)
                                            (interactive "r")
