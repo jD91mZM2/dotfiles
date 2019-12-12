@@ -139,7 +139,6 @@ in
     gotools
     mdl
     multimarkdown
-    nodejs
     (python3.withPackages (p: with p; [
       python-language-server
       tkinter
