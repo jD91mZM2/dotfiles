@@ -31,7 +31,7 @@ fi
 
 echo "Generating hardware config..."
 pushd "$name"
-nixos-generate-config --show-hardware-config > hardware-configuration.nix
+nixos-generate-config --root /mnt --show-hardware-config > hardware-configuration.nix
 
 echo "Ready to modify configuration? Vim will launch."
 read -p "[Press any character to continue]" -rn1
