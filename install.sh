@@ -12,7 +12,7 @@ cat <<EOF
 |___|_| |_|___/\\__\\__,_|_|_| |_| \\_|_/_/\\_\\\\___/|____/
 EOF
 
-if [ "$PWD" != "/mnt"* ]; then
+if [[ "$PWD" != "/mnt/"* ]]; then
     echo "Warning: You're not inside /mnt, any modifications will probably get lost after a reboot."
 fi
 
