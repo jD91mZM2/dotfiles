@@ -10,6 +10,10 @@ in
 {
   options = {
     setup = {
+      name = lib.mkOption {
+        type = lib.types.str;
+        description = "The name of this deployment, same as the folder's name in /etc.";
+      };
       networkId = lib.mkOption {
         type = lib.types.str;
         description = "Same as network.hostId, obtain using `head -c8 /etc/machine-id`";
@@ -37,7 +41,7 @@ in
 
     nix.nixPath = [
       "dotfiles=${shared.consts.dotfiles}"
-      "nixos-config=${shared.consts.dotfiles}/etc/nixos/configuration.nix"
+      "nixos-config=${shared.consts.dotfiles}/etc/${config.setup.name}/configuration.nix"
     ] ++ (lib.filter (key: !(lib.hasPrefix "nixos-config=" key)) options.nix.nixPath.default);
 
     boot.supportedFilesystems = [ "zfs" ];

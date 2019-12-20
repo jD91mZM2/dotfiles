@@ -17,7 +17,14 @@
   services.xserver = {
     enable = true;
     enableCtrlAltBackspace = true;
-    layout = "dvorak";
+
+    # Enable driver for various input devices - While I think it's
+    # mainly for touchpads, without it, my keyboard layout doesn't
+    # seem to be applied.
+    libinput.enable = true;
+
+    layout = "us";
+    xkbVariant = "dvorak";
     xkbOptions = "compose:ralt";
 
     displayManager = {

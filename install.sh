@@ -26,7 +26,10 @@ read -p "What should this setup be called? " -r name
 
 if [ ! -e "$name" ]; then
     cp -r template "$name"
-    sed -i "s|@@NETWORK_ID@@|$(head -c8 /etc/machine-id)|g" "$name/configuration.nix"
+    sed -i \
+"s|@@NETWORK_ID@@|$(head -c8 /etc/machine-id)|g" \
+"s|@@DEVICE_NAME@@|$name|g" \
+"$name/configuration.nix"
 fi
 
 echo "Generating hardware config..."

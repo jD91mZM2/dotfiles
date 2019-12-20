@@ -10,8 +10,12 @@ rec {
   secret = import ./secret.nix;
 
   syncthingDevices = {
-    computer = {
+    laptop = {
       id = "ILTIRMY-JT4SGSQ-AWETWCV-SLQYHE6-CY2YGAS-P3EGWY6-LSP7H4Z-F7ZQIAN";
+      introducer = true;
+    };
+    computer = {
+      id = "PPZ6RHN-2WYP3HI-OMQKLHY-4LZW6RK-L6CFPK6-G4QTVPV-SUIZH6S-F5E72QB";
       introducer = true;
     };
     droplet = {
