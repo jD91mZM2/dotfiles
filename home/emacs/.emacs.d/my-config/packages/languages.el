@@ -63,10 +63,6 @@
             (insert new-content)
             (goto-char old-pos)))))))
 
-;; JSON
-(use-package json-mode
-  :mode "\\.json\\'")
-
 ;; Markdown
 (use-package markdown-mode
   :hook (markdown-mode . flycheck-mode)
@@ -104,7 +100,8 @@
   :mode ("\\.org\\'". org-mode)
   :commands org-mode
   :custom ((org-startup-indented t)
-           (org-startup-folded nil)))
+           (org-startup-folded nil)
+           (org-list-allow-alphabetical t)))
 
 ;; Rust
 (use-package rustic
@@ -125,6 +122,13 @@
   :config
   (setq inferior-lisp-program "sbcl --noinform")
   (slime-setup '(slime-fancy slime-company)))
+
+;; JSON, JavaScript, HTML, CSS, etc. This is an AWESOME mode which I highly recommend
+(use-package web-mode
+  :mode ("\\.html?\\'"
+         "\\.jsx?\\'"
+         "\\.tsx?\\'"
+         "\\.json\\'"))
 
 ;; YAML
 (use-package yaml-mode
