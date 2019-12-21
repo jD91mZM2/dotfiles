@@ -128,7 +128,9 @@
   :mode ("\\.html?\\'"
          "\\.jsx?\\'"
          "\\.tsx?\\'"
-         "\\.json\\'"))
+         "\\.json\\'"
+         "\\.s?css\\'"
+         "\\.less\\'"))
 
 ;; YAML
 (use-package yaml-mode
