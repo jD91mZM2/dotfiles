@@ -4,7 +4,7 @@
 pkill polybar
 
 readarray monitors    < <(xrandr | awk '/\<connected\>/ { print $1 }')
-readarray geometries  < <(xrandr | awk '/\<connected\>/ { print $3 }')
+readarray geometries  < <(xrandr | awk '/\<connected primary\>/ { print $4; next } /\<connected\>/ { print $3 }')
 
 # Update monitors in BSPWM (it doesn't detect mine correctly automatically)
 while [ $(bspc query -M | wc -l) -gt "${#monitors[@]}" ]; do

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 let
   shared = import <dotfiles/shared> {};
@@ -16,6 +16,10 @@ in
     name      = "computer";
     networkId = "c0122dbe";
   };
+
+  services.xserver.displayManager.sessionCommands = ''
+    ${pkgs.xorg.xrandr}/bin/xrandr --output default --primary
+  '';
 
   # Syncthing
   services.syncthing = {
