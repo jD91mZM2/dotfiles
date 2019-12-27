@@ -1,6 +1,7 @@
 (add-to-list 'load-path (locate-user-emacs-file "my-config") t)
 
 (load "utils")
+(load "devices")
 
 ;;  ____            _
 ;; |  _ \ __ _  ___| | ____ _  __ _  ___  ___
@@ -36,7 +37,7 @@
 ;; Prevent emacs from writing stuff to this file. All customization
 ;; options should be set from here, and all packages should be set
 ;; using use-package.
-(setq custom-file "/dev/null")
+(setq custom-file null-device)
 
 (setq backup-directory-alist `((".*" . ,(locate-user-emacs-file "backups/"))))
 (setq auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backups/") t)))
@@ -79,8 +80,8 @@
   (set-fontset-font t 'unicode "Symbola" nil 'prepend))
 
 ;; Transparency!
-(add-to-list 'default-frame-alist '(alpha . 90)) ; default frame settings
-(set-frame-parameter (selected-frame) 'alpha 90) ; for current session
+(add-to-list 'default-frame-alist (cons 'alpha my/option/transparency)) ; default frame settings
+(set-frame-parameter (selected-frame) 'alpha my/option/transparency)    ; for current session
 
 (desktop-save-mode 1)
 (xterm-mouse-mode 1)
