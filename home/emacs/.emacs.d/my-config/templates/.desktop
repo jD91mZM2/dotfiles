@@ -1,0 +1,16 @@
+# https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+
+[Desktop Entry]
+Type=Application
+Name=My Application
+Comment=Makes you a sandwich
+Icon=my-app
+MimeType=text/plain
+
+# For list of possible categories, see
+# https://specifications.freedesktop.org/menu-spec/menu-spec-latest.html
+Categories=CoolApps;Butter;
+Keywords=Sudo;XKCD;Make;Sandwich
+
+Exec=my-app %F
+Terminal=false

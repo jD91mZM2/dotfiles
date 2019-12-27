@@ -70,6 +70,7 @@ in
     abiword
     bitwarden
     chromium
+    filezilla
     firefox
     gimp
     inkscape
@@ -95,7 +96,6 @@ in
     ffmpeg
     figlet
     gitAndTools.hub
-    ncftp
     neofetch
     nixops
     pv
@@ -135,6 +135,8 @@ in
     gdb
     ghc
     gnumake
+    nodePackages.typescript-language-server
+    nodePackages.typescript # https://github.com/NixOS/nixpkgs/pull/73119
     go
     gotools
     mdl

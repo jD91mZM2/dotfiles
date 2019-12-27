@@ -130,7 +130,8 @@
          "\\.tsx?\\'"
          "\\.json\\'"
          "\\.s?css\\'"
-         "\\.less\\'"))
+         "\\.less\\'")
+  :hook (web-mode . lsp))
 
 ;; YAML
 (use-package yaml-mode
