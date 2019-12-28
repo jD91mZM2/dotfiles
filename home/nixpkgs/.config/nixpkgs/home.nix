@@ -27,13 +27,13 @@ in
   imports = [
     ./dunst.nix
     ./env.nix
-    ./keychain.nix
+    ./keyring.nix
     ./packages.nix
   ];
 
   programs.home-manager = {
     enable = true;
-    path   = https://github.com/rycee/home-manager/archive/release-19.03.tar.gz;
+    path   = https://github.com/rycee/home-manager/archive/release-19.09.tar.gz;
   };
 
   home.keyboard = null;
@@ -104,7 +104,7 @@ in
     userEmail  = shared.consts.email;
 
     signing = {
-      key = "BC5DAE4EC168B1F9B94C98503055D54729A72666";
+      key = shared.consts.gpgKeys.signing;
       signByDefault = true;
     };
     extraConfig = {

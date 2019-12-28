@@ -69,6 +69,7 @@
     bc
     bind
     binutils
+    cryptsetup
     efibootmgr
     file
     gist

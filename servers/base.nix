@@ -41,7 +41,7 @@ in
     home = "/home/user";
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keyFiles = shared.consts.sshKeys;
+    openssh.authorizedKeys.keys = shared.consts.sshKeys;
   };
 
   # Default packages

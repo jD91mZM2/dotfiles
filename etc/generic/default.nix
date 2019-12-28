@@ -44,7 +44,7 @@ in
       "nixos-config=${shared.consts.dotfiles}/etc/${config.setup.name}/configuration.nix"
     ] ++ (lib.filter (key: !(lib.hasPrefix "nixos-config=" key)) options.nix.nixPath.default);
 
-    boot.supportedFilesystems = [ "zfs" ];
+    boot.supportedFilesystems = [ "btrfs" "zfs" ];
 
     # These systems will be able to be emulated transparently. Enabling
     # aarch64 will allow me to run aarch64 executables (using

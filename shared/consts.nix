@@ -5,7 +5,10 @@ rec {
   user     = "user";
   home     = "/home/${user}";
   dotfiles = "${home}/dotfiles";
-  sshKeys  = [ "${dotfiles}/keys/computer.pub" "${dotfiles}/keys/laptop.pub" ];
+  sshKeys  = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPRNU1yPnVxZtK/qrOkAnp5J+EqXJ6wTeXOScw2lhqWg (none)" ];
+  gpgKeys  = {
+    signing = "1845AFF2E614738266665F63E471B167937421AB";
+  };
 
   secret = import ./secret.nix;
 
@@ -19,8 +22,8 @@ rec {
       introducer = true;
     };
     droplet = {
-        id = "4JBUWER-ECEJGT7-XH6NFJB-F4WBHP2-CPREUK6-ETHPHHU-LXGPP3O-IAYLNAI";
-        addresses = [ "tcp://krake.one:22000" ];
+      id = "4JBUWER-ECEJGT7-XH6NFJB-F4WBHP2-CPREUK6-ETHPHHU-LXGPP3O-IAYLNAI";
+      addresses = [ "tcp://krake.one:22000" ];
     };
     phone.id  = "O7H6BPC-PKQPTT4-T4SEA7K-VI7HJ4K-J7ZJO5K-NWLNAK5-RBVCSBU-EXDHSA3";
     rpi.id    = "KFJ55KX-GEL7PFY-4KBSZG4-WEIUGTV-ICE52PD-PTFUZDV-5PSUOKH-CMNNPQ4";
