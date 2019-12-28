@@ -3,6 +3,8 @@
 (defvar my/option/project-search-path '()
   "Becomes the value of projectile-project-search-path")
 
+(eval-when-compile (require 'subr-x))
+
 ;; Per-system values
 (let ((hostname (eval-when-compile (string-trim (shell-command-to-string "hostname")))))
   (cond ((equal hostname "samuel-computer")
