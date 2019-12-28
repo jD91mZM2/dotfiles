@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 
 # Most of my installed applications are nowadays installed through
 # here. The line between what I want as a "system package" and a "user
@@ -39,118 +39,120 @@ let
 
       ssh "$1" -L ":''${2}:localhost:$2" -- sleep infinity
   '';
-in
-  # Convenient bash aliases
-  [
-    forward
-    backward
-  ]
+in {
+  home.packages =
+    # Convenient bash aliases
+    [
+      forward
+      backward
+    ]
 
-  ++
+    ++
 
-  # Unstable packages
-  (with pkgs.unstable; [
-  ])
+    # Unstable packages
+    (with pkgs.unstable; [
+    ])
 
-  ++
+    ++
 
-  # Stable packages
-  (with pkgs; [
-    # Local overlays
-    clangd
+    # Stable packages
+    (with pkgs; [
+      # Local overlays
+      clangd
 
-    # My software
-    termplay
-    unmerged.git-subcopy
-    unmerged.powerline-rs
-    unmerged.scaff
-    (callPackage (builtins.fetchTarball https://gitlab.com/jD91mZM2/xidlehook/-/archive/master.tar.gz) {})
+      # My software
+      termplay
+      unmerged.git-subcopy
+      unmerged.powerline-rs
+      unmerged.scaff
+      (callPackage (builtins.fetchTarball https://gitlab.com/jD91mZM2/xidlehook/-/archive/master.tar.gz) {})
 
-    # Graphical applications
-    abiword
-    bitwarden
-    chromium
-    filezilla
-    firefox
-    gimp
-    inkscape
-    keepassxc
-    liferea
-    mpv
-    multimc
-    musescore
-    obs-studio
-    olive-editor # <- THIS IS AMAZING
-    pavucontrol
-    superTuxKart
-    thunderbird
-    tigervnc
-    torbrowser
-    xorg.xev
-    xorg.xwininfo
+      # Graphical applications
+      abiword
+      bitwarden
+      chromium
+      filezilla
+      firefox
+      gimp
+      inkscape
+      keepassxc
+      liferea
+      mpv
+      multimc
+      musescore
+      obs-studio
+      olive-editor # <- THIS IS AMAZING
+      pavucontrol
+      superTuxKart
+      thunderbird
+      tigervnc
+      torbrowser
+      xorg.xev
+      xorg.xwininfo
 
-    # Must have utils
-    ascii
-    ctags
-    fd
-    ffmpeg
-    figlet
-    gitAndTools.hub
-    neofetch
-    nixops
-    pv
-    rclone
-    rename
-    ripgrep
-    sqlite
-    tree
-    units
-    weechat
-    youtube-dl
+      # Must have utils
+      ascii
+      ctags
+      fd
+      ffmpeg
+      figlet
+      gitAndTools.hub
+      neofetch
+      nixops
+      pv
+      rclone
+      rename
+      ripgrep
+      sqlite
+      tree
+      units
+      weechat
+      youtube-dl
 
-    # Other CLI utils
-    asciinema
-    cdrkit
-    docker_compose
-    imagemagick
-    pandoc
-    whois
+      # Other CLI utils
+      asciinema
+      cdrkit
+      docker_compose
+      imagemagick
+      pandoc
+      whois
 
-    # Nix stuff
-    (callPackage (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
-    (callPackage (builtins.fetchTarball https://github.com/kolloch/crate2nix/archive/master.tar.gz) {})
-    (callPackage (builtins.fetchTarball https://github.com/nix-community/pypi2nix/archive/db43e3b896739c78bd1abed1ba45c52d1bc74c7e.tar.gz) {})
-    nix-prefetch-scripts
-    nix-review
+      # Nix stuff
+      (callPackage (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
+      (callPackage (builtins.fetchTarball https://github.com/kolloch/crate2nix/archive/master.tar.gz) {})
+      (callPackage (builtins.fetchTarball https://github.com/nix-community/pypi2nix/archive/db43e3b896739c78bd1abed1ba45c52d1bc74c7e.tar.gz) {})
+      nix-prefetch-scripts
+      nix-review
 
-    # Languages
-    cabal-install
-    cargo-edit
-    cargo-release
-    cargo-tree
-    cmake
-    dhall
-    dhall-json
-    gcc
-    gdb
-    ghc
-    gnumake
-    nodePackages.typescript-language-server
-    nodePackages.typescript # https://github.com/NixOS/nixpkgs/pull/73119
-    go
-    gotools
-    mdl
-    multimarkdown
-    (python3.withPackages (p: with p; [
-      python-language-server
-      tkinter
-    ]))
-    # ruby
-    rustup
-    sbcl
+      # Languages
+      cabal-install
+      cargo-edit
+      cargo-release
+      cargo-tree
+      cmake
+      dhall
+      dhall-json
+      gcc
+      gdb
+      ghc
+      gnumake
+      nodePackages.typescript-language-server
+      nodePackages.typescript # https://github.com/NixOS/nixpkgs/pull/73119
+      go
+      gotools
+      mdl
+      multimarkdown
+      (python3.withPackages (p: with p; [
+        python-language-server
+        tkinter
+      ]))
+      # ruby
+      rustup
+      sbcl
 
-    # LaTeX stuff
-    okular
-    poppler_utils
-    texlive.combined.scheme-full
-  ])
+      # LaTeX stuff
+      okular
+      poppler_utils
+      texlive.combined.scheme-full
+    ]);
+}

@@ -24,13 +24,18 @@ let
   shared = pkgs.callPackage <dotfiles/shared> {};
 in
 {
+  imports = [
+    ./dunst.nix
+    ./env.nix
+    ./keychain.nix
+    ./packages.nix
+  ];
+
   programs.home-manager = {
     enable = true;
     path   = https://github.com/rycee/home-manager/archive/release-19.03.tar.gz;
   };
 
-  home.sessionVariables = import ./env.nix;
-  home.packages = import ./packages.nix { inherit pkgs; };
   home.keyboard = null;
 
   home.file = {
@@ -107,16 +112,6 @@ in
     } // shared.consts.secret.gitConfig;
   };
 
-  # Services
-  services.gpg-agent = {
-    enable             = true;
-    enableSshSupport   = true;
-    defaultCacheTtl    = 86400;
-    defaultCacheTtlSsh = 86400;
-    maxCacheTtl        = 86400;
-    maxCacheTtlSsh     = 86400;
-  };
-
   #   ____                 _     _           _
   #  / ___|_ __ __ _ _ __ | |__ (_) ___ __ _| |
   # | |  _| '__/ _` | '_ \| '_ \| |/ __/ _` | |
@@ -139,21 +134,21 @@ in
   };
   xresources = {
     # (...)s around the expression just for my editor's sake.
-      extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
-        owner  = "dracula";
-        repo   = "xresources";
-        rev    = "ca0d05cf2b7e5c37104c6ad1a3f5378b72c705db";
+    extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
+      owner  = "dracula";
+      repo   = "xresources";
+      rev    = "ca0d05cf2b7e5c37104c6ad1a3f5378b72c705db";
 
-        sha256 = "0ywkf2bzxkr45a0nmrmb2j3pp7igx6qvq6ar0kk7d5wigmkr9m5n";
-      } + "/Xresources");
-      properties = {
-        "XTerm.termName"          = "xterm-256color";
-        "XTerm.vt100.faceName"    = "Hack:size=10";
+      sha256 = "0ywkf2bzxkr45a0nmrmb2j3pp7igx6qvq6ar0kk7d5wigmkr9m5n";
+    } + "/Xresources");
+    properties = {
+      "XTerm.termName"          = "xterm-256color";
+      "XTerm.vt100.faceName"    = "Hack:size=10";
 
-        # Sixel stuff
-        "XTerm*decTerminalID"     = "vt340";
-        "XTerm*numColorRegisters" = 256;
-      };
+      # Sixel stuff
+      "XTerm*decTerminalID"     = "vt340";
+      "XTerm*numColorRegisters" = 256;
+    };
   };
   gtk = {
     enable = true;
@@ -189,6 +184,5 @@ in
       inactive-dim = 0.1;
     '';
   };
-  services.dunst = import ./dunst.nix { inherit pkgs; };
   services.udiskie.enable = true;
 }
