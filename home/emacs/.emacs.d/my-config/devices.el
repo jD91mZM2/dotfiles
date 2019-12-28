@@ -4,9 +4,9 @@
   "Becomes the value of projectile-project-search-path")
 
 ;; Per-system values
-(let ((hostname (string-trim (shell-command-to-string "hostname"))))
-  (cond ((equal hostname "localhost")
+(let ((hostname (eval-when-compile (string-trim (shell-command-to-string "hostname")))))
+  (cond ((equal hostname "samuel-computer")
          (setq my/option/transparency 90))
-        ((equal hostname "compotar")
+        ((equal hostname "samuel-laptop")
          (setq my/option/transparency 90)
          (setq my/option/project-search-path '("~/" "~/Coding/Rust/" "~/Coding/Rust/external/")))))

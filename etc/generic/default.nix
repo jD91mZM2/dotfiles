@@ -71,7 +71,7 @@ in
 
     # Networking
     networking.hostId = config.setup.networkId;
-    networking.hostName = ""; # obtain from DHCP
+    networking.hostName = "samuel-${config.setup.name}";
     networking.networkmanager.enable = true;
 
     # Mime type for wasm, see https://github.com/mdn/webassembly-examples/issues/5
