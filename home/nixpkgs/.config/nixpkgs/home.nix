@@ -33,7 +33,7 @@ in
 
   programs.home-manager = {
     enable = true;
-    path   = https://github.com/rycee/home-manager/archive/release-19.09.tar.gz;
+    path   = https://github.com/rycee/home-manager/archive/master.tar.gz;
   };
 
   home.keyboard = null;

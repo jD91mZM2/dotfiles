@@ -17,10 +17,6 @@ in
     networkId = "c0122dbe";
   };
 
-  # Get AMD RX 5700 working by using the latest 5.0 kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  hardware.enableRedistributableFirmware = true;
-
   hardware.cpu.amd.updateMicrocode = true;
 
   services.xserver = {
