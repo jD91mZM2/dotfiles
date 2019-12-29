@@ -23,6 +23,7 @@ in
     videoDrivers = [ "amdgpu" ];
     displayManager.sessionCommands = ''
       ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-2 --primary
+      ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-2 --set TearFree on
     '';
   };
 
