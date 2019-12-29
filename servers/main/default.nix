@@ -41,9 +41,6 @@ in {
     ./email.nix
     ./web.nix
     ./znc.nix
-
-    # Unstable modules
-    # <nixos-unstable/nixos/modules/services/monitoring/do-agent.nix>
   ];
 
   # Backup

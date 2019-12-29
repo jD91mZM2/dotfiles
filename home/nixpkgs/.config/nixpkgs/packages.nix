@@ -49,12 +49,6 @@ in {
 
     ++
 
-    # Unstable packages
-    (with pkgs.unstable; [
-    ])
-
-    ++
-
     # Stable packages
     (with pkgs; [
       # Local overlays

@@ -17,6 +17,8 @@ in
     networkId = "e345d278";
   };
 
+  hardware.cpu.intel.updateMicrocode = true;
+
   services.xserver = {
     # Configure video DPI and drivers
     dpi = 96;

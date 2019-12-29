@@ -17,9 +17,18 @@ in
     networkId = "c0122dbe";
   };
 
-  services.xserver.displayManager.sessionCommands = ''
-    ${pkgs.xorg.xrandr}/bin/xrandr --output default --primary
-  '';
+  # Get AMD RX 5700 working by using the latest 5.0 kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.enableRedistributableFirmware = true;
+
+  hardware.cpu.amd.updateMicrocode = true;
+
+  services.xserver = {
+    videoDrivers = [ "amdgpu" ];
+    displayManager.sessionCommands = ''
+      ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-2 --primary
+    '';
+  };
 
   # Syncthing
   services.syncthing = {

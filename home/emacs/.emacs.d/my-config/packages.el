@@ -4,18 +4,6 @@
 (load "packages/navigation.el")
 (load "packages/editing.el")
 
-;; Styling
-
-(use-package dracula-theme
-  :demand t
-  :config
-  (load-theme 'dracula t))
-
-(use-package powerline
-  :demand t
-  :config
-  (powerline-center-evil-theme))
-
 ;; Packages needed elsewhere
 
 (use-package hydra

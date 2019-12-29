@@ -29,16 +29,9 @@ in
     ./services.nix
     ./sudo.nix
     ./x11.nix
-
-    # Unstable modules
-    # <nixos-unstable/nixos/my/module/here.nix>
   ];
 
   config = {
-    # disabledModules = [
-    #   "my/module/here.nix"
-    # ];
-
     nix.nixPath = [
       "dotfiles=${shared.consts.dotfiles}"
       "nixos-config=${shared.consts.dotfiles}/etc/${config.setup.name}/configuration.nix"
@@ -52,6 +45,10 @@ in
     # all .exe files will be handled using WINE.
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+    # Use latest kernel, and some extra drivers
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+    hardware.enableRedistributableFirmware = true;
+
     # Misc. settings
     documentation.dev.enable  = true;
     hardware.bluetooth.enable = true;
@@ -63,10 +60,10 @@ in
     boot.loader.systemd-boot.enable      = true;
 
     # TTY settings
-    i18n = {
-      consoleFont   = "Lat2-Terminus16";
-      consoleKeyMap = "dvorak";
-      defaultLocale = "en_US.UTF-8";
+    i18n.defaultLocale = "en_US.UTF-8";
+    console = {
+      font   = "Lat2-Terminus16";
+      keyMap = "dvorak";
     };
 
     # Networking

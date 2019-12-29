@@ -86,6 +86,16 @@
 (desktop-save-mode 1)
 (xterm-mouse-mode 1)
 
+(use-package dracula-theme
+  :demand t
+  :config
+  (load-theme 'dracula t))
+
+(use-package powerline
+  :demand t
+  :config
+  (powerline-center-evil-theme))
+
 ;;  _  __          _     _           _
 ;; | |/ /___ _   _| |__ (_)_ __   __| |___
 ;; | ' // _ \ | | | '_ \| | '_ \ / _` / __|
