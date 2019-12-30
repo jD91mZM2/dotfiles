@@ -39,7 +39,10 @@ let
 
       ssh "$1" -L ":''${2}:localhost:$2" -- sleep infinity
   '';
+
+  my-preferred-java-version = pkgs.openjdk8;
 in {
+  home.sessionVariables.JAVA_HOME = "${my-preferred-java-version.home}";
   home.packages =
     # Convenient bash aliases
     [
@@ -119,32 +122,42 @@ in {
       nix-review
 
       # Languages
+      ## Haskell
       cabal-install
+      ghc
+      ## Rust
       cargo-edit
       cargo-release
       cargo-tree
+      rustup
+      ## C
       cmake
-      dhall
-      dhall-json
       gcc
       gdb
-      ghc
       gnumake
-      nodePackages.typescript-language-server
+      ## Dhall
+      dhall
+      dhall-json
+      ## JavaScript :puke:
       nodePackages.typescript # https://github.com/NixOS/nixpkgs/pull/73119
+      nodePackages.typescript-language-server
+      ## Java & JVM languages :slightly less puke:
+      my-preferred-java-version
+      jetbrains.idea-community
+      ## Go
       go
       gotools
+      ## Markdown
       mdl
       multimarkdown
+      ## Python
       (python3.withPackages (p: with p; [
         python-language-server
         tkinter
       ]))
-      # ruby
-      rustup
+      ## Lisp
       sbcl
-
-      # LaTeX stuff
+      ## LaTeX
       okular
       poppler_utils
       texlive.combined.scheme-full

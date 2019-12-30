@@ -27,7 +27,6 @@ in
   imports = [
     ./dunst.nix
     ./env.nix
-    ./keyring.nix
     ./packages.nix
     ./polybar.nix
   ];
@@ -111,6 +110,17 @@ in
     extraConfig = {
       pull.rebase = true;
     } // shared.consts.secret.gitConfig;
+  };
+  programs.gpg.enable = true;
+
+  # Services
+  services.gpg-agent = {
+    enable             = true;
+    enableSshSupport   = true;
+    defaultCacheTtl    = 86400;
+    defaultCacheTtlSsh = 86400;
+    maxCacheTtl        = 86400;
+    maxCacheTtlSsh     = 86400;
   };
 
   #   ____                 _     _           _
