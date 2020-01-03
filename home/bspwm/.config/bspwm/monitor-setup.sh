@@ -16,15 +16,12 @@ while [ $i -lt "${#monitors[@]}" ]; do
     i=$((i + 1))
 done
 
-env MONITOR=${monitors[0]} polybar main &
-
 # Update desktops
 m1=("Terminal" "Editor" "Primary" "Secondary" "5" "6" "7")
 m2=("Misc" "Message")
 if [ -n "$(bspc query -M primary#next)" ]; then
     bspc monitor primary#next  -d ${m2[@]}
     bspc monitor primary       -d ${m1[@]}
-    env MONITOR=${monitors[1]} polybar secondary &
 else
     bspc monitor primary -d ${m1[@]} ${m2[@]}
 fi

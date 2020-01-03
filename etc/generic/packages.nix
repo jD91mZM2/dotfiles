@@ -56,7 +56,6 @@
     firefox
     gnome3.zenity
     kitty
-    polybar
     virtmanager
     xfce.xfce4-power-manager
 

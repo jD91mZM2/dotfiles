@@ -2,7 +2,7 @@
 
 if [ -e "/tmp/focus-mode" ]; then
     feh --bg-fill ~/Pictures/Backgrounds/background-focus.jpg --no-fehbg
-    pkill polybar
+    systemctl --user stop polybar
 
     # bspwm settings
     bspc config window_gap 24
@@ -15,6 +15,7 @@ if [ -e "/tmp/focus-mode" ]; then
 else
     feh --bg-fill ~/Pictures/Backgrounds/background.jpg --no-fehbg
     ~/.config/bspwm/monitor-setup.sh
+    systemctl --user start polybar
 
     # bspwm settings
     bspc config window_gap 12

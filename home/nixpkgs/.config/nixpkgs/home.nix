@@ -29,6 +29,7 @@ in
     ./env.nix
     ./keyring.nix
     ./packages.nix
+    ./polybar.nix
   ];
 
   programs.home-manager = {
@@ -184,5 +185,4 @@ in
       inactive-dim = 0.1;
     '';
   };
-  services.udiskie.enable = true;
 }
