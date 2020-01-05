@@ -7,7 +7,7 @@ in
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
   services.locate = {
     enable = true;
-    interval = "07:00 PM";
+    interval = "19:00";
   };
   services.upower.enable = true;
 
