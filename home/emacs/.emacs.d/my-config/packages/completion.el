@@ -1,19 +1,7 @@
 (use-package company
-  :commands (company-select-next company-select-previous)
   :config
   (global-company-mode 1)
-  (setq company-idle-delay 0)
-
-  ;; <tab>    = Tab key when using graphical emacs
-  ;; TAB      = Tab key when using C-i or terminal emacs
-  (define-key company-mode-map (kbd "M-<tab>") 'company-indent-or-complete-common)
-  (define-key company-mode-map (kbd "M-TAB") 'company-indent-or-complete-common)
-  ;; <return> = Return key when using graphical emacs
-  ;; RET      = Return key when using C-m or terminal emacs
-  (define-key company-active-map (kbd "C-<return>") 'company-complete-selection)
-  (define-key company-active-map (kbd "C-RET") 'company-complete-selection)
-  (define-key company-active-map (kbd "C-n") 'company-select-next-if-tooltip-visible-or-complete-selection)
-  (define-key company-active-map (kbd "C-p") 'company-select-prev))
+  (setq company-idle-delay 0))
 (use-package company-auctex
   :after company)
 (use-package company-lsp
@@ -26,5 +14,16 @@
 (use-package yasnippet
   :demand t
   :config
+  ;; Rebind TAB to M-/
+  (define-key yas-minor-mode-map  (kbd "<tab>")       nil)
+  (define-key yas-minor-mode-map  (kbd "TAB")         nil)
+  (define-key yas-minor-mode-map  (kbd "M-<ret>")     yas-maybe-expand)
+  (define-key yas-keymap          [(tab)]             nil)
+  (define-key yas-keymap          (kbd "TAB")         nil)
+  (define-key yas-keymap          [(shift tab)]       nil)
+  (define-key yas-keymap          [backtab]           nil)
+  (define-key yas-keymap          (kbd "<ret>")       'yas-next-field-or-maybe-expand)
+  (define-key yas-keymap          (kbd "<S-return>")  'yas-prev-field)
+
   (setq yas-snippet-dirs (list (my/util/relative "../snippets")))
   (yas-global-mode 1))

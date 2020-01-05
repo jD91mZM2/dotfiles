@@ -129,6 +129,7 @@ leaving the point at the end of the latter"
   (evil-define-key 'normal prog-mode-map (kbd "M-n") (lambda () (interactive) (my/transpose-args 'evil-forward-arg)))
   (evil-define-key 'normal prog-mode-map (kbd "M-p") (lambda () (interactive) (my/transpose-args 'evil-backward-arg))))
 (use-package evil-collection
+  :custom (evil-collection-company-use-tng nil)
   :config
   (evil-collection-init))
 (use-package evil-easymotion

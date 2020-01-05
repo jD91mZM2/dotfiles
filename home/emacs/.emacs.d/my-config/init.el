@@ -174,6 +174,16 @@
   (interactive)
   (insert (uuid-string)))
 
+(defun load-dir ()
+  "Load a directory"
+  (interactive)
+  (let* ((file-to-load (read-file-name "Load path: " "~/.emacs.d" nil t ""))
+         (dir-to-load (file-name-directory file-to-load)))
+    (if (not (file-regular-p file-to-load))
+        (message "Not a regular file")
+      (add-to-list 'load-path dir-to-load)
+      (load file-to-load))))
+
 ;;  _____                               _ _            _
 ;; | ____|_ __ ___   __ _  ___ ___  ___| (_) ___ _ __ | |_
 ;; |  _| | '_ ` _ \ / _` |/ __/ __|/ __| | |/ _ \ '_ \| __|

@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Kill running polybars
-pkill polybar
-
 readarray monitors    < <(xrandr | awk '/\<connected\>/ { print $1 }')
 readarray geometries  < <(xrandr | awk '/\<connected primary\>/ { print $4; next } /\<connected\>/ { print $3 }')
 
@@ -32,3 +29,6 @@ feh --bg-fill ~/Pictures/Backgrounds/background.jpg --no-fehbg
 # Adopt nodes that aren't on any desktops now
 bspc desktop -f "^9"
 bspc wm -o
+
+# Restart polybars
+systemctl restart --user polybar
