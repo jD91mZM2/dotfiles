@@ -58,10 +58,10 @@ in {
       clangd
 
       # My software
-      termplay
       unmerged.git-subcopy
       unmerged.powerline-rs
       unmerged.scaff
+      unmerged.termplay
       (callPackage (builtins.fetchTarball https://gitlab.com/jD91mZM2/xidlehook/-/archive/master.tar.gz) {})
 
       # Graphical applications
