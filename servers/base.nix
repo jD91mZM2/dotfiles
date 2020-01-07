@@ -3,10 +3,12 @@ let
   shared = pkgs.callPackage <dotfiles/shared> {};
 in
 {
-  imports = [
-    # Custom modules
-    <dotfiles/shared/modules/services.nix>
-  ];
+  # System overlays
+  nixpkgs.overlays = let
+    dir = (<dotfiles/home/nixpkgs/.config/nixpkgs/overlays>);
+    names = builtins.attrNames (builtins.readDir dir);
+  in
+    (map (name: import (dir + "/${name}")) names);
 
   # Language settings
   i18n.consoleKeyMap = "dvorak";

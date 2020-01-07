@@ -48,7 +48,7 @@ in
 
     declarative = {
       overrideDevices = true;
-      devices = shared.utils.without [ "laptop" ] shared.consts.syncthingDevices;
+      devices = builtins.removeAttrs shared.consts.syncthingDevices [ "laptop" ];
       overrideFolders = true;
       folders.main = {
         enable = true;

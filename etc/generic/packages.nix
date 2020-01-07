@@ -2,7 +2,7 @@
 {
   # System overlays
   nixpkgs.overlays = let
-    dir = ../../home/nixpkgs/.config/nixpkgs/overlays;
+    dir = (<dotfiles/home/nixpkgs/.config/nixpkgs/overlays>);
     names = builtins.attrNames (builtins.readDir dir);
   in
     (map (name: import (dir + "/${name}")) names);

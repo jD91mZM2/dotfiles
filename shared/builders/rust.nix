@@ -2,7 +2,7 @@
 # prevents cargo from being cached. Using carnix would be better, if only it
 # worked as reliably as cargo itself.
 
-{ callPackage, binutils-unwrapped, lib, rsync, stdenv }:
+{ callPackage, binutils-unwrapped, lib, rsync, stdenv, pkgs }:
 
 { name, src, buildInputs ? [], wrapperHook ? "" }:
 
@@ -17,7 +17,7 @@ let
   });
 in stdenv.mkDerivation {
   inherit name buildInputs;
-  src = shared.utils.cleanSource src;
+  src = pkgs.nur.repos.jd91mzm2.lib.cleanSourceRust src;
   doConfigure = false;
   dontBuild = true;
   installPhase = ''

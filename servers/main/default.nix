@@ -2,6 +2,7 @@
 
 let
   shared = pkgs.callPackage <dotfiles/shared> {};
+  nur-no-pkgs = import (<dotfiles/shared/nur-no-pkgs.nix>);
 
   # Packages
   abottomod = shared.builders.buildPypiPackage {
@@ -35,6 +36,9 @@ in {
   imports = [
     # Shared base settings
     ../base.nix
+
+    # Custom modules
+    nur-no-pkgs.repos.jd91mzm2.modules.custom-services
 
     # Files
     ./bitwarden.nix
@@ -70,7 +74,7 @@ in {
     declarative = {
       overrideDevices = true;
       overrideFolders = false;
-      devices         = shared.utils.without [ "droplet" ] shared.consts.syncthingDevices;
+      devices         = builtins.removeAttrs shared.consts.syncthingDevices [ "droplet" ];
     };
     relay = {
       enable     = true;

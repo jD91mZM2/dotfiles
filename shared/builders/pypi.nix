@@ -1,14 +1,13 @@
-{ callPackage, curl, lib, python36Packages, stdenv }:
+{ callPackage, curl, lib, python36Packages, stdenv, pkgs }:
 
 { name, src }:
 
 let
-  shared = callPackage <dotfiles/shared> {};
-
   python = callPackage (src + "/requirements.nix") {};
 in python.mkDerivation {
   inherit name;
-  src = shared.utils.cleanSource src;
+  src = pkgs.nur.repos.jd91mzm2.lib.sourceByNotRegex src [ ''^.*\.sqlite$'' ];
+
   buildInputs = builtins.attrValues python.packages;
   format = "other";
   installPhase = ''
