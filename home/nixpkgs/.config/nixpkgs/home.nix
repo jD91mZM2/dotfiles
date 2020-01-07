@@ -22,9 +22,11 @@ let
   } + "/dircolors/Dracula.dircolors";
 
   shared = pkgs.callPackage <dotfiles/shared> {};
+  nur-no-pkgs = import (<dotfiles/shared/nur-no-pkgs.nix>);
 in
 {
   imports = [
+    nur-no-pkgs.repos.jd91mzm2.hm-modules.programs
     ./dunst.nix
     ./env.nix
     ./packages.nix
@@ -60,16 +62,12 @@ in
   #  \____|_____|___|
 
   # Shells
+  programs.powerline-rs.enable = true;
   programs.bash = {
     enable = true;
     shellAliases = aliases;
     initExtra = ''
       ${bashConfig}
-
-      powerline() {
-        PS1="$(powerline-rs --shell bash $?)"
-      }
-      PROMPT_COMMAND=powerline
     '';
   };
   programs.zsh = {
@@ -77,16 +75,6 @@ in
     shellAliases = aliases;
     initExtra = ''
       ${bashConfig}
-
-      powerline() {
-        local exit_code="$?"
-        if [[ "$TERM" == eterm* ]]; then
-            PS1="''${PWD/$HOME/~} %% "
-        else
-            PS1="$(powerline-rs --shell zsh "$exit_code")"
-        fi
-      }
-      precmd_functions+=(powerline)
 
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=#${shared.theme.current-line},fg=#${shared.theme.comment}"
     '';
