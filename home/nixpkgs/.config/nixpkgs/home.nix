@@ -181,6 +181,57 @@ in
     platformTheme = "gtk";
   };
 
+  programs.firefox = {
+    enable = true;
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      # Privacy addons: https://www.privacytools.io/browsers/#addons
+      ublock-origin
+      https-everywhere
+      decentraleyes
+      cookie-autodelete
+      # TODO: tosdr
+      # Skipping "Snowflake" for now
+      privacy-badger
+      # NoScript and uMatrix are too advanced for me :)
+
+      # Other addons
+      bitwarden
+      react-devtools
+      stylus
+      vimium
+    ];
+    profiles.main = {
+      id = 0;
+      name = "home-manager";
+      settings = {
+        # Privacy settings: https://www.privacytools.io/browsers/#about_config
+        "privacy.firstparty.isolate"                        = true;
+        "privacy.resistFingerprinting"                      = true;
+        "privacy.trackingprotection.fingerprinting.enabled" = true;
+        "privacy.trackingprotection.cryptomining.enabled"   = true;
+        "privacy.trackingprotection.enabled"                = true;
+        "browser.send_pings"                                = false;
+        "browser.urlbar.speculativeConnect.enabled"         = false;
+        "dom.event.clipboardevents.enabled"                 = false;
+        "media.eme.enabled"                                 = false;
+        "media.gmp-widevinecdm.enabled"                     = false;
+        "media.navigator.enabled"                           = false;
+        "network.cookie.cookieBehavior"                     = 1;
+        "network.http.referer.XOriginPolicy"                = 2;
+        "network.http.referer.XOriginTrimmingPolicy"        = 2;
+        "webgl.disabled"                                    = true;
+        "browser.sessionstore.privacy_level"                = 2;
+        "network.IDN_show_punycode"                         = true;
+
+        # Fix issues with having a dark GTK theme
+        "ui.use_standins_for_native_colors"   = true;
+        "widget.content.allow-gtk-dark-theme" = false;
+        "widget.chrome.allow-gtk-dark-theme"  = false;
+        "widget.content.gtk-theme-override"   = "Adwaita:light";
+      };
+    };
+  };
+
   # Services
   services.compton = {
     enable = true;

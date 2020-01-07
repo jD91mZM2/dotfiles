@@ -1,0 +1,3 @@
+[submodule "nur-packages"]
+	path = nur-packages
+	url = ../nur-packages
