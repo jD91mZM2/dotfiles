@@ -15,15 +15,15 @@
   :demand t
   :config
   ;; Rebind TAB to M-/
-  (define-key yas-minor-mode-map  (kbd "<tab>")       nil)
-  (define-key yas-minor-mode-map  (kbd "TAB")         nil)
-  (define-key yas-minor-mode-map  (kbd "M-<ret>")     yas-maybe-expand)
-  (define-key yas-keymap          [(tab)]             nil)
-  (define-key yas-keymap          (kbd "TAB")         nil)
-  (define-key yas-keymap          [(shift tab)]       nil)
-  (define-key yas-keymap          [backtab]           nil)
-  (define-key yas-keymap          (kbd "<ret>")       'yas-next-field-or-maybe-expand)
-  (define-key yas-keymap          (kbd "<S-return>")  'yas-prev-field)
+  (define-key yas-minor-mode-map  (kbd "<tab>")  nil)
+  (define-key yas-minor-mode-map  (kbd "TAB")    nil)
+  (define-key yas-minor-mode-map  (kbd "M-RET")  yas-maybe-expand)
+  (define-key yas-keymap          [(tab)]        nil)
+  (define-key yas-keymap          (kbd "TAB")    nil)
+  (define-key yas-keymap          [(shift tab)]  nil)
+  (define-key yas-keymap          [backtab]      nil)
+  (define-key yas-keymap          (kbd "RET")    'yas-next-field-or-maybe-expand)
+  (define-key yas-keymap          (kbd "S-RET")  'yas-prev-field)
 
   (setq yas-snippet-dirs (list (my/util/relative "../snippets")))
   (yas-global-mode 1))
