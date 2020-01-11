@@ -1,5 +1,12 @@
 { pkgs, ... }:
+let
+  nur-no-pkgs = import <dotfiles/shared/nur-no-pkgs.nix>;
+in
 {
+  imports = [
+    nur-no-pkgs.repos.jd91mzm2.modules.programs
+  ];
+
   # System overlays
   nixpkgs.overlays = let
     dir = (<dotfiles/home/nixpkgs/.config/nixpkgs/overlays>);
@@ -12,6 +19,10 @@
     adb.enable = true;
     dconf.enable = true;
     slock.enable = true;
+    powerline-rs = {
+      enable = true;
+      package = pkgs.master.powerline-rs;
+    };
     bash = {
       enableCompletion = true;
       interactiveShellInit = ''
@@ -24,7 +35,6 @@
       autosuggestions.enable = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
-      promptInit = "";
       interactiveShellInit = ''
         source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
         source "${pkgs.autojump}/share/autojump/autojump.zsh"

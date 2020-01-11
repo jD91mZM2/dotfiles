@@ -62,10 +62,6 @@ in
   #  \____|_____|___|
 
   # Shells
-  programs.powerline-rs = {
-    enable = true;
-    package = pkgs.unmerged.powerline-rs;
-  };
   programs.bash = {
     enable = true;
     shellAliases = aliases;

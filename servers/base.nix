@@ -1,8 +1,13 @@
 { pkgs, ... }:
 let
   shared = pkgs.callPackage <dotfiles/shared> {};
+  nur-no-pkgs = import <dotfiles/shared/nur-no-pkgs.nix>;
 in
 {
+  imports = [
+    nur-no-pkgs.repos.jd91mzm2.modules.programs
+  ];
+
   # System overlays
   nixpkgs.overlays = let
     dir = (<dotfiles/home/nixpkgs/.config/nixpkgs/overlays>);
@@ -58,16 +63,11 @@ in
   ];
 
   # Program config
+  programs.powerline-rs.enable = true;
   programs.mosh.enable = true;
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
-    promptInit = ''
-      powerline() {
-        PS1="$(${pkgs.powerline-rs}/bin/powerline-rs --shell zsh "$?")"
-      }
-      precmd_functions+=(powerline)
-    '';
     interactiveShellInit = ''
       . ${pkgs.grml-zsh-config}/etc/zsh/zshrc
     '';
