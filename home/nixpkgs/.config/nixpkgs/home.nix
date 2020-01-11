@@ -62,13 +62,14 @@ in
   #  \____|_____|___|
 
   # Shells
-  programs.powerline-rs.enable = true;
+  programs.powerline-rs = {
+    enable = true;
+    package = pkgs.unmerged.powerline-rs;
+  };
   programs.bash = {
     enable = true;
     shellAliases = aliases;
-    initExtra = ''
-      ${bashConfig}
-    '';
+    initExtra = bashConfig;
   };
   programs.zsh = {
     enable = true;
@@ -81,6 +82,22 @@ in
   };
 
   # Misc
+  programs.scaff = {
+    enable = true;
+    package = pkgs.unmerged.scaff;
+    imports = let
+      baseURL = "https://gitlab.com/jD91mZM2/scaff-repo/-/jobs/398592242/artifacts/raw/build";
+    in {
+      cachix          = builtins.fetchurl "${baseURL}/cachix.tar.gz";
+      license-mit     = builtins.fetchurl "${baseURL}/license-mit.tar.gz";
+      nix-rust-legacy = builtins.fetchurl "${baseURL}/nix-rust-legacy.tar.gz";
+      nix-rust        = builtins.fetchurl "${baseURL}/nix-rust.tar.gz";
+      nix-shell       = builtins.fetchurl "${baseURL}/nix-shell.tar.gz";
+      nixpkgs-rust    = builtins.fetchurl "${baseURL}/nixpkgs-rust.tar.gz";
+      readme          = builtins.fetchurl "${baseURL}/readme.tar.gz";
+      rustfmt         = builtins.fetchurl "${baseURL}/rustfmt.tar.gz";
+    };
+  };
   programs.ssh = {
     enable      = true;
     matchBlocks = shared.consts.secret.sshHosts;

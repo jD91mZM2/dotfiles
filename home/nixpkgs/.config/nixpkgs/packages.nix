@@ -59,10 +59,8 @@ in {
 
       # My software
       unmerged.git-subcopy
-      unmerged.powerline-rs
-      unmerged.scaff
-      unmerged.termplay
-      (callPackage (builtins.fetchTarball https://gitlab.com/jD91mZM2/xidlehook/-/archive/master.tar.gz) {})
+      master.termplay
+      xidlehook
 
       # Graphical applications
       abiword
@@ -118,6 +116,7 @@ in {
       (callPackage (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
       (callPackage (builtins.fetchTarball https://github.com/kolloch/crate2nix/archive/master.tar.gz) {})
       (callPackage (builtins.fetchTarball https://github.com/nix-community/pypi2nix/archive/db43e3b896739c78bd1abed1ba45c52d1bc74c7e.tar.gz) {})
+      niv
       nix-prefetch-scripts
       nix-review
 
