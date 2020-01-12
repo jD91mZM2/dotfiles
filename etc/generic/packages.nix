@@ -19,30 +19,7 @@ in
     adb.enable = true;
     dconf.enable = true;
     slock.enable = true;
-    powerline-rs = {
-      enable = true;
-      package = pkgs.master.powerline-rs;
-    };
-    bash = {
-      enableCompletion = true;
-      interactiveShellInit = ''
-        source "${pkgs.autojump}/share/autojump/autojump.bash"
-        eval "$("${pkgs.direnv}/bin/direnv" hook bash)"
-      '';
-    };
-    zsh = {
-      enable = true;
-      autosuggestions.enable = true;
-      enableCompletion = true;
-      syntaxHighlighting.enable = true;
-      interactiveShellInit = ''
-        source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
-        source "${pkgs.autojump}/share/autojump/autojump.zsh"
-        eval "$("${pkgs.direnv}/bin/direnv" hook zsh)"
-
-        set noextendglob
-      '';
-    };
+    powerline-rs.package = pkgs.master.powerline-rs;
   };
   virtualisation = {
     docker = {
@@ -82,11 +59,9 @@ in
     binutils
     cryptsetup
     efibootmgr
-    file
     gist
     git
     gnupg
-    htop
     httpie
     manpages
     mosh

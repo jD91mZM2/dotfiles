@@ -3,7 +3,11 @@
   ## https://github.com/NixOS/nixpkgs/issues/33231
   environment.variables.GDK_PIXBUF_MODULE_FILE = "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache";
 
-  hardware.opengl.driSupport32Bit = true;
+  # Enable 32-bit OpenGL for steam
+  hardware.opengl = {
+    driSupport32Bit = true;
+    extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+  };
 
   # Sound
   hardware.pulseaudio = {

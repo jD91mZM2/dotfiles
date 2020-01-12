@@ -23,7 +23,9 @@ in
 
   imports = [
     # Files
+    <dotfiles/shared/base.nix>
     ./cachix.nix
+    ./containers.nix
     ./fonts.nix
     ./packages.nix
     ./services.nix
@@ -76,14 +78,13 @@ in
 
     # Mime type for wasm, see https://github.com/mdn/webassembly-examples/issues/5
     environment.etc."mime.types".text = ''
-    application/wasm  wasm
-  '';
+      application/wasm  wasm
+    '';
 
     # User settings
     users.users."${shared.consts.user}" = {
       isNormalUser = true;
-      extraGroups  = [ "wheel" "libvirtd" "adbusers" ];
-      shell        = pkgs.zsh;
+      extraGroups  = [ "libvirtd" "adbusers" ];
     };
 
     # This value determines the NixOS release with which your system is to be

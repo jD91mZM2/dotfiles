@@ -100,7 +100,6 @@ in {
       rename
       ripgrep
       sqlite
-      tree
       units
       weechat
       youtube-dl
