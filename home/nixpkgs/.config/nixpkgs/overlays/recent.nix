@@ -6,9 +6,8 @@ let
   );
 in {
   unmerged = {
-    git-subcopy  = (for-rev "git-subcopy").git-subcopy;
-    powerline-rs = (for-rev "powerline-rs").powerline-rs;
-    scaff        = (for-rev "scaff").scaff;
+    git-subcopy = (for-rev "git-subcopy").git-subcopy;
+    scaff       = (for-rev "scaff").scaff;
   };
   master = import (builtins.fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) { overlays = []; };
 }

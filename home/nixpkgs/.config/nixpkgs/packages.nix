@@ -58,8 +58,9 @@ in {
       clangd
 
       # My software
-      unmerged.git-subcopy
+      master.rnix-lsp
       master.termplay
+      unmerged.git-subcopy
       xidlehook
 
       # Graphical applications
