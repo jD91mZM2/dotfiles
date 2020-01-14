@@ -19,6 +19,8 @@ in
   # Must have packages
   environment.systemPackages = with pkgs; [
     file
+    git
+    gnupg
     htop
     kitty.terminfo
     trash-cli

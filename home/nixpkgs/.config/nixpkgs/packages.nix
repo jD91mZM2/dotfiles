@@ -92,7 +92,6 @@ in {
       fd
       ffmpeg
       figlet
-      gitAndTools.hub
       neofetch
       nixops
       pv

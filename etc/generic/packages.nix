@@ -60,8 +60,6 @@ in
     cryptsetup
     efibootmgr
     gist
-    git
-    gnupg
     httpie
     manpages
     mosh

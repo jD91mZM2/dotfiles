@@ -4,7 +4,6 @@ let
   aliases = {
     clear     = "clear; echo -ne \"\\e[3J\"";
     e         = "env -u TMPDIR emacsclient -n"; # nix-shell sets $TMPDIR which messes up emacsclient's search
-    git       = "hub";
     ls        = "ls -CF --color=auto";
     nix-shell = "nix-shell --command zsh";
     rsynca    = "rsync -avzhP --delete";
