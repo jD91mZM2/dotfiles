@@ -54,6 +54,10 @@ in
     # Misc. settings
     documentation.dev.enable  = true;
     hardware.bluetooth.enable = true;
+    nix.gc = {
+      automatic = true;
+      dates = "17:00";
+    };
     system.autoUpgrade = {
       enable = true;
       dates  = "16:00";

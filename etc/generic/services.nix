@@ -5,10 +5,7 @@ in
 {
   # General things
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
-  services.locate = {
-    enable = true;
-    interval = "19:00";
-  };
+  services.lorri.enable  = true;
   services.upower.enable = true;
 
   # Backup
