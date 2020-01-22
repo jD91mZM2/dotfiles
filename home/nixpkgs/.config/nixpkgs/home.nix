@@ -201,6 +201,9 @@ in
         "widget.content.allow-gtk-dark-theme" = false;
         "widget.chrome.allow-gtk-dark-theme"  = false;
         "widget.content.gtk-theme-override"   = "Adwaita:light";
+
+        # Disable WebRTC because it's scary
+        "media.peerconnection.enabled" = false;
       };
     };
   };
