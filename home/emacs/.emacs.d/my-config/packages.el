@@ -1,15 +1,20 @@
-(load "packages/evil.el")
-(load "packages/completion.el")
-(load "packages/languages.el")
-(load "packages/navigation.el")
-(load "packages/editing.el")
-
 ;; Packages needed elsewhere
 
 (use-package hydra
   :demand t)
 
+(use-package quelpa-use-package
+  :demand t)
+
 (require 'man)
+
+;; Include packages
+
+(load "packages/evil.el")
+(load "packages/completion.el")
+(load "packages/languages.el")
+(load "packages/navigation.el")
+(load "packages/editing.el")
 
 ;; Packages that I for other reasons want always available
 

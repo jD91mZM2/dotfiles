@@ -1,7 +1,8 @@
 ;; General language support
 
 (use-package flycheck
-  :hook (lsp-ui-mode . flycheck-mode))
+  :hook (lsp-ui-mode . flycheck-mode)
+  :commands (flycheck-add-mode))
 (use-package lsp-mode
   :bind ("C-c e" . lsp-extend-selection)
   :commands (lsp lsp-register-client)
@@ -70,6 +71,15 @@
   :custom
   (markdown-header-scaling t))
 
+;; Minecraft Functions
+(use-package mcf-mode
+  :ensure quelpa
+  :quelpa (mcf
+           :fetcher github
+           :repo "rasensuihei/mcf"
+           :commit "7fe4c74a47b1820806bf92d818039dafb2df114b")
+  :mode "\\.mcfunction\\'")
+
 ;; Nasm
 (use-package nasm-mode
   :hook (asm-mode . nasm-mode))
@@ -131,7 +141,9 @@
          "\\.json\\'"
          "\\.s?css\\'"
          "\\.less\\'")
-  :hook (web-mode . lsp))
+  :hook (web-mode . lsp)
+  :config
+  (flycheck-add-mode 'json-python-json 'web-mode))
 
 ;; YAML
 (use-package yaml-mode
