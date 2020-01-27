@@ -21,3 +21,11 @@
                                                load-file-name
                                                ;; When evaluating the file
                                                buffer-file-name))))
+
+(setq my/util/font-lock-additions (make-hash-table))
+(defun my/util/font-lock-extend (mode keywords)
+  (let ((prev (gethash mode my/util/font-lock-additions)))
+    (when prev
+      (font-lock-remove-keywords mode prev))
+    (font-lock-add-keywords mode keywords)
+    (puthash mode keywords my/util/font-lock-additions)))

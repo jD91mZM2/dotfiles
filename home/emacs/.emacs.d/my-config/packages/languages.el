@@ -28,6 +28,10 @@
 ;; Emacs Lisp
 (use-package auto-compile
   :hook (emacs-lisp-mode . auto-compile-on-save-mode))
+(my/util/font-lock-extend 'emacs-lisp-mode '(("[[:space:](]+\\(t\\)[[:space:])]+" 1 font-lock-builtin-face)
+                                             ("[[:space:](]+\\(nil\\)[[:space:])]+" 1 font-lock-builtin-face)
+                                             ("[[:space:](]+\\(-?[0-9]+\\)[[:space:])]+" 1 font-lock-builtin-face)
+                                             ("[[:space:](]+\\('[a-zA-Z-]+\\)[[:space:])]+" 1 font-lock-constant-face)))
 
 ;; LaTeX
 (use-package auctex
@@ -103,7 +107,8 @@
                                            (let ((original-notify Man-notify-method))
                                              (setq Man-notify-method 'pushy)
                                              (man "configuration.nix")
-                                             (setq Man-notify-method original-notify)))))
+                                             (setq Man-notify-method original-notify))))
+  (my/util/font-lock-extend 'nix-mode '(("\\<builtins.[a-zA-Z]+\\>" . font-lock-builtin-face))))
 
 ;; Org
 (use-package org
@@ -112,6 +117,8 @@
   :custom ((org-startup-indented t)
            (org-startup-folded nil)
            (org-list-allow-alphabetical t)))
+(use-package ob-ipython :after org)
+(use-package ob-rust    :after org)
 
 ;; Rust
 (use-package rustic
@@ -148,3 +155,16 @@
 ;; YAML
 (use-package yaml-mode
   :mode "\\.yml\\'")
+
+(require 'generic-x)
+
+(define-generic-mode lark-mode
+  '("//")
+  '("%import" "%ignore")
+  '(("[^/]\\(/[^/]\\(\\\\/\\|[^/]\\)*/\\)" (1 font-lock-constant-face))
+    ("\\([a-zA-Z0-9_]+\\):" (1 font-lock-builtin-face))
+    ("~[0-9]+\\|[?+*]" . font-lock-builtin-face)
+    ("|" . font-lock-type-face))
+  '("\\.lark\\'")
+  nil
+  "A mode for .lark files")
