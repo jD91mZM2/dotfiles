@@ -16,6 +16,11 @@ in {
     certs."krake.one" = {
       email = shared.consts.email;
       webroot = "/var/www/challenges";
+
+      # Allow nginx to access certs
+      group = "nginx";
+      allowKeysForGroup = true;
+
       postRun = ''
         systemctl reload nginx
       '';
@@ -27,6 +32,10 @@ in {
     certs."mail.krake.one" = {
       email = shared.consts.email;
       webroot = "/var/www/challenges";
+
+      # Allow nginx to access certs
+      group = "nginx";
+      allowKeysForGroup = true;
 
       # https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/blob/v2.2.1/mail-server/nginx.nix#L39-41
       postRun = ''

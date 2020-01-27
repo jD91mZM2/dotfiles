@@ -11,13 +11,14 @@ in
   # https://gitlab.com/simple-nixos-mailserver/nixos-mailserver
   imports = [
     (builtins.fetchTarball {
-      url    = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/v2.2.1/nixos-mailserver-v2.2.1.tar.gz";
-      sha256 = "03d49v8qnid9g9rha0wg2z6vic06mhp0b049s3whccn1axvs2zzx";
+      url    = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/v2.3.0/nixos-mailserver-v2.3.0.tar.gz";
+      sha256 = "0lpz08qviccvpfws2nm83n7m2r8add2wvfg9bljx9yxx8107r919";
     })
   ];
 
   mailserver = {
     enable  = true;
+    localDnsResolver = false;  # kresd is broken
     fqdn    = "mail.krake.one";
     domains = [ "krake.one" ];
 

@@ -15,14 +15,6 @@ in
   };
 
   # See https://github.com/dani-garcia/bitwarden_rs/wiki/Fail2Ban-Setup
-  environment.etc."fail2ban/filter.d/bitwarden.conf".text = ''
-    [INCLUDES]
-    before = common.conf
-
-    [Definition]
-    failregex   = ^.*Username or password is incorrect\. Try again\. IP: <ADDR>\. Username:.*$
-    ignoreregex =
-  '';
   environment.etc."fail2ban/filter.d/bitwarden-admin.conf".text = ''
     [INCLUDES]
     before = common.conf
@@ -51,7 +43,7 @@ in
       bitwarden-admin = ''
         # If you make 3 failed attempts
         logpath  = /var/lib/bitwarden_rs/log
-        filter   = bitwarden
+        filter   = bitwarden-admin
         maxretry = 3
 
         # Ban the IP for an entire day

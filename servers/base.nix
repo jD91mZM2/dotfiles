@@ -1,11 +1,13 @@
 { pkgs, ... }:
 
-{
+let
+  shared = import <dotfiles/shared> {};
+in {
   imports = [
     <dotfiles/shared/base.nix>
   ];
   # Language settings
-  i18n.consoleKeyMap = "dvorak";
+  console.keyMap = "dvorak";
 
   # System config
   networking.firewall.enable = false;
@@ -23,7 +25,11 @@
     passwordAuthentication = false;
   };
 
-  environment.systemPackages = [
+  # Add SSH key to user account
+  users.users."${shared.consts.user}".openssh.authorizedKeys.keys = shared.consts.sshKeys;
+
+  # Extra packages
+  environment.systemPackages = with pkgs; [
     rclone
     sqlite
   ];
