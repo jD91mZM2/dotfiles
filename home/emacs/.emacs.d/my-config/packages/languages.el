@@ -31,7 +31,8 @@
 (my/util/font-lock-extend 'emacs-lisp-mode '(("[[:space:](]+\\(t\\)[[:space:])]+" 1 font-lock-builtin-face)
                                              ("[[:space:](]+\\(nil\\)[[:space:])]+" 1 font-lock-builtin-face)
                                              ("[[:space:](]+\\(-?[0-9]+\\)[[:space:])]+" 1 font-lock-builtin-face)
-                                             ("[[:space:](]+\\('[a-zA-Z-]+\\)[[:space:])]+" 1 font-lock-constant-face)))
+                                             ("[[:space:](]+\\('[a-zA-Z-]+\\)[[:space:])]+" 1 font-lock-constant-face)
+                                             ("[()]" . font-lock-comment-face)))
 
 ;; LaTeX
 (use-package auctex
@@ -152,10 +153,15 @@
   :config
   (flycheck-add-mode 'json-python-json 'web-mode))
 
+;; Python
+(add-hook 'python-mode-hook (defun my/python-hook ()
+                              (setq-local fill-column 80)))
+
 ;; YAML
 (use-package yaml-mode
   :mode "\\.yml\\'")
 
+;; Other languages
 (require 'generic-x)
 
 (define-generic-mode lark-mode
@@ -167,4 +173,15 @@
     ("|" . font-lock-type-face))
   '("\\.lark\\'")
   nil
-  "A mode for .lark files")
+  "A mode for files read by the LARK python parser library")
+
+(define-generic-mode wat-mode
+  '(";;")
+  '("module" "func" "param" "result" "export")
+  '(("[()]" . font-lock-comment-face)
+    ("\\<\\(i32\\|i64\\|f32\\|f64\\)\\>" . font-lock-type-face)
+    ("\\$\\([a-zA-Z_]+\\)" . font-lock-constant-face))
+  '("\\.wat\\'")
+  '((lambda ()
+      (setq-local tab-width 2)))
+  "WebAssembly Text format")

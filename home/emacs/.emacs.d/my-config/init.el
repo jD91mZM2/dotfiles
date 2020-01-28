@@ -53,6 +53,7 @@
 
 ;; Editing options
 (setq-default c-basic-offset 4)
+(setq-default fill-column 100)
 (setq-default indent-tabs-mode nil)
 (setq-default require-final-newline t)
 (setq-default tab-width 4)
