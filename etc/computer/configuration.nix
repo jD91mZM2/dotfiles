@@ -41,7 +41,7 @@ in
       overrideFolders = true;
       folders.main = {
         enable = true;
-        path = "/${shared.consts.home}/Sync/main";
+        path = "${shared.consts.home}/Sync";
         devices = [ "droplet" "rpi" "phone" "laptop" ];
       };
     };

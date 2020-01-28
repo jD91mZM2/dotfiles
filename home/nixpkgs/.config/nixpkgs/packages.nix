@@ -159,5 +159,7 @@ in {
       okular
       poppler_utils
       texlive.combined.scheme-full
+      ## Web Assembly
+      wabt
     ]);
 }
