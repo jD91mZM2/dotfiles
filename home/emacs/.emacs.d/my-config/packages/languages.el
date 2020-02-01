@@ -7,9 +7,11 @@
   :bind ("C-c e" . lsp-extend-selection)
   :commands (lsp lsp-register-client)
   :hook (python-mode . lsp)
+  :custom
+  (lsp-enable-indentation nil)
+  (lsp-prefer-flymake nil)
+  (lsp-auto-guess-root t)
   :config
-  (setq lsp-prefer-flymake nil)
-  (setq lsp-auto-guess-root t)
   (evil-define-key 'normal lsp-mode-map "gd" 'lsp-find-definition))
 (use-package lsp-ui
   :after lsp-mode
@@ -115,16 +117,20 @@
 (use-package org
   :mode ("\\.org\\'". org-mode)
   :commands org-mode
-  :custom ((org-startup-indented t)
-           (org-startup-folded nil)
-           (org-list-allow-alphabetical t)))
+  :custom
+  (org-startup-indented t)
+  (org-startup-folded nil)
+  (org-list-allow-alphabetical t))
 (use-package ob-ipython :after org)
 (use-package ob-rust    :after org)
 
 ;; Rust
 (use-package rustic
-  :hook (rustic-mode . lsp)
   :mode ("\\.rs\\'" . rustic-mode)
+  :hook (rustic-mode . lsp)
+  :custom
+  (rustic-lsp-setup-p nil)
+  (rustic-match-angle-brackets nil)
   :config
   (sp-local-pair 'rustic-mode "<" ">"))
 (use-package rust-playground
@@ -177,10 +183,10 @@
 
 (define-generic-mode wat-mode
   '(";;")
-  '("module" "func" "param" "result" "export")
+  '("module" "func" "param" "result" "export" "type")
   '(("[()]" . font-lock-comment-face)
     ("\\<\\(i32\\|i64\\|f32\\|f64\\)\\>" . font-lock-type-face)
-    ("\\$\\([a-zA-Z_]+\\)" . font-lock-constant-face))
+    ("\\$\\([a-zA-Z_][a-zA-Z_0-9]*\\)" . font-lock-constant-face))
   '("\\.wat\\'")
   '((lambda ()
       (setq-local tab-width 2)))

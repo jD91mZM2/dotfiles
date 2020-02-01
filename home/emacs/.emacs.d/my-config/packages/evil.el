@@ -8,7 +8,10 @@
   (setq-default evil-ex-search-persistent-highlight nil)
   :config
   (evil-mode 1)
-  (global-undo-tree-mode -1)
+
+  ;; Seems like disabling it immediately no longer has any effect
+  (add-hook 'after-init-hook () (defun my/disable-undo-tree ())
+            (global-undo-tree-mode -1))
 
   (defun my/with-inverted-case (beg end inner)
     ;; Invert casing
@@ -44,13 +47,15 @@
                           (evil-define-operator ,function (beg end)
                             ,docstring
                             (align-regexp beg end ,regexp nil nil t))))
-  (my/define-align "=" my/align-symbols "\\(\\s-*\\)\\(=\\| #\\|//\\|?\\)"
-                   "Align equal marks and comments")
+  (my/define-align "=" my/align-symbols "\\(\\s-*\\)\\(=\\|?\\)"
+                   "Align equal marks")
+  (my/define-align "#" my/align-comments "\\(\\s-+\\)\\(#\\|//\\|;\\)"
+                   "Align all comments")
   (my/define-align "," my/align-comma ",\\(\\s-*\\)[^[:space:]\n]"
                    "Align all non-whitespace characters after a comma")
   (my/define-align ":" my/align-colon ":\\(\\s-+\\)[^[:space:]\n]"
                    "Align all non-whitespace characters after a colon")
-  (my/define-align " SPC" my/align-word "\\(\\s-+\\)\\s-[^[:space:]\n]"
+  (my/define-align " SPC" my/align-word "[^[:space:]\n]\\(\\s-+\\)\\s-[^[:space:]\n]"
                    "Align all non-whitespace characters preceeded by at least 2 spaces")
 
 
@@ -129,7 +134,8 @@ leaving the point at the end of the latter"
   (evil-define-key 'normal prog-mode-map (kbd "M-n") (lambda () (interactive) (my/transpose-args 'evil-forward-arg)))
   (evil-define-key 'normal prog-mode-map (kbd "M-p") (lambda () (interactive) (my/transpose-args 'evil-backward-arg))))
 (use-package evil-collection
-  :custom (evil-collection-company-use-tng nil)
+  :custom
+  (evil-collection-company-use-tng nil)
   :config
   (evil-collection-init))
 (use-package evil-easymotion

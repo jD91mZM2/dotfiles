@@ -3,14 +3,6 @@
   :config
   (global-aggressive-indent-mode 1))
 
-(use-package fill-column-indicator
-  :demand t
-  :config
-  (define-globalized-minor-mode global-fci-mode fci-mode
-    (lambda ()
-      (fci-mode 1)))
-  (global-fci-mode 1))
-
 (use-package imenu-list
   :bind ("C-c i" . imenu-list-smart-toggle))
 
