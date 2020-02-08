@@ -154,14 +154,16 @@
          "\\.tsx?\\'"
          "\\.json\\'"
          "\\.s?css\\'"
-         "\\.less\\'")
+         "\\.less\\'"
+         "\\.mcmeta\\'")
   :hook (web-mode . lsp)
+  :custom
+  (web-mode-content-types-alist '(("json" . "\\.mcmeta\\'")))
   :config
-  (flycheck-add-mode 'json-python-json 'web-mode))
-
-;; Python
-(add-hook 'python-mode-hook (defun my/python-hook ()
-                              (setq-local fill-column 80)))
+  (flycheck-add-mode 'json-python-json 'web-mode)
+  (add-hook 'web-mode-hook (defun my/web-mode-hook ()
+                             (when (equal web-mode-content-type "json")
+                               (setq-local web-mode-code-indent-offset 2)))))
 
 ;; YAML
 (use-package yaml-mode
@@ -183,7 +185,7 @@
 
 (define-generic-mode wat-mode
   '(";;")
-  '("module" "func" "param" "result" "export" "type")
+  '("module" "func" "param" "result" "export" "type" "local")
   '(("[()]" . font-lock-comment-face)
     ("\\<\\(i32\\|i64\\|f32\\|f64\\)\\>" . font-lock-type-face)
     ("\\$\\([a-zA-Z_][a-zA-Z_0-9]*\\)" . font-lock-constant-face))
