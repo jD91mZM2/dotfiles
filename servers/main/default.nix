@@ -8,6 +8,7 @@ let
   abottomod = shared.builders.buildPypiPackage {
     name = "abottomod";
     src  = ~/Coding/Python/abottomod;
+    script = "-m src";
   };
   timeywimey = shared.builders.buildPypiPackage {
     name = "timeywimey";
