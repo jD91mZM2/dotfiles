@@ -185,10 +185,12 @@
 
 (define-generic-mode wat-mode
   '(";;")
-  '("module" "func" "param" "result" "export" "type" "local")
+  '("module" "func" "param" "result" "export" "type" "return" "call")
   '(("[()]" . font-lock-comment-face)
     ("\\<\\(i32\\|i64\\|f32\\|f64\\)\\>" . font-lock-type-face)
-    ("\\$\\([a-zA-Z_][a-zA-Z_0-9]*\\)" . font-lock-constant-face))
+    ("\\$\\([a-zA-Z_][a-zA-Z_0-9]*\\)" . font-lock-constant-face)
+    ("(\\(local\\)" 1 font-lock-variable-name-face)
+    ("\\<\\(?:if\\|end\\)\\>" . font-lock-builtin-face))
   '("\\.wat\\'")
   '((lambda ()
       (setq-local tab-width 2)))
