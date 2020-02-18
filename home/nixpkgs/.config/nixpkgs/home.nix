@@ -73,6 +73,24 @@ in
       ${bashConfig}
 
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=#${shared.theme.current-line},fg=#${shared.theme.comment}"
+
+      # Vi keybindings
+      bindkey -v
+      export KEYTIMEOUT=1
+
+      # Sync with cursor
+      echo -ne "\e[5 q"
+      zle-keymap-select() {
+        case $KEYMAP in
+          vicmd)
+            echo -ne "\e[0 q"
+            ;;
+          viins|main)
+            echo -ne "\e[5 q"
+            ;;
+        esac
+      }
+      zle -N zle-keymap-select
     '';
   };
 
