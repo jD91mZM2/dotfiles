@@ -11,13 +11,24 @@ in python.mkDerivation {
   buildInputs = builtins.attrValues python.packages;
   format = "other";
   installPhase = ''
-    mkdir -p $out/src
-    cp *.py $out/src
+    if [ -d src ]; then
+      # Some of my projects have moved to having a src/ directory instead of just dumping all .py files in the root
+      cd src
+    fi
+
+    mkdir $out
+    cp -R . $out/src
 
     mkdir -p $out/bin
     cat > $out/bin/start <<EOF
       #!${stdenv.shell}
-      ${python.interpreter}/bin/python $out/src/main.py
+      if [ -f $out/src/__main__.py ]; then
+        cd $out
+        ${python.interpreter}/bin/python -m src
+      else
+        # Compatibility crux which I should fix some time
+        ${python.interpreter}/bin/python $out/src/main.py
+      fi
     EOF
     chmod +x $out/bin/start
   '';

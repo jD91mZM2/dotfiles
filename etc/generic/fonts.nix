@@ -7,7 +7,7 @@
       comic-relief
       font-awesome
       hack-font
-      symbola
+      noto-fonts
     ];
     fontconfig.defaultFonts.monospace = [ "Hack" ];
   };
