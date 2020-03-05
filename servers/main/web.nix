@@ -10,6 +10,8 @@ in {
   #   |_| |_____|____/
 
   security.acme = {
+    acceptTerms = true;
+
     # for testing certificates, toggle comment below:
     # production = false;
 
