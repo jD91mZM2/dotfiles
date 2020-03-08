@@ -62,11 +62,18 @@ in
       enable = true;
       dates  = "16:00";
     };
-    time.timeZone = "Europe/Stockholm";
+    time = {
+      timeZone = "Europe/Stockholm";
+      hardwareClockInLocalTime = true; # fuck windows
+    };
 
     # systemd-boot
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.systemd-boot.enable      = true;
+    boot.loader.systemd-boot = {
+      enable = true;
+      configurationLimit = 5;
+      editor = false;
+    };
 
     # TTY settings
     i18n.defaultLocale = "en_US.UTF-8";

@@ -17,6 +17,10 @@ in
     networkId = "c0122dbe";
   };
 
+  # Make timeout long so I have time to plug in my keyboard. Using `null` here
+  # seems to cause it to be selected immediately, unlike what the man page says
+  boot.loader.timeout = 99;
+
   hardware.cpu.amd.updateMicrocode = true;
 
   services.xserver = {
