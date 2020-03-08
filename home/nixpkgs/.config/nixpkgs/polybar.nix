@@ -84,7 +84,7 @@ in
       "module/date" = {
         type             = "internal/date";
         date             = "%b %d";
-        time             = "%I:%M %p";
+        time             = "%H:%M";
         label            = "%date% %time%";
         label-background = shared.theme.background;
         interval         = 30;
