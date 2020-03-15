@@ -81,5 +81,5 @@ in {
       providedBy = "krake.one on DigitalOcean";
     };
   };
-  # services.do-agent.enable = true;
+  services.do-agent.enable = true;
 }

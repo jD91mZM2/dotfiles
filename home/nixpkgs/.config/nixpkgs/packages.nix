@@ -65,6 +65,7 @@ in {
 
       # Graphical applications
       abiword
+      audacity
       bitwarden
       chromium
       filezilla

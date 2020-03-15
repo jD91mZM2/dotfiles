@@ -233,11 +233,9 @@ in
     # backend) seems to cause all kinds of weird issues.
     backend = "xrender";
 
-    fade = true;
-    fadeDelta = 5;
-    shadow = true;
-    extraOptions = ''
-      inactive-dim = 0.1;
-    '';
+    fade        = true;
+    fadeDelta   = 5;
+    inactiveDim = "0.1";
+    shadow      = true;
   };
 }
