@@ -1,11 +1,11 @@
-# -*- mode: sh -*-
+# -*- mode: sh; eval: (aggressive-indent-mode -1) -*-
 ###################
 # General hotkeys #
 ###################
 
 # terminal emulator
 super + shift + Return
-    if which kitty; then kitty; else xterm; fi
+    if which st; then st; else xterm; fi
 
 # program launcher
 super + p

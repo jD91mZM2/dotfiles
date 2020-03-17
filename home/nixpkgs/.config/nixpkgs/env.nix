@@ -9,6 +9,7 @@ in
     PATH = "$PATH:$HOME/.cargo/bin";
 
     # Standard configs
+    SHELL = "${pkgs.tmux}/bin/tmux";
     EDITOR = "env -u TMPDIR emacsclient"; # nix-shell sets $TMPDIR which messes up emacsclient's search
     VISUAL = "env -u TMPDIR emacsclient -t";
 

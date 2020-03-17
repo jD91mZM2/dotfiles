@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  nur-no-pkgs = import <dotfiles/shared/nur-no-pkgs.nix>;
+  nur-no-pkgs = (import <dotfiles/shared/nur-no-pkgs.nix>);
 in
 {
   imports = [
@@ -44,7 +44,7 @@ in
     emacs
     firefox
     gnome3.zenity
-    kitty
+    nur.repos.jd91mzm2.st
     virtmanager
     xfce.xfce4-power-manager
 
