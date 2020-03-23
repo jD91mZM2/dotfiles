@@ -79,8 +79,7 @@ in
       export KEYTIMEOUT=1
 
       # Sync with cursor
-      echo -ne "\e[5 q"
-      zle-keymap-select() {
+      vi-mode-cursor() {
         case $KEYMAP in
           vicmd)
             echo -ne "\e[0 q"
@@ -90,7 +89,8 @@ in
             ;;
         esac
       }
-      zle -N zle-keymap-select
+      zle -N zle-keymap-select vi-mode-cursor
+      zle -N zle-line-init vi-mode-cursor
     '';
   };
 
@@ -162,7 +162,6 @@ in
     '';
   };
   xresources = {
-    # (...)s around the expression just for my editor's sake.
     extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
       owner  = "dracula";
       repo   = "xresources";
@@ -171,10 +170,12 @@ in
       sha256 = "0ywkf2bzxkr45a0nmrmb2j3pp7igx6qvq6ar0kk7d5wigmkr9m5n";
     } + "/Xresources");
     properties = {
-      "XTerm.termName"          = "xterm-256color";
-      "XTerm.vt100.faceName"    = "Hack:size=10";
+      # Everything
+      "*.font" = "Hack:pixelsize=13:antialias=true:autohint=true";
 
-      # Sixel stuff
+      # XTerm stuff
+      "XTerm.termName"          = "xterm-256color";
+      "XTerm.vt100.faceName"    = "Hack:size =10";
       "XTerm*decTerminalID"     = "vt340";
       "XTerm*numColorRegisters" = 256;
     };

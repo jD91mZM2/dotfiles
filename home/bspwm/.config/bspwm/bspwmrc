@@ -60,11 +60,11 @@ bspc rule -a "Emacs"               desktop="Editor"     state=tiled
     thunderbird &
     xfce4-power-manager &
 
-    bspc rule -a st-256color -o desktop="Terminal"
+    bspc rule -a *:st -o desktop="Terminal"
     st &
     sleep 1 # wait for terminal to statup
     emacs &
-    bspc rule -a st-256color -o desktop="Message"
+    bspc rule -a *:st -o desktop="Message"
     st -e weechat &
 
     chromium --app="https://chat.redox-os.org/" &
