@@ -6,6 +6,9 @@ in
 {
   services.polybar = {
     enable = true;
+    package = pkgs.polybar.override {
+      pulseSupport = true;
+    };
     script = ''
       readarray monitors < <(${pkgs.xorg.xrandr}/bin/xrandr | ${pkgs.gawk}/bin/awk '/\<connected\>/ { print $1 }')
       monitors[0]="$(echo -n ''${monitors[0]})"
@@ -26,7 +29,7 @@ in
         padding    = 3;
 
         modules-left  = "bspwm";
-        modules-right = "date alsa battery";
+        modules-right = "date pulseaudio battery";
         module-margin = 1;
         tray-position = "right";
       };
@@ -90,21 +93,19 @@ in
         interval         = 30;
       };
 
-      "module/alsa" = {
-        type          = "internal/alsa";
-        format-volume = "<ramp-volume>";
+      "module/pulseaudio" = {
+        type          = "internal/pulseaudio";
+        format-volume = "<label-volume> <bar-volume>";
 
-        label-muted = "";
+        label-muted = "";
+
+        label-volume = " %percentage%%";
 
         bar-volume-width            = 10;
         bar-volume-empty            = "█";
         bar-volume-empty-foreground = shared.theme.comment;
         bar-volume-fill             = "█";
         bar-volume-indicator        = "";
-
-        ramp-volume-0 = "";
-        ramp-volume-1 = "";
-        ramp-volume-2 = "";
       };
 
       "module/battery" = {

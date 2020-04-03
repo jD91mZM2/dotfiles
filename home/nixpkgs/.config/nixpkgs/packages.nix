@@ -83,7 +83,7 @@ in {
       superTuxKart
       thunderbird
       tigervnc
-      torbrowser
+      (callPackage (builtins.fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) {}).torbrowser # temporary fix
       xorg.xev
       xorg.xwininfo
 
@@ -93,6 +93,7 @@ in {
       fd
       ffmpeg
       figlet
+      libnotify
       neofetch
       nixops
       pv

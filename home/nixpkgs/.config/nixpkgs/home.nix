@@ -228,7 +228,7 @@ in
   };
 
   # Services
-  services.compton = {
+  services.picom = {
     enable = true;
     # Apparently, using (intel + xrandr to configure multiple monitors + glx
     # backend) seems to cause all kinds of weird issues.

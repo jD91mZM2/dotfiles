@@ -57,13 +57,9 @@ super + Return
 
 # volume settings
 XF86Audio{Raise,Lower}Volume
-    notify-send "$(amixer set Master 2%{+,-} unmute | grep -o "[0-9]*%" | head -n1)" -t 200
+    ~/dotfiles/scripts/volume.sh {up,down}
 XF86AudioMute
-    if [ "$(amixer set Master toggle | grep -o "\<on\|off\>" | head -n1)" = "on" ]; then \
-        notify-send "Unmuted" -t 500; \
-    else \
-        notify-send "Muted" -t 500; \
-    fi
+    pactl set-sink-mute "@DEFAULT_SINK@" toggle
 
 # focus mode
 super + Home
