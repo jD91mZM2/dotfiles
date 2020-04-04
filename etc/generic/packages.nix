@@ -49,12 +49,9 @@ in
     xfce.xfce4-power-manager
 
     # Command line
-    direnv
     tmux
 
     # Must have utils
-    autojump
-    bc
     bind
     binutils
     cryptsetup

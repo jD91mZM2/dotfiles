@@ -5,7 +5,6 @@ in
 {
   # General things
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
-  services.lorri.enable  = true;
   services.upower.enable = true;
 
   # Backup

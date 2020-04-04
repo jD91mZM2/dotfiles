@@ -18,6 +18,14 @@ in
 
   # Must have packages
   environment.systemPackages = with pkgs; [
+    # CLI applications
+    direnv
+
+    # Used by zsh
+    autojump
+
+    # CLI utils
+    bc
     file
     git
     gnupg
@@ -26,6 +34,9 @@ in
     trash-cli
     tree
   ];
+
+  # Services
+  services.lorri.enable = true;
 
   # Programs
   programs = {
