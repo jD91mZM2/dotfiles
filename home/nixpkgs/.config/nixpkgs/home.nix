@@ -71,26 +71,6 @@ in
     shellAliases = aliases;
     initExtra = ''
       ${bashConfig}
-
-      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=#${shared.theme.current-line},fg=#${shared.theme.comment}"
-
-      # Vi keybindings
-      bindkey -v
-      export KEYTIMEOUT=1
-
-      # Sync with cursor
-      vi-mode-cursor() {
-        case $KEYMAP in
-          vicmd)
-            echo -ne "\e[0 q"
-            ;;
-          viins|main)
-            echo -ne "\e[5 q"
-            ;;
-        esac
-      }
-      zle -N zle-keymap-select vi-mode-cursor
-      zle -N zle-line-init vi-mode-cursor
     '';
   };
 

@@ -39,7 +39,12 @@ in
     };
     zsh = {
       enable = true;
-      autosuggestions.enable = true;
+      autosuggestions = {
+        enable = true;
+        highlightStyle = "bg=#${shared.theme.current-line},fg=#${shared.theme.comment}";
+      };
+      syntaxHighlighting.enable = true;
+      vi.enable = true;
       interactiveShellInit = ''
         source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
         source "${pkgs.autojump}/share/autojump/autojump.zsh"
@@ -47,7 +52,6 @@ in
 
         set noextendglob
       '';
-      syntaxHighlighting.enable = true;
     };
   };
 
