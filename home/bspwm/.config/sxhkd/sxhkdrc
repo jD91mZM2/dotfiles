@@ -57,7 +57,7 @@ super + Return
 
 # volume settings
 XF86Audio{Raise,Lower}Volume
-    ~/dotfiles/scripts/volume.sh {up,down}
+    ~/dotfiles/scripts/volume.perl {up,down}
 XF86AudioMute
     pactl set-sink-mute "@DEFAULT_SINK@" toggle
 
