@@ -53,7 +53,7 @@ bspc rule -a "Emacs"               desktop="Editor"     state=tiled
 
     # Always running
 
-    ~/dotfiles/lock-timer.sh slock &
+    ~/dotfiles/scripts/lock-timer.sh slock &
     nm-applet &
 
     # Applications

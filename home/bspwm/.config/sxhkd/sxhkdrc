@@ -9,7 +9,7 @@ super + shift + Return
 
 # program launcher
 super + p
-    j4-dmenu-desktop --dmenu 'dmenu -fn Hack-10 -i -sb "#a38b06" -l 15 -p "Run:"' || dmenu_run
+    j4-dmenu-desktop --dmenu '~/dotfiles/scripts/dmenu.sh -p "Run:"' || dmenu_run
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -25,11 +25,11 @@ super + shift + l
 
 # screenshotting
 Print
-    ~/dotfiles/screenshot.sh screen
+    ~/dotfiles/scripts/screenshot.sh screen
 super + Print
-    ~/dotfiles/screenshot.sh window
+    ~/dotfiles/scripts/screenshot.sh window
 super + shift + Print
-    ~/dotfiles/screenshot.sh region
+    ~/dotfiles/scripts/screenshot.sh region
 
 # shutdown the system
 super + Pause
@@ -147,3 +147,8 @@ super + {h,l}
 # move a floating window
 super + {Left,Down,Up,Right}
     bspc node -v {-20 0,0 20,0 -20,20 0}
+
+F1; a
+    cat ~/dotfiles/data/ascii | ~/dotfiles/scripts/dmenu.sh -p "ASCII:" | sed "s/^.*=\s*//" | tr -d $'\n' | xclip -sel clip
+F1; e
+    cat ~/dotfiles/data/emoji | ~/dotfiles/scripts/dmenu.sh -p "Emoji:" | sed "s/^.*=\s*//" | tr -d $'\n' | xclip -sel clip
