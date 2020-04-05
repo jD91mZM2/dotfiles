@@ -186,7 +186,6 @@ in
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       # Other addons
       bitwarden
-      react-devtools
       stylus
       vimium
     ];
