@@ -41,6 +41,12 @@
   :mode ("\\.tex\\'" . LaTeX-mode)
   :pin gnu)
 
+;; Dot
+(use-package graphviz-dot-mode
+  :mode "\\.dot"
+  :config
+  (require 'company-graphviz-dot))
+
 ;; Dhall
 (use-package dhall-mode
   :mode "\\.dhall\\'")

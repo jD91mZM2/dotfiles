@@ -109,6 +109,7 @@ in {
       asciinema
       cdrkit
       docker_compose
+      graphviz
       imagemagick
       pandoc
       whois
