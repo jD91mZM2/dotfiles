@@ -167,10 +167,9 @@
   :config
   (flycheck-add-mode 'json-python-json 'web-mode)
   (add-hook 'web-mode-hook (defun my/web-mode-hook ()
-                             (if (not (equal web-mode-content-type "json"))
-                                 (lsp)
-                               (setq-local web-mode-code-indent-offset 2)
-                               (flycheck-mode 1)))))
+                             (flycheck-mode 1)
+                             (when (equal web-mode-content-type "json")
+                               (setq-local web-mode-code-indent-offset 2)))))
 
 ;; YAML
 (use-package yaml-mode

@@ -139,10 +139,7 @@ in {
       ## Dhall
       dhall
       dhall-json
-      ## JavaScript :puke:
-      nodePackages.typescript # https://github.com/NixOS/nixpkgs/pull/73119
-      nodePackages.typescript-language-server
-      ## Java & JVM languages :slightly less puke:
+      ## Java & JVM languages :puke:
       my-preferred-java-version
       jetbrains.idea-community
       ## Go
