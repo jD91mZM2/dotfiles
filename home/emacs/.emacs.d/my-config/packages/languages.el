@@ -162,14 +162,15 @@
          "\\.s?css\\'"
          "\\.less\\'"
          "\\.mcmeta\\'")
-  :hook (web-mode . lsp)
   :custom
   (web-mode-content-types-alist '(("json" . "\\.mcmeta\\'")))
   :config
   (flycheck-add-mode 'json-python-json 'web-mode)
   (add-hook 'web-mode-hook (defun my/web-mode-hook ()
-                             (when (equal web-mode-content-type "json")
-                               (setq-local web-mode-code-indent-offset 2)))))
+                             (if (not (equal web-mode-content-type "json"))
+                                 (lsp)
+                               (setq-local web-mode-code-indent-offset 2)
+                               (flycheck-mode 1)))))
 
 ;; YAML
 (use-package yaml-mode

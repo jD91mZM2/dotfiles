@@ -1,3 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil; -*-
+# name: library lints
+# key: lib.rs
+# --
+
 #![warn(
     // Harden built-in lints
     missing_copy_implementations,
