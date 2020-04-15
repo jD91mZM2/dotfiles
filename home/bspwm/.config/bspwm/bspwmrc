@@ -63,7 +63,7 @@ bspc rule -a "Emacs"               desktop="Editor"     state=tiled
     xfce4-power-manager &
 
     bspc rule -a *:st -o desktop="Terminal"
-    st &
+    st -e tmux &
     sleep 1 # wait for terminal to statup
     emacs &
     bspc rule -a *:st -o desktop="Message"

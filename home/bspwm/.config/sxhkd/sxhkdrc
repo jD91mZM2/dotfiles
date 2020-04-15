@@ -5,7 +5,7 @@
 
 # terminal emulator
 super + shift + Return
-    if which st; then st; else xterm; fi
+    if which st; then st -e tmux; else xterm; fi
 
 # program launcher
 super + p
