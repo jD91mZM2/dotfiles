@@ -3,6 +3,13 @@
   :config
   (global-aggressive-indent-mode 1))
 
+(use-package editorconfig
+  :demand t
+  :custom
+  (editorconfig-trim-whitespace-mode 1)
+  :config
+  (editorconfig-mode 1))
+
 (use-package imenu-list
   :bind ("C-c i" . imenu-list-smart-toggle))
 
