@@ -170,7 +170,8 @@
   (add-hook 'web-mode-hook (defun my/web-mode-hook ()
                              (flycheck-mode 1)
                              (when (equal web-mode-content-type "json")
-                               (setq-local web-mode-code-indent-offset 2)))))
+                               (setq-local web-mode-code-indent-offset 2)
+                               (setq-local tab-width 2)))))
 
 ;; YAML
 (use-package yaml-mode
