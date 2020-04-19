@@ -10,8 +10,8 @@
   (evil-mode 1)
 
   ;; Seems like disabling it immediately no longer has any effect
-  (add-hook 'after-init-hook () (defun my/disable-undo-tree ())
-            (global-undo-tree-mode -1))
+  (add-hook 'after-init-hook (defun my/disable-undo-tree ()
+                               (global-undo-tree-mode -1)))
 
   (defun my/with-inverted-case (beg end inner)
     ;; Invert casing

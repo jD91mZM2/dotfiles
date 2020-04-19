@@ -82,7 +82,8 @@
   :hook (markdown-mode . flycheck-mode)
   :mode "\\.md\\'"
   :custom
-  (markdown-header-scaling t))
+  (markdown-header-scaling t)
+  (markdown-fontify-code-blocks-natively t))
 
 ;; Minecraft Functions
 (use-package mcf-mode

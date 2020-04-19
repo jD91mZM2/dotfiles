@@ -1,5 +1,8 @@
 (add-to-list 'load-path (locate-user-emacs-file "my-config") t)
 
+(add-to-list 'debug-ignored-errors 'search-failed)
+(setq debug-on-error t)
+
 (load "utils")
 (load "devices")
 
@@ -72,6 +75,10 @@
 
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
+(global-whitespace-mode 1)
+
+(setq-default whitespace-style '(face space-before-tab::tab))
+
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)

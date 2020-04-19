@@ -5,8 +5,6 @@
 
 (use-package editorconfig
   :demand t
-  :custom
-  (editorconfig-trim-whitespace-mode 1)
   :config
   (editorconfig-mode 1))
 
