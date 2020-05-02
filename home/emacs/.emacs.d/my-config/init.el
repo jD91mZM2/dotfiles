@@ -61,6 +61,7 @@
 (setq-default require-final-newline t)
 (setq-default tab-width 4)
 (setq-default vc-follow-symlinks t)
+(setq-default tags-add-tables nil)  ;; prevents super annoying popup that idk what it does
 
 ;;  ____  _         _ _
 ;; / ___|| |_ _   _| (_)_ __   __ _

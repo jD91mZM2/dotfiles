@@ -1,7 +1,18 @@
 (use-package company
   :config
   (global-company-mode 1)
-  (setq company-idle-delay 0))
+  (setq company-idle-delay 0)
+  (require 'cl)
+
+  ;; Insane way to exclude company-etags which seems to sometimes ask if I want
+  ;; to keep the current list of tag table or something
+  (defun my/company-mode-filter-backends (backends)
+    (if (listp backends)
+        (loop for backend in backends
+              unless (and (symbolp backend) (string-match-p "tags" (symbol-name backend)))
+              collect (my/company-mode-filter-backends backend))
+      backends))
+  (setq-default company-backends (my/company-mode-filter-backends company-backends)))
 (use-package company-auctex
   :after company)
 (use-package company-lsp
@@ -9,7 +20,7 @@
 (use-package company-math
   :after company
   :config
-  (setq-default company-backends (cons 'company-math-symbols-unicode (default-value 'company-backends))))
+  (add-to-list 'company-backends 'company-math-symbols-unicode))
 
 (use-package yasnippet
   :demand t

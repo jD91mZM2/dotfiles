@@ -168,8 +168,8 @@
   :config
   (flycheck-add-mode 'json-python-json 'web-mode)
   (add-hook 'web-mode-hook (defun my/web-mode-hook ()
-                             (flycheck-mode 1)
                              (when (equal web-mode-content-type "json")
+                               (flycheck-mode 1)
                                (setq-local web-mode-code-indent-offset 2)
                                (setq-local tab-width 2)))))
 
