@@ -1,0 +1,27 @@
+# -*- mode: snippet; require-final-newline: nil; -*-
+# name: stdenv.mkDerivation
+# key: stdenv
+# --
+
+stdenv.mkDerivation rec {
+  pname = "$1";
+  version = "$2";
+
+  src = fetchFromGitHub {
+    owner = "$3";
+    repo = pname;
+    rev = version;
+    sha256 = "0000000000000000000000000000000000000000000000000000";
+  };
+
+  nativeBuildInputs = [];
+  buildInputs = [];$0
+
+  meta = with stdenv.lib; {
+    description = "$4";
+    homepage = "$5";
+    license = licenses.$6;
+    platforms = with platforms; platforms.unix;
+    maintainers = with maintainers; [ jD91mZM2 ];
+  };
+}

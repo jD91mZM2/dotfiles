@@ -128,8 +128,35 @@
   (org-startup-indented t)
   (org-startup-folded nil)
   (org-list-allow-alphabetical t))
-(use-package ob-ipython :after org)
-(use-package ob-rust    :after org)
+(use-package org-present
+  :after org
+  :commands (org-present org-present-big org-present-hide-cursor
+                         org-present-show-cursor org-present-read-only
+                         org-present-read-write)
+  :config
+  (add-hook 'org-present-mode-hook
+            (defun my/org-present-start ()
+              (org-present-big)
+              (org-display-inline-images)
+              (org-present-hide-cursor)
+              (org-present-read-only)
+              (display-line-numbers-mode -1)
+              ;; doing hl-line-mode locally isn't enough
+              (global-hl-line-mode -1)
+              (setq-local mode-line-format nil)
+              (evil-emacs-state nil)))
+  (add-hook 'org-present-mode-quit-hook
+            (defun my/org-present-end ()
+              (org-present-small)
+              (org-remove-inline-images)
+              (org-present-show-cursor)
+              (org-present-read-write)
+              (display-line-numbers-mode 1)
+              (global-hl-line-mode 1)
+              (setq-local mode-line-format (my/modeline))
+              (evil-exit-emacs-state nil))))
+(use-package ob-rust
+  :after org)
 
 ;; Rust
 (use-package rustic

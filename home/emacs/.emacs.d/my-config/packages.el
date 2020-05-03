@@ -6,6 +6,12 @@
 (use-package quelpa-use-package
   :demand t)
 
+(use-package powerline
+  :demand t
+  :config
+  (defalias 'my/modeline 'powerline-center-evil-theme)
+  (my/modeline))
+
 (require 'man)
 
 ;; Include packages
@@ -38,9 +44,6 @@
 
 ;; Other packages
 
-(use-package chess
-  :commands chess
-  :pin gnu)
 (use-package gist
   :commands gist-region-private
   :init

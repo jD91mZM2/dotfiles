@@ -80,6 +80,7 @@
 
 (setq-default whitespace-style '(face space-before-tab::tab))
 
+(blink-cursor-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -99,11 +100,6 @@
   :demand t
   :config
   (load-theme 'dracula t))
-
-(use-package powerline
-  :demand t
-  :config
-  (powerline-center-evil-theme))
 
 ;;  _  __          _     _           _
 ;; | |/ /___ _   _| |__ (_)_ __   __| |___
