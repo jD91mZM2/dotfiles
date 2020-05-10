@@ -13,7 +13,6 @@ case "$1" in
         monitors="$(xrandr | grep -o '[0-9]*x[0-9]*[+-][0-9]*[+-][0-9]*')"
         # Get the location of the mouse
         eval "$(xdotool getmouselocation --shell --prefix mouse_)"
-        eval "$(xdotool getmouselocation --shell --prefix mouse_)"
 
         while read -r line; do
             if [[ "$line" =~ ([0-9]+)x([0-9]+)([+-][0-9]+)([+-][0-9]+) ]]; then
