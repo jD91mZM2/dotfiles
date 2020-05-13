@@ -73,7 +73,6 @@ in {
       gimp
       inkscape
       keepassxc
-      liferea
       mpv
       multimc
       musescore
