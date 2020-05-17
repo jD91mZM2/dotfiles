@@ -111,6 +111,7 @@ in {
       graphviz
       imagemagick
       pandoc
+      wildmidi
       whois
 
       # Nix stuff
