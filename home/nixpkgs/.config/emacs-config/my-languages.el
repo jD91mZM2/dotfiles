@@ -1,3 +1,8 @@
+(eval-when-compile (require 'use-package))
+(require 'evil)
+(require 'man)
+(require 'my-styling)
+
 ;; General language support
 
 (use-package flycheck
@@ -28,8 +33,6 @@
 ;; More specific modes
 
 ;; Emacs Lisp
-(use-package auto-compile
-  :hook (emacs-lisp-mode . auto-compile-on-save-mode))
 (my/util/font-lock-extend 'emacs-lisp-mode '(("[[:space:](]+\\(t\\)[[:space:])]+" 1 font-lock-builtin-face)
                                              ("[[:space:](]+\\(nil\\)[[:space:])]+" 1 font-lock-builtin-face)
                                              ("[[:space:](]+\\(-?[0-9]+\\)[[:space:])]+" 1 font-lock-builtin-face)
@@ -118,7 +121,7 @@
 ;; Org
 (use-package org
   :mode ("\\.org\\'". org-mode)
-  :commands org-mode
+  :commands (org-mode org-display-inline-images org-remove-inline-images)
   :custom
   (org-startup-indented t)
   (org-startup-folded nil)
@@ -171,7 +174,7 @@
   :commands slime-company)
 (use-package slime
   :mode "\\.lisp\\'"
-  :commands slime
+  :commands (slime slime-setup)
   :config
   (setq inferior-lisp-program "sbcl --noinform")
   (slime-setup '(slime-fancy slime-company)))
@@ -226,4 +229,4 @@
       (setq-local tab-width 2)))
   "WebAssembly Text format")
 
-(provide 'packages/languages)
+(provide 'my-languages)

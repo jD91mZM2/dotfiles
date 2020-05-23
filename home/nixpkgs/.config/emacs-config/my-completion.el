@@ -1,8 +1,11 @@
+(eval-when-compile (require 'use-package))
+(eval-when-compile (require 'cl))
+
 (use-package company
+  :commands (global-company-mode)
   :config
   (global-company-mode 1)
   (setq company-idle-delay 0)
-  (require 'cl)
 
   ;; Insane way to exclude company-etags which seems to sometimes ask if I want
   ;; to keep the current list of tag table or something
@@ -24,6 +27,7 @@
 
 (use-package yasnippet
   :demand t
+  :commands (yas-global-mode)
   :config
   ;; Rebind TAB to M-/
   (define-key yas-minor-mode-map  (kbd "<tab>")  nil)
@@ -36,7 +40,7 @@
   (define-key yas-keymap          (kbd "RET")    'yas-next-field-or-maybe-expand)
   (define-key yas-keymap          (kbd "S-RET")  'yas-prev-field)
 
-  (setq yas-snippet-dirs (list (my/util/relative "../snippets")))
+  (setq yas-snippet-dirs (list (my/util/relative "snippets")))
   (yas-global-mode 1))
 
-(provide 'packages/completion)
+(provide 'my-completion)

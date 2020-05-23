@@ -1,28 +1,35 @@
+(eval-when-compile (require 'use-package))
+(require 'bind-key)
+(require 'hydra)
+
 (use-package aggressive-indent
   :demand t
+  :commands (global-aggressive-indent-mode)
   :config
   (global-aggressive-indent-mode 1))
 
 (use-package editorconfig
   :demand t
+  :commands (editorconfig-mode)
   :config
   (editorconfig-mode 1))
 
 (use-package imenu-list
-  :bind ("C-c i" . imenu-list-smart-toggle))
+  :bind (("C-c i" . imenu-list-smart-toggle)))
 
 (use-package smartparens
   :demand t
-  :commands (sp-local-pair)
+  :commands (sp-forward-slurp-sexp sp-forward-barf-sexp)
   :bind (("C-M-l" . sp-forward-slurp-sexp)
          ("C-M-h" . sp-forward-barf-sexp))
   :config
   (require 'smartparens-config)
+
   (smartparens-global-mode 1)
   (show-smartparens-global-mode 1)
 
   ;; Allow using smartparens from minibuffer
-  (setq sp-ignore-modes-list (remove 'minibuffer-inactive-mode sp-ignore-modes-list))
+  (setq-default sp-ignore-modes-list (remove 'minibuffer-inactive-mode sp-ignore-modes-list))
 
   ;; Configure evil to use smartparens for %
   (evil-define-motion my/matching-paren (num)
@@ -49,6 +56,12 @@
 
 (use-package string-inflection
   :after hydra
+  :commands (string-inflection-cycle
+             string-inflection-all-cycle
+             string-inflection-underscore string-inflection-upcase
+             string-inflection-kebab-case
+             string-inflection-lower-camelcase
+             string-inflection-camelcase)
   :config
   (defhydra my/string-inflection-keys (global-map "C-c")
     "
@@ -68,4 +81,4 @@ Toggle string casing
     ("c" string-inflection-lower-camelcase :bind nil)
     ("C" string-inflection-camelcase :bind nil)))
 
-(provide 'packages/editing)
+(provide 'my-editing)

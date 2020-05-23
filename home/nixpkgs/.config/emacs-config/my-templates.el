@@ -1,4 +1,6 @@
 (require 'autoinsert)
+(require 'my-utils)
+
 (auto-insert-mode 1)
 
 (setq auto-insert-directory (my/util/relative "templates"))
@@ -12,4 +14,4 @@
   (unless (or (string= file ".") (string= file ".."))
     (define-auto-insert (concat (regexp-quote file) "\\'") file)))
 
-(provide 'templates)
+(provide 'my-templates)

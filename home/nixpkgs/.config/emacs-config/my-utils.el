@@ -14,9 +14,8 @@
            c))
        string))
 
-;; TODO: This is a duplicate from init.el, because that somehow fixes
-;; things. IDK how to solve this, but I definitely should
-(defun my/util/directory ()
+(defun my/util/current-directory ()
+  "Get the filepath to the current directory"
   (file-name-directory (or
                         ;; When loading the file
                         load-file-name
@@ -25,7 +24,7 @@
 
 (defun my/util/relative (path)
   "Convert a relative path to an absolute one"
-  (expand-file-name path (my/util/directory)))
+  (expand-file-name path (my/util/current-directory)))
 
 (defvar my/util/font-lock-additions (make-hash-table))
 (defun my/util/font-lock-extend (mode keywords)
@@ -35,4 +34,4 @@
     (font-lock-add-keywords mode keywords)
     (puthash mode keywords my/util/font-lock-additions)))
 
-(provide 'utils)
+(provide 'my-utils)

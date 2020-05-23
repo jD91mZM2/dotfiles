@@ -1,30 +1,71 @@
+;; Debug on error
+
 (add-to-list 'debug-ignored-errors 'search-failed)
 (setq debug-on-error t)
 
-;; Important util for importing files
-
-(defun my/util/directory ()
-  (file-name-directory (or
-                        ;; When loading the file
-                        load-file-name
-                        ;; When evaluating the file
-                        buffer-file-name)))
-
-(add-to-list 'load-path (my/util/directory) t)
-
-(require 'utils)
-(require 'devices)
-
-;;  ____            _
-;; |  _ \ __ _  ___| | ____ _  __ _  ___  ___
-;; | |_) / _` |/ __| |/ / _` |/ _` |/ _ \/ __|
-;; |  __/ (_| | (__|   < (_| | (_| |  __/\__ \
-;; |_|   \__,_|\___|_|\_\__,_|\__, |\___||___/
-;;                            |___/
+;;  ____       _                              _ _
+;; / ___|  ___| |_   _   _ _ __     _____   _(_) |
+;; \___ \ / _ \ __| | | | | '_ \   / _ \ \ / / | |
+;;  ___) |  __/ |_  | |_| | |_) | |  __/\ V /| | |
+;; |____/ \___|\__|  \__,_| .__/   \___| \_/ |_|_|
+;;                        |_|
 
 (eval-when-compile (require 'use-package))
-(require 'utils)
-(require 'packages)
+
+;; Set up basic evil, as early on as possible. Imagine being stuck without vim
+;; bindings because something fails!!
+(setq-default evil-want-keybinding nil) ; for evil-collection later
+(setq-default evil-want-C-u-scroll t)
+(setq-default evil-search-module 'evil-search)
+(setq-default evil-ex-search-persistent-highlight nil)
+
+(require 'evil)
+(evil-mode 1)
+
+;; Disable undo tree.
+;; Seems like disabling it immediately no longer has any effect
+(add-hook 'after-init-hook (defun my/disable-undo-tree ()
+                             (global-undo-tree-mode -1)))
+
+;;  _   _ _   _ _        ___    __     __         _       _     _
+;; | | | | |_(_) |___   ( _ )   \ \   / /_ _ _ __(_) __ _| |__ | | ___  ___
+;; | | | | __| | / __|  / _ \/\  \ \ / / _` | '__| |/ _` | '_ \| |/ _ \/ __|
+;; | |_| | |_| | \__ \ | (_>  <   \ V / (_| | |  | | (_| | |_) | |  __/\__ \
+;;  \___/ \__|_|_|___/  \___/\/    \_/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
+
+;; Load necessary utils & device-specific options
+(require 'my-utils)
+(require 'my-devices)
+
+;;   ____ _        _       _
+;;  / ___| |_ _ __| |     | |_
+;; | |   | __| '__| |_____| __|
+;; | |___| |_| |  | |_____| |_
+;;  \____|\__|_|  |_|      \__|
+
+;; Swap C-t and C-x to make it easier on dvorak. This is applied
+;; earliest possible and will work basically everywhere. It doesn't
+;; work in all emacsclient sessions, unlike `key-translation-map', but
+;; it does solve some rare issues with the latter alternative that
+;; makes it worth battling the quirks.
+(keyboard-translate ?\C-t ?\C-x)
+(keyboard-translate ?\C-x ?\C-t)
+
+;;  _   _ _       _                  _            _ _
+;; | | | (_) __ _| |__    _ __  _ __(_) ___  _ __(_) |_ _   _
+;; | |_| | |/ _` | '_ \  | '_ \| '__| |/ _ \| '__| | __| | | |
+;; |  _  | | (_| | | | | | |_) | |  | | (_) | |  | | |_| |_| |
+;; |_| |_|_|\__, |_| |_| | .__/|_|  |_|\___/|_|  |_|\__|\__, |
+;;          |___/        |_|                            |___/
+
+;; Full Evil load
+(require 'my-evil)
+
+;; File Navigation
+(require 'my-navigation)
+
+;; Ivy Selection
+(require 'my-ivy)
 
 ;;  _____                                        _   _
 ;; | ____|_ __ ___   __ _  ___ ___    ___  _ __ | |_(_) ___  _ __  ___
@@ -47,9 +88,6 @@
 (setq-default inhibit-startup-screen t)
 (setq-default mouse-wheel-progressive-speed nil)
 
-;; Load file templates
-(load "templates")
-
 ;; Editing options
 (setq-default c-basic-offset 4)
 (setq-default fill-column 79)  ;; 80 exclusive
@@ -59,85 +97,69 @@
 (setq-default vc-follow-symlinks t)
 (setq-default tags-add-tables nil)  ;; prevents super annoying popup that idk what it does
 
-;;  ____  _         _ _
-;; / ___|| |_ _   _| (_)_ __   __ _
-;; \___ \| __| | | | | | '_ \ / _` |
-;;  ___) | |_| |_| | | | | | | (_| |
-;; |____/ \__|\__, |_|_|_| |_|\__, |
-;;            |___/           |___/
-
-(setq-default display-line-numbers-type 'relative)
-(setq-default glasses-uncapitalize-p t)
-(setq-default show-trailing-whitespace t)
-
-(global-display-line-numbers-mode 1)
-(global-hl-line-mode 1)
-(global-whitespace-mode 1)
-
-(setq-default whitespace-style '(face space-before-tab::tab))
-
-(blink-cursor-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-
-;; Fonts
-(when (member "Symbola" (font-family-list))
-  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
-
-;; Transparency!
-(add-to-list 'default-frame-alist (cons 'alpha my/option/transparency)) ; default frame settings
-(set-frame-parameter (selected-frame) 'alpha my/option/transparency)    ; for current session
-
-(desktop-save-mode 1)
-(xterm-mouse-mode 1)
-
-(use-package dracula-theme
-  :demand t
-  :config
-  (load-theme 'dracula t))
-
-;;  _  __          _     _           _
-;; | |/ /___ _   _| |__ (_)_ __   __| |___
-;; | ' // _ \ | | | '_ \| | '_ \ / _` / __|
-;; | . \  __/ |_| | |_) | | | | | (_| \__ \
-;; |_|\_\___|\__, |_.__/|_|_| |_|\__,_|___/
-;;           |___/
-
-;; Swap C-t and C-x to make it easier on dvorak. This is applied
-;; earliest possible and will work basically everywhere. It doesn't
-;; work in all emacsclient-sessions, unlike `key-translation-map', but
-;; it does solve some rare issues with the latter alternative that
-;; makes it worth battling the quirks.
-(keyboard-translate ?\C-t ?\C-x)
-(keyboard-translate ?\C-x ?\C-t)
-
-(define-key emacs-lisp-mode-map (kbd "C-c c") 'eval-buffer)
-(global-set-key (kbd "C-c b") 'bookmark-bmenu-list)
-(global-set-key (kbd "C-c c") 'recompile)
-(global-set-key (kbd "C-c s") 'eshell)
-
-;;  __  __           _ _  __         _          _                 _
-;; |  \/  | ___   __| (_)/ _|_   _  | |__   ___| |__   __ ___   _(_) ___  _ __
-;; | |\/| |/ _ \ / _` | | |_| | | | | '_ \ / _ \ '_ \ / _` \ \ / / |/ _ \| '__|
-;; | |  | | (_) | (_| | |  _| |_| | | |_) |  __/ | | | (_| |\ V /| | (_) | |
-;; |_|  |_|\___/ \__,_|_|_|  \__, | |_.__/ \___|_| |_|\__,_| \_/ |_|\___/|_|
-;;                           |___/
-
-(add-hook 'after-change-major-mode-hook
-          (defun my/major-hook ()
-            (modify-syntax-entry ?_ "w"))) ; Make _ a word character in all syntaxes, like it is in vim
-
+;; Enable auto-fill-mode in text-based buffers
 (add-hook 'text-mode-hook (defun my/text-hook ()
                             (auto-fill-mode 1)))
 
-(add-hook 'term-mode-hook
-          (defun my/term-hook ()
-            (setq show-trailing-whitespace nil)))
+;;  _   _                            _              _
+;; | \ | | ___  _ __ _ __ ___   __ _| |  _ __  _ __(_) ___
+;; |  \| |/ _ \| '__| '_ ` _ \ / _` | | | '_ \| '__| |/ _ \
+;; | |\  | (_) | |  | | | | | | (_| | | | |_) | |  | | (_) |
+;; |_| \_|\___/|_|  |_| |_| |_|\__,_|_| | .__/|_|  |_|\___/
+;;                                      |_|
 
+;; Editing tweaks, like loading editorconfig
+(require 'my-editing)
+
+;; Completion
+(require 'my-completion)
+
+;; Make _ a word character in all syntaxes, like it is in vim
+(add-hook 'after-change-major-mode-hook
+          (defun my/major-hook ()
+            (modify-syntax-entry ?_ "w")))
+
+;; Save list of open buffers...
+(desktop-save-mode 1)
+
+;; ... but clean the buffer list before opening
 (add-hook 'desktop-after-read-hook
           (defun my/desktop-read-hook ()
             (clean-buffer-list)))
+
+;; Beautiful styling
+(require 'my-styling)
+
+;; Automagically load environment
+(use-package direnv
+  :demand t
+  :commands (direnv-mode)
+  :config
+  (direnv-mode 1))
+
+;; Language-specific add-ons
+(require 'my-languages)
+
+;; Finally, load file templates
+(require 'my-templates)
+
+;;  _____     _          _ _
+;; | ____|___| |__   ___| | |
+;; |  _| / __| '_ \ / _ \ | |
+;; | |___\__ \ | | |  __/ | |
+;; |_____|___/_| |_|\___|_|_|
+
+;; Enable mouse interaction
+(xterm-mouse-mode 1)
+
+;; Make Ctrl-d exit
+(add-hook 'eshell-mode-hook
+          (defun my/eshell-hook ()
+            (evil-define-key 'insert eshell-mode-map (kbd "C-d")
+              (lambda ()
+                (interactive)
+                (unless (eshell-send-eof-to-process)
+                  (kill-buffer))))))
 
 ;;   ____                                          _
 ;;  / ___|___  _ __ ___  _ __ ___   __ _ _ __   __| |___
@@ -145,15 +167,23 @@
 ;; | |__| (_) | | | | | | | | | | | (_| | | | | (_| \__ \
 ;;  \____\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_|___/
 
-;; Minor modes
+;; Packages required only for commands
 
-(define-minor-mode keep-centered-mode
-  "Keep recentering the screen all the time why not"
-  :init-value nil
-  (add-hook 'post-command-hook
-            (defun my/keep-centered-hook ()
-              (when keep-centered-mode
-                (recenter nil)))))
+(use-package gist
+  :commands gist-region-private
+  :init
+  (defun gist (start end)
+    "Send current region to a private gist"
+    (interactive "r")
+    (gist-region-private start end)))
+
+(use-package uuid
+  :commands uuid-string
+  :init
+  (defun uuid ()
+    "Insert a new random UUID"
+    (interactive)
+    (insert (uuid-string))))
 
 ;; Eshell commands
 
@@ -162,18 +192,13 @@
   (interactive)
   (find-file file))
 
-;; Other commands
+;; Pure emacs commands
 
 (defun touch ()
   "Touch the current file"
   (interactive)
   (set-buffer-modified-p t)
   (save-buffer))
-
-(defun uuid ()
-  "Insert a new random UUID"
-  (interactive)
-  (insert (uuid-string)))
 
 (defun load-dir ()
   "Load a directory"
@@ -185,11 +210,25 @@
       (add-to-list 'load-path dir-to-load)
       (load file-to-load))))
 
-;;  _____                               _ _            _
-;; | ____|_ __ ___   __ _  ___ ___  ___| (_) ___ _ __ | |_
-;; |  _| | '_ ` _ \ / _` |/ __/ __|/ __| | |/ _ \ '_ \| __|
-;; | |___| | | | | | (_| | (__\__ \ (__| | |  __/ | | | |_
-;; |_____|_| |_| |_|\__,_|\___|___/\___|_|_|\___|_| |_|\__|
+;;  _____    _ _ _     ____
+;; | ____|__| (_) |_  / ___|  ___ _ ____   _____ _ __
+;; |  _| / _` | | __| \___ \ / _ \ '__\ \ / / _ \ '__|
+;; | |__| (_| | | |_   ___) |  __/ |   \ V /  __/ |
+;; |_____\__,_|_|\__| |____/ \___|_|    \_/ \___|_|
+
+;; https://www.emacswiki.org/emacs/Edit_with_Emacs
+(use-package edit-server
+  :demand t
+  :commands (edit-server-start)
+  :config
+  (setq edit-server-new-frame nil)
+  (edit-server-start))
+
+;;  _____
+;; | ____|_ __ ___   __ _  ___ ___   ___  ___ _ ____   _____ _ __
+;; |  _| | '_ ` _ \ / _` |/ __/ __| / __|/ _ \ '__\ \ / / _ \ '__|
+;; | |___| | | | | | (_| | (__\__ \ \__ \  __/ |   \ V /  __/ |
+;; |_____|_| |_| |_|\__,_|\___|___/ |___/\___|_|    \_/ \___|_|
 
 ;; Set up emacsclient the way I want it
 (setq confirm-kill-emacs 'y-or-n-p)

@@ -1,3 +1,6 @@
+(eval-when-compile (require 'use-package))
+(require 'bind-key)
+
 (use-package projectile
   :after projectile-ripgrep
   :demand t
@@ -15,4 +18,4 @@
   (ranger-override-dired 'ranger)
   (ranger-override-dired-mode t))
 
-(provide 'packages/navigation)
+(provide 'my-navigation)

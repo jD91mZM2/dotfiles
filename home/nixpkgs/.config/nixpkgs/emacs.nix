@@ -37,7 +37,6 @@ let
       evil
       evil-args
       evil-collection
-      evil-easymotion
       evil-magit
       evil-surround
       flycheck
@@ -72,12 +71,24 @@ let
       yasnippet
     ])
   );
+  outLispPath = "share/emacs/site-lisp";
   emacsConf = "${pkgs.emacsPackages.trivialBuild {
     pname = "my-config";
     version = "local";
     packageRequires = packages pkgs.emacsPackages;
     src = ../emacs-config;
-  }}/share/emacs/site-lisp";
+
+    postPatch = ''
+      mv init.el realinit.el
+      echo "(add-to-list 'load-path \"$out/${outLispPath}\" t)" >> init.el
+      cat realinit.el >> init.el
+      rm realinit.el
+    '';
+    postInstall = ''
+      cp -r templates "$out/${outLispPath}/templates"
+      cp -r snippets "$out/${outLispPath}/snippets"
+    '';
+  }}/${outLispPath}";
 in
 {
   home.file.".emacs.d/init.elc".source = "${emacsConf}/init.elc";
