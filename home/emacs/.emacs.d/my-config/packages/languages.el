@@ -11,14 +11,14 @@
   (lsp-enable-indentation nil)
   (lsp-prefer-flymake nil)
   (lsp-auto-guess-root t)
-  :config
-  (evil-define-key 'normal lsp-mode-map "gd" 'lsp-find-definition))
+  (lsp-restart 'ignore))
 (use-package lsp-ui
   :after lsp-mode
   :hook (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-ui-doc-max-width 50)
-  (lsp-ui-doc-max-height 20))
+  (lsp-ui-doc-max-height 20)
+  (lsp-ui-doc-position 'top))
 
 ;; Optional dependencies
 
@@ -132,7 +132,7 @@
   :after org
   :commands (org-present org-present-big org-present-hide-cursor
                          org-present-show-cursor org-present-read-only
-                         org-present-read-write)
+                         org-present-read-write org-present-small)
   :config
   (add-hook 'org-present-mode-hook
             (defun my/org-present-start ()
