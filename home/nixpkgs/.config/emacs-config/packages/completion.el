@@ -38,3 +38,5 @@
 
   (setq yas-snippet-dirs (list (my/util/relative "../snippets")))
   (yas-global-mode 1))
+
+(provide 'packages/completion)

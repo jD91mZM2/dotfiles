@@ -14,3 +14,5 @@
   :custom
   (ranger-override-dired 'ranger)
   (ranger-override-dired-mode t))
+
+(provide 'packages/navigation)

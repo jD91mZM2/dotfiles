@@ -12,3 +12,5 @@
         ((equal hostname "samuel-laptop")
          (setq my/option/transparency 90)
          (setq my/option/project-search-path '("~/" "~/Coding/Rust/" "~/Coding/Rust/external/")))))
+
+(provide 'devices)

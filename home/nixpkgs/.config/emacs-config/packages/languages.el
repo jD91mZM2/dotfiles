@@ -87,11 +87,6 @@
 
 ;; Minecraft Functions
 (use-package mcf-mode
-  :ensure quelpa
-  :quelpa (mcf
-           :fetcher github
-           :repo "rasensuihei/mcf"
-           :commit "7fe4c74a47b1820806bf92d818039dafb2df114b")
   :mode "\\.mcfunction\\'")
 
 ;; Nasm
@@ -230,3 +225,5 @@
   '((lambda ()
       (setq-local tab-width 2)))
   "WebAssembly Text format")
+
+(provide 'packages/languages)

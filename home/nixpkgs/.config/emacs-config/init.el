@@ -1,10 +1,19 @@
-(add-to-list 'load-path (locate-user-emacs-file "my-config") t)
-
 (add-to-list 'debug-ignored-errors 'search-failed)
 (setq debug-on-error t)
 
-(load "utils")
-(load "devices")
+;; Important util for importing files
+
+(defun my/util/directory ()
+  (file-name-directory (or
+                        ;; When loading the file
+                        load-file-name
+                        ;; When evaluating the file
+                        buffer-file-name)))
+
+(add-to-list 'load-path (my/util/directory) t)
+
+(require 'utils)
+(require 'devices)
 
 ;;  ____            _
 ;; |  _ \ __ _  ___| | ____ _  __ _  ___  ___
@@ -13,22 +22,9 @@
 ;; |_|   \__,_|\___|_|\_\__,_|\__, |\___||___/
 ;;                            |___/
 
-(eval-when-compile
-  (require 'package)
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-  (setq package-enable-at-startup nil)
-  (package-initialize)
-
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
-
-  (require 'use-package))
-(setq use-package-always-ensure t)
-(setq use-package-always-pin "melpa")
-
-(load "utils")
-(load "packages")
+(eval-when-compile (require 'use-package))
+(require 'utils)
+(require 'packages)
 
 ;;  _____                                        _   _
 ;; | ____|_ __ ___   __ _  ___ ___    ___  _ __ | |_(_) ___  _ __  ___

@@ -1,8 +1,9 @@
+(setq-default evil-want-keybinding nil)
+
 (use-package evil
   :demand t
   :commands (evil-define-key evil-define-motion evil-global-set-key)
   :init
-  (setq-default evil-want-keybinding nil)
   (setq-default evil-want-C-u-scroll t)
   (setq-default evil-search-module 'evil-search)
   (setq-default evil-ex-search-persistent-highlight nil)
@@ -147,3 +148,5 @@ leaving the point at the end of the latter"
 (use-package evil-surround
   :config
   (global-evil-surround-mode 1))
+
+(provide 'packages/evil)

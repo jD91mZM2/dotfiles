@@ -3,9 +3,6 @@
 (use-package hydra
   :demand t)
 
-(use-package quelpa-use-package
-  :demand t)
-
 (use-package powerline
   :demand t
   :config
@@ -16,11 +13,11 @@
 
 ;; Include packages
 
-(load "packages/evil.el")
-(load "packages/completion.el")
-(load "packages/languages.el")
-(load "packages/navigation.el")
-(load "packages/editing.el")
+(require 'packages/evil)
+(require 'packages/editing)
+(require 'packages/completion)
+(require 'packages/languages)
+(require 'packages/navigation)
 
 ;; Packages that I for other reasons want always available
 
@@ -56,3 +53,5 @@
   (sublimity-mode 1))
 (use-package uuid
   :commands uuid-string)
+
+(provide 'packages)

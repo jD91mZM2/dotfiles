@@ -13,7 +13,7 @@
 
 (use-package smartparens
   :demand t
-  :commands sp-local-pairs
+  :commands (sp-local-pair)
   :bind (("C-M-l" . sp-forward-slurp-sexp)
          ("C-M-h" . sp-forward-barf-sexp))
   :config
@@ -67,3 +67,5 @@ Toggle string casing
     ("k" string-inflection-kebab-case :bind nil)
     ("c" string-inflection-lower-camelcase :bind nil)
     ("C" string-inflection-camelcase :bind nil)))
+
+(provide 'packages/editing)
