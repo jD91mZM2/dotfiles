@@ -10,11 +10,7 @@ in
   ];
 
   # System overlays
-  nixpkgs.overlays = let
-    dir = (<dotfiles/home/nixpkgs/.config/nixpkgs/overlays>);
-    names = builtins.attrNames (builtins.readDir dir);
-  in
-    (map (name: import (dir + "/${name}")) names);
+  nixpkgs.overlays = import <dotfiles/home/overlays.nix>;
 
   # Must have packages
   environment.systemPackages = with pkgs; [

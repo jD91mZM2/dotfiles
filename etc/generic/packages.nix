@@ -7,13 +7,6 @@ in
     nur-no-pkgs.repos.jd91mzm2.modules.programs
   ];
 
-  # System overlays
-  nixpkgs.overlays = let
-    dir = (<dotfiles/home/nixpkgs/.config/nixpkgs/overlays>);
-    names = builtins.attrNames (builtins.readDir dir);
-  in
-    (map (name: import (dir + "/${name}")) names);
-
   # More involved programs
   programs = {
     adb.enable = true;

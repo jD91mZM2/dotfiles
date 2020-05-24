@@ -76,7 +76,7 @@ let
     pname = "my-config";
     version = "local";
     packageRequires = packages pkgs.emacsPackages;
-    src = ../emacs-config;
+    src = ./emacs-config;
 
     postPatch = ''
       mv init.el realinit.el

@@ -26,5 +26,5 @@
     };
   };
 
-  home.link.".tmux.conf".source = ../misc/tmux.conf;
+  home.link.".tmux.conf".source = ./misc/tmux.conf;
 }

@@ -4,9 +4,9 @@
     "Pictures/Backgrounds/background.jpg".source = pkgs.background;
     "Pictures/Backgrounds/background-focus.jpg".source = pkgs.background-focus;
   };
-  home.link = {
-    ".config/bspwm".source = ../bspwm-config/bspwm;
-    ".config/sxhkd".source = ../bspwm-config/sxhkd;
+  xdg.configLink = {
+    "bspwm".source = ./bspwm-config/bspwm;
+    "sxhkd".source = ./bspwm-config/sxhkd;
   };
   xsession = {
     enable = true;
