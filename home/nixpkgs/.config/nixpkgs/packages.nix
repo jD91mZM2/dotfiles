@@ -60,7 +60,6 @@ in {
       # My software
       master.rnix-lsp
       master.termplay
-      unmerged.git-subcopy
       xidlehook
 
       # Graphical applications
