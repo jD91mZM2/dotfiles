@@ -73,6 +73,12 @@ super + shift + Home
 super + Up; Up; Down; Down; Left; Right; Left; Right; b; a
     xdg-open "https://youtu.be/dQw4w9WgXcQ"
 
+# Quick clipboard
+F1; a
+    cat ~/dotfiles/data/ascii | ~/dotfiles/scripts/dmenu.sh -p "ASCII:" | sed "s/^.*=\s*//" | tr -d $'\n' | xclip -sel clip
+F1; e
+    cat ~/dotfiles/data/emoji | ~/dotfiles/scripts/dmenu.sh -p "Emoji:" | sed "s/^.*=\s*//" | tr -d $'\n' | xclip -sel clip
+
 ########################
 # Window state hotkeys #
 ########################
@@ -147,8 +153,3 @@ super + {h,l}
 # move a floating window
 super + {Left,Down,Up,Right}
     bspc node -v {-20 0,0 20,0 -20,20 0}
-
-F1; a
-    cat ~/dotfiles/data/ascii | ~/dotfiles/scripts/dmenu.sh -p "ASCII:" | sed "s/^.*=\s*//" | tr -d $'\n' | xclip -sel clip
-F1; e
-    cat ~/dotfiles/data/emoji | ~/dotfiles/scripts/dmenu.sh -p "Emoji:" | sed "s/^.*=\s*//" | tr -d $'\n' | xclip -sel clip

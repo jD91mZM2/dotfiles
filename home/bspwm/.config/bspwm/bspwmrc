@@ -17,7 +17,8 @@ bspc config  ignore_ewmh_focus          true
 bspc config  pointer_follows_monitor    true
 bspc config  remove_disabled_monitors   true
 bspc config  remove_unplugged_monitors  true
-bspc config  window_gap                 12
+
+~/.config/bspwm/setup-gap.sh 1
 
 # Dracula theme
 # https://github.com/dracula/dracula-theme

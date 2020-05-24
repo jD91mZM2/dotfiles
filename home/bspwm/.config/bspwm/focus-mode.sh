@@ -5,8 +5,7 @@ if [ -e "/tmp/focus-mode" ]; then
     systemctl --user stop polybar
 
     # bspwm settings
-    bspc config window_gap 24
-    bspc config top_padding 0
+    ~/.config/bspwm/setup-gap.sh 2 24 0
 
     # pause notifications
     pkill dunst -USR1
@@ -18,8 +17,7 @@ else
     systemctl --user start polybar
 
     # bspwm settings
-    bspc config window_gap 12
-    bspc config top_padding 30 # obtained from `xprop | grep _NET_WM_STRUT`
+    ~/.config/bspwm/setup-gap.sh 1
 
     # resume notifications
     pkill dunst -USR2
