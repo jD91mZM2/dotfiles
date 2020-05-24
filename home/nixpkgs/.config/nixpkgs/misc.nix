@@ -26,6 +26,5 @@
     };
   };
 
-  # Don't use home-manager-provided default tmux config modifications
-  home.file.".tmux.conf".source = ../misc/tmux.conf;
+  home.link.".tmux.conf".source = ../misc/tmux.conf;
 }

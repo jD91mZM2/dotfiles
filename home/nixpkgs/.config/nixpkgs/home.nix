@@ -26,6 +26,7 @@ in
 {
   imports = [
     nur-no-pkgs.repos.jd91mzm2.hm-modules.programs
+    nur-no-pkgs.repos.jd91mzm2.hm-modules.directlink
 
     ./bspwm.nix
     ./dunst.nix
