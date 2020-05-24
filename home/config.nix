@@ -1,3 +1,0 @@
-{
-  allowBroken = true;
-}

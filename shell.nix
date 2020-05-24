@@ -1,8 +1,9 @@
-{ pkgs ? import <nixpkgs> {} }:
+{
+  pkgs ? import <nixpkgs> {},
+  home-manager ? (pkgs.callPackage (builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz) {}).home-manager,
+}:
 
-let
-  home-manager = (pkgs.callPackage (builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz) {}).home-manager;
-in pkgs.mkShell {
+pkgs.mkShell {
   # Things to be put in $PATH
   nativeBuildInputs =
     # Convenient scripts
