@@ -5,6 +5,7 @@
   :config
   (ivy-mode 1))
 (use-package counsel
+  :after ivy
   :demand t
   :config
   (counsel-mode 1))

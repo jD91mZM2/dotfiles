@@ -27,6 +27,7 @@ in
   imports = [
     nur-no-pkgs.repos.jd91mzm2.hm-modules.programs
 
+    ./bspwm.nix
     ./dunst.nix
     ./emacs.nix
     ./env.nix
@@ -51,9 +52,6 @@ in
 
       sha256 = "0xv8klvrwd68k589i4kihdl3mkgkaflh7j6iaxig6p52rw18636y";
     }) + "/dracula.conf";
-
-    "Pictures/Backgrounds/background.jpg".source = pkgs.background;
-    "Pictures/Backgrounds/background-focus.jpg".source = pkgs.background-focus;
   };
 
   #   ____ _     ___
@@ -133,18 +131,6 @@ in
   #                 |_|
 
   # Configs
-  xsession = {
-    enable = true;
-    pointerCursor = {
-      package = pkgs.xorg.xcursorthemes;
-      name    = "whiteglass";
-      size    = 16;
-    };
-    windowManager.command = ''
-      ${pkgs.sxhkd}/bin/sxhkd &
-      ${pkgs.bspwm}/bin/bspwm
-    '';
-  };
   xresources = {
     extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
       owner  = "dracula";

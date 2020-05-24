@@ -91,12 +91,13 @@ let
   }}/${outLispPath}";
 in
 {
-  home.file.".emacs.d/init.elc".source = "${emacsConf}/init.elc";
-  home.file.".emacs.d/my-config".source = "${emacsConf}";
+  home.file = {
+    ".emacs.d/init.elc".source = "${emacsConf}/init.elc";
+    ".emacs.d/my-config".source = "${emacsConf}";
+  };
 
   programs.emacs = {
     enable = true;
-
     extraPackages = packages;
   };
 }
