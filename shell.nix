@@ -1,6 +1,7 @@
 {
   pkgs ? import <nixpkgs> {},
-  home-manager ? (pkgs.callPackage (builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz) {}).home-manager,
+  # home-manager ? (pkgs.callPackage (builtins.fetchTarball https://github.com/rycee/home-manager/archive/master.tar.gz) {}).home-manager,
+  home-manager ? toString ~/.nix-profile,
 }:
 
 pkgs.mkShell {

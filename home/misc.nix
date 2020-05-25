@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs.scaff = {
     enable = true;
@@ -26,5 +26,5 @@
     };
   };
 
-  home.link.".tmux.conf".source = ./misc/tmux.conf;
+  home.file.".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink ./misc/tmux.conf;
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   # Backgrounds used by BSPWM
   home.file = {
@@ -7,9 +7,9 @@
   };
 
   # BSPWM config
-  xdg.configLink = {
-    "bspwm".source = ./bspwm-config/bspwm;
-    "sxhkd".source = ./bspwm-config/sxhkd;
+  xdg.configFile = {
+    "bspwm".source = config.lib.file.mkOutOfStoreSymlink ./bspwm-config/bspwm;
+    "sxhkd".source = config.lib.file.mkOutOfStoreSymlink ./bspwm-config/sxhkd;
   };
 
   # Finally, start BSPWM
