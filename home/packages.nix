@@ -73,6 +73,7 @@ in {
       inkscape
       keepassxc
       mpv
+      mullvad-vpn
       multimc
       musescore
       obs-studio
@@ -80,8 +81,7 @@ in {
       pavucontrol
       superTuxKart
       thunderbird
-      tigervnc
-      (callPackage (builtins.fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) {}).torbrowser # temporary fix
+      torbrowser
       xorg.xev
       xorg.xwininfo
 
@@ -99,7 +99,6 @@ in {
       rename
       ripgrep
       sqlite
-      units
       weechat
       youtube-dl
 
@@ -152,10 +151,8 @@ in {
         python-language-server
         tkinter
       ]))
-      ## Lisp
-      sbcl
       ## LaTeX
-      okular
+      zathura
       poppler_utils
       texlive.combined.scheme-full
       ## Web Assembly

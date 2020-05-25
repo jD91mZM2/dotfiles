@@ -24,9 +24,16 @@ in
     path   = https://github.com/rycee/home-manager/archive/master.tar.gz;
   };
 
-  # System overlays
+  # Load overlays
   nixpkgs.overlays = import ./overlays.nix;
-  xdg.configFile."nixpkgs/overlays".source = config.lib.file.mkOutOfStoreSymlink ./overlays;
+
+  xdg.configFile = {
+    # Install overlays
+    "nixpkgs/overlays".source = config.lib.file.mkOutOfStoreSymlink ./overlays;
+
+    # Install this home-manager config
+    "nixpkgs/home.nix".source = config.lib.file.mkOutOfStoreSymlink ./default.nix;
+  };
 
   # Don't mess with my keyboard layout!
   home.keyboard = null;
