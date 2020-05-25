@@ -42,7 +42,9 @@
 ;; LaTeX
 (use-package auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
-  :pin gnu)
+  :custom
+  (TeX-command-list '(("LatexMk" "latexmk -pdf %t; pgrep zathura || zathura --fork %s.pdf" TeX-run-command nil t)))
+  (TeX-command-force "LatexMk"))
 
 ;; Dot
 (use-package graphviz-dot-mode

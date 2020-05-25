@@ -1,6 +1,16 @@
-;; Debug on error
+;;  ____       _
+;; |  _ \  ___| |__  _   _  __ _    ___  _ __     ___ _ __ _ __ ___  _ __
+;; | | | |/ _ \ '_ \| | | |/ _` |  / _ \| '_ \   / _ \ '__| '__/ _ \| '__|
+;; | |_| |  __/ |_) | |_| | (_| | | (_) | | | | |  __/ |  | | | (_) | |
+;; |____/ \___|_.__/ \__,_|\__, |  \___/|_| |_|  \___|_|  |_|  \___/|_|
+;;                         |___/
 
+;; Searches can fail, calm down
 (add-to-list 'debug-ignored-errors 'search-failed)
+
+;; Don't annoy me when I'm typing
+(add-to-list 'debug-ignored-errors "^use-package: Unrecognized")
+
 (setq debug-on-error t)
 
 ;;  ____       _                              _ _
