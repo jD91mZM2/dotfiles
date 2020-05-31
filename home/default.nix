@@ -8,7 +8,7 @@ in
     nur-no-pkgs.repos.jd91mzm2.hm-modules.programs
 
     ./dunst.nix
-    ./emacs.nix
+    ./emacs
     ./env.nix
     ./firefox.nix
     ./graphics.nix

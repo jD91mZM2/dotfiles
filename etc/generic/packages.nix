@@ -37,7 +37,6 @@ in
     emacs
     firefox
     gnome3.zenity
-    nur.repos.jd91mzm2.st
     virtmanager
     xfce.xfce4-power-manager
 

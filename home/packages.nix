@@ -63,6 +63,7 @@ in {
       xidlehook
 
       # Graphical applications
+      (callPackage <dotfiles/forks/st> {})
       abiword
       audacity
       bitwarden

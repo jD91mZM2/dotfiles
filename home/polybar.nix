@@ -24,11 +24,10 @@ in
         background = shared.theme.background;
         font-0     = "Hack:size=10;2";
         font-1     = "Font Awesome 5 Free Solid:size=10;2";
-        wm-restack = "bspwm";
         height     = 30;
         padding    = 3;
 
-        modules-left  = "bspwm";
+        modules-left  = "ewmh_taskbar";
         modules-right = "date pulseaudio battery";
         module-margin = 1;
         tray-position = "right";
@@ -39,49 +38,38 @@ in
         background = shared.theme.background;
         font-0     = "Hack:size=10;2";
         font-1     = "Font Awesome 5 Free Solid:size=10;2";
-        wm-restack = "bspwm";
         height     = 30;
         padding    = 3;
 
-        modules-left  = "bspwm";
+        modules-left  = "ewmh_taskbar";
         module-margin = 3;
       };
 
-      "module/bspwm" = {
-        type                     = "internal/bspwm";
-        label-focused-foreground = shared.theme.purple;
-        label-focused-background = shared.theme.current-line;
-        label-urgent-foreground  = shared.theme.red;
+      "module/ewmh_taskbar" = {
+        type                    = "internal/xworkspaces";
+        label-active-foreground = shared.theme.purple;
+        label-active-background = shared.theme.current-line;
+        label-urgent-foreground = shared.theme.red;
 
-        ws-icon-0 = "Terminal;";
-        ws-icon-1 = "Editor;";
-        ws-icon-2 = "Primary;";
-        ws-icon-3 = "Secondary;";
-        ws-icon-4 = "5;5";
-        ws-icon-5 = "6;6";
-        ws-icon-6 = "7;7";
-        ws-icon-7 = "Misc;";
-        ws-icon-8 = "Message;";
+        icon-0 = "0;";
+        icon-1 = "1;";
+        icon-2 = "2;";
+        icon-3 = "3;";
+        icon-4 = "4;5";
+        icon-5 = "5;6";
+        icon-6 = "6;7";
+        icon-7 = "7;";
+        icon-8 = "8;";
 
-        label-empty    = "";
-        label-focused  = "%icon%";
-        label-urgent   = "%icon%";
+        label-active   = "%icon%";
         label-occupied = "%icon%";
+        label-urgent   = "%icon%";
+        label-empty    = "%icon%";
 
-        label-monitor-padding     = 2;
-        label-dimmed-padding      = 2;
-        label-focused-padding     = 2;
-        label-occupied-padding    = 2;
-        label-urgent-padding      = 2;
-        label-empty-padding       = 2;
-        label-monocle-padding     = 2;
-        label-tiled-padding       = 2;
-        label-fullscreen-padding  = 2;
-        label-floating-padding    = 2;
-        label-pseudotiled-padding = 2;
-        label-locked-padding      = 2;
-        label-sticky-padding      = 2;
-        label-private-padding     = 2;
+        label-active-padding   = 2;
+        label-occupied-padding = 2;
+        label-urgent-padding   = 2;
+        label-empty-padding    = 2;
       };
 
       "module/date" = {

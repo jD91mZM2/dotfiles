@@ -6,7 +6,8 @@
   :demand t
   :commands (global-aggressive-indent-mode)
   :config
-  (global-aggressive-indent-mode 1))
+  (global-aggressive-indent-mode 1)
+  (add-to-list 'aggressive-indent-excluded-modes 'c-mode))
 
 (use-package editorconfig
   :demand t

@@ -1,5 +1,8 @@
 { pkgs, config, ... }:
-{
+let
+  frankenwm = pkgs.callPackage <dotfiles/forks/FrankenWM> {};
+  emacs = import ./emacs/config.nix { inherit pkgs; };
+in {
   # Backgrounds used by BSPWM
   home.file = {
     "Pictures/Backgrounds/background.jpg".source = pkgs.background;
@@ -11,6 +14,10 @@
     "bspwm".source = config.lib.file.mkOutOfStoreSymlink ./bspwm-config/bspwm;
     "sxhkd".source = config.lib.file.mkOutOfStoreSymlink ./bspwm-config/sxhkd;
   };
+  xdg.dataFile."bin/frankenwm" = {
+    source = "${frankenwm}/bin/frankenwm";
+    executable = true;
+  };
 
   # Finally, start BSPWM
   xsession = {
@@ -21,8 +28,14 @@
       size    = 16;
     };
     windowManager.command = ''
-      ${pkgs.sxhkd}/bin/sxhkd &
-      ${pkgs.bspwm}/bin/bspwm
+      # ${pkgs.sxhkd}/bin/sxhkd &
+      # ${pkgs.bspwm}/bin/bspwm
+
+      while true; do
+        "''${XDG_DATA_HOME:-$HOME/.local/share}/bin/frankenwm" || break
+      done
+
+      # ${emacs.package}/bin/emacs
     '';
   };
 

@@ -1,3 +1,9 @@
 [submodule "nur-packages"]
 	path = nur-packages
-	url = ../nur-packages
+	url = git@gitlab.com:jD91mZM2/nur-packages.git
+[submodule "forks/st"]
+	path = forks/st
+	url = git@gitlab.com:jD91mZM2/st.git
+[submodule "forks/FrankenWM"]
+	path = forks/FrankenWM
+	url = git@gitlab.com:jD91mZM2/frankenwm.git

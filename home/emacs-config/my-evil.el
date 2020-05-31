@@ -56,7 +56,7 @@
                           (align-regexp beg end ,regexp nil nil t))))
 (my/define-align "=" my/align-symbols "\\(\\s-*\\)\\(=\\|?\\)"
                  "Align equal marks")
-(my/define-align "#" my/align-comments "\\(\\s-+\\)\\(#\\|//\\|;\\)"
+(my/define-align "#" my/align-comments "\\(\\s-+\\)\\(#\\|//\\|/\\*\\|;\\)"
                  "Align all comments")
 (my/define-align "," my/align-comma ",\\(\\s-*\\)[^[:space:]\n]"
                  "Align all non-whitespace characters after a comma")
