@@ -27,6 +27,8 @@ in
         height     = 30;
         padding    = 3;
 
+        override-redirect = true;
+
         modules-left  = "ewmh_taskbar";
         modules-right = "date pulseaudio battery";
         module-margin = 1;
@@ -41,6 +43,8 @@ in
         height     = 30;
         padding    = 3;
 
+        override-redirect = true;
+
         modules-left  = "ewmh_taskbar";
         module-margin = 3;
       };
@@ -51,15 +55,15 @@ in
         label-active-background = shared.theme.current-line;
         label-urgent-foreground = shared.theme.red;
 
-        icon-0 = "0;";
-        icon-1 = "1;";
-        icon-2 = "2;";
-        icon-3 = "3;";
-        icon-4 = "4;5";
-        icon-5 = "5;6";
-        icon-6 = "6;7";
-        icon-7 = "7;";
-        icon-8 = "8;";
+        icon-0 = "1;";
+        icon-1 = "2;";
+        icon-2 = "3;";
+        icon-3 = "4;";
+        icon-4 = "5;5";
+        icon-5 = "6;6";
+        icon-6 = "7;7";
+        icon-7 = "8;";
+        icon-8 = "9;";
 
         label-active   = "%icon%";
         label-occupied = "%icon%";

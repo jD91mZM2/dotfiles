@@ -1,21 +1,11 @@
 { pkgs, config, ... }:
 let
-  frankenwm = pkgs.callPackage <dotfiles/forks/FrankenWM> {};
-  emacs = import ./emacs/config.nix { inherit pkgs; };
-in {
-  # Backgrounds used by BSPWM
-  home.file = {
-    "Pictures/Backgrounds/background.jpg".source = pkgs.background;
-    "Pictures/Backgrounds/background-focus.jpg".source = pkgs.background-focus;
-  };
-
-  # BSPWM config
-  xdg.configFile = {
-    "bspwm".source = config.lib.file.mkOutOfStoreSymlink ./bspwm-config/bspwm;
-    "sxhkd".source = config.lib.file.mkOutOfStoreSymlink ./bspwm-config/sxhkd;
-  };
-  xdg.dataFile."bin/frankenwm" = {
-    source = "${frankenwm}/bin/frankenwm";
+  dwm = pkgs.callPackage <dotfiles/forks/dwm> {};
+in
+{
+  # Allow hotswitching dwm by quitting it
+  xdg.dataFile."bin/dwm" = {
+    source = "${dwm}/bin/dwm";
     executable = true;
   };
 
@@ -28,14 +18,9 @@ in {
       size    = 16;
     };
     windowManager.command = ''
-      # ${pkgs.sxhkd}/bin/sxhkd &
-      # ${pkgs.bspwm}/bin/bspwm
-
       while true; do
-        "''${XDG_DATA_HOME:-$HOME/.local/share}/bin/frankenwm" || break
+        "''${XDG_DATA_HOME:-$HOME/.local/share}/bin/dwm" || break
       done
-
-      # ${emacs.package}/bin/emacs
     '';
   };
 
