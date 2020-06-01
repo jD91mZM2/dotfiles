@@ -21,7 +21,7 @@ case "$1" in
                 height="${BASH_REMATCH[2]}"
                 x="${BASH_REMATCH[3]}"
                 y="${BASH_REMATCH[4]}"
-                echo "$width * $height + $offset_x + $offset_y"
+                echo "$width * $height $x $y"
 
                 if (( $mouse_X >= $x )) && (( $mouse_X <= $x+$width )) \
                        && (( $mouse_Y >= $y )) && (( $mouse_Y <= $y+$height )); then

@@ -1,7 +1,8 @@
 { pkgs, config, ... }:
 {
   # Save awesome's config file
-  home.file.".config/awesome".source = config.lib.file.mkOutOfStoreSymlink ./awesome-config;
+  home.file."Pictures/background.jpg".source = pkgs.background;
+  xdg.configFile."awesome".source = config.lib.file.mkOutOfStoreSymlink ./awesome-config;
 
   # Configure xsession
   xsession = {
