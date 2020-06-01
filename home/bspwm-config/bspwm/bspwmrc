@@ -46,29 +46,4 @@ bspc rule -a "Zathura"             state=tiled
 #####################
 
 (
-    cd
-    # Setup
-
-    xsetroot -cursor_name left_ptr
-
-    # Always running
-
-    ~/dotfiles/scripts/lock-timer.sh slock &
-    nm-applet &
-
-    # Applications
-
-    thunderbird &
-    xfce4-power-manager &
-
-    bspc rule -a *:st -o desktop="Terminal"
-    st -e tmux &
-    sleep 1 # wait for terminal to statup
-    emacs &
-    bspc rule -a *:st -o desktop="Message"
-    st -e weechat &
-
-    chromium --app="https://chat.redox-os.org/" &
-    sleep 10 # chrome doesn't handle stress well apparently
-    chromium --app="https://discordapp.com/channels/@me" &
 ) &

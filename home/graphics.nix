@@ -1,15 +1,9 @@
 { pkgs, config, ... }:
-let
-  dwm = pkgs.callPackage <dotfiles/forks/dwm> {};
-in
 {
-  # Allow hotswitching dwm by quitting it
-  xdg.dataFile."bin/dwm" = {
-    source = "${dwm}/bin/dwm";
-    executable = true;
-  };
+  # Save awesome's config file
+  home.file.".config/awesome".source = config.lib.file.mkOutOfStoreSymlink ./awesome-config;
 
-  # Finally, start BSPWM
+  # Configure xsession
   xsession = {
     enable = true;
     pointerCursor = {
@@ -17,11 +11,14 @@ in
       name    = "whiteglass";
       size    = 16;
     };
-    windowManager.command = ''
-      while true; do
-        "''${XDG_DATA_HOME:-$HOME/.local/share}/bin/dwm" || break
-      done
-    '';
+    windowManager.awesome = {
+      enable = true;
+    };
+    # windowManager.xmonad = {
+    #   enable = true;
+    #   enableContribAndExtras = true;
+    #   config = config.lib.file.mkOutOfStoreSymlink ./xmonad/xmonad.hs;
+    # };
   };
 
   # Composite manager

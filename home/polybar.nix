@@ -27,8 +27,6 @@ in
         height     = 30;
         padding    = 3;
 
-        override-redirect = true;
-
         modules-left  = "ewmh_taskbar";
         modules-right = "date pulseaudio battery";
         module-margin = 1;
@@ -42,8 +40,6 @@ in
         font-1     = "Font Awesome 5 Free Solid:size=10;2";
         height     = 30;
         padding    = 3;
-
-        override-redirect = true;
 
         modules-left  = "ewmh_taskbar";
         module-margin = 3;

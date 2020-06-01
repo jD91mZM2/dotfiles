@@ -52,7 +52,6 @@ rec {
       company-math
       counsel
       dhall-mode
-      use-package
       direnv
       dockerfile-mode
       dracula-theme
@@ -68,12 +67,14 @@ rec {
       gist
       go-mode
       graphviz-dot-mode
+      haskell-mode
       htmlize
       hydra
       imenu-list
       ivy
       lsp-mode
       lsp-ui
+      lua-mode
       markdown-mode
       nasm-mode
       nix-mode
@@ -90,6 +91,7 @@ rec {
       smartparens
       string-inflection
       sublimity
+      use-package
       uuid
       web-mode
       yaml-mode

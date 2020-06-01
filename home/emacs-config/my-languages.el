@@ -82,6 +82,15 @@
             (insert new-content)
             (goto-char old-pos)))))))
 
+;; Haskell
+(use-package haskell-mode
+  :hook (haskell-mode . flycheck-mode)
+  :mode "\\.hs\\'")
+
+;; Lua
+(use-package lua-mode
+  :mode "\\.lua\\'")
+
 ;; Markdown
 (use-package markdown-mode
   :hook (markdown-mode . flycheck-mode)

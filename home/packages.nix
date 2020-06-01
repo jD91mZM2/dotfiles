@@ -113,6 +113,18 @@ in {
       wildmidi
       whois
 
+      # Desktop items
+      (makeDesktopItem {
+        name = "discord";
+        desktopName = "Discord";
+        exec = "${chromium}/bin/chromium --app=https://discordapp.com/channels/@me";
+      })
+      (makeDesktopItem {
+        name = "redox-mattermost";
+        desktopName = "Redox Mattermost";
+        exec = "${chromium}/bin/chromium --app=https://chat.redox-os.org/";
+      })
+
       # Nix stuff
       (callPackage (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
       (callPackage (builtins.fetchTarball https://github.com/kolloch/crate2nix/archive/master.tar.gz) {})
