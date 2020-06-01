@@ -52,12 +52,10 @@ in
     httpie
     manpages
     mosh
-    ncdu
     nix-index
     patchelf
     pciutils
     socat
-    trash-cli
     unzip
     wget
     xclip

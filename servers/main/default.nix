@@ -76,10 +76,6 @@ in {
       overrideFolders = false;
       devices         = builtins.removeAttrs shared.consts.syncthingDevices [ "droplet" ];
     };
-    relay = {
-      enable     = true;
-      providedBy = "krake.one on DigitalOcean";
-    };
   };
   services.do-agent.enable = true;
 }

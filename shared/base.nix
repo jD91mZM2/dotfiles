@@ -26,7 +26,8 @@ in
     git
     gnupg
     htop
-    kitty.terminfo
+    ncdu
+    nethogs
     trash-cli
     tree
   ];
