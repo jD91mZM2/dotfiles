@@ -12,14 +12,12 @@
       name    = "whiteglass";
       size    = 16;
     };
+    initExtra = ''
+      ${pkgs.stdenv.shell} ${pkgs.lib.escapeShellArg <dotfiles/scripts/startup.sh>} &
+    '';
     windowManager.awesome = {
       enable = true;
     };
-    # windowManager.xmonad = {
-    #   enable = true;
-    #   enableContribAndExtras = true;
-    #   config = config.lib.file.mkOutOfStoreSymlink ./xmonad/xmonad.hs;
-    # };
   };
 
   # Composite manager
