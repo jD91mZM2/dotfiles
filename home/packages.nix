@@ -82,7 +82,7 @@ in {
       pavucontrol
       superTuxKart
       thunderbird
-      torbrowser
+      # torbrowser
       xorg.xev
       xorg.xwininfo
 
