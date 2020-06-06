@@ -65,7 +65,7 @@ awful.rules.rules = {
   },
   {
     rule_any = {
-      class = { "Chromium-browser", "Thunderbird" },
+      class = { "Chromium-browser", "Daily" },
       name = { "weechat" },
     },
     properties = { screen = 1, tag = "9" }
