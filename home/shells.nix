@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 let
+  shared = pkgs.callPackage <dotfiles/shared> {};
+
   aliases = {
     clear     = "clear; echo -ne \"\\e[3J\"";
     e         = "env -u TMPDIR emacsclient -n"; # nix-shell sets $TMPDIR which messes up emacsclient's search
@@ -9,19 +11,15 @@ let
     rsynca    = "rsync -avzhP --delete";
   };
 
-  dircolors = pkgs.fetchFromGitHub {
-    owner  = "joshbenham";
-    repo   = "linux-dotfiles";
-    rev    = "67641154e7befa67527f73a6cbf64b36e15641ca";
-
-    sha256 = "0hvnbc2wlx6j0p4k1znx72ma9rnvf55b9mcfays3pdn80qsx9s8q";
-  } + "/dircolors/Dracula.dircolors";
-
   bashConfig = builtins.replaceStrings [ "  " ] [ "\t" ] ''
-    eval "$(dircolors "${dircolors}")"
-  '';
+    # No dircolors, the defaults look good to me... for now
 
-  shared = pkgs.callPackage <dotfiles/shared> {};
+    if [ "$TERM" = "linux" ]; then
+      ${shared.theme.mapStr (color: ''
+          echo -ne "\e]P${color.hex}${color.rgb}"
+        '')}
+    fi
+  '';
 in
 {
   # Shells

@@ -1,3 +1,7 @@
 #!/bin/sh
 
-dmenu -fn Hack-10 -i -sb "#a38b06" -l 15 "$@"
+dmenu -i -l 15 \
+      -fn Hack-10 \
+      -nb "#282c34" -sb "#3e4451" \
+      -nf "#565c64" -sf "#abb2bf" \
+      "$@"

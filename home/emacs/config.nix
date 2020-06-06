@@ -46,6 +46,7 @@ rec {
     (with epkgs.melpaPackages; [
       aggressive-indent
       auto-compile
+      base16-theme
       company
       company-auctex
       company-lsp
@@ -54,7 +55,6 @@ rec {
       dhall-mode
       direnv
       dockerfile-mode
-      dracula-theme
       edit-indirect
       edit-server
       editorconfig

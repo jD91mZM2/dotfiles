@@ -49,7 +49,7 @@ in
       enable = true;
       autosuggestions = {
         enable = true;
-        highlightStyle = "bg=#${shared.theme.current-line},fg=#${shared.theme.comment}";
+        highlightStyle = "bg=#${shared.theme.getColor 0},fg=#${shared.theme.getColor 3}";
       };
       syntaxHighlighting.enable = true;
       vi.enable = true;

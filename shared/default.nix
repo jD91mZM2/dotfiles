@@ -7,5 +7,5 @@
 {
   consts   = import ./consts.nix;
   builders = callPackage ./builders {};
-  theme    = import ./dracula.nix;
+  theme    = import ./theme.nix;
 }

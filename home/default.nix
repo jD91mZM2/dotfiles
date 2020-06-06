@@ -7,7 +7,6 @@ in
   imports = [
     nur-no-pkgs.repos.jd91mzm2.hm-modules.programs
 
-    ./dunst.nix
     ./emacs
     ./env.nix
     ./firefox.nix

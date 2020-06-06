@@ -1,5 +1,7 @@
 { pkgs, config, ... }:
-{
+let
+  shared = pkgs.callPackage <dotfiles/shared> {};
+in {
   # Save awesome's config file
   home.file."Pictures/background.jpg".source = pkgs.background;
   xdg.configFile."awesome".source = config.lib.file.mkOutOfStoreSymlink ./awesome-config;
@@ -35,23 +37,25 @@
 
   # Xresources is kinda cool I guess :)
   xresources = {
-    extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
-      owner  = "dracula";
-      repo   = "xresources";
-      rev    = "ca0d05cf2b7e5c37104c6ad1a3f5378b72c705db";
+    properties =
+      (builtins.foldl'
+        (x: y: x // y)
+        {}
+        (shared.theme.map (color: {
+          "*.color${toString color.index}" = "#${color.rgb}";
+        }))
+      ) // {
+        # Everything
+        "*.font" = "Hack:pixelsize=13:antialias=true:autohint=true";
+        "*.background" = "#${shared.theme.getColor 0}";
+        "*.foreground" = "#${shared.theme.getColor 5}";
 
-      sha256 = "0ywkf2bzxkr45a0nmrmb2j3pp7igx6qvq6ar0kk7d5wigmkr9m5n";
-    } + "/Xresources");
-    properties = {
-      # Everything
-      "*.font" = "Hack:pixelsize=13:antialias=true:autohint=true";
-
-      # XTerm stuff
-      "XTerm.termName"          = "xterm-256color";
-      "XTerm.vt100.faceName"    = "Hack:size =10";
-      "XTerm*decTerminalID"     = "vt340";
-      "XTerm*numColorRegisters" = 256;
-    };
+        # XTerm stuff
+        "XTerm.termName"          = "xterm-256color";
+        "XTerm.vt100.faceName"    = "Hack:size =10";
+        "XTerm*decTerminalID"     = "vt340";
+        "XTerm*numColorRegisters" = 256;
+      };
   };
 
   # GTK+ theme

@@ -31,11 +31,18 @@
 (add-to-list 'default-frame-alist (cons 'alpha my/option/transparency)) ; default frame settings
 (set-frame-parameter (selected-frame) 'alpha my/option/transparency)    ; for current session
 
-;; Dracula theme...
-(use-package dracula-theme
+;; My colorscheme theme...
+(use-package base16-theme
   :demand t
   :config
-  (load-theme 'dracula t))
+  (load-theme 'base16-onedark t)
+
+  ;; Fix some off-looking colors
+  (defun my/get-color (base)
+    (plist-get base16-onedark-colors base))
+  (modify-face 'trailing-whitespace (my/get-color :base00) (my/get-color :base08))
+  (modify-face 'line-number-current-line (my/get-color :base05) (my/get-color :base00) nil t)
+  (modify-face 'line-number (my/get-color :base04) (my/get-color :base00)))
 
 ;; ... with a powerline modeline
 (require 'powerline)
