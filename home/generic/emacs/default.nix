@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 
 with import ./config.nix { inherit pkgs; };
 

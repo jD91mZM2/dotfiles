@@ -8,16 +8,14 @@ let
   shared = pkgs.callPackage <dotfiles/shared> {};
 in
 {
-  options = {
-    setup = {
-      name = lib.mkOption {
-        type = lib.types.str;
-        description = "The name of this deployment, same as the folder's name in /etc.";
-      };
-      networkId = lib.mkOption {
-        type = lib.types.str;
-        description = "Same as network.hostId, obtain using `head -c8 /etc/machine-id`";
-      };
+  options.setup = {
+    name = lib.mkOption {
+      type = lib.types.str;
+      description = "The name of this deployment, same as the folder's name in /etc.";
+    };
+    networkId = lib.mkOption {
+      type = lib.types.str;
+      description = "Same as network.hostId, obtain using `head -c8 /etc/machine-id`";
     };
   };
 

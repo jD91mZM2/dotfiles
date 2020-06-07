@@ -2,36 +2,18 @@ local gears = require("gears")
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
---[[
-REMAINING KEYBINDINGS FROM SXHKD
-
-# lock the screen with xidlehook
-super + shift + l
-    xidlehook-client --socket /tmp/xidlehook.sock control --action trigger --timer 1
-
-# volume settings
-XF86Audio{Raise,Lower}Volume
-    ~/dotfiles/scripts/volume.perl {up,down}
-XF86AudioMute
-    pactl set-sink-mute "@DEFAULT_SINK@" toggle
-
-# Quick clipboard
-F1; a
-    cat ~/dotfiles/data/ascii | ~/dotfiles/scripts/dmenu.sh -p "ASCII:" | sed "s/^.*=\s*//" | tr -d $'\n' | xclip -sel clip
-F1; e
-    cat ~/dotfiles/data/emoji | ~/dotfiles/scripts/dmenu.sh -p "Emoji:" | sed "s/^.*=\s*//" | tr -d $'\n' | xclip -sel clip
-
-# secret??
-super + Up; Up; Down; Down; Left; Right; Left; Right; b; a
-    xdg-open "https://youtu.be/dQw4w9WgXcQ"
-]]
-
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
+
+function spawn_cmd(cmd)
+  return function()
+    awful.spawn.with_shell(cmd)
+  end
+end
 
 -- Global keybindings
 globalkeys = gears.table.join(
@@ -57,13 +39,13 @@ globalkeys = gears.table.join(
     { description = "go back", group = "client" }),
 
   -- Standard program
-  awful.key({ modkey, "Shift" }, "Return", function () awful.spawn("st -e tmux") end, { description = "open a terminal", group = "launcher" }),
+  awful.key({ modkey, "Shift" }, "Return", spawn_cmd("st -e tmux"), { description = "open a terminal", group = "launcher" }),
   awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
   awful.key({ modkey }, "Pause",
-    function () awful.spawn.with_shell("~/dotfiles/scripts/dmenu-confirm.sh Shutdown && systemctl poweroff") end,
+    spawn_cmd("~/dotfiles/scripts/dmenu-confirm.sh Shutdown && systemctl poweroff"),
     { description = "turn off computer", group = "awesome" }),
   awful.key({ modkey, "Shift" }, "q",
-    function () awful.spawn.with_shell("~/dotfiles/scripts/dmenu-confirm.sh \"Exit AwesomeWM\" && awesome-client \"quit()\"") end,
+    spawn_cmd("~/dotfiles/scripts/dmenu-confirm.sh \"Exit AwesomeWM\" && awesome-client \"quit()\""),
     { description = "quit awesome", group = "awesome" }),
 
   -- Switch between layouts
@@ -72,13 +54,19 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, "m", function () awful.layout.set(awful.layout.suit.max) end, { description = "stacked view", group = "layout" }),
 
   -- Screenshot
-  awful.key({}, "Print", function () awful.spawn.with_shell("~/dotfiles/scripts/screenshot.sh screen") end, { description = "dump screen", group = "screenshot" }),
-  awful.key({ modkey }, "Print", function () awful.spawn.with_shell("~/dotfiles/scripts/screenshot.sh window") end, { description = "dump window", group = "screenshot" }),
-  awful.key({ modkey, "Shift" }, "Print", function () awful.spawn.with_shell("~/dotfiles/scripts/screenshot.sh region") end, { description = "dump region", group = "screenshot" }),
+  awful.key({}, "Print", spawn_cmd("~/dotfiles/scripts/screenshot.sh screen"), { description = "dump screen", group = "screenshot" }),
+  awful.key({ modkey }, "Print", spawn_cmd("~/dotfiles/scripts/screenshot.sh window"), { description = "dump window", group = "screenshot" }),
+  awful.key({ modkey, "Shift" }, "Print", spawn_cmd("~/dotfiles/scripts/screenshot.sh region"), { description = "dump region", group = "screenshot" }),
+
+  -- Volume
+  awful.key({}, "F9", spawn_cmd("pactl set-sink-mute \"@DEFAULT_SINK@\" toggle"), { description = "mute/unmute the volume", group = "volume" }),
+  awful.key({}, "F10", spawn_cmd("~/dotfiles/scripts/volume.perl down"), { description = "lower the volume", group = "volume" }),
+  awful.key({}, "F11", spawn_cmd("~/dotfiles/scripts/volume.perl up"), { description = "higher the volume", group = "volume" }),
 
   -- Misc
-  awful.key({ modkey }, "p", function () awful.spawn("j4-dmenu-desktop --dmenu \"~/dotfiles/scripts/dmenu.sh -p 'Execute:'\"") end, { description = "show the menubar", group = "misc" }),
-  awful.key({ modkey }, "z", function () awful.spawn.with_shell("echo -n \"\xE2\x80\x8B\" | xclip -sel clip") end, { description = "clear the clipboard (zero-width space)", group = "misc" })
+  awful.key({ modkey }, "p", spawn_cmd("j4-dmenu-desktop --dmenu \"~/dotfiles/scripts/dmenu.sh -p 'Execute:'\""), { description = "show the menubar", group = "misc" }),
+  awful.key({ modkey, "Shift" }, "l", spawn_cmd("xidlehook-client --socket /tmp/xidlehook.sock control --action trigger --timer 1"), { description = "lock screen", group = "misc" }),
+  awful.key({ modkey }, "z", spawn_cmd("echo -n \"\xE2\x80\x8B\" | xclip -sel clip"), { description = "clear the clipboard (zero-width space)", group = "misc" })
 )
 -- Global mouse-bindings
 globalbuttons = gears.table.join(

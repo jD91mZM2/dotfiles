@@ -111,7 +111,6 @@
 
 ;; Nix
 (use-package nix-mode
-  :after (lsp)
   :hook (nix-mode . lsp)
   :mode "\\.nix\\'"
   :config

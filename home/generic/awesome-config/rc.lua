@@ -67,14 +67,16 @@ function try_load(filepath, ...)
   return result(...)
 end
 
-local theme = try_load("theme.lua")
-
 -- Setup keybinds early on
 local keybinds = try_load("keybinds.lua")
 root.keys(keybinds.globalkeys)
 root.buttons(keybinds.globalbuttons)
 
+try_load("quickcopy.lua")
+
 -- Themes define colours, icons, font and wallpapers.
+
+local theme = try_load("theme.lua")
 if not theme or not beautiful.init(theme) then
   naughty.notify {
     preset = naughty.config.presets.critical,

@@ -143,4 +143,23 @@ leaving the point at the end of the latter"
   :config
   (global-evil-surround-mode 1))
 
+;;  _   _         _     _       _     _ _       _     _
+;; | \ | | ___   | |__ (_) __ _| |__ | (_) __ _| |__ | |_
+;; |  \| |/ _ \  | '_ \| |/ _` | '_ \| | |/ _` | '_ \| __|
+;; | |\  | (_) | | | | | | (_| | | | | | | (_| | | | | |_
+;; |_| \_|\___/  |_| |_|_|\__, |_| |_|_|_|\__, |_| |_|\__|
+;;                        |___/           |___/
+
+(defvar my/stop-hl-timer-last nil)
+
+(defun my/stop-hl-timer (_)
+  ;; Cancel previous timer
+  (when my/stop-hl-timer-last
+    (cancel-timer my/stop-hl-timer-last))
+  ;; Create new timer
+  (setq my/stop-hl-timer-last
+        (run-at-time 1 nil (lambda () (evil-ex-nohighlight)))))
+
+(advice-add 'evil-ex-search-activate-highlight :after 'my/stop-hl-timer)
+
 (provide 'my-evil)
