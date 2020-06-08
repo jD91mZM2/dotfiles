@@ -144,6 +144,7 @@ awful.screen.connect_for_each_screen(
 --                      |_|
 
 local rules = try_load("rules.lua", keybinds)
+local swallow = try_load("swallow.lua")
 
 -- Signal function to execute when a new client appears.
 client.connect_signal(
@@ -156,6 +157,10 @@ client.connect_signal(
     if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
       -- Prevent clients from being unreachable after screen count changes.
       awful.placement.no_offscreen(c)
+    end
+
+    if swallow then
+      swallow.on_window_manage(c)
     end
   end
 )
