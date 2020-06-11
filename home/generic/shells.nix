@@ -16,9 +16,12 @@ let
     # No dircolors, the defaults look good to me... for now
 
     if [ "$TERM" = "linux" ]; then
-      ${shared.theme.mapStr (color: ''
-          echo -ne "\e]P${color.hex}${color.rgb}"
-        '')}
+      ${toString
+        (map
+          (color: ''
+            echo -ne "\e]P${color.hex}${color.rgb}"
+          '')
+          shared.theme.colors)}
     fi
   '';
 in {

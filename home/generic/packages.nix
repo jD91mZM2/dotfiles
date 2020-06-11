@@ -94,7 +94,7 @@ in {
       figlet
       libnotify
       neofetch
-      nixops
+      # nixops
       pv
       rclone
       rename

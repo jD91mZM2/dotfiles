@@ -3,27 +3,26 @@
 (require 'man)
 (require 'my-styling)
 
-;; General language support
+;; Flycheck
 
-(use-package flycheck
-  :hook (lsp-ui-mode . flycheck-mode)
-  :commands (flycheck-add-mode))
-(use-package lsp-mode
-  :bind ("C-c e" . lsp-extend-selection)
-  :commands (lsp lsp-register-client)
-  :hook (python-mode . lsp)
-  :custom
-  (lsp-enable-indentation nil)
-  (lsp-prefer-flymake nil)
-  (lsp-auto-guess-root t)
-  (lsp-restart 'ignore))
-(use-package lsp-ui
-  :after lsp-mode
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom
-  (lsp-ui-doc-max-width 50)
-  (lsp-ui-doc-max-height 20)
-  (lsp-ui-doc-position 'top))
+(require 'flycheck)
+
+;; Language server
+
+(require 'lsp)
+(global-set-key (kbd "C-c e") 'lsp-extend-selection)
+(add-hook 'python-mode-hook 'lsp)
+(setq-default lsp-enable-indentation nil)
+(setq-default lsp-prefer-flymake nil)
+(setq-default lsp-auto-guess-root t)
+(setq-default lsp-restart 'ignore)
+
+(require 'lsp-ui)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+(add-hook 'lsp-ui-mode-hook 'flycheck-mode)
+(setq-default lsp-ui-doc-max-width 50)
+(setq-default lsp-ui-doc-max-height 20)
+(setq-default lsp-ui-doc-position 'top)
 
 ;; Optional dependencies
 

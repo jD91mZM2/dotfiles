@@ -1,36 +1,42 @@
 let
-  # Colors from https://github.com/tilal6991/base16-onedark-scheme
+  # Colors from https://github.com/dracula/base16-dracula-scheme
+  colors = [
+    "282936" # base 0 - *background*
+    "3a3c4e" # base 1 - lighter bg (status bars)
+    "4d4f68" # base 2 - selection bg
+    "626483" # base 3 - comments / line-highlight
+    "62d6e8" # base 4 - darker fg (status bars)
+    "e9e9f4" # base 5 - *foreground*
+    "f1f2f8" # base 6 - light fg (rarely used)
+    "f7f7fb" # base 7 - light bg (rarely used)
+    "ea51b2" # base 8 - variables and xml tags
+    "b45bcf" # base 9 - integers, booleans, xml attributes
+    "00f769" # base A - classes
+    "ebff87" # base B - strings
+    "a1efe4" # base C - regexp and escape characters
+    "62d6e8" # base D - functions
+    "b45bcf" # base E - keywords
+    "00f769" # base F - open/close language tags
+  ];
+
   self = {
-    colors = [
-      "282c34" # base 0 - *background*
-      "353b45" # base 1 - lighter bg (status bars)
-      "3e4451" # base 2 - selection bg
-      "545862" # base 3 - comments / line-highlight
-      "565c64" # base 4 - darker fg (status bars)
-      "abb2bf" # base 5 - *foreground*
-      "b6bdca" # base 6 - light fg (rarely used)
-      "c8ccd4" # base 7 - light bg (rarely used)
-      "e06c75" # base 8 - variables and xml tags
-      "d19a66" # base 9 - integers, booleans, xml attributes
-      "e5c07b" # base A - classes
-      "98c379" # base B - strings
-      "56b6c2" # base C - regexp and escape characters
-      "61afef" # base D - functions
-      "c678dd" # base E - keywords
-      "be5046" # base F - open/close language tags
-    ];
+    colors = builtins.genList
+      (index: {
+        number = index;
+        hex =
+          if index < 10
+          then toString index
+          else builtins.elemAt [ "A" "B" "C" "D" "E" "F" ] (index - 10);
+        rgb = builtins.elemAt colors index;
+      })
+      16;
 
-    getColor = i: builtins.elemAt self.colors i;
+    getColor = builtins.elemAt self.colors;
 
-    map = f: map (index: f {
-      inherit index;
-      hex =
-        if index < 10
-        then toString index
-        else builtins.elemAt [ "A" "B" "C" "D" "E" "F" ] (index - 10);
-      rgb = self.getColor index;
-    }) (builtins.genList (i: i) 16);
+    # Orderings
 
-    mapStr = f: toString (self.map f);
+    # Obtained from
+    # https://github.com/base16-templates/base16-xresources/blob/d762461de45e00c73a514408988345691f727632/templates/default.mustache#L29-L45
+    xresources = map self.getColor [ 00 08 11 10 13 14 12 05 03 09 01 02 04 06 15 07 ];
   };
 in self

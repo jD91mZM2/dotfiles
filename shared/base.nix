@@ -49,7 +49,7 @@ in
       enable = true;
       autosuggestions = {
         enable = true;
-        highlightStyle = "bg=#${shared.theme.getColor 0},fg=#${shared.theme.getColor 3}";
+        highlightStyle = "bg=#${(shared.theme.getColor 0).rgb},fg=#${(shared.theme.getColor 3).rgb}";
       };
       syntaxHighlighting.enable = true;
       vi.enable = true;

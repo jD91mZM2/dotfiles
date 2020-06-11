@@ -1,4 +1,5 @@
 { pkgs, config, lib, ... }:
+
 let
   shared = pkgs.callPackage <dotfiles/shared> {};
   cfg = config.setup.graphics;
@@ -54,14 +55,17 @@ in {
         (builtins.foldl'
           (x: y: x // y)
           {}
-          (shared.theme.map (color: {
-            "*.color${toString color.index}" = "#${color.rgb}";
-          }))
+          (lib.zipListsWith
+            (index: color: {
+              "*.color${toString index.number}" = "#${color.rgb}";
+            })
+            shared.theme.colors
+            shared.theme.xresources)
         ) // {
           # Everything
           "*.font" = "Hack:pixelsize=13:antialias=true:autohint=true";
-          "*.background" = "#${shared.theme.getColor 0}";
-          "*.foreground" = "#${shared.theme.getColor 5}";
+          "*.background" = "#${(shared.theme.getColor 0).rgb}";
+          "*.foreground" = "#${(shared.theme.getColor 5).rgb}";
 
           # XTerm stuff
           "XTerm.termName"          = "xterm-256color";
