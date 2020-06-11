@@ -10,7 +10,7 @@ in
   ];
 
   # System overlays
-  nixpkgs.overlays = import <dotfiles/home/overlays.nix>;
+  nixpkgs.overlays = import <dotfiles/home/generic/overlays.nix>;
 
   # Must have packages
   environment.systemPackages = with pkgs; [
@@ -49,7 +49,7 @@ in
       enable = true;
       autosuggestions = {
         enable = true;
-        highlightStyle = "bg=#${(shared.theme.getColor 0).rgb},fg=#${(shared.theme.getColor 3).rgb}";
+        highlightStyle = "bg=#${(shared.theme.getColor 1).rgb},fg=#${(shared.theme.getColor 3).rgb}";
       };
       syntaxHighlighting.enable = true;
       vi.enable = true;

@@ -15,13 +15,18 @@ function spawn_cmd(cmd)
   end
 end
 
+scripts = "${XDG_DATA_HOME:-$HOME/.local/share}/scripts/"
+
+function script(cmd)
+  return spawn_cmd(scripts .. cmd)
+end
+
 -- Global keybindings
 globalkeys = gears.table.join(
   awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 
   awful.key({ modkey }, "j", function () awful.client.focus.byidx( 1) end, { description = "focus next by index", group = "client" }),
   awful.key({ modkey }, "k", function () awful.client.focus.byidx(-1) end, { description = "focus previous by index", group = "client" }),
-  awful.key({ modkey }, "w", function () mymainmenu:show() end, { description = "show main menu", group = "awesome" }),
 
   -- Layout manipulation
   awful.key({ modkey, "Shift" }, "j", function () awful.client.swap.byidx(  1) end, { description = "swap with next client by index", group = "client" }),
@@ -29,24 +34,12 @@ globalkeys = gears.table.join(
   awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end, { description = "focus the next screen", group = "screen" }),
   awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end, { description = "focus the previous screen", group = "screen" }),
   awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
-  awful.key({ modkey }, "Tab",
-    function ()
-      awful.client.focus.history.previous()
-      if client.focus then
-        client.focus:raise()
-      end
-    end,
-    { description = "go back", group = "client" }),
 
   -- Standard program
   awful.key({ modkey, "Shift" }, "Return", spawn_cmd("st -e tmux"), { description = "open a terminal", group = "launcher" }),
   awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-  awful.key({ modkey }, "Pause",
-    spawn_cmd("~/dotfiles/scripts/dmenu-confirm.sh Shutdown && systemctl poweroff"),
-    { description = "turn off computer", group = "awesome" }),
-  awful.key({ modkey, "Shift" }, "q",
-    spawn_cmd("~/dotfiles/scripts/dmenu-confirm.sh \"Exit AwesomeWM\" && awesome-client \"quit()\""),
-    { description = "quit awesome", group = "awesome" }),
+  awful.key({ modkey }, "Pause", script("dmenu-confirm.sh Shutdown && systemctl poweroff"), { description = "turn off computer", group = "awesome" }),
+  awful.key({ modkey, "Shift" }, "q", script("dmenu-confirm.sh \"Exit AwesomeWM\" && awesome-client \"quit()\""), { description = "quit awesome", group = "awesome" }),
 
   -- Switch between layouts
   awful.key({ modkey }, "t", function () awful.layout.set(awful.layout.suit.spiral) end, { description = "tiling view", group = "layout" }),
@@ -54,17 +47,17 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, "m", function () awful.layout.set(awful.layout.suit.max) end, { description = "stacked view", group = "layout" }),
 
   -- Screenshot
-  awful.key({}, "Print", spawn_cmd("~/dotfiles/scripts/screenshot.sh screen"), { description = "dump screen", group = "screenshot" }),
+  awful.key({}, "Print", script("screenshot.sh screen"), { description = "dump screen", group = "screenshot" }),
   awful.key({ modkey }, "Print", spawn_cmd("~/dotfiles/scripts/screenshot.sh window"), { description = "dump window", group = "screenshot" }),
   awful.key({ modkey, "Shift" }, "Print", spawn_cmd("~/dotfiles/scripts/screenshot.sh region"), { description = "dump region", group = "screenshot" }),
 
   -- Volume
   awful.key({}, "F9", spawn_cmd("pactl set-sink-mute \"@DEFAULT_SINK@\" toggle"), { description = "mute/unmute the volume", group = "volume" }),
-  awful.key({}, "F10", spawn_cmd("~/dotfiles/scripts/volume.perl down"), { description = "lower the volume", group = "volume" }),
-  awful.key({}, "F11", spawn_cmd("~/dotfiles/scripts/volume.perl up"), { description = "higher the volume", group = "volume" }),
+  awful.key({}, "F10", script("volume.perl down"), { description = "lower the volume", group = "volume" }),
+  awful.key({}, "F11", script("volume.perl up"), { description = "higher the volume", group = "volume" }),
 
   -- Misc
-  awful.key({ modkey }, "p", spawn_cmd("j4-dmenu-desktop --dmenu \"~/dotfiles/scripts/dmenu.sh -p 'Execute:'\""), { description = "show the menubar", group = "misc" }),
+  awful.key({ modkey }, "p", spawn_cmd("j4-dmenu-desktop --dmenu \"" .. scripts .. "dmenu.sh -p 'Execute:'\""), { description = "show the menubar", group = "misc" }),
   awful.key({ modkey, "Shift" }, "l", spawn_cmd("xidlehook-client --socket /tmp/xidlehook.sock control --action trigger --timer 1"), { description = "lock screen", group = "misc" }),
   awful.key({ modkey }, "z", spawn_cmd("echo -n \"\xE2\x80\x8B\" | xclip -sel clip"), { description = "clear the clipboard (zero-width space)", group = "misc" })
 )

@@ -17,7 +17,8 @@ in {
     setup.graphics.polybar.enable = true;
 
     # Save awesome's config file
-    home.file."Pictures/background.jpg".source = pkgs.background;
+    home.file."Pictures/background.jpg".source = shared.background;
+    xdg.dataFile."scripts".source = shared.scripts;
     xdg.configFile."awesome".source = config.lib.file.mkOutOfStoreSymlink ./awesome-config;
 
     # Configure xsession
@@ -29,7 +30,7 @@ in {
         size    = 16;
       };
       initExtra = ''
-        ${pkgs.stdenv.shell} ${pkgs.lib.escapeShellArg <dotfiles/scripts/startup.sh>} &
+        ${pkgs.stdenv.shell} "${shared.scripts}/startup.sh" &
       '';
       windowManager.awesome = {
         enable = true;

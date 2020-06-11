@@ -2,12 +2,12 @@
 
 use strict;
 
-my $sink = 0;
+my $found_default_sink = 0;
 my $percent = 0;
 
 foreach (split /\n/, `pacmd list-sinks`) {
-    $sink = 1 if /\*/;
-    if ($sink && /([0-9]+)%/) {
+    $found_default_sink = 1 if /\*/;
+    if ($found_default_sink && /([0-9]+)%/) {
         $percent = $1;
         last;
     }
