@@ -48,8 +48,8 @@ globalkeys = gears.table.join(
 
   -- Screenshot
   awful.key({}, "Print", script("screenshot.sh screen"), { description = "dump screen", group = "screenshot" }),
-  awful.key({ modkey }, "Print", spawn_cmd("~/dotfiles/scripts/screenshot.sh window"), { description = "dump window", group = "screenshot" }),
-  awful.key({ modkey, "Shift" }, "Print", spawn_cmd("~/dotfiles/scripts/screenshot.sh region"), { description = "dump region", group = "screenshot" }),
+  awful.key({ modkey }, "Print", script("screenshot.sh window"), { description = "dump window", group = "screenshot" }),
+  awful.key({ modkey, "Shift" }, "Print", script("screenshot.sh region"), { description = "dump region", group = "screenshot" }),
 
   -- Volume
   awful.key({}, "F9", spawn_cmd("pactl set-sink-mute \"@DEFAULT_SINK@\" toggle"), { description = "mute/unmute the volume", group = "volume" }),

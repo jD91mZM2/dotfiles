@@ -112,13 +112,16 @@
 (use-package nix-mode
   :hook (nix-mode . lsp)
   :mode "\\.nix\\'"
-  :config
+  :commands (nix-mode)
+  :custom
+  (nix-mode-use-smie t)
+  :init
+  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection '("bash" "-c" "env RUST_LOG=trace rnix-lsp 2> /tmp/nix-lsp.log"))
                     :major-modes '(nix-mode)
                     :server-id 'nix))
-  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
-  (setq nix-mode-use-smie t)
+  :config
   (define-key nix-mode-map (kbd "C-M-x") (lambda (beg end)
                                            (interactive "r")
                                            (shell-command-on-region beg end "nix-instantiate --eval -")))
@@ -138,33 +141,10 @@
   (org-startup-indented t)
   (org-startup-folded nil)
   (org-list-allow-alphabetical t))
-(use-package org-present
+(use-package ox-reveal
   :after org
-  :commands (org-present org-present-big org-present-hide-cursor
-                         org-present-show-cursor org-present-read-only
-                         org-present-read-write org-present-small)
-  :config
-  (add-hook 'org-present-mode-hook
-            (defun my/org-present-start ()
-              (org-present-big)
-              (org-display-inline-images)
-              (org-present-hide-cursor)
-              (org-present-read-only)
-              (display-line-numbers-mode -1)
-              ;; doing hl-line-mode locally isn't enough
-              (global-hl-line-mode -1)
-              (setq-local mode-line-format nil)
-              (evil-emacs-state nil)))
-  (add-hook 'org-present-mode-quit-hook
-            (defun my/org-present-end ()
-              (org-present-small)
-              (org-remove-inline-images)
-              (org-present-show-cursor)
-              (org-present-read-write)
-              (display-line-numbers-mode 1)
-              (global-hl-line-mode 1)
-              (setq-local mode-line-format (my/modeline))
-              (evil-exit-emacs-state nil))))
+  :custom
+  (org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))
 (use-package ob-rust
   :after org)
 

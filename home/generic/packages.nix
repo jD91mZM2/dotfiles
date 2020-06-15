@@ -155,7 +155,7 @@ in {
       jetbrains.idea-community
       ## Go
       go
-      gotools
+      gopls
       ## Markdown
       mdl
       multimarkdown

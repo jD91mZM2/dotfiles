@@ -1,18 +1,3 @@
-;;  ____       _
-;; |  _ \  ___| |__  _   _  __ _    ___  _ __     ___ _ __ _ __ ___  _ __
-;; | | | |/ _ \ '_ \| | | |/ _` |  / _ \| '_ \   / _ \ '__| '__/ _ \| '__|
-;; | |_| |  __/ |_) | |_| | (_| | | (_) | | | | |  __/ |  | | | (_) | |
-;; |____/ \___|_.__/ \__,_|\__, |  \___/|_| |_|  \___|_|  |_|  \___/|_|
-;;                         |___/
-
-;; Searches can fail, calm down
-(add-to-list 'debug-ignored-errors 'search-failed)
-
-;; Don't annoy me when I'm typing
-(add-to-list 'debug-ignored-errors "^use-package: Unrecognized")
-
-(setq debug-on-error t)
-
 ;;  ____       _                              _ _
 ;; / ___|  ___| |_   _   _ _ __     _____   _(_) |
 ;; \___ \ / _ \ __| | | | | '_ \   / _ \ \ / / | |
@@ -129,14 +114,6 @@
           (defun my/major-hook ()
             (modify-syntax-entry ?_ "w")))
 
-;; Save list of open buffers...
-(desktop-save-mode 1)
-
-;; ... but clean the buffer list before opening
-(add-hook 'desktop-after-read-hook
-          (defun my/desktop-read-hook ()
-            (clean-buffer-list)))
-
 ;; Beautiful styling
 (require 'my-styling)
 
@@ -150,8 +127,16 @@
 ;; Language-specific add-ons
 (require 'my-languages)
 
-;; Finally, load file templates
+;; Load file templates
 (require 'my-templates)
+
+;; Finally, save/load list of open buffers...
+(desktop-save-mode 1)
+
+;; ... but clean the buffer list after loading
+(add-hook 'desktop-after-read-hook
+          (defun my/desktop-read-hook ()
+            (clean-buffer-list)))
 
 ;;  _____     _          _ _
 ;; | ____|___| |__   ___| | |

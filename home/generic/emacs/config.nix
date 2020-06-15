@@ -79,7 +79,7 @@ rec {
       nasm-mode
       nix-mode
       ob-rust
-      org-present
+      ox-reveal
       powerline
       projectile
       projectile-ripgrep

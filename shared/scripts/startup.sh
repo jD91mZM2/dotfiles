@@ -1,5 +1,7 @@
 #!/bin/sh
 
+dirname="$(dirname "$0")"
+
 cd
 # Setup
 
@@ -7,7 +9,7 @@ xsetroot -cursor_name left_ptr
 
 # Always running
 
-~/dotfiles/scripts/lock-timer.sh slock &
+"$dirname/lock-timer.sh" slock &
 nm-applet &
 
 # Applications
