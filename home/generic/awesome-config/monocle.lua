@@ -53,11 +53,15 @@ function init_screen(screen)
   }
 
   for _, t in ipairs(screen.tags) do
+    t.display_mono = true
+
     local callback = function(tag)
-      screen.monocle_tasklist.visible = (tag.layout == awful.layout.suit.max)
+      screen.monocle_tasklist.visible = (tag.display_mono and tag.layout == awful.layout.suit.max)
     end
-    t:connect_signal("property::selected", callback)
-    t:connect_signal("property::layout", callback)
+
+    t:connect_signal("property::selected",     callback)
+    t:connect_signal("property::display_mono", callback)
+    t:connect_signal("property::layout",       callback)
   end
 end
 

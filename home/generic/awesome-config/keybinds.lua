@@ -1,5 +1,6 @@
-local gears = require("gears")
 local awful = require("awful")
+local beautiful = require("beautiful")
+local gears = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 -- Default modkey.
@@ -7,7 +8,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+local modkey = "Mod4"
 
 function spawn_cmd(cmd)
   return function()
@@ -15,14 +16,18 @@ function spawn_cmd(cmd)
   end
 end
 
-scripts = "${XDG_DATA_HOME:-$HOME/.local/share}/scripts/"
+local scripts = "${XDG_DATA_HOME:-$HOME/.local/share}/scripts/"
 
 function script(cmd)
   return spawn_cmd(scripts .. cmd)
 end
 
+function toggle(obj, prop)
+  obj[prop] = not obj[prop]
+end
+
 -- Global keybindings
-globalkeys = gears.table.join(
+local globalkeys = gears.table.join(
   awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 
   awful.key({ modkey }, "j", function () awful.client.focus.byidx( 1) end, { description = "focus next by index", group = "client" }),
@@ -43,8 +48,16 @@ globalkeys = gears.table.join(
 
   -- Switch between layouts
   awful.key({ modkey }, "t", function () awful.layout.set(awful.layout.suit.spiral) end, { description = "tiling view", group = "layout" }),
+  awful.key({ modkey, "Shift" }, "t", function () awful.layout.set(awful.layout.suit.tile) end, { description = "traditional tiling view", group = "layout" }),
+  awful.key({ modkey }, "v", function () awful.layout.set(awful.layout.suit.tile.bottom) end, { description = "tiling view - vertical", group = "layout" }),
   awful.key({ modkey }, "n", function () awful.layout.set(awful.layout.suit.magnifier) end, { description = "magnifier view", group = "layout" }),
   awful.key({ modkey }, "m", function () awful.layout.set(awful.layout.suit.max) end, { description = "stacked view", group = "layout" }),
+
+  -- Misc tag settings
+  awful.key({ modkey }, "b", function () toggle(awful.screen.focused().selected_tag, "display_mono") end, { description = "toggle monocle bar", group = "pertag" }),
+  awful.key({ modkey }, "h", function () awful.tag.incmwfact(-0.05) end, { description = "decrease split ratio", group = "pertag" }),
+  awful.key({ modkey }, "l", function () awful.tag.incmwfact( 0.05) end, { description = "increase split ratio", group = "pertag" }),
+  awful.key({ modkey, "Shift" }, "h", function () awful.screen.focused().selected_tag.master_width_factor = 0.5 end, { description = "reset split ratio", group = "pertag" }),
 
   -- Screenshot
   awful.key({}, "Print", script("screenshot.sh screen"), { description = "dump screen", group = "screenshot" }),
@@ -62,7 +75,7 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, "z", spawn_cmd("echo -n \"\xE2\x80\x8B\" | xclip -sel clip"), { description = "clear the clipboard (zero-width space)", group = "misc" })
 )
 -- Global mouse-bindings
-globalbuttons = gears.table.join(
+local globalbuttons = gears.table.join(
   awful.button({}, 4, awful.tag.viewnext),
   awful.button({}, 5, awful.tag.viewprev)
 )
@@ -124,7 +137,7 @@ for i = 1, 9 do
 end
 
 -- Window-specific keybindings
-clientkeys = gears.table.join(
+local clientkeys = gears.table.join(
   awful.key({ modkey }, "f",
     function (c)
       c.fullscreen = not c.fullscreen
@@ -138,7 +151,7 @@ clientkeys = gears.table.join(
 )
 
 -- Window-specific mouse-bindings
-clientbuttons = gears.table.join(
+local clientbuttons = gears.table.join(
   awful.button({}, 1, function (c)
       c:emit_signal("request::activate", "mouse_click", { raise = true })
   end),
