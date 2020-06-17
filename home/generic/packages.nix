@@ -112,6 +112,16 @@ in {
       pandoc
       wildmidi
       whois
+      (runCommand "mgitstatus" {} ''
+        cd "${fetchFromGitHub {
+          owner = "fboender";
+          repo = "multi-git-status";
+          rev = "0f67ed0de0417823e52a2c4be2eea26208c0647c";
+          sha256 = "1i4nm842bv0clkwm46553h6y0bg61xm5g54w28qfjxylzxjjmwhm";
+        }}"
+        mkdir "$out"
+        PREFIX="$out" ./install.sh
+      '')
 
       # Desktop items
       (makeDesktopItem {
