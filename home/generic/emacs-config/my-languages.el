@@ -153,10 +153,12 @@
   :mode ("\\.rs\\'" . rustic-mode)
   :hook (rustic-mode . lsp)
   :custom
+  (rustic-lsp-server 'rust-analyzer)
   (rustic-lsp-setup-p nil)
   (rustic-match-angle-brackets nil)
   :config
-  (sp-local-pair 'rustic-mode "<" ">"))
+  ;; for some reason, this is required for it to work properly
+  (rustic-lsp-mode-setup))
 (use-package rust-playground
   :after rustic-mode
   :commands (rust-playground rust-playground-mode))

@@ -141,6 +141,7 @@ in {
       cargo-edit
       cargo-release
       cargo-tree
+      rust-analyzer
       rustup
       ## C
       cmake
