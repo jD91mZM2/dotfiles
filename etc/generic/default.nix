@@ -55,6 +55,11 @@ in
     nix.gc = {
       automatic = true;
       dates = "17:00";
+      options = "--delete-older-than 10d";
+    };
+    nix.optimise = {
+      automatic = true;
+      dates = "17:00";
     };
     system.autoUpgrade = {
       enable = true;
