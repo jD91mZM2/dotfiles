@@ -172,7 +172,7 @@ in {
       multimarkdown
       ## Python
       (python3.withPackages (p: with p; [
-        python-language-server
+        # python-language-server - broken?
         tkinter
       ]))
       ## LaTeX

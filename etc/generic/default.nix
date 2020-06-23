@@ -59,7 +59,7 @@ in
     };
     nix.optimise = {
       automatic = true;
-      dates = "17:00";
+      dates = [ "17:00" ];
     };
     system.autoUpgrade = {
       enable = true;

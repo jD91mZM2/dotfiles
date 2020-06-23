@@ -1,5 +1,5 @@
 (eval-when-compile (require 'use-package))
-(eval-when-compile (require 'cl))
+(require 'cl-lib)
 
 (use-package company
   :commands (global-company-mode)
@@ -11,9 +11,9 @@
   ;; to keep the current list of tag table or something
   (defun my/company-mode-filter-backends (backends)
     (if (listp backends)
-        (loop for backend in backends
-              unless (and (symbolp backend) (string-match-p "tags" (symbol-name backend)))
-              collect (my/company-mode-filter-backends backend))
+        (cl-loop for backend in backends
+                 unless (and (symbolp backend) (string-match-p "tags" (symbol-name backend)))
+                 collect (my/company-mode-filter-backends backend))
       backends))
   (setq-default company-backends (my/company-mode-filter-backends company-backends)))
 (use-package company-auctex

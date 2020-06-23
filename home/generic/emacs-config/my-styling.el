@@ -33,7 +33,9 @@
 
 ;; My colorscheme...
 (use-package dracula-theme
-  :demand t)
+  :demand t
+  :config
+  (load-theme 'dracula t))
 
 ;; ... with a powerline modeline
 (require 'powerline)

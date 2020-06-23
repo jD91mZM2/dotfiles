@@ -1,28 +1,44 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
   outLispPath = "share/emacs/site-lisp";
+
+  withOutPath = out: ''
+    mv init.el realinit.el
+    echo "(add-to-list 'load-path \"${out}\" t)" >> init.el
+    cat realinit.el >> init.el
+    rm realinit.el
+  '';
 in
 rec {
-  configDir = "${pkgs.emacsPackages.trivialBuild {
-    pname = "my-config";
-    version = "local";
-    packageRequires = depsForEpkgs pkgs.emacsPackages;
-    src = ../emacs-config;
+  BYTE_COMPILE_CONFIG = true; # change to debug
 
-    postPatch = ''
-      mv init.el realinit.el
-      echo "(add-to-list 'load-path \"$out/${outLispPath}\" t)" >> init.el
-      cat realinit.el >> init.el
-      rm realinit.el
-    '';
-    postInstall = ''
-      cp -r templates "$out/${outLispPath}/templates"
-      cp -r snippets "$out/${outLispPath}/snippets"
-    '';
-  }}/${outLispPath}";
+  configDir = if BYTE_COMPILE_CONFIG
+              then "${emacsPackages.trivialBuild {
+                pname = "my-config";
+                version = "local";
+                packageRequires = depsForEpkgs emacsPackages;
+                src = ../emacs-config;
 
-  package = pkgs.emacsWithPackages depsForEpkgs;
+                postPatch = ''
+                  ${withOutPath "$out/${outLispPath}"}
+                '';
+                postInstall = ''
+                  cp -r templates "$out/${outLispPath}/templates"
+                  cp -r snippets "$out/${outLispPath}/snippets"
+                '';
+              }}/${outLispPath}"
+              else pkgs.runCommand "emacs-config" {} ''
+                cp -r "${../emacs-config}" "$out"
+                chmod +w "$out"
+                cd "$out"
+                ${withOutPath "$out"}
+              '';
+
+  emacs = pkgs.emacsGit;
+  emacsPackages = pkgs.emacsPackagesFor emacs;
+
+  package = emacsPackages.emacsWithPackages depsForEpkgs;
 
   depsForEpkgs = (epkgs:
     [

@@ -1,3 +1,5 @@
+(require 'cl-lib)
+
 (defun my/util/replace-region (beg end text)
   "Replace a region of text in the current buffer"
   (delete-region beg end)
@@ -7,12 +9,12 @@
 
 (defun my/util/invert-case (string)
   "Return string but with the casing inverted. \"Hello\" => \"hELLO\""
-  (map 'string
-       (lambda (c)
-         (if (or (<= ?a c ?z) (<= ?A c ?Z))
-             (logxor c 32)
-           c))
-       string))
+  (cl-map 'string
+          (lambda (c)
+            (if (or (<= ?a c ?z) (<= ?A c ?Z))
+                (logxor c 32)
+              c))
+          string))
 
 (defun my/util/current-directory ()
   "Get the filepath to the current directory"

@@ -1,5 +1,6 @@
 (eval-when-compile (require 'use-package))
 (require 'bind-key)
+(require 'cl-lib)
 (require 'evil)
 
 ;;  _   _      _                    __                  _   _
@@ -117,20 +118,20 @@
   (defun my/transpose-args (direction)
     "Interchange the current argument with the one in direction,
 leaving the point at the end of the latter"
-    (destructuring-bind (beg1 end1 _) (evil-inner-arg)
+    (cl-destructuring-bind (beg1 end1 _) (evil-inner-arg)
       ;; Get the text of the first argument
       (let ((text1 (buffer-substring-no-properties beg1 end1)))
         (apply direction '(1))
 
         ;; Get the text of the second argument
-        (let ((text2 (destructuring-bind (beg2 end2 _) (evil-inner-arg)
+        (let ((text2 (cl-destructuring-bind (beg2 end2 _) (evil-inner-arg)
                        (buffer-substring-no-properties beg2 end2))))
 
           ;; Replace the first
           (my/util/replace-region beg1 end1 text2)
 
           ;; Re-obtain text (because marks probably changed) and replace second
-          (destructuring-bind (beg2 end2 _) (evil-inner-arg)
+          (cl-destructuring-bind (beg2 end2 _) (evil-inner-arg)
             (my/util/replace-region beg2 end2 text1))))))
 
   (evil-define-key 'normal prog-mode-map (kbd "M-n") (lambda () (interactive) (my/transpose-args 'evil-forward-arg)))
