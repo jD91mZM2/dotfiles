@@ -12,7 +12,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.sessionVariables = {
       # Override PATH
-      PATH = "$PATH:$HOME/.cargo/bin";
+      PATH = "$PATH:\${XDG_CONFIG_HOME:-$HOME/.config}/emacs/bin:$HOME/.cargo/bin";
 
       # Standard configs
       EDITOR = "env -u TMPDIR emacsclient"; # nix-shell sets $TMPDIR which messes up emacsclient's search

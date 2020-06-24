@@ -34,7 +34,6 @@ in
     networkmanagerapplet
 
     # Graphical
-    emacs
     firefox
     gnome3.zenity
     virtmanager
@@ -42,6 +41,7 @@ in
 
     # Command line
     tmux
+    neovim # nice to have as backup if emacs would break
 
     # Must have utils
     bind

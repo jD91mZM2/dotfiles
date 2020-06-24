@@ -16,7 +16,8 @@ in {
   imports = [
     nur-no-pkgs.repos.jd91mzm2.hm-modules.programs
 
-    ./emacs
+    ./fonts.nix
+    ./emacs.nix
     ./env.nix
     ./firefox.nix
     ./graphics.nix
