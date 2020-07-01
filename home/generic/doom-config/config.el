@@ -29,15 +29,22 @@
  display-line-numbers-type 'relative
 
  ;; This is annoying
- +evil-want-o/O-to-continue-comments)
+ +evil-want-o/O-to-continue-comments nil
+
+ ;; Use rust-analyzer for rust server
+ rustic-lsp-server 'rust-analyzer)
 
 ;; Swap C-x and C-t
 (keyboard-translate ?\C-x ?\C-t)
 (keyboard-translate ?\C-t ?\C-x)
 
 ;; Show trailing whitespace for certain modes
-(setq-hook! 'prog-mode-hook
+(setq-hook! ('prog-mode-hook 'conf-mode-hook)
   show-trailing-whitespace t)
+
+(add-hook! 'prog-mode-hook
+  (defun my/prog-mode-hook ()
+    (modify-syntax-entry ?\_ "w")))
 
 ;;  _   _      _                    __                  _   _
 ;; | | | | ___| |_ __   ___ _ __   / _|_   _ _ __   ___| |_(_) ___  _ __  ___
@@ -108,7 +115,7 @@
                                                (sort-lines nil beg end))))
  :n "g s ," (evil-define-operator my/sort-fields (beg end)
               (my/with-inverted-case beg end (lambda ()
-                                               (sort-regexp-fields nil "[^,[:space:]\n]+" "\\&" beg end))))
+                                               (sort-regexp-fields nil "[[:space:]]*\\([^,[:space:]\n][^,\n]+\\)" "\\1" beg end))))
 
  ;; Kill line
  :n "D" (lambda ()
@@ -157,6 +164,17 @@
 (use-package! aggressive-indent
   :config
   (global-aggressive-indent-mode 1))
+
+;;   ____                                          _
+;;  / ___|___  _ __ ___  _ __ ___   __ _ _ __   __| |___
+;; | |   / _ \| '_ ` _ \| '_ ` _ \ / _` | '_ \ / _` / __|
+;; | |__| (_) | | | | | | | | | | | (_| | | | | (_| \__ \
+;;  \____\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_|___/
+
+(defun touch ()
+  (interactive)
+  (set-buffer-modified-p t)
+  (save-buffer))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
