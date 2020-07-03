@@ -158,9 +158,6 @@ in {
       gcc
       gdb
       gnumake
-      ## Dhall
-      dhall
-      dhall-json
       ## Java & JVM languages :puke:
       my-preferred-java-version
       jetbrains.idea-community
@@ -169,7 +166,6 @@ in {
       gopls
       ## Markdown
       mdl
-      multimarkdown
       ## Python
       (python3.withPackages (p: with p; [
         # python-language-server - broken?
