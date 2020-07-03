@@ -165,6 +165,11 @@
   :config
   (global-aggressive-indent-mode 1))
 
+;; Replace assembler mode, which seems broken in Doom emacs, with nasm-mode
+(add-hook! 'asm-mode-hook
+  (defun my/asm-mode-hook ()
+    (nasm-mode)))
+
 ;;   ____                                          _
 ;;  / ___|___  _ __ ___  _ __ ___   __ _ _ __   __| |___
 ;; | |   / _ \| '_ ` _ \| '_ ` _ \ / _` | '_ \ / _` / __|
@@ -175,6 +180,16 @@
   (interactive)
   (set-buffer-modified-p t)
   (save-buffer))
+
+(defun date (prefix)
+  (interactive "P")
+  (insert (format-time-string
+           (if prefix
+               (let* ((seconds (car (current-time-zone)))
+                      (minutes (/ seconds 60))
+                      (hours   (/ minutes 60)))
+                 (concat "%FT%T" (format "%+.2d:%.2d" hours (% minutes 60))))
+             "%F"))))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
