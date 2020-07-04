@@ -2,7 +2,6 @@
 {
   programs.scaff = {
     enable = true;
-    package = pkgs.unmerged.scaff;
     imports = let
       baseURL = "https://gitlab.com/jD91mZM2/scaff-repo/-/jobs/512194133/artifacts/raw/build";
     in {

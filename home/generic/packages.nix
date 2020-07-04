@@ -58,8 +58,8 @@ in {
       clangd
 
       # My software
-      master.rnix-lsp
-      master.termplay
+      rnix-lsp
+      termplay
       xidlehook
 
       # Graphical applications
