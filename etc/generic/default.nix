@@ -2,11 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, options, pkgs, ... }:
+{ config, lib, options, pkgs, shared, ... }:
 
-let
-  shared = pkgs.callPackage <dotfiles/shared> {};
-in
 {
   options.setup = {
     name = lib.mkOption {
@@ -21,7 +18,6 @@ in
 
   imports = [
     # Files
-    <dotfiles/shared/base.nix>
     ./cachix.nix
     ./containers.nix
     ./fonts.nix
@@ -32,10 +28,19 @@ in
   ];
 
   config = {
-    nix.nixPath = [
-      "dotfiles=${shared.consts.dotfiles}"
-      "nixos-config=${shared.consts.dotfiles}/etc/${config.setup.name}/configuration.nix"
-    ] ++ (lib.filter (key: !(lib.hasPrefix "nixos-config=" key)) options.nix.nixPath.default);
+    nix = {
+      # Nix flakes
+      package = pkgs.nixFlakes;
+      extraOptions = ''
+        experimental-features = nix-command flakes
+      '';
+
+      # Add dotfiles to my nix path
+      nixPath = [
+        "dotfiles=${shared.consts.dotfiles}"
+        "nixos-config=${shared.consts.dotfiles}/etc/${config.setup.name}/configuration.nix"
+      ] ++ (lib.filter (key: !(lib.hasPrefix "nixos-config=" key)) options.nix.nixPath.default);
+    };
 
     boot.supportedFilesystems = [ "btrfs" "zfs" ];
 

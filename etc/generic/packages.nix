@@ -1,18 +1,11 @@
 { pkgs, ... }:
-let
-  nur-no-pkgs = (import <dotfiles/shared/nur-no-pkgs.nix>);
-in
 {
-  imports = [
-    nur-no-pkgs.repos.jd91mzm2.modules.programs
-  ];
-
   # More involved programs
   programs = {
     adb.enable = true;
     dconf.enable = true;
     slock.enable = true;
-    powerline-rs.package = pkgs.master.powerline-rs;
+    powerline-rs.package = pkgs.powerline-rs;
   };
   virtualisation = {
     docker = {

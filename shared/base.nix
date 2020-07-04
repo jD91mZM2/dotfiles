@@ -1,16 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, self, shared, nur, ... }:
 
-let
-  shared = pkgs.callPackage <dotfiles/shared> {};
-  nur-no-pkgs = import ./nur-no-pkgs.nix;
-in
 {
-  imports = [
-    nur-no-pkgs.repos.jd91mzm2.modules.programs
-  ];
-
   # System overlays
-  nixpkgs.overlays = import <dotfiles/home/generic/overlays.nix>;
+  nixpkgs.overlays = self.overlays;
 
   # Must have packages
   environment.systemPackages = with pkgs; [

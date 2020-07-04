@@ -1,8 +1,5 @@
-{ config, pkgs, ... }:
+{ config, pkgs, self, shared, nur, sharedBase, ... }:
 
-let
-  shared = import <dotfiles/shared> {};
-in
 {
   # Because most npm packages are horribly unsafe, embedding native libraries
   # compiled by randos and downloading binaries all over the place.
@@ -14,32 +11,25 @@ in
       };
     };
     config = { pkgs, ... }: {
+      # Somewhat hacky way to set extraArgs for the containers and therefore
+      # make sharedBase work.
+      _module.args = {
+        inherit self shared;
+      };
+
       imports = [
-        <dotfiles/shared/base.nix>
+        nur.nixosModules.programs
+        sharedBase
       ];
 
       environment.systemPackages = with pkgs; [
         nodejs
       ];
     };
-  };
-
-  # Because nix-flakes are unstable
-  containers.nix-flakes = {
-    bindMounts = {
-      "/home" = { isReadOnly = false; };
-    };
-    config = { pkgs, ... }: {
-      imports = [
-        <dotfiles/shared/base.nix>
-      ];
-
-      nix = {
-        package = pkgs.nixFlakes;
-        extraOptions = ''
-          experimental-features = nix-command flakes
-        '';
-      };
-    };
+    # path = mkNixosConfig ({ pkgs, ... }: {
+    #   environment.systemPackages = with pkgs; [
+    #     nodejs
+    #   ];
+    # });
   };
 }

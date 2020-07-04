@@ -1,8 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, self, shared, ... }:
 
-let
-  shared = import <dotfiles/shared> {};
-in
 {
   imports = [
     # Include results from hardware scan
