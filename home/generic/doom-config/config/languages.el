@@ -21,9 +21,7 @@
 
 ;; YAML
 (use-package! yaml-mode
-  :mode "\\.yaml"
-  :config
-  (my/font-lock-extend 'yaml-mode '(("[a-zA-Z0-9_]+:" . font-lock-variable-name-face))))
+  :mode "\\.yaml")
 
 ;; XML
 (use-package! nxml-mode
