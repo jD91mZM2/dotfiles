@@ -50,7 +50,8 @@
         source "${pkgs.autojump}/share/autojump/autojump.zsh"
         eval "$("${pkgs.direnv}/bin/direnv" hook zsh)"
 
-        set noextendglob
+        # Free up the '#' symbol, for use in nix flakes
+        unsetopt extendedglob
       '';
     };
   };

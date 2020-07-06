@@ -12,6 +12,10 @@
 (package! aggressive-indent)
 (package! nasm-mode)
 
+(package! mcf-mode
+  :recipe (:host github :repo "rasensuihei/mcf")
+  :pin "7fe4c74a47b1820806bf92d818039dafb2df114b")
+
 ;; -----------
 
 

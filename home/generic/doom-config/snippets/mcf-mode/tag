@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil; -*-
+# name: tag replace
+# key: tag
+# --
+
+# Tag $0
+tag @e remove $1
+tag @e[type=minecraft:$2,nbt={$3}] add $1

@@ -31,7 +31,7 @@
           config
         ];
         extraArgs = inputs // {
-          inherit self system shared sharedBase;
+          inherit self shared sharedBase;
         };
       };
     in {

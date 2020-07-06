@@ -134,41 +134,31 @@
 ;; I actually somewhat like Emacs' undo system :(
 (after! undo-tree (global-undo-tree-mode -1))
 
-;; TODO: Decide if I prefer having smartparens highlight or not lol.
-;;
-;; Pro: If my pairs are set up in a stupid way, the whole thing doesn't get
-;; unusable.
-;;
-;; Con: If my file is actually wrong and I have an unbalanced pair, I can't
-;; quickly jump to it.
-
-;; (after! smartparens
-;;   ;; Use smartparens for its strict matching feature
-;;   (show-smartparens-global-mode 1)
-;;   (show-paren-mode -1)
-;;
-;;   ;; Configure evil to use smartparens for %
-;;   (map! :m "%" (evil-define-motion my/matching-paren (num)
-;;                  :type inclusive
-;;                  (let* ((expr (sp-get-paired-expression))
-;;                         (begin (plist-get expr :beg))
-;;                         (next (plist-get expr :end))
-;;                         (end (if next (- next 1) nil)))
-;;                    (if (eq (point) end)
-;;                        (goto-char begin)
-;;                      (when end (goto-char end)))))))
-
 ;; Breaks bit-shifting
 (after! rustic (setq! rustic-match-angle-brackets nil))
+
+;; Replace assembler mode with nasm-mode
+(after! nasm-mode (setq! nasm-after-mnemonic-whitespace :space))
+(add-hook! 'asm-mode-hook
+  (defun my/asm-mode-hook ()
+    (nasm-mode)
+    ;; aggressive-indent-mode does not work well with assembly
+    (aggressive-indent-mode -1)))
+
+(after! yassnippet (pushnew! yas-snippet-dirs (expand-file-name "snippets" (dir!))))
+
+;;  __  __        _                                  _
+;; |  \/  | __ _ (_) ___  _ __   _ __ ___   ___   __| | ___  ___
+;; | |\/| |/ _` || |/ _ \| '__| | '_ ` _ \ / _ \ / _` |/ _ \/ __|
+;; | |  | | (_| || | (_) | |    | | | | | | (_) | (_| |  __/\__ \
+;; |_|  |_|\__,_|/ |\___/|_|    |_| |_| |_|\___/ \__,_|\___||___/
+;;             |__/
 
 (use-package! aggressive-indent
   :config
   (global-aggressive-indent-mode 1))
-
-;; Replace assembler mode, which seems broken in Doom emacs, with nasm-mode
-(add-hook! 'asm-mode-hook
-  (defun my/asm-mode-hook ()
-    (nasm-mode)))
+(use-package! mcf-mode
+  :mode "\\.mcfunction\\'")
 
 ;;   ____                                          _
 ;;  / ___|___  _ __ ___  _ __ ___   __ _ _ __   __| |___
