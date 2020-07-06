@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# --
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - stage1
+  - stage2
+
+stage1:
+  stage: stage1
+  image: rust
+  cache:
+    paths:
+      - target
+  script:
+    - cargo build
+    - cargo test
+
+stage2:
+  stage: stage2
+  image: nixos/nix
+  only:
+    - master
+  script:
+    - echo todo
