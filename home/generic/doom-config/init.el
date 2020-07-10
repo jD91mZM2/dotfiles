@@ -176,6 +176,6 @@
 
        :config
        ;;l
-       (default +bindings))
+       (default +bindings +smartparens))
 
 (server-start)
