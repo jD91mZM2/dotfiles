@@ -2,6 +2,8 @@ local awful = require("awful")
 local wibox = require("wibox")
 local naughty = require("naughty")
 
+local scripts = "${XDG_DATA_HOME:-$HOME/.local/share}/scripts/"
+
 local popup
 local extract = "sed 's/^.*=\\s*//' | tr -d $'\\n' | xclip -sel clip"
 awful.keygrabber {
@@ -15,8 +17,8 @@ awful.keygrabber {
   },
   allowed_keys = { "F1", "a", "e" },
   keybindings = {
-    {{}, "a", function (self) awful.spawn.with_shell("cat ~/dotfiles/data/ascii | ~/dotfiles/scripts/dmenu.sh -p 'ASCII:' | " .. extract); self:stop() end},
-    {{}, "e", function (self) awful.spawn.with_shell("cat ~/dotfiles/data/emoji | ~/dotfiles/scripts/dmenu.sh -p 'Emoji:' | " .. extract); self:stop() end},
+    {{}, "a", function (self) awful.spawn.with_shell("cat ~/dotfiles/data/ascii | " .. scripts .. "/dmenu.sh -p 'ASCII:' | " .. extract); self:stop() end},
+    {{}, "e", function (self) awful.spawn.with_shell("cat ~/dotfiles/data/emoji | " .. scripts .. "/dmenu.sh -p 'Emoji:' | " .. extract); self:stop() end},
   },
   start_callback = function ()
     popup = awful.popup {

@@ -37,6 +37,7 @@
     in {
       nixosConfigurations = {
         samuel-computer = mkNixosConfig ./etc/computer/configuration.nix;
+        samuel-laptop = mkNixosConfig ./etc/laptop/configuration.nix;
       };
     });
 

@@ -64,6 +64,10 @@ local globalkeys = gears.table.join(
   awful.key({ modkey }, "Print", script("screenshot.sh window"), { description = "dump window", group = "screenshot" }),
   awful.key({ modkey, "Shift" }, "Print", script("screenshot.sh region"), { description = "dump region", group = "screenshot" }),
 
+  -- Toggle touchpad (on my laptop)
+  awful.key({}, "F6", spawn_cmd('xinput enable "$(xinput | grep Touchpad | sed "s/^.*id=\\([0-9]\\+\\).*$/\\1/g")"')),
+  awful.key({}, "F7", spawn_cmd('xinput disable "$(xinput | grep Touchpad | sed "s/^.*id=\\([0-9]\\+\\).*$/\\1/g")"')),
+
   -- Volume
   awful.key({}, "F9", spawn_cmd("pactl set-sink-mute \"@DEFAULT_SINK@\" toggle"), { description = "mute/unmute the volume", group = "volume" }),
   awful.key({}, "F10", script("volume.perl down"), { description = "lower the volume", group = "volume" }),

@@ -1,8 +1,5 @@
-{ options, pkgs, lib, ... }:
+{ options, pkgs, lib, shared, ... }:
 
-let
-  shared = import <dotfiles/shared> {};
-in
 {
   imports = [
     # Include results from hardware scan

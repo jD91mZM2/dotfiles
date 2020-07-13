@@ -15,7 +15,7 @@
       dir="''${XDG_CONFIG_HOME:-$HOME/.config}/emacs"
       if [ ! -e "$dir" ]; then
         ${pkgs.git}/bin/git clone https://github.com/hlissner/doom-emacs.git "$dir"
-        "$dir/bin/doom" install --no-envvar --no-config --no-fonts
+        "$dir/bin/doom" install --no-env --no-config --no-fonts
       fi
     '';
   };
