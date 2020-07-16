@@ -29,7 +29,10 @@
 
   # Programs
   programs = {
-    powerline-rs.enable = true;
+    powerline-rs = {
+      enable = true;
+      args = ["--cwd-max-depth" "3"];
+    };
     bash = {
       enableCompletion = true;
       interactiveShellInit = ''
