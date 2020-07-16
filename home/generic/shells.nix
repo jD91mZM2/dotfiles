@@ -67,7 +67,12 @@ in {
     };
 
     # Every git needs some gpg...
-    programs.gpg.enable = lib.mkIf cfg.enableGit true;
+    programs.gpg = lib.mkIf cfg.enableGit {
+      enable = true;
+      settings = {
+        keyserver = "keys.openpgp.org";
+      };
+    };
     services.gpg-agent = lib.mkIf cfg.enableGit {
       enable             = true;
       enableSshSupport   = true;
