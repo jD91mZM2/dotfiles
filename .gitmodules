@@ -1,9 +1,8 @@
 [submodule "nur-packages"]
 	path = nur-packages
 	url = git@gitlab.com:jD91mZM2/nur-packages.git
+	branch = master
 [submodule "forks/st"]
 	path = forks/st
 	url = git@gitlab.com:jD91mZM2/st.git
-[submodule "forks/dwm"]
-	path = forks/dwm
-	url = git@gitlab.com:jD91mZM2/dwm.git
+	branch = master
