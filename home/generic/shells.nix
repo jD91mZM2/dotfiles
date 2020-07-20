@@ -10,6 +10,7 @@ let
     ls        = "ls -CF --color=auto";
     nix-shell = "nix-shell --command zsh";
     rsynca    = "rsync -avzhP --delete";
+    objdump   = "objdump -Mintel";
   };
 
   bashConfig = builtins.replaceStrings [ "  " ] [ "\t" ] ''

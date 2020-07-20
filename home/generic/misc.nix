@@ -27,4 +27,5 @@
 
   home.file.".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink ./misc/tmux.conf;
   home.file.".editorconfig".source = config.lib.file.mkOutOfStoreSymlink ./misc/default.editorconfig;
+  home.file.".gdbinit".source = config.lib.file.mkOutOfStoreSymlink ./misc/gdbinit;
 }
