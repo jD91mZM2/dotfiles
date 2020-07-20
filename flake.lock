@@ -2,11 +2,11 @@
   "nodes": {
     "emacs-overlay": {
       "locked": {
-        "lastModified": 1595060549,
-        "narHash": "sha256-DdxfsNWqvBlJQP+7zBC69dljfTb+ZWJTUbxHP0Vvg0U=",
+        "lastModified": 1595247772,
+        "narHash": "sha256-ewIJttX5lWOjaKnK48EpZmg+89aK4ORITVSys1LCOp4=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "f7aa30e3ec1c27b0ef71c8ca9549131a9298c39f",
+        "rev": "e13820041cf618c1b01fd9a5d82197e5904fde66",
         "type": "github"
       },
       "original": {
@@ -15,13 +15,97 @@
         "type": "github"
       }
     },
+    "nixops": {
+      "inputs": {
+        "nixops-aws": "nixops-aws",
+        "nixops-hetzner": "nixops-hetzner",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1591784847,
+        "narHash": "sha256-nBmp7z8W88f9eDH7N1WX0tKudQ1EbvbE9/nX8FrSWRw=",
+        "owner": "NixOS",
+        "repo": "nixops",
+        "rev": "c781c8f04786ab99b2e7afca01c94e3f25499b5d",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixops",
+        "type": "indirect"
+      }
+    },
+    "nixops-aws": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1586700941,
+        "narHash": "sha256-9yh7iHMJ8F8wA4nwTjm8rcmceFM/6URHK/Q/AuCkdzE=",
+        "owner": "NixOS",
+        "repo": "nixops-aws",
+        "rev": "af97c16f179cd0df94a6fc3ef470092122253f60",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "flake",
+        "repo": "nixops-aws",
+        "type": "github"
+      }
+    },
+    "nixops-digitalocean": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1595145170,
+        "narHash": "sha256-p8JgSiT65WKZGyasKCw3ZHiPB8vEmibT5Sb95r+mPZ0=",
+        "owner": "nix-community",
+        "repo": "nixops-digitalocean",
+        "rev": "fe855bf61adea5ae95ecf8a5f9b0b25dccaec6a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixops-digitalocean",
+        "type": "github"
+      }
+    },
+    "nixops-hetzner": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1586701048,
+        "narHash": "sha256-q1QhsSp3N4nffnpUnGrF0Jg7VyLvi9JXiD82oxaM/Jg=",
+        "owner": "NixOS",
+        "repo": "nixops-hetzner",
+        "rev": "663b02618ece7a92a72da408a552528ee8dd354c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "zfs",
+        "repo": "nixops-hetzner",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1595064934,
-        "narHash": "sha256-t56kAo6pUTxDzlfXvFPtIHviieGjyFWBCxkYQSFgWhI=",
+        "lastModified": 1586219474,
+        "narHash": "sha256-fvfrMnEA2lDnXvH/eInGV5i0sO/EGLVHa4pOek8VG78=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "eb66a32a5630b63f2f01647a68fb729e4b46e588",
+        "rev": "29eddfc36d720dcc4822581175217543b387b1e8",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-20.03",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1595260683,
+        "narHash": "sha256-usEpApsLjEWZfVWCH/Zc1sIKKA9rtaQCi/51lWa/21Q=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c050aa6a4b43a6dbe25890cd158da71edc5f980f",
         "type": "github"
       },
       "original": {
@@ -29,7 +113,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1593795536,
         "narHash": "sha256-3alw2DvlEoDbP/g4wrcmRY61khQ9eG9eEnfZ1xnRS6E=",
@@ -45,7 +129,7 @@
     },
     "nur": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "narHash": "sha256-TQ4IbwKltrB/4L2bETNFTHb8e6lx7wCH1CrhATeYP5c=",
@@ -60,7 +144,9 @@
     "root": {
       "inputs": {
         "emacs-overlay": "emacs-overlay",
-        "nixpkgs": "nixpkgs",
+        "nixops": "nixops",
+        "nixops-digitalocean": "nixops-digitalocean",
+        "nixpkgs": "nixpkgs_2",
         "nur": "nur"
       }
     }
