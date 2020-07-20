@@ -53,9 +53,10 @@
       };
     in {
       # NixOS configurations
-      samuel-computer = mkNixosConfig ./etc/computer/configuration.nix;
-      samuel-laptop = mkNixosConfig ./etc/laptop/configuration.nix;
-
+      nixosConfigurations = {
+        samuel-computer = mkNixosConfig ./etc/computer/configuration.nix;
+        samuel-laptop = mkNixosConfig ./etc/laptop/configuration.nix;
+      };
 
       # Packages
       nixops = nixops.packages."${system}".nixops.overridePythonAttrs (attrs: {
