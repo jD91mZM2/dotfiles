@@ -10,35 +10,32 @@
 # Answer is "preferrably no"? It's a system package.
 
 let
-  reminder = ''
+  script = name: message: arg: let
+    usage = "${name} <remote> <ports...>";
+  in
+    pkgs.writeShellScriptBin name ''
+      remote="''${1:?${usage}}"
+      : "''${2:?${usage}}"
+      cat <<-EOF
+      ${message}
 
       If it doesn't seem to work, make sure the remote's sshd_config
       specifies "GatewayPorts" to either "yes" or "clientspecified".
-  '';
-  forward = let
-    usage = "forward <remote> <port>";
-  in pkgs.writeShellScriptBin "forward" ''
-      : "''${1:?${usage}}"
-      : "''${2:?${usage}}"
-      cat <<-EOF
-      Remote port being forwarded over SSH!
-      ${reminder}
       EOF
 
-      ssh "$1" -R ":''${2}:localhost:$2" -- sleep infinity
-  '';
-  backward = let
-    usage = "backward <remote> <port>";
-  in pkgs.writeShellScriptBin "backward" ''
-      : "''${1:?${usage}}"
-      : "''${2:?${usage}}"
-      cat <<-EOF
-      Local port being forwarded to a remote application over SSH!
-      ${reminder}
-      EOF
+      # Shift away first argument
+      shift
 
-      ssh "$1" -L ":''${2}:localhost:$2" -- sleep infinity
-  '';
+      arguments=()
+      for port in "$@"; do
+        arguments+=(${arg} ":''${port}:localhost:''${port}")
+      done
+
+      set -x
+      ssh "$remote" "''${arguments[@]}" -- sleep infinity
+    '';
+  forward = script "forward" "Remote port being forwarded over SSH!" "-R";
+  backward = script "backward" "Local port being forwarded to a remote application over SSH!" "-L";
 
   my-preferred-java-version = pkgs.openjdk8;
 in {

@@ -94,6 +94,7 @@
     networking.hostId = config.setup.networkId;
     networking.hostName = "samuel-${config.setup.name}";
     networking.networkmanager.enable = true;
+    networking.firewall.enable = false;
 
     # Mime type for wasm, see https://github.com/mdn/webassembly-examples/issues/5
     environment.etc."mime.types".text = ''
