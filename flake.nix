@@ -10,7 +10,7 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nixops.url = "nixops";
     nixops-digitalocean = {
-      url = "github:nix-community/nixops-digitalocean";
+      url = "github:jD91mZM2/nixops-digitalocean";
       flake = false;
     };
   };
@@ -34,7 +34,9 @@
       );
 
     packages = forAllSystems (system: let
-      shared = nixpkgs.legacyPackages."${system}".callPackage ./shared {};
+      pkgs = nixpkgs.legacyPackages."${system}";
+
+      shared = pkgs.callPackage ./shared {};
       sharedBase = ./shared/base.nix;
 
       mkNixosConfig = config: nixpkgs.lib.nixosSystem {
@@ -61,7 +63,7 @@
       # Packages
       nixops = nixops.packages."${system}".nixops.overridePythonAttrs (attrs: {
         propagatedBuildInputs = attrs.propagatedBuildInputs ++ [
-          (nixpkgs.legacyPackages."${system}".callPackage nixops-digitalocean {})
+          (pkgs.callPackage nixops-digitalocean {})
         ];
       });
     });

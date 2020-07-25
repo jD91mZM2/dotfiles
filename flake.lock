@@ -54,15 +54,15 @@
     "nixops-digitalocean": {
       "flake": false,
       "locked": {
-        "lastModified": 1595145170,
-        "narHash": "sha256-p8JgSiT65WKZGyasKCw3ZHiPB8vEmibT5Sb95r+mPZ0=",
-        "owner": "nix-community",
+        "lastModified": 1595433951,
+        "narHash": "sha256-pwvpgNAGBeJ651Mg46Lnkx3P6/qnEKGjYK+AobTrI6U=",
+        "owner": "jD91mZM2",
         "repo": "nixops-digitalocean",
-        "rev": "fe855bf61adea5ae95ecf8a5f9b0b25dccaec6a3",
+        "rev": "2e4cce66c15bc0bbe172eb2939e1cb709a099e01",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "jD91mZM2",
         "repo": "nixops-digitalocean",
         "type": "github"
       }
