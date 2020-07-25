@@ -48,5 +48,8 @@
     };
   };
 
+  # IPFS
+  services.ipfs.enable = true;
+
   # TODO: Backup
 }
