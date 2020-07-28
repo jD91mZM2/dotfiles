@@ -66,10 +66,11 @@
       automatic = true;
       dates = [ "17:00" ];
     };
-    system.autoUpgrade = {
-      enable = true;
-      dates  = "16:00";
-    };
+    # Can you system upgrade with nix flakes, though?
+    # system.autoUpgrade = {
+    #   enable = true;
+    #   dates  = "16:00";
+    # };
     time = {
       timeZone = "Europe/Stockholm";
       hardwareClockInLocalTime = true; # fuck windows

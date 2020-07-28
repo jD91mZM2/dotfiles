@@ -108,7 +108,7 @@
 (after! undo-tree (global-undo-tree-mode -1))
 
 ;; Add my own snippets
-(after! yassnippet (pushnew! yas-snippet-dirs (expand-file-name "snippets" (dir!))))
+(after! yasnippet (pushnew! yas-snippet-dirs (expand-file-name "snippets" (dir!))))
 
 ;; Aggressive indention
 (use-package! aggressive-indent

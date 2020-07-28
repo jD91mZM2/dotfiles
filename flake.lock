@@ -132,7 +132,7 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "narHash": "sha256-KD78v33P3SrCMu2irTcsxCctEDueyio4aEfPc8XrFU4=",
+        "narHash": "sha256-CMY3L331GJNOKN3SEOSEX2wXcvuJBTLMM6AVvVRqQak=",
         "path": "./nur-packages",
         "type": "path"
       },
