@@ -77,6 +77,7 @@ in {
       obs-studio
       olive-editor # <- THIS IS AMAZING
       pavucontrol
+      scrcpy
       superTuxKart
       thunderbird
       # torbrowser
