@@ -5,10 +5,7 @@ let
   nur-no-pkgs = import (<dotfiles/shared/nur-no-pkgs.nix>);
 
   # Packages
-  abottomod = shared.builders.buildPypiPackage {
-    name = "abottomod";
-    src  = ~/Coding/Python/abottomod;
-  };
+  abottomod = import ~/Coding/Python/abottomod;
   timeywimey = import ~/Coding/Python/timeywimey;
   redox-world-map = shared.builders.buildRustPackage {
     name        = "redox-world-map";
@@ -62,7 +59,7 @@ in {
 
   # Services
   custom.services = {
-    # abottomod.script       = "${abottomod}/bin/start";
+    abottomod.script       = "ABOTTOMOD_TOKEN=\"${shared.consts.secret.discordTokens.abottomod}\" ${abottomod}/bin/abottomod";
     timeywimey.script      = "TIMEYWIMEY_TOKEN=\"${shared.consts.secret.discordTokens.timeywimey}\" ${timeywimey}/bin/timeywimey";
     redox-world-map.script = "${redox-world-map}/bin/start";
   };
