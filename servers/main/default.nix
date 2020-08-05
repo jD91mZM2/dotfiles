@@ -9,10 +9,7 @@ let
     name = "abottomod";
     src  = ~/Coding/Python/abottomod;
   };
-  timeywimey = shared.builders.buildPypiPackage {
-    name = "timeywimey";
-    src  = ~/Coding/Python/timeywimey;
-  };
+  timeywimey = import ~/Coding/Python/timeywimey;
   redox-world-map = shared.builders.buildRustPackage {
     name        = "redox-world-map";
     src         = ~/Coding/Web/redox-world-map;
@@ -66,7 +63,7 @@ in {
   # Services
   custom.services = {
     abottomod.script       = "${abottomod}/bin/start";
-    timeywimey.script      = "${timeywimey}/bin/start";
+    timeywimey.script      = "${timeywimey}/bin/timeywimey";
     redox-world-map.script = "${redox-world-map}/bin/start";
   };
   services.syncthing = {
