@@ -42,16 +42,35 @@
       ] ++ (lib.filter (key: !(lib.hasPrefix "nixos-config=" key)) options.nix.nixPath.default);
     };
 
-    boot.supportedFilesystems = [ "btrfs" "zfs" ];
+    boot = {
+      supportedFilesystems = [ "btrfs" "zfs" ];
 
-    # These systems will be able to be emulated transparently. Enabling
-    # aarch64 will allow me to run aarch64 executables (using
-    # qemu-aarch64 behind the scenes). If I were to enable windows here,
-    # all .exe files will be handled using WINE.
-    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+      # These systems will be able to be emulated transparently. Enabling
+      # aarch64 will allow me to run aarch64 executables (using
+      # qemu-aarch64 behind the scenes). If I were to enable windows here,
+      # all .exe files will be handled using WINE.
+      binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-    # Use latest kernel, and some extra drivers
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+      # Use latest kernel
+      kernelPackages = pkgs.linuxPackages_latest;
+
+      # Only use swap for hibernate, because swap on SSD is bad
+      kernel.sysctl = {
+        "vm.swappiness" = 0;
+      };
+
+      # systemd-boot
+      loader = {
+        efi.canTouchEfiVariables = true;
+        systemd-boot = {
+          enable = true;
+          configurationLimit = 5;
+          editor = false;
+        };
+      };
+    };
+
+    # Add some extra drivers
     hardware.enableRedistributableFirmware = true;
 
     # Misc. settings
@@ -74,14 +93,6 @@
     time = {
       timeZone = "Europe/Stockholm";
       hardwareClockInLocalTime = true; # fuck windows
-    };
-
-    # systemd-boot
-    boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.systemd-boot = {
-      enable = true;
-      configurationLimit = 5;
-      editor = false;
     };
 
     # TTY settings
