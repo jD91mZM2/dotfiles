@@ -62,8 +62,8 @@ in {
 
   # Services
   custom.services = {
-    abottomod.script       = "${abottomod}/bin/start";
-    timeywimey.script      = "${timeywimey}/bin/timeywimey";
+    # abottomod.script       = "${abottomod}/bin/start";
+    timeywimey.script      = "TIMEYWIMEY_TOKEN=\"${shared.consts.secret.discordTokens.timeywimey}\" ${timeywimey}/bin/timeywimey";
     redox-world-map.script = "${redox-world-map}/bin/start";
   };
   services.syncthing = {
