@@ -4,8 +4,16 @@ let
   shared = import <dotfiles/shared> {};
 in {
   imports = [
+    (import <dotfiles/nur-packages> {}).modules.programs
     <dotfiles/shared/base.nix>
   ];
+
+  # Temporary: Hack around flakes
+  _module.args = {
+    inherit shared;
+    self = import <dotfiles>;
+  };
+
   # Language settings
   console.keyMap = "dvorak";
 
