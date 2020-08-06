@@ -3,6 +3,11 @@
 let
   shared   = pkgs.callPackage <dotfiles/shared> {};
   acmeRoot = "/var/lib/acme";
+
+  whitelist = ''
+    redox-os.org
+    gitlab.redox-os.org
+  '';
 in
 {
   # Configured using
@@ -11,8 +16,8 @@ in
   # https://gitlab.com/simple-nixos-mailserver/nixos-mailserver
   imports = [
     (builtins.fetchTarball {
-      url    = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/v2.3.0/nixos-mailserver-v2.3.0.tar.gz";
-      sha256 = "0lpz08qviccvpfws2nm83n7m2r8add2wvfg9bljx9yxx8107r919";
+      url    = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/4008d0cb53b9abd00d2dc568814566227ddd3825.tar.gz";
+      sha256 = "1y9svi3nrg24ky1gqbpa3zhnhhin399h0cmnf81hb4yn75mlqiqx";
     })
   ];
 
@@ -46,4 +51,16 @@ in
 
     virusScanning = false;
   };
+
+  # Overwrite rspamd's whitelist settings
+  services.rspamd.locals."whitelists.conf".text = ''
+    whitelist {
+      rules {
+        whitelist_domains = {
+          domains = "${pkgs.writeText "good-domains.map" whitelist}";
+          score = -1.0;
+        }
+      }
+    }
+  '';
 }
