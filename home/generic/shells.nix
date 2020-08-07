@@ -62,6 +62,9 @@ in {
         key = shared.consts.gpgKeys.signing;
         signByDefault = true;
       };
+      aliases = {
+        mr = "!f() { git fetch \${2-origin} merge-requests/\${1?}/head && git switch -d FETCH_HEAD; }; f";
+      };
       extraConfig = {
         pull.rebase = true;
       } // shared.consts.secret.gitConfig;
