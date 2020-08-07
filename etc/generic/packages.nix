@@ -7,9 +7,14 @@
     slock.enable = true;
     powerline-rs.package = pkgs.powerline-rs;
   };
-
   virtualisation = {
-    # VMs
+    # Docker containers
+    docker = {
+      enable           = true;
+      autoPrune.enable = true;
+      storageDriver    = "zfs";
+    };
+    # Libvirt VMs
     libvirtd.enable = true;
   };
 
