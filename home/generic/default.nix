@@ -47,6 +47,10 @@ in {
           (builtins.attrNames (builtins.readDir <dotfiles/overlays>))
       );
 
+    # g_get_user_special_dir(...) would return NULL, see
+    # https://github.com/NixOS/nixpkgs/issues/95276
+    xdg.userDirs.enable = true;
+
     xdg.configFile = {
       # Install overlays
       "nixpkgs/overlays".source = config.lib.file.mkOutOfStoreSymlink (<dotfiles/overlays>);
