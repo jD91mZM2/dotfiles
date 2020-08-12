@@ -47,7 +47,7 @@
         };
       };
       session = lib.singleton {
-        name = "DWM";
+        name = "AwesomeWM";
         manage = "window";
 
         # There's no start script here, because home-manager manages my session.
