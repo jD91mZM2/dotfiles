@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# --
+
+{
+  description = "${0:A really useful tool that does an awesome thing}";
+
+  outputs = { self, nixpkgs }: let
+    forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" "x86_64-darwin" "i686-linux" "aarch64-linux" ];
+  in {
+    # Packages
+    packages = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages."\${system}";
+    in {
+      hello = pkgs.hello;
+    });
+    defaultPackage = forAllSystems (system: self.packages."\${system}".hello);
+
+    devShell = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages."\${system}";
+    in pkgs.mkShell {
+      buildInputs = with pkgs; [ hello ];
+    });
+
+    # Make it runnable with \`nix app\`
+    apps = forAllSystems (system: {
+      hello = {
+        type    = "app";
+        program = "\${self.packages."\${system}".hello}/bin/hello";
+      };
+    });
+    defaultApp = forAllSystems (system: self.apps."\${system}".hello);
+  };
+}
