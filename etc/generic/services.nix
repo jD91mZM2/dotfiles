@@ -7,6 +7,10 @@ in
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
   services.upower.enable = true;
 
+  # Flatpak
+  xdg.portal.enable = true;
+  services.flatpak.enable = true;
+
   # Backup
   services.zfs = {
     autoSnapshot = {
