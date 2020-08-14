@@ -26,9 +26,9 @@
     # seem to be applied.
     libinput.enable = true;
 
-    layout = "us";
-    xkbVariant = "dvorak";
-    xkbOptions = "compose:ralt";
+    layout = "us,us";
+    xkbVariant = "dvorak,";
+    xkbOptions = "compose:ralt,terminate:ctrl_alt_bksp,grp:ctrl_shift_toggle";
 
     displayManager = {
       lightdm = {
