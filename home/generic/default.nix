@@ -34,27 +34,13 @@ in {
     };
 
     # Load overlays
-    #
-    # TODO: This is copied (and fixed) from flake.nix. Update when home-manager
-    # gets flake support
-    nixpkgs.overlays =
-      [
-        (import (builtins.fetchTarball "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz"))
-      ]
-      ++ (
-        map
-          (name: import (<dotfiles/overlays> + "/${name}"))
-          (builtins.attrNames (builtins.readDir <dotfiles/overlays>))
-      );
+    nixpkgs.overlays = (import <dotfiles>).overlays;
 
     # g_get_user_special_dir(...) would return NULL, see
     # https://github.com/NixOS/nixpkgs/issues/95276
     xdg.userDirs.enable = true;
 
     xdg.configFile = {
-      # Install overlays
-      "nixpkgs/overlays".source = config.lib.file.mkOutOfStoreSymlink (<dotfiles/overlays>);
-
       # Install this home-manager config
       "nixpkgs/home.nix".source = config.lib.file.mkOutOfStoreSymlink cfg.source;
     };
