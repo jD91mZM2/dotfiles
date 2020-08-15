@@ -11,6 +11,7 @@ let
     nix-shell = "nix-shell --command zsh";
     rsynca    = "rsync -avzhP --delete";
     objdump   = "objdump -Mintel";
+    cal       = "cal -m";
   };
 
   bashConfig = builtins.replaceStrings [ "  " ] [ "\t" ] ''
