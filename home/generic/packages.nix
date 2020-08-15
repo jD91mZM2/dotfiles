@@ -77,10 +77,10 @@ in {
       obs-studio
       olive-editor # <- THIS IS AMAZING
       pavucontrol
+      radare2-cutter
       scrcpy
       superTuxKart
       thunderbird
-      # torbrowser
       xorg.xev
       xorg.xwininfo
 
@@ -92,7 +92,6 @@ in {
       figlet
       libnotify
       neofetch
-      # nixops
       pv
       rclone
       rename
