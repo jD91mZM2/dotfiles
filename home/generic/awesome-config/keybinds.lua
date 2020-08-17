@@ -75,7 +75,7 @@ local globalkeys = gears.table.join(
 
   -- Misc
   awful.key({ modkey }, "p", spawn_cmd("j4-dmenu-desktop --dmenu \"" .. scripts .. "dmenu.sh -p 'Execute:'\""), { description = "show the menubar", group = "misc" }),
-  awful.key({ modkey, "Shift" }, "l", spawn_cmd("xidlehook-client --socket /tmp/xidlehook.sock control --action trigger --timer 1"), { description = "lock screen", group = "misc" }),
+  awful.key({ modkey, "Shift" }, "l", spawn_cmd("slock"), { description = "lock screen", group = "misc" }),
   awful.key({ modkey }, "z", spawn_cmd("echo -n \"\xE2\x80\x8B\" | xclip -sel clip"), { description = "clear the clipboard (zero-width space)", group = "misc" })
 )
 -- Global mouse-bindings

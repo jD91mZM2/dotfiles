@@ -57,7 +57,6 @@ in {
       # My software
       rnix-lsp
       termplay
-      xidlehook
 
       # Graphical applications
       (callPackage <dotfiles/forks/st> {})

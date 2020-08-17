@@ -9,7 +9,6 @@ xsetroot -cursor_name left_ptr
 
 # Always running
 
-"$dirname/lock-timer.sh" slock &
 nm-applet &
 
 # Applications
