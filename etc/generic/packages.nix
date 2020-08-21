@@ -8,12 +8,8 @@
     powerline-rs.package = pkgs.powerline-rs;
   };
   virtualisation = {
-    # Docker containers
-    docker = {
-      enable           = true;
-      autoPrune.enable = true;
-      storageDriver    = "zfs";
-    };
+    # Podman > Docker, change my mind
+    podman.enable = true;
     # Libvirt VMs
     libvirtd.enable = true;
   };
