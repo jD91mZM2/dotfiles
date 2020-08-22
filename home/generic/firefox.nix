@@ -20,7 +20,13 @@ in {
       profiles.main = {
         id = 0;
         name = "home-manager";
-        privacy.enableSettings = true;
+        privacy.settings = {
+          enable = true;
+          exceptions = [
+            # Enable WebGL because I need it :(
+            "webgl.disabled"
+          ];
+        };
         settings = {
           # Fix issues with having a dark GTK theme
           "ui.use_standins_for_native_colors"   = true;
