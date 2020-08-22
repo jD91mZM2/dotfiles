@@ -28,7 +28,7 @@
 
     layout = "us,us";
     xkbVariant = "dvorak,";
-    xkbOptions = "compose:ralt,terminate:ctrl_alt_bksp,grp:ctrl_shift_toggle";
+    xkbOptions = "compose:ralt,terminate:ctrl_alt_bksp,grp:alt_shift_toggle";
 
     displayManager = {
       lightdm = {
