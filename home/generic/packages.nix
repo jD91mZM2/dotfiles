@@ -106,8 +106,9 @@ in {
       graphviz
       imagemagick
       pandoc
-      wildmidi
+      translate-shell
       whois
+      wildmidi
       (runCommand "mgitstatus" {} ''
         cd "${fetchFromGitHub {
           owner = "fboender";

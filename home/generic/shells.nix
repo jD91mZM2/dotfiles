@@ -43,7 +43,10 @@ in {
     programs.zsh = lib.mkIf cfg.enableZsh {
       enable = true;
       shellAliases = aliases;
-      initExtra = bashConfig;
+      initExtra = ''
+        ${bashConfig}
+        unset -f trans # some alias by grml-zsh-config
+      '';
     };
 
     # Remote shell
