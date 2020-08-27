@@ -19,11 +19,13 @@ in {
 
   # System config
   networking.firewall.enable = false;
+
+  # Don't run out of space
   nix.gc = {
     automatic = true;
-    dates     = "monthly";
     options   = "-d";
   };
+  nix.optimise.automatic = true;
 
   # OpenSSH settings
   services.openssh = {
