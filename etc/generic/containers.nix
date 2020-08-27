@@ -25,6 +25,9 @@
       environment.systemPackages = with pkgs; [
         nodejs
       ];
+
+      programs.npm.enable = true;
+      environment.variables.PATH = "$PATH:$HOME/.npm/bin";
     };
     # path = mkNixosConfig ({ pkgs, ... }: {
     #   environment.systemPackages = with pkgs; [

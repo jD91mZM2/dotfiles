@@ -19,6 +19,10 @@
 (use-package! mcf-mode
   :mode "\\.mcfunction\\'")
 
+;; Web stuff
+(use-package! web-mode
+  :mode "\\.\\(json\\|php\\|html\\|jsx?\\|tsx?\\)\\'")
+
 ;; YAML
 (use-package! yaml-mode
   :mode "\\.yaml")
