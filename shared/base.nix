@@ -1,8 +1,11 @@
-{ pkgs, self, shared, nur, ... }:
+{ pkgs, self, shared, nur, inputs, ... }:
 
 {
   # System overlays
   nixpkgs.overlays = self.overlays;
+
+  # Pin nixpkgs used to resolve flakes
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
 
   # Must have packages
   environment.systemPackages = with pkgs; [

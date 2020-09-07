@@ -2,22 +2,18 @@
   description = "My personal dotfiles and configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs-channels/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
-    nur = {
-      type = "path";
-      path = "./nur-packages";
-    };
+    nur.url = "git+https://gitlab.com/jD91mZM2/nur-packages.git";
+    # nur = {
+    #   type = "path";
+    #   path = "./nur-packages";
+    # };
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    nixops.url = "nixops";
-    nixops-digitalocean = {
-      url = "github:jD91mZM2/nixops-digitalocean";
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, nur, emacs-overlay, nixops, nixops-digitalocean } @ inputs: let
+  outputs = { self, nixpkgs, nur, emacs-overlay } @ inputs: let
     forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" ];
   in {
     overlay = final: prev: (
@@ -37,40 +33,44 @@
           (builtins.attrNames (builtins.readDir ./overlays))
       );
 
-    packages = forAllSystems (system: let
-      pkgs = nixpkgs.legacyPackages."${system}";
+    lib = {
+      system = forAllSystems (system: let
+        pkgs = nixpkgs.legacyPackages."${system}";
 
-      shared = pkgs.callPackage ./shared {};
-      sharedBase = ./shared/base.nix;
+        shared = pkgs.callPackage ./shared {};
 
-      mkNixosConfig = config: nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          # Base packages
-          nur.nixosModules.programs
-          ./shared/base.nix
-
-          # Config
-          config
-        ];
-        extraArgs = inputs // {
-          inherit self shared sharedBase;
+        configInputs = {
+          inherit system;
+          modules = [
+            # Base packages
+            nur.nixosModules.programs
+            ./shared/base.nix
+          ];
+          extraArgs = {
+            inherit self shared inputs system;
+          };
         };
-      };
-    in {
-      # NixOS configurations
-      nixosConfigurations = {
-        samuel-computer = mkNixosConfig ./etc/computer/configuration.nix;
-        samuel-laptop = mkNixosConfig ./etc/laptop/configuration.nix;
-      };
+      in {
+        mkNixosConfig = module:
+          nixpkgs.lib.nixosSystem (configInputs // {
+            modules = configInputs.modules ++ [ module ];
+          });
 
-      # Packages
-      nixops = nixops.packages."${system}".nixops.overridePythonAttrs (attrs: {
-        propagatedBuildInputs = attrs.propagatedBuildInputs ++ [
-          (pkgs.callPackage nixops-digitalocean {})
-        ];
+        mkNixosModule = module: {
+          # Hacky way to send extraArgs to a module directly
+          _module.args = configInputs.extraArgs;
+          imports = configInputs.modules ++ [ module ];
+        };
       });
-    });
+    };
+
+    # NixOS configurations
+    nixosConfigurations = let
+      mkNixosConfig = self.lib.system."x86_64-linux".mkNixosConfig;
+    in {
+      samuel-computer = mkNixosConfig ./etc/computer/configuration.nix;
+      samuel-laptop = mkNixosConfig ./etc/laptop/configuration.nix;
+    };
 
     devShell = forAllSystems (system: let
       pkgs = nixpkgs.legacyPackages."${system}";
@@ -84,14 +84,5 @@
           '')
         ];
     });
-
-    nixopsConfigurations.default = {
-      network.description = "My personal VPS network";
-      resources.sshKeyPairs.ssh-key = {};
-
-      inherit nixpkgs;
-
-      main = import ./servers/main;
-    };
   };
 }

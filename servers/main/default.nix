@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   shared = pkgs.callPackage <dotfiles/shared> {};
@@ -32,7 +32,7 @@ in {
     ../base.nix
 
     # Custom modules
-    nur-no-pkgs.repos.jd91mzm2.modules.custom-services
+    nur-no-pkgs.repos.jd91mzm2.modules.custom-services # <- recursion
 
     # Files
     ./bitwarden.nix

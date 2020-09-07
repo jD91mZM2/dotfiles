@@ -1,5 +1,8 @@
-{ config, pkgs, self, shared, nur, sharedBase, ... }:
+{ config, pkgs, self, shared, inputs, system, ... }:
 
+let
+  mkNixosModule = self.lib.system."${system}".mkNixosModule;
+in
 {
   # Because most npm packages are horribly unsafe, embedding native libraries
   # compiled by randos and downloading binaries all over the place.
@@ -10,29 +13,13 @@
         isReadOnly = false;
       };
     };
-    config = { pkgs, ... }: {
-      # Somewhat hacky way to set extraArgs for the containers and therefore
-      # make sharedBase work.
-      _module.args = {
-        inherit self shared;
-      };
-
-      imports = [
-        nur.nixosModules.programs
-        sharedBase
-      ];
-
+    config = mkNixosModule ({ pkgs, ... }: {
       environment.systemPackages = with pkgs; [
         nodejs
       ];
 
       programs.npm.enable = true;
       environment.variables.PATH = "$PATH:$HOME/.npm/bin";
-    };
-    # path = mkNixosConfig ({ pkgs, ... }: {
-    #   environment.systemPackages = with pkgs; [
-    #     nodejs
-    #   ];
-    # });
+    });
   };
 }
