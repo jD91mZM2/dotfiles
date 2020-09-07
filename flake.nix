@@ -2,7 +2,7 @@
   description = "My personal dotfiles and configurations";
 
   inputs = {
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs-channels/32b46dd897ab2143a609988a04d87452f0bbef59";
+    nixpkgs.url = "github:NixOS/nixpkgs-channels/nixos-unstable";
 
     nur = {
       type = "path";
@@ -17,7 +17,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nur, emacs-overlay, nixops, nixops-digitalocean } @ inputs: let
+  outputs = { self, nixpkgs, nur, emacs-overlay, nixops, nixops-digitalocean } @ inputs: let
     forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" ];
   in {
     overlay = final: prev: (
@@ -29,14 +29,6 @@
     );
     overlays =
       [ emacs-overlay.overlay ]
-
-      # Temporary nixpkgs rollbacks
-      ++ [
-        # I don't feel like recompiling firefox
-        (final: prev: {
-          firefox = nixpkgs-unstable.legacyPackages."${final.system}".firefox;
-        })
-      ]
 
       # All overlays in the overlays directory
       ++ (
