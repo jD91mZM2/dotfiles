@@ -33,7 +33,7 @@ case "$1" in
         # -----------------------------------------------------------------------------------
         ;;
     window)
-        import -window "$(xdotool getwindowfocus -f)" /tmp/screenshot.png
+        import -window "$(xdotool getactivewindow)" /tmp/screenshot.png
         ;;
     region)
         import /tmp/screenshot.png
