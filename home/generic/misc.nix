@@ -1,4 +1,7 @@
 { pkgs, config, ... }:
+let
+  shared = pkgs.callPackage <dotfiles/shared> {};
+in
 {
   programs.scaff = {
     enable = true;
@@ -28,4 +31,13 @@
   home.file.".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink ./misc/tmux.conf;
   home.file.".editorconfig".source = config.lib.file.mkOutOfStoreSymlink ./misc/default.editorconfig;
   home.file.".gdbinit".source = config.lib.file.mkOutOfStoreSymlink ./misc/gdbinit;
+
+  home.file.".stack/config.yaml".text =
+    builtins.toJSON { # YAML is a JSON superset
+      templates.params = {
+        "author-name" = shared.consts.name;
+        "author-email" = shared.consts.email;
+        "github-username" = shared.consts.name;
+      };
+    };
 }

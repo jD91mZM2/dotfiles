@@ -142,8 +142,7 @@ in {
 
       # Languages
       ## Haskell
-      cabal-install
-      ghc
+      stack
       ## Rust
       cargo-edit
       cargo-release
