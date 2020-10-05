@@ -19,6 +19,13 @@
 (use-package! mcf-mode
   :mode "\\.mcfunction\\'")
 
+;; LaTeX
+(use-package auctex
+  :mode ("\\.tex\\'" . LaTeX-mode)
+  :custom
+  (TeX-command-list '(("LatexMk" "latexmk -pdf %t; pgrep zathura || zathura --fork %s.pdf" TeX-run-command nil t)))
+  (TeX-command-force "LatexMk"))
+
 ;; Web stuff
 (use-package! web-mode
   :mode "\\.\\(json\\|php\\|html\\|jsx?\\|tsx?\\)\\'")
