@@ -154,6 +154,9 @@ in {
       gcc
       gdb
       gnumake
+      ## Elm
+      elmPackages.elm
+      elmPackages.elm-format
       ## Java & JVM languages :puke:
       my-preferred-java-version
       jetbrains.idea-community
