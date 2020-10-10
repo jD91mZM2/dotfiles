@@ -35,11 +35,30 @@
         experimental-features = nix-command flakes
       '';
 
+      # Input Output HK - Hydra cache for haskell.nix
+      binaryCachePublicKeys = [
+        "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+      ];
+      binaryCaches = [
+        "https://hydra.iohk.io"
+      ];
+
       # Add dotfiles to my nix path
       nixPath = [
         "dotfiles=${shared.consts.dotfiles}"
         "nixos-config=${shared.consts.dotfiles}/etc/${config.setup.name}/configuration.nix"
       ] ++ (lib.filter (key: !(lib.hasPrefix "nixos-config=" key)) options.nix.nixPath.default);
+
+      # Keep my harddrive relatively small
+      gc = {
+        automatic = true;
+        dates = "17:00";
+        options = "--delete-older-than 10d";
+      };
+      optimise = {
+        automatic = true;
+        dates = [ "17:00" ];
+      };
     };
 
     boot = {
@@ -76,15 +95,6 @@
     # Misc. settings
     documentation.dev.enable  = true;
     hardware.bluetooth.enable = true;
-    nix.gc = {
-      automatic = true;
-      dates = "17:00";
-      options = "--delete-older-than 10d";
-    };
-    nix.optimise = {
-      automatic = true;
-      dates = [ "17:00" ];
-    };
     # Can you system upgrade with nix flakes, though?
     # system.autoUpgrade = {
     #   enable = true;

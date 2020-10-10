@@ -1,4 +1,3 @@
-
 # WARN: this file will get overwritten by $ cachix use <name>
 { pkgs, lib, ... }:
 
@@ -11,4 +10,3 @@ in {
   inherit imports;
   nix.binaryCaches = ["https://cache.nixos.org/"];
 }
-    
