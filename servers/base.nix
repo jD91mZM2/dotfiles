@@ -1,9 +1,6 @@
 { system, shared, pkgs, ... }:
 
 {
-  # Language settings
-  console.keyMap = "dvorak";
-
   # System config
   networking.firewall.enable = false;
 

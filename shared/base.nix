@@ -1,6 +1,10 @@
 { pkgs, self, shared, nur, inputs, ... }:
 
 {
+  # Language settings
+  console.keyMap = "dvorak";
+  i18n.defaultLocale = "en_UK.UTF-8";
+
   # System overlays
   nixpkgs.overlays = self.overlays;
 
