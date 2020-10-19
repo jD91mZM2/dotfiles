@@ -20,10 +20,9 @@
   :mode "\\.mcfunction\\'")
 
 ;; LaTeX
-(use-package auctex
+(use-package tex
   :mode ("\\.tex\\'" . LaTeX-mode)
   :custom
-  (TeX-command-list '(("LatexMk" "latexmk -pdf %t; pgrep zathura || zathura --fork %s.pdf" TeX-run-command nil t)))
   (TeX-command-force "LatexMk"))
 
 ;; Web stuff
