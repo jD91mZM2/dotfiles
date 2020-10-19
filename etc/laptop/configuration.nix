@@ -54,26 +54,4 @@
       };
     };
   };
-
-  services.borgbackup.jobs.main = let
-    repo = "${shared.consts.home}/backup";
-  in {
-    paths = map (s: "${shared.consts.home}/${s}") [ "dotfiles" "Coding" "Pictures" "Sync" ];
-    inherit repo;
-    encryption = {
-      mode = "repokey";
-      passCommand = "cat /root/borg-passphrase";
-    };
-    startAt = "16:00";
-    prune.keep = {
-      daily   = 7;
-      weekly  = 4;
-      monthly = 2;
-    };
-    postCreate = ''
-      echo "\$archiveName = $archiveName"
-      ${pkgs.rclone}/bin/rclone sync -v "${repo}" "BackBlaze:jD91mZM2-backups/primary"
-      ${pkgs.rclone}/bin/rclone cleanup -v "BackBlaze:jD91mZM2-backups/primary"
-    '';
-  };
 }
