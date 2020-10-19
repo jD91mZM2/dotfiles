@@ -79,6 +79,7 @@
       nativeBuildInputs =
         # Convenient scripts
         [
+          pkgs.nixops
           (pkgs.writeShellScriptBin "deploy" ''
             "${pkgs.nixops}/bin/nixops" deploy -d main --check --allow-reboot "$@"
           '')

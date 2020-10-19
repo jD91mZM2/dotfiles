@@ -29,7 +29,7 @@ in
 
     loginAccounts = {
       "me@krake.one" = {
-        hashedPassword = shared.consts.secret.emailPass;
+        hashedPasswordFile = "/run/keys/email";
 
         # Really, really, old email address. Don't judge.
         aliases = [ "legolord208@krake.one" ];

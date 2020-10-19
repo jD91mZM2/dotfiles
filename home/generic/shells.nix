@@ -52,7 +52,12 @@ in {
     # Remote shell
     programs.ssh = lib.mkIf cfg.enableGit {
       enable      = true;
-      matchBlocks = shared.consts.secret.sshHosts;
+      matchBlocks = {
+        "main" = {
+          user     = "user";
+          hostname = "krake.one";
+        };
+      };
     };
 
     # Every shell needs some git...
@@ -71,7 +76,7 @@ in {
       };
       extraConfig = {
         pull.rebase = true;
-      } // shared.consts.secret.gitConfig;
+      };
     };
 
     # Every git needs some gpg...

@@ -42,14 +42,17 @@ in
           createZncServers {
             freenode = {
               ip = "chat.freenode.net";
-              chan = [ "#nixos" "#nixos-chat" "#nix-community" ];
+              chan = [ "#nixos" "#nixos-chat" "#nix-community" "#haskell.nix" ];
             };
             mozilla = {
               ip = "irc.mozilla.org";
               chan = [ "#rust" ];
             };
           };
-        Pass.password = shared.consts.secret.zncPassBlock;
+
+        # TODO: Find some way to use `passwordFile`-like thing with ZNC
+        # extraConfigFile = "/run/keys/znc";
+        extraConfig = builtins.readFile "${shared.consts.secrets}/znc";
       };
     };
   };

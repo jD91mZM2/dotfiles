@@ -2,8 +2,11 @@
 
 {
   # Language settings
-  console.keyMap = "dvorak";
-  i18n.defaultLocale = "en_UK.UTF-8";
+  i18n.defaultLocale = "en_GB.UTF-8";
+  console = {
+    keyMap = "dvorak";
+    font   = "Lat2-Terminus16";
+  };
 
   # System overlays
   nixpkgs.overlays = self.overlays;

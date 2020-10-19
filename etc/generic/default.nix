@@ -105,13 +105,6 @@
       hardwareClockInLocalTime = true; # fuck windows
     };
 
-    # TTY settings
-    i18n.defaultLocale = "en_UK.UTF-8";
-    console = {
-      font   = "Lat2-Terminus16";
-      keyMap = "dvorak";
-    };
-
     # Networking
     networking.hostId = config.setup.networkId;
     networking.hostName = "samuel-${config.setup.name}";

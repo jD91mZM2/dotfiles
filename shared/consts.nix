@@ -5,12 +5,12 @@ rec {
   user     = "user";
   home     = "/home/${user}";
   dotfiles = "${home}/dotfiles";
+  secrets = "${home}/Sync/secrets";
+
   sshKeys  = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPRNU1yPnVxZtK/qrOkAnp5J+EqXJ6wTeXOScw2lhqWg (none)" ];
   gpgKeys  = {
     signing = "1845AFF2E614738266665F63E471B167937421AB";
   };
-
-  secret = import ./secret.nix;
 
   syncthingDevices = {
     laptop = {

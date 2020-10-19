@@ -48,11 +48,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1602260074,
-        "narHash": "sha256-7V0K/DIcc9soFUK3C0rC+AJm4hXgS8KNh/tl5Zl6Cag=",
+        "lastModified": 1603138209,
+        "narHash": "sha256-gssRkO+RRncurn/cpRdS6NPYVmXGDLE75+n7udWXId8=",
         "ref": "master",
-        "rev": "4355d12fc006444d08f40045a299cf2b73cbb5d3",
-        "revCount": 38,
+        "rev": "30014a601e981ab2335fc82a7e43994006358ab5",
+        "revCount": 39,
         "type": "git",
         "url": "https://gitlab.com/jD91mZM2/nur-packages.git"
       },
