@@ -18,7 +18,6 @@
 
   imports = [
     # Files
-    ./cachix.nix
     ./containers.nix
     ./fonts.nix
     ./packages.nix
@@ -35,12 +34,23 @@
         experimental-features = nix-command flakes
       '';
 
-      # Input Output HK - Hydra cache for haskell.nix
-      binaryCachePublicKeys = [
-        "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-      ];
       binaryCaches = [
+        # Input Output HK - Hydra cache for haskell.nix
         "https://hydra.iohk.io"
+
+        # Cachix Caches
+        "https://iohk.cachix.org"
+        "https://nix-community.cachix.org"
+        "https://jd91mzm2.cachix.org"
+      ];
+      binaryCachePublicKeys = [
+        # Input Output HK - Hydra cache for haskell.nix
+        "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+
+        # Cachix Caches
+        "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
+        "jd91mzm2.cachix.org-1:Ozz1Jhba7XCQidfZuptUFWy0tpnqtg6v1gJpuLIkyyY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
 
       # Add dotfiles to my nix path
