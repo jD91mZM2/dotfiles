@@ -16,30 +16,17 @@
   outputs = { self, nixpkgs, nur, emacs-overlay, redox-world-map } @ inputs: let
     forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" ];
   in {
-    overlay = final: prev: (
-      builtins.foldl' (a: b: a // b) {} (
-        map
-          (overlay: overlay final prev)
-          self.overlays
-      )
-    );
-    overlays =
-      [
-        # Add emacs overlay
-        emacs-overlay.overlay
-
-        # Add NUR package
-        (_final: _prev: {
-          inherit nur;
-        })
-      ]
-
-      # All overlays in the overlays directory
-      ++ (
-        map
-          (name: import (./overlays + "/${name}"))
-          (builtins.attrNames (builtins.readDir ./overlays))
+    overlay = final: prev: (emacs-overlay.overlay final prev) // {
+      clangd = (
+        let
+          clang = final.llvmPackages.clang-unwrapped;
+        in
+          final.runCommand "clangd-${final.stdenv.lib.getVersion clang}" {} ''
+            mkdir -p "$out/bin"
+            ln -s "${clang}/bin/clangd" "$out/bin/clangd"
+          ''
       );
+    };
 
     lib = {
       system = forAllSystems (system: let

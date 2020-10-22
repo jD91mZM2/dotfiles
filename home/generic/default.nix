@@ -34,7 +34,7 @@ in {
     };
 
     # Load overlays
-    nixpkgs.overlays = (import <dotfiles>).overlays;
+    nixpkgs.overlays = [ (import <dotfiles>).overlay ];
 
     # g_get_user_special_dir(...) would return NULL, see
     # https://github.com/NixOS/nixpkgs/issues/95276

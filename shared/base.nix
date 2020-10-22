@@ -9,7 +9,7 @@
   };
 
   # System overlays
-  nixpkgs.overlays = self.overlays;
+  nixpkgs.overlays = [ self.overlay ];
 
   # Pin nixpkgs used to resolve flakes
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
