@@ -47,7 +47,4 @@
       };
     };
   };
-
-  # IPFS
-  services.ipfs.enable = true;
 }
