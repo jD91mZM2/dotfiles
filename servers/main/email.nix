@@ -1,7 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, shared, ... }:
 
 let
-  shared   = pkgs.callPackage <dotfiles/shared> {};
   acmeRoot = "/var/lib/acme";
 
   whitelist = ''

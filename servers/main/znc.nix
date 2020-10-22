@@ -1,8 +1,5 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, shared, ... }:
 
-let
-  shared = pkgs.callPackage <dotfiles/shared> {};
-in
 {
   services.znc = {
     enable = true;

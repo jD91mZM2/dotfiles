@@ -1,12 +1,10 @@
-{
-  pkgs ? import <nixpkgs> {},
-  callPackage ? pkgs.callPackage,
-  ...
-}:
+{ pkgs, inputs }:
 
-rec {
+let
+  inherit (pkgs) callPackage;
+in rec {
   consts   = import ./consts.nix;
-  builders = callPackage ./builders {};
+  builders = callPackage ./builders { inherit inputs; };
   theme    = import ./theme.nix;
 
   scripts = pkgs.runCommand "scripts" {} ''

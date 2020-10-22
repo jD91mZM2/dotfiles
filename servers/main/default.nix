@@ -1,19 +1,15 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, system, shared, ... }:
 
 let
-  shared = pkgs.callPackage <dotfiles/shared> {};
   nur-no-pkgs = import (<dotfiles/shared/nur-no-pkgs.nix>);
 
   # Packages
   abottomod = import ~/Coding/Python/abottomod;
   timeywimey = import ~/Coding/Python/timeywimey;
-  redox-world-map = shared.builders.buildRustPackage {
-    name        = "redox-world-map";
-    src         = ~/Coding/Web/redox-world-map;
-    buildInputs = with pkgs; [ pkgconfig openssl sqlite ];
-    wrapperHook = ''
-      ln -sf $out/src/Rocket.toml .
-    '';
+  redox-world-map = inputs.redox-world-map.defaultPackage."${system}".override {
+    # TODO: Make these into runtime secrets
+    clientId = "2247a648fd9f3f852ef66a5d876fed20421d0a974f67bc3e9bf0926048d831c1";
+    clientSecret = builtins.readFile ~/Sync/secrets/redox-world-map;
   };
 
   # Helpers
@@ -79,7 +75,7 @@ in {
   in {
     abottomod       = withKeys "ABOTTOMOD_TOKEN=\"$(cat /run/keys/discord-abottomod)\" ${abottomod}/bin/abottomod";
     timeywimey      = withKeys "TIMEYWIMEY_TOKEN=\"$(cat /run/keys/discord-timeywimey)\" ${timeywimey}/bin/timeywimey";
-    redox-world-map = normal "${redox-world-map}/bin/start";
+    redox-world-map = normal "${redox-world-map}/bin/redox-world-map";
   };
   services.syncthing = {
     enable = true;

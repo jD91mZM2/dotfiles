@@ -5,15 +5,15 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
     nur.url = "git+https://gitlab.com/jD91mZM2/nur-packages.git";
-    # nur = {
-    #   type = "path";
-    #   path = "./nur-packages";
-    # };
+    # nur.url = "./nur-packages.git";
+
+    redox-world-map.url = "git+https://gitlab.com/jD91mZM2/redox-world-map.git";
+    # redox-world-map.url = "/home/user/Coding/Rust/redox-world-map";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = { self, nixpkgs, nur, emacs-overlay } @ inputs: let
+  outputs = { self, nixpkgs, nur, emacs-overlay, redox-world-map } @ inputs: let
     forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" ];
   in {
     overlay = final: prev: (
@@ -24,7 +24,15 @@
       )
     );
     overlays =
-      [ emacs-overlay.overlay ]
+      [
+        # Add emacs overlay
+        emacs-overlay.overlay
+
+        # Add NUR package
+        (_final: _prev: {
+          inherit nur;
+        })
+      ]
 
       # All overlays in the overlays directory
       ++ (
@@ -37,7 +45,9 @@
       system = forAllSystems (system: let
         pkgs = nixpkgs.legacyPackages."${system}";
 
-        shared = pkgs.callPackage ./shared {};
+        shared = pkgs.callPackage ./shared {
+          inherit inputs;
+        };
 
         configInputs = {
           inherit system;

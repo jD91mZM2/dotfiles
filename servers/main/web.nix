@@ -1,8 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, shared, ... }:
 
-let
-  shared = pkgs.callPackage <dotfiles/shared> {};
-in {
+{
   #  _____ _     ____
   # |_   _| |   / ___|
   #   | | | |   \___ \
