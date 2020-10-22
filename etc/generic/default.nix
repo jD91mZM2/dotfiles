@@ -80,9 +80,6 @@
       # all .exe files will be handled using WINE.
       binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-      # Use latest kernel
-      kernelPackages = pkgs.linuxPackages_latest;
-
       # Only use swap for hibernate, because swap on SSD is bad
       kernel.sysctl = {
         "vm.swappiness" = 0;
