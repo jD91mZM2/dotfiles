@@ -1,7 +1,4 @@
-{ pkgs, ... }:
-let
-  shared = pkgs.callPackage <dotfiles/shared> {};
-in
+{ pkgs, shared, ... }:
 {
   imports = [
     # Base on top of the regular SD image

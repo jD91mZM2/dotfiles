@@ -1,7 +1,6 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, shared, ... }:
 
 let
-  shared = pkgs.callPackage <dotfiles/shared> {};
   cfg = config.setup.graphics;
 in {
   options.setup.graphics = {

@@ -1,7 +1,6 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, shared, ... }:
 
 let
-  shared = pkgs.callPackage <dotfiles/shared> {};
   cfg = config.setup.graphics.polybar;
 in {
   options.setup.graphics.polybar = {

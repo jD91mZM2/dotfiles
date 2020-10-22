@@ -123,6 +123,22 @@
         "url": "https://gitlab.com/jD91mZM2/nur-packages.git"
       }
     },
+    "nur-rycee": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1603339651,
+        "narHash": "sha256-252Ne6TcJDbe4Ls6jwa/aSXyeOHJdAMqu4OjEhDCNfo=",
+        "ref": "master",
+        "rev": "4fc902928157577e72de4ff7da397d106d5b921d",
+        "revCount": 848,
+        "type": "git",
+        "url": "https://gitlab.com/rycee/nur-expressions.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gitlab.com/rycee/nur-expressions.git"
+      }
+    },
     "redox-world-map": {
       "inputs": {
         "mozillapkgs": "mozillapkgs",
@@ -148,6 +164,7 @@
         "emacs-overlay": "emacs-overlay",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
+        "nur-rycee": "nur-rycee",
         "redox-world-map": "redox-world-map"
       }
     }

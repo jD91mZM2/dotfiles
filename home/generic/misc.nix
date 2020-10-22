@@ -1,7 +1,4 @@
-{ pkgs, config, ... }:
-let
-  shared = pkgs.callPackage <dotfiles/shared> {};
-in
+{ pkgs, config, shared, ... }:
 {
   programs.scaff = {
     enable = true;

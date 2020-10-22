@@ -10,8 +10,11 @@ in {
   config = lib.mkIf cfg.enable {
     programs.firefox = {
       enable = true;
-      privacy.extensions.enable = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      privacy.extensions = {
+        enable = true;
+        repository = pkgs.nur-rycee.firefox-addons;
+      };
+      extensions = with pkgs.nur-rycee.firefox-addons; [
         # Other addons
         bitwarden
         stylus

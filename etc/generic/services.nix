@@ -1,7 +1,4 @@
-{ pkgs, ... }:
-let
-  shared = pkgs.callPackage <dotfiles/shared> {};
-in
+{ pkgs, shared, ... }:
 {
   # General things
   services.dbus.packages = with pkgs; [ gnome3.dconf ];

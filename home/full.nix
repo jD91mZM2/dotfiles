@@ -1,4 +1,7 @@
-{
+let
+  flake = import <dotfiles>;
+  mkHomeModule = flake.lib.system."${builtins.currentSystem}".mkHomeModule;
+in mkHomeModule ({
   imports = [
     ./generic
   ];
@@ -14,4 +17,4 @@
     shells.enableBash = true;
     shells.enableGit = true;
   };
-}
+})
