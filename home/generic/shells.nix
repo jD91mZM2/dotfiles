@@ -4,13 +4,14 @@ let
   cfg = config.setup.shells;
 
   aliases = {
-    clear     = "clear; echo -ne \"\\e[3J\"";
-    e         = "env -u TMPDIR emacsclient -n"; # nix-shell sets $TMPDIR which messes up emacsclient's search
-    ls        = "ls -CF --color=auto";
-    nix-shell = "nix-shell --command zsh";
-    rsynca    = "rsync -avzhP --delete";
-    objdump   = "objdump -Mintel";
-    cal       = "cal -m";
+    cal        = "cal -m";
+    clear      = "clear; echo -ne \"\\e[3J\"";
+    e          = "env -u TMPDIR emacsclient -n"; # nix-shell sets $TMPDIR which messes up emacsclient's search
+    ls         = "ls -CF --color=auto";
+    nix-shell  = "nix-shell --command zsh";
+    objdump    = "objdump -Mintel";
+    rsynca     = "rsync -avzhP --delete";
+    screencast = "mkchromecast -n \"Living Room TV\" --video --screencast";
   };
 
   bashConfig = builtins.replaceStrings [ "  " ] [ "\t" ] ''

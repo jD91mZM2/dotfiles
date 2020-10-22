@@ -80,6 +80,7 @@ in {
       scrcpy
       superTuxKart
       thunderbird
+      vlc
       xorg.xev
       xorg.xwininfo
 
@@ -102,9 +103,9 @@ in {
       # Other CLI utils
       asciinema
       cdrkit
-      docker_compose
       graphviz
       imagemagick
+      mkchromecast
       pandoc
       translate-shell
       whois

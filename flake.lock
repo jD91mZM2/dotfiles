@@ -64,6 +64,21 @@
         "type": "indirect"
       }
     },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1603385944,
+        "narHash": "sha256-n/xZxDg6Oj14KgT5jJGhOr49wSKNUxDNK3AiIwcPv2Q=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "186f24e81f12ff5c3c3a5b7cd50817dd43a9e301",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "master",
+        "type": "indirect"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1602066138,
@@ -163,6 +178,7 @@
       "inputs": {
         "emacs-overlay": "emacs-overlay",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-master": "nixpkgs-master",
         "nur": "nur",
         "nur-rycee": "nur-rycee",
         "redox-world-map": "redox-world-map"

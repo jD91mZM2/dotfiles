@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "nixpkgs/master";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nur-rycee = { url = "git+https://gitlab.com/rycee/nur-expressions.git"; flake = false; };
@@ -13,7 +14,7 @@
     # redox-world-map.url = "/home/user/Coding/Rust/redox-world-map";
   };
 
-  outputs = { self, nixpkgs, nur-rycee, emacs-overlay, nur, redox-world-map } @ inputs: let
+  outputs = { self, nixpkgs, nixpkgs-master, nur-rycee, emacs-overlay, nur, redox-world-map } @ inputs: let
     forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" ];
   in {
     overlay = final: prev: (emacs-overlay.overlay final prev) // {
@@ -28,6 +29,8 @@
       );
 
       nur-rycee = prev.callPackage nur-rycee {};
+
+      mkchromecast = nixpkgs-master.legacyPackages."${prev.system}".mkchromecast;
     };
 
     lib = {
