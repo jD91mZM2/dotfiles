@@ -1,7 +1,6 @@
 { pkgs, config, lib, ... }:
 
 let
-  nur-no-pkgs = import (<dotfiles/shared/nur-no-pkgs.nix>);
   cfg = config.setup;
 in {
   options.setup = with lib; {
@@ -14,8 +13,6 @@ in {
   };
 
   imports = [
-    nur-no-pkgs.repos.jd91mzm2.hm-modules.programs
-
     ./fonts.nix
     ./emacs.nix
     ./env.nix
@@ -32,9 +29,6 @@ in {
       enable = true;
       path   = https://github.com/rycee/home-manager/archive/master.tar.gz;
     };
-
-    # Load overlays
-    nixpkgs.overlays = [ (import <dotfiles>).overlay ];
 
     # g_get_user_special_dir(...) would return NULL, see
     # https://github.com/NixOS/nixpkgs/issues/95276

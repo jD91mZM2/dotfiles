@@ -4,9 +4,13 @@
     enable = true;
     imports = let
       baseURL = "https://gitlab.com/jD91mZM2/scaff-repo/-/jobs/782984841/artifacts/raw/build";
-      config = builtins.fromTOML (builtins.readFile (builtins.fetchurl "${baseURL}/config.toml"));
+      rawConfig = builtins.fetchurl {
+        url = "${baseURL}/config.toml";
+        sha256 = "06cfijsjipha4521pvq0ng8h7dlamvfgwi7dgjypiab1gz11nfsl";
+      };
+      config = builtins.fromTOML (builtins.readFile rawConfig);
     in pkgs.lib.mapAttrs (_: value:
-      builtins.fetchurl "${baseURL}/${value}"
+      "${baseURL}/${value}"
     ) config.imports;
   };
 

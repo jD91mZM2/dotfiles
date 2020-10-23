@@ -59,7 +59,6 @@ in {
       termplay
 
       # Graphical applications
-      (callPackage <dotfiles/forks/st> {})
       abiword
       audacity
       bitwarden
@@ -76,9 +75,9 @@ in {
       obs-studio
       olive-editor # <- THIS IS AMAZING
       pavucontrol
-      radare2-cutter
       scrcpy
-      superTuxKart
+      st
+      # superTuxKart
       thunderbird
       vlc
       xorg.xev
@@ -102,7 +101,6 @@ in {
 
       # Other CLI utils
       asciinema
-      cdrkit
       graphviz
       imagemagick
       mkchromecast
@@ -134,12 +132,12 @@ in {
       })
 
       # Nix stuff
-      (callPackage (builtins.fetchTarball https://cachix.org/api/v1/install) {}).cachix
-      (callPackage (builtins.fetchTarball https://github.com/kolloch/crate2nix/archive/master.tar.gz) {})
-      (callPackage (builtins.fetchTarball https://github.com/nix-community/pypi2nix/archive/master.tar.gz) {})
-      niv
+      cachix
+      crate2nix
       nix-prefetch-scripts
       nix-review
+      nixos-generators
+      pypi2nix
 
       # Languages
       ## Haskell
@@ -147,7 +145,6 @@ in {
       ## Rust
       cargo-edit
       cargo-release
-      cargo-tree
       rust-analyzer
       rustup
       ## C

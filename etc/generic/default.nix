@@ -53,10 +53,22 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
 
-      # Add dotfiles to my nix path
+      registry.nixpkgs = {
+        from = {
+          type = "indirect";
+          id = "nixpkgs";
+        };
+        to = lib.mkForce {
+          type  = "github";
+          owner = "NixOS";
+          repo  = "nixpkgs";
+          rev   = "nixos-unstable";
+        };
+      };
+
+      # Add dotfiles to my nix path - for now. This should be removed once I go full flake
       nixPath = [
         "dotfiles=${shared.consts.dotfiles}"
-        "nixos-config=${shared.consts.dotfiles}/etc/${config.setup.name}/configuration.nix"
       ] ++ (lib.filter (key: !(lib.hasPrefix "nixos-config=" key)) options.nix.nixPath.default);
 
       # Keep my harddrive relatively small
