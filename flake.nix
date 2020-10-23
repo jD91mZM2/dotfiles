@@ -54,7 +54,7 @@
         };
       in {
         mkNixosConfig = module:
-          nixpkgs.lib.nixosSystem (configInputs // {
+          nixpkgs.lib.makeOverridable nixpkgs.lib.nixosSystem (configInputs // {
             modules = configInputs.modules ++ [ module ];
           });
 

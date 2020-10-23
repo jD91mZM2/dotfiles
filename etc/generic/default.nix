@@ -102,11 +102,6 @@
     # Misc. settings
     documentation.dev.enable  = true;
     hardware.bluetooth.enable = true;
-    # Can you system upgrade with nix flakes, though?
-    # system.autoUpgrade = {
-    #   enable = true;
-    #   dates  = "16:00";
-    # };
     time = {
       timeZone = "Europe/Stockholm";
       hardwareClockInLocalTime = true; # fuck windows
@@ -125,8 +120,9 @@
 
     # User settings
     users.users."${shared.consts.user}" = {
-      isNormalUser = true;
-      extraGroups  = [ "libvirtd" "adbusers" ];
+      initialPassword = "nixos";
+      isNormalUser    = true;
+      extraGroups     = [ "libvirtd" "adbusers" ];
     };
 
     # This value determines the NixOS release with which your system is to be
