@@ -3,13 +3,12 @@
 {
   imports = [
     # Include setup that's generic across my devices
-    ../../generic
+    ../generic
   ];
 
   setup = {
-    name = "vm-gui";
+    name = "vm-headless";
 
-    graphics.enable = true;
     packages.languages.wasm = true;
   };
 }

@@ -113,7 +113,9 @@
       in {
         samuel-computer = mkNixosConfigWithHome [ ./etc/computer/configuration.nix ];
         samuel-laptop = mkNixosConfigWithHome [ ./etc/laptop/configuration.nix ];
-        samuel-vm-gui = mkNixosConfigWithHome [ ./etc/vm/gui/configuration.nix ];
+
+        samuel-vm-gui = mkNixosConfigWithHome [ ./etc/vm/vm-gui.nix ];
+        samuel-vm-headless = mkNixosConfigWithHome [ ./etc/vm/vm-headless.nix ];
       };
 
       devShell = forAllSystems (system: let

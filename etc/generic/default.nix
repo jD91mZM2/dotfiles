@@ -28,7 +28,7 @@ in {
   imports = [
     # Files
     ./containers.nix
-    ./gui.nix
+    ./gui
     ./home.nix
     ./meta.nix
     ./packages

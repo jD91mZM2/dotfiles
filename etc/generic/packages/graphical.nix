@@ -8,8 +8,8 @@ in
     enable = mkEnableOption "Graphical applications";
   };
 
-  config = {
-    environment.systemPackages = with pkgs; lib.optionals cfg.enable [
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
       # Graphical - WM
       dmenu
       feh
@@ -25,7 +25,7 @@ in
     ];
 
     setup.home.modules = lib.singleton ({
-      home.packages = with pkgs; lib.optionals cfg.enable [
+      home.packages = with pkgs; [
         # Must have utils
         xclip
         xdotool
