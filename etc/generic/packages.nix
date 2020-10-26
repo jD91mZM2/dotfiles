@@ -19,7 +19,6 @@
     # Graphical - WM
     compton
     dmenu
-    dunst
     feh
     j4-dmenu-desktop
     networkmanagerapplet
