@@ -16,6 +16,8 @@
   };
 
   boot = {
+    supportedFilesystems = [ "btrfs" "zfs" ];
+
     # Make timeout long so I have time to plug in my keyboard. Using `null` here
     # seems to cause it to be selected immediately, unlike what the man page says
     loader.timeout = 99;

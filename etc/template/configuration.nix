@@ -14,4 +14,6 @@
     networkId = "@@NETWORK_ID@@";
     full      = true;
   };
+
+  boot.supportedFilesystems = [ "zfs" ];
 }

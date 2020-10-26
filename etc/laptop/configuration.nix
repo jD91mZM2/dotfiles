@@ -15,6 +15,8 @@
     full      = true;
   };
 
+  boot.supportedFilesystems = [ "zfs" ];
+
   hardware.cpu.intel.updateMicrocode = true;
 
   services.xserver = {

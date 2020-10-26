@@ -17,6 +17,8 @@ in
   };
 
   config = {
+    setup.packages.graphical.enable = true;
+
     ## https://github.com/NixOS/nixpkgs/issues/33231
     environment.variables.GDK_PIXBUF_MODULE_FILE = "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache";
 

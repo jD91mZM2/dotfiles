@@ -19,6 +19,7 @@ in
       # Graphical
       firefox
       gnome3.zenity
+      st
       virtmanager
       xfce.xfce4-power-manager
     ];
@@ -48,7 +49,6 @@ in
         olive-editor # <- THIS IS AMAZING
         pavucontrol
         scrcpy
-        st
         # superTuxKart
         thunderbird
         vlc

@@ -13,12 +13,14 @@ in {
       description = "The name of this deployment, same as the folder's name in /etc.";
     };
     networkId = mkOption {
-      type = types.str;
+      type = types.nullOr types.str;
       description = "Same as network.hostId, obtain using `head -c8 /etc/machine-id`";
+      default = null;
     };
 
     full = mkOption {
       type = types.bool;
+      default = false;
       description = "Installs all the bells and whistles. Just an alias for enabling different components.";
     };
   };
@@ -57,14 +59,6 @@ in {
     };
 
     boot = {
-      supportedFilesystems = [ "btrfs" "zfs" ];
-
-      # These systems will be able to be emulated transparently. Enabling
-      # aarch64 will allow me to run aarch64 executables (using
-      # qemu-aarch64 behind the scenes). If I were to enable windows here,
-      # all .exe files will be handled using WINE.
-      binfmt.emulatedSystems = [ "aarch64-linux" ];
-
       # systemd-boot
       loader = {
         efi.canTouchEfiVariables = true;
