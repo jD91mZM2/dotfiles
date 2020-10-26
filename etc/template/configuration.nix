@@ -12,5 +12,6 @@
   setup = {
     name      = "@@DEVICE_NAME@@";
     networkId = "@@NETWORK_ID@@";
+    full      = true;
   };
 }

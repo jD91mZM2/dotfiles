@@ -2,32 +2,58 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, options, pkgs, shared, ... }:
+{ config, lib, pkgs, shared, ... }:
 
-{
-  options.setup = {
-    name = lib.mkOption {
-      type = lib.types.str;
+let
+  cfg = config.setup;
+in {
+  options.setup = with lib; {
+    name = mkOption {
+      type = types.str;
       description = "The name of this deployment, same as the folder's name in /etc.";
     };
-    networkId = lib.mkOption {
-      type = lib.types.str;
+    networkId = mkOption {
+      type = types.str;
       description = "Same as network.hostId, obtain using `head -c8 /etc/machine-id`";
+    };
+
+    full = mkOption {
+      type = types.bool;
+      description = "Installs all the bells and whistles. Just an alias for enabling different components.";
     };
   };
 
   imports = [
     # Files
     ./containers.nix
-    ./fonts.nix
     ./gui.nix
+    ./home.nix
     ./meta.nix
-    ./packages.nix
+    ./packages
     ./services.nix
     ./sudo.nix
   ];
 
   config = {
+    setup = lib.mkIf cfg.full {
+      packages = {
+        graphical.enable = true;
+
+        languages = {
+          c = true;
+          elm = true;
+          go = true;
+          haskell = true;
+          java = true;
+          latex = true;
+          markdown = true;
+          python = true;
+          rust = true;
+          wasm = true;
+        };
+      };
+    };
+
     boot = {
       supportedFilesystems = [ "btrfs" "zfs" ];
 

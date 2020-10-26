@@ -12,15 +12,18 @@
   setup = {
     name      = "computer";
     networkId = "c0122dbe";
+    full      = true;
   };
 
-  # Make timeout long so I have time to plug in my keyboard. Using `null` here
-  # seems to cause it to be selected immediately, unlike what the man page says
-  boot.loader.timeout = 99;
+  boot = {
+    # Make timeout long so I have time to plug in my keyboard. Using `null` here
+    # seems to cause it to be selected immediately, unlike what the man page says
+    loader.timeout = 99;
 
-  # Only use swap for hibernate, because swap on SSD is bad
-  kernel.sysctl = {
-    "vm.swappiness" = 0;
+    # Only use swap for hibernate, because swap on SSD is bad
+    kernel.sysctl = {
+      "vm.swappiness" = 0;
+    };
   };
 
   hardware.cpu.amd.updateMicrocode = true;

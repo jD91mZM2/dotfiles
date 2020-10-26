@@ -82,6 +82,8 @@
             };
           };
         in rec {
+          inherit configInputs;
+
           mkNixosConfig = modules:
             nixpkgs.lib.makeOverridable nixpkgs.lib.nixosSystem (configInputs // {
               modules = configInputs.modules ++ modules;
@@ -89,16 +91,6 @@
 
           mkNixosConfigWithHome = modules: mkNixosConfig ([
             home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users."${shared.consts.user}" = {
-                imports = [ ./home/full.nix nur.hmModules.programs ];
-
-                # Hacky way to send extraArgs to home-manager
-                _module.args = configInputs.extraArgs;
-              };
-            }
           ] ++ modules);
 
           mkNixosModule = module: {

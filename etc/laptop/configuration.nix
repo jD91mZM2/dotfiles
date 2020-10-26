@@ -12,6 +12,7 @@
   setup = {
     name      = "laptop";
     networkId = "e345d278";
+    full      = true;
   };
 
   hardware.cpu.intel.updateMicrocode = true;

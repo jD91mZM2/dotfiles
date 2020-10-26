@@ -13,31 +13,25 @@ in {
   };
 
   imports = [
-    ./fonts.nix
     ./emacs.nix
     ./env.nix
     ./firefox.nix
+    ./fonts.nix
     ./graphics.nix
     ./misc.nix
-    ./packages.nix
     ./shells.nix
   ];
 
   config = {
     # Set up master branch of home-manager
-    programs.home-manager = {
-      enable = true;
-      path   = https://github.com/rycee/home-manager/archive/master.tar.gz;
-    };
+    # programs.home-manager = {
+    #   enable = true;
+    #   path   = https://github.com/rycee/home-manager/archive/master.tar.gz;
+    # };
 
     # g_get_user_special_dir(...) would return NULL, see
     # https://github.com/NixOS/nixpkgs/issues/95276
     xdg.userDirs.enable = true;
-
-    xdg.configFile = {
-      # Install this home-manager config
-      "nixpkgs/home.nix".source = config.lib.file.mkOutOfStoreSymlink cfg.source;
-    };
 
     # Don't mess with my keyboard layout!
     home.keyboard = null;
