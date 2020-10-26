@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }:
 
 let
-  cfg = config.setup.packages.graphical;
+  cfg = config.setup.packages.graphics;
 in
 {
-  options.setup.packages.graphical = with lib; {
+  options.setup.packages.graphics = with lib; {
     enable = mkEnableOption "Graphical applications";
   };
 

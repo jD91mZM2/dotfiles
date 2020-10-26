@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ./graphical.nix
-    ./scripts.nix
+    ./graphics.nix
     ./languages.nix
+    ./scripts.nix
     ./system.nix
   ];
 

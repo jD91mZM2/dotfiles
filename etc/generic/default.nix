@@ -41,7 +41,7 @@ in {
       graphics.enable = true;
 
       packages = {
-        graphical.enable = true;
+        graphics.enable = true;
 
         languages = {
           c = true;

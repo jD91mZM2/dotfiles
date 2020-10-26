@@ -18,10 +18,14 @@ in
 
   imports = [
     ./style.nix
+    ./polybar.nix
+    ./firefox.nix
   ];
 
   config = lib.mkIf cfg.enable {
-    setup.packages.graphical.enable = true;
+    setup.packages.graphics.enable = true;
+    setup.graphics.polybar.enable = true;
+    setup.graphics.firefox.enable = true;
 
     ## https://github.com/NixOS/nixpkgs/issues/33231
     environment.variables.GDK_PIXBUF_MODULE_FILE = "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache";

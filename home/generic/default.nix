@@ -15,19 +15,12 @@ in {
   imports = [
     ./emacs.nix
     ./env.nix
-    ./firefox.nix
     ./fonts.nix
     ./misc.nix
     ./shells.nix
   ];
 
   config = {
-    # Set up master branch of home-manager
-    # programs.home-manager = {
-    #   enable = true;
-    #   path   = https://github.com/rycee/home-manager/archive/master.tar.gz;
-    # };
-
     # g_get_user_special_dir(...) would return NULL, see
     # https://github.com/NixOS/nixpkgs/issues/95276
     xdg.userDirs.enable = true;
