@@ -20,10 +20,10 @@
     # Files
     ./containers.nix
     ./fonts.nix
+    ./gui.nix
     ./packages.nix
     ./services.nix
     ./sudo.nix
-    ./x11.nix
   ];
 
   config = {
