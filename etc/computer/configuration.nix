@@ -18,6 +18,11 @@
   # seems to cause it to be selected immediately, unlike what the man page says
   boot.loader.timeout = 99;
 
+  # Only use swap for hibernate, because swap on SSD is bad
+  kernel.sysctl = {
+    "vm.swappiness" = 0;
+  };
+
   hardware.cpu.amd.updateMicrocode = true;
 
   services.xserver = {
