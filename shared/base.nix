@@ -2,6 +2,7 @@
 
 {
   # Language settings
+  time.timeZone = "Europe/Stockholm";
   i18n.defaultLocale = "en_GB.UTF-8";
   console = {
     keyMap = "dvorak";
@@ -10,9 +11,6 @@
 
   # System overlays
   nixpkgs.overlays = [ self.overlay ];
-
-  # Pin nixpkgs used to resolve flakes
-  nix.registry.nixpkgs.flake = inputs.nixpkgs;
 
   # Must have packages
   environment.systemPackages = with pkgs; [

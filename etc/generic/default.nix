@@ -114,10 +114,7 @@
     # Misc. settings
     documentation.dev.enable  = true;
     hardware.bluetooth.enable = true;
-    time = {
-      timeZone = "Europe/Stockholm";
-      hardwareClockInLocalTime = true; # fuck windows
-    };
+    time.hardwareClockInLocalTime = true; # fuck windows
 
     # Networking
     networking.hostId = config.setup.networkId;
