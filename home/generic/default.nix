@@ -17,7 +17,6 @@ in {
     ./env.nix
     ./firefox.nix
     ./fonts.nix
-    ./graphics.nix
     ./misc.nix
     ./shells.nix
   ];

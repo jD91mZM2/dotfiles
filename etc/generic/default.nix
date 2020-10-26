@@ -36,6 +36,8 @@ in {
 
   config = {
     setup = lib.mkIf cfg.full {
+      graphics.enable = true;
+
       packages = {
         graphical.enable = true;
 
