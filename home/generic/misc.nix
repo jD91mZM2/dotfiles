@@ -1,4 +1,4 @@
-{ pkgs, config, shared, ... }:
+{ pkgs, shared, ... }:
 {
   programs.scaff = {
     enable = true;
@@ -21,9 +21,9 @@
     };
   };
 
-  home.file.".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink ./misc/tmux.conf;
-  home.file.".editorconfig".source = config.lib.file.mkOutOfStoreSymlink ./misc/default.editorconfig;
-  home.file.".gdbinit".source = config.lib.file.mkOutOfStoreSymlink ./misc/gdbinit;
+  home.file.".tmux.conf".source = ./misc/tmux.conf;
+  home.file.".editorconfig".source = ./misc/default.editorconfig;
+  home.file.".gdbinit".source = ./misc/gdbinit;
 
   home.file.".stack/config.yaml".text =
     builtins.toJSON { # YAML is a JSON superset

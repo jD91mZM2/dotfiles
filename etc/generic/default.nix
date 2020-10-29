@@ -9,15 +9,10 @@ let
 in {
   options.setup = with lib; {
     name = mkOption {
-      type = types.str;
-      description = "The name of this deployment, same as the folder's name in /etc.";
-    };
-    networkId = mkOption {
       type = types.nullOr types.str;
-      description = "Same as network.hostId, obtain using `head -c8 /etc/machine-id`";
+      description = "The name of this deployment";
       default = null;
     };
-
     full = mkOption {
       type = types.bool;
       default = false;
@@ -29,6 +24,7 @@ in {
     # Files
     ./containers.nix
     ./gui
+    ./hardware.nix
     ./home.nix
     ./meta.nix
     ./packages
@@ -38,11 +34,12 @@ in {
 
   config = {
     setup = lib.mkIf cfg.full {
+      boot = true;
+      network = true;
+
       graphics.enable = true;
 
       packages = {
-        graphics.enable = true;
-
         languages = {
           c = true;
           elm = true;
@@ -58,16 +55,9 @@ in {
       };
     };
 
-    boot = {
-      # systemd-boot
-      loader = {
-        efi.canTouchEfiVariables = true;
-        systemd-boot = {
-          enable = true;
-          configurationLimit = 5;
-          editor = false;
-        };
-      };
+    # Specify hostname, if set
+    networking = lib.mkIf (cfg.name != null) {
+      hostName = "samuel-${cfg.name}";
     };
 
     # Add some extra drivers
@@ -77,12 +67,6 @@ in {
     documentation.dev.enable  = true;
     hardware.bluetooth.enable = true;
     time.hardwareClockInLocalTime = true; # fuck windows
-
-    # Networking
-    networking.hostId = config.setup.networkId;
-    networking.hostName = "samuel-${config.setup.name}";
-    networking.networkmanager.enable = true;
-    networking.firewall.enable = false;
 
     # Mime type for wasm, see https://github.com/mdn/webassembly-examples/issues/5
     environment.etc."mime.types".text = ''

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   setup-doom = pkgs.writeShellScript "setup-doom" ''
@@ -18,7 +18,7 @@ let
 in
 {
   xdg.configFile = {
-    "doom".source = config.lib.file.mkOutOfStoreSymlink ./doom-config;
+    "doom".source = ./doom-config;
   };
 
   home.packages = [ emacs ];

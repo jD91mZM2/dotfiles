@@ -4,11 +4,10 @@
   imports = [
     # Include setup that's generic across my devices
     ../generic
+    # ../../shared/base.nix
   ];
 
   setup = {
-    name = "vm-gui";
-
     graphics = {
       enable = true;
       fast   = true;

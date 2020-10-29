@@ -10,10 +10,12 @@
   ];
 
   setup = {
-    name      = "computer";
-    networkId = "c0122dbe";
-    full      = true;
+    name = "computer";
+    full = true;
   };
+
+  # Needed for ZFS
+  networking.hostId = "c0122dbe";
 
   boot = {
     supportedFilesystems = [ "btrfs" "zfs" ];

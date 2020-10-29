@@ -79,10 +79,10 @@ in
       desktopManager.xterm.enable = false;
     };
 
-    setup.home.modules = lib.singleton ({ config, ... }: {
+    setup.home.modules = lib.singleton {
       # Save awesome's config file
       xdg.dataFile."scripts".source = shared.scripts;
-      xdg.configFile."awesome".source = config.lib.file.mkOutOfStoreSymlink ./awesome-config;
+      xdg.configFile."awesome".source = ./awesome-config;
 
       # Configure xsession
       xsession = {
@@ -107,6 +107,6 @@ in
         inactiveDim = "0.1";
         shadow      = true;
       };
-    });
+    };
   };
 }

@@ -10,9 +10,11 @@
   ];
 
   setup = {
-    name      = "laptop";
-    networkId = "e345d278";
-    full      = true;
+    full = true;
+    network = {
+      name = "laptop";
+      id   = "e345d278";
+    };
   };
 
   boot.supportedFilesystems = [ "zfs" ];
