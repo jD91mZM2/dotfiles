@@ -4,14 +4,8 @@ lib.mkIf config.setup.graphics.enable {
   services.xserver.displayManager.lightdm = {
     background = "${pkgs.adapta-backgrounds}/share/backgrounds/adapta/tealized.jpg";
     greeters.gtk = {
-      theme = {
-        name = "Yaru-dark";
-        package = pkgs.yaru-theme;
-      };
-      iconTheme = {
-        name = "Yaru";
-        package = pkgs.yaru-theme;
-      };
+      theme = shared.theme.gtkTheme;
+      iconTheme = shared.theme.iconTheme;
     };
   };
 
@@ -57,14 +51,8 @@ lib.mkIf config.setup.graphics.enable {
         name    = "Cantarell 11";
         package = pkgs.cantarell-fonts;
       };
-      iconTheme = {
-        name    = "Yaru";
-        package = pkgs.yaru-theme;
-      };
-      theme = {
-        name    = "Yaru-dark";
-        package = pkgs.yaru-theme;
-      };
+      iconTheme = shared.theme.iconTheme;
+      theme = shared.theme.gtkTheme;
     };
 
     # QT theme

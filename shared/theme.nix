@@ -1,3 +1,5 @@
+{ pkgs }:
+
 let
   # Colors from https://github.com/dracula/base16-dracula-scheme
   colors = [
@@ -38,5 +40,14 @@ let
     # Obtained from
     # https://github.com/base16-templates/base16-xresources/blob/d762461de45e00c73a514408988345691f727632/templates/default.mustache#L29-L45
     xresources = map self.getColor [ 00 08 11 10 13 14 12 05 03 09 01 02 04 06 15 07 ];
+
+    gtkTheme = {
+      name = "Dracula";
+      package = pkgs.dracula-theme;
+    };
+    iconTheme = {
+      name = "Dracula";
+      package = pkgs.dracula-theme;
+    };
   };
 in self

@@ -5,7 +5,7 @@ let
 in rec {
   consts   = import ./consts.nix;
   builders = callPackage ./builders { inherit inputs; };
-  theme    = import ./theme.nix;
+  theme    = callPackage ./theme.nix {};
 
   scripts = pkgs.runCommand "scripts" {} ''
     cp -r ${./scripts} "$out"
