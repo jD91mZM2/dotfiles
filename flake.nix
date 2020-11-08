@@ -74,7 +74,7 @@
             inherit system;
             modules = [
               # Base packages
-              nur.nixosModules.programs
+              nur.nixosModules.all
               ./shared/base.nix
             ];
             extraArgs = {

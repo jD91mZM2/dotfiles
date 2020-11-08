@@ -2,16 +2,7 @@
 {
   programs.scaff = {
     enable = true;
-    imports = let
-      baseURL = "https://gitlab.com/jD91mZM2/scaff-repo/-/jobs/836232426/artifacts/raw/build";
-      rawConfig = builtins.fetchurl {
-        url = "${baseURL}/config.toml";
-        sha256 = "09vpplqhz4bgs67j2ldga1pw77p99g940w3f24zgvv7rpaj4xdw7";
-      };
-      config = builtins.fromTOML (builtins.readFile rawConfig);
-    in pkgs.lib.mapAttrs (_: value:
-      "${baseURL}/${value}"
-    ) config.imports;
+    extra-configs = "https://gitlab.com/jD91mZM2/scaff-repo/-/jobs/836692518/artifacts/raw/build/config.toml";
   };
 
   programs.mpv = {
