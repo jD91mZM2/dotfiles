@@ -30,7 +30,9 @@
     };
   };
 
+  # Add some extra drivers
   hardware.cpu.amd.updateMicrocode = true;
+  hardware.enableRedistributableFirmware = true;
 
   services.xserver = {
     videoDrivers = [ "amdgpu" ];

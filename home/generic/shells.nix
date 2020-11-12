@@ -33,66 +33,79 @@ in {
     enableGit = lib.mkEnableOption "git";
   };
 
-  config = {
-    # Shells
-    programs.bash = lib.mkIf cfg.enableBash {
-      enable = true;
-      shellAliases = aliases;
-      initExtra = bashConfig;
-    };
-    programs.zsh = lib.mkIf cfg.enableZsh {
-      enable = true;
-      shellAliases = aliases;
-      initExtra = ''
-        ${bashConfig}
-        unset -f trans # some alias by grml-zsh-config
-      '';
-    };
+  config = lib.mkMerge [
+    {
+      # Shells
+      programs.bash = lib.mkIf cfg.enableBash {
+        enable = true;
+        shellAliases = aliases;
+        initExtra = bashConfig;
+      };
+      programs.zsh = lib.mkIf cfg.enableZsh {
+        enable = true;
+        shellAliases = aliases;
+        initExtra = ''
+          ${bashConfig}
+          unset -f trans # some alias by grml-zsh-config
+        '';
+      };
+    }
 
-    # Remote shell
-    programs.ssh = lib.mkIf cfg.enableGit {
-      enable      = true;
-      matchBlocks = {
-        "main" = {
-          user     = "user";
-          hostname = "krake.one";
+    (lib.mkIf cfg.enableGit {
+      # Remote shell
+      programs.ssh = {
+        enable      = true;
+        matchBlocks = {
+          "main" = {
+            user     = "user";
+            hostname = "krake.one";
+          };
         };
       };
-    };
 
-    # Every shell needs some git...
-    programs.git = lib.mkIf cfg.enableGit {
-      enable     = true;
-      lfs.enable = true;
-      userName   = shared.consts.name;
-      userEmail  = shared.consts.email;
+      # Every shell needs some git...
+      programs.git = {
+        enable     = true;
+        lfs.enable = true;
+        userName   = shared.consts.name;
+        userEmail  = shared.consts.email;
 
-      signing = {
-        key = shared.consts.gpgKeys.signing;
-        signByDefault = true;
+        signing = {
+          key = shared.consts.gpgKeys.signing;
+          signByDefault = true;
+        };
+        aliases = {
+          mr = "!f() { git fetch \${2-origin} merge-requests/\${1?}/head && git switch -d FETCH_HEAD; }; f";
+        };
+        extraConfig = {
+          pull.rebase = true;
+        };
       };
-      aliases = {
-        mr = "!f() { git fetch \${2-origin} merge-requests/\${1?}/head && git switch -d FETCH_HEAD; }; f";
-      };
-      extraConfig = {
-        pull.rebase = true;
-      };
-    };
 
-    # Every git needs some gpg...
-    programs.gpg = lib.mkIf cfg.enableGit {
-      enable = true;
-      settings = {
-        keyserver = "keys.openpgp.org";
+      # Every git needs some gpg...
+      programs.gpg = {
+        enable = true;
+        settings = {
+          keyserver = "keys.openpgp.org";
+        };
       };
-    };
-    services.gpg-agent = lib.mkIf cfg.enableGit {
-      enable             = true;
-      enableSshSupport   = true;
-      defaultCacheTtl    = 86400;
-      defaultCacheTtlSsh = 86400;
-      maxCacheTtl        = 86400;
-      maxCacheTtlSsh     = 86400;
-    };
-  };
+      home.file.".pam-gnupg".text = ''
+        B844DEE9FB33753FCFE216654430F649CA2FCC2B
+        D827EEC5D8A0F0CA7DAC011270CC552C8953BBA1
+        7AB7CA7DF6203E0F38B5B18F9BA3114B3DDBA750
+        6157563FB7B5618A02F7D7490118A26A97F31CA9
+      '';
+      services.gpg-agent = {
+        enable             = true;
+        enableSshSupport   = true;
+        defaultCacheTtl    = 86400;
+        defaultCacheTtlSsh = 86400;
+        maxCacheTtl        = 86400;
+        maxCacheTtlSsh     = 86400;
+        extraConfig = ''
+          allow-preset-passphrase
+        '';
+      };
+    })
+  ];
 }

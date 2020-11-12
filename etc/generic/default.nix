@@ -60,8 +60,8 @@ in {
       hostName = "samuel-${cfg.name}";
     };
 
-    # Add some extra drivers
-    hardware.enableRedistributableFirmware = true;
+    # Enable SYSRQ keys because disabling that is a horrible idea I think
+    boot.kernel.sysctl."kernel.sysrq" = 1;
 
     # Misc. settings
     documentation.dev.enable  = true;
@@ -78,6 +78,13 @@ in {
       initialPassword = "nixos";
       isNormalUser    = true;
       extraGroups     = [ "libvirtd" "adbusers" ];
+    };
+
+    # Unlock GnuPG automagically
+    security.pam.services.login.gnupg = {
+      enable = true;
+      noAutostart = true;
+      storeOnly = true;
     };
 
     # This value determines the NixOS release with which your system is to be
