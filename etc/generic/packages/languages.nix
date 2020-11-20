@@ -52,12 +52,11 @@ in
           mdl
         ]
         ++ lib.optionals cfg.python [
+          poetry
           (python3.withPackages (p: with p; [
             # python-language-server - broken?
             tkinter
           ]))
-
-          pypi2nix
         ]
         ++ lib.optionals cfg.rust [
           cargo-edit
