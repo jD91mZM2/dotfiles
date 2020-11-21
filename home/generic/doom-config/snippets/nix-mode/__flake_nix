@@ -12,20 +12,20 @@
     utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages."\${system}";
     in rec {
-      # `nix build`
+      # \`nix build\`
       packages.${1:hello} = pkgs.writeShellScriptBin "hello" "echo Hello, World!";
       defaultPackage = packages.$1;
 
-      # `nix develop`
-      devShell = pkgs.mkShell {
-        buildInputs = with pkgs; [ openssl ];
-        nativeBuildInputs = with pkgs; [ gcc ];
-      };
-
-      # `nix run`
+      # \`nix run\`
       apps.$1 = utils.lib.mkApp {
         drv = packages.$1;
       };
       defaultApp = apps.$1;
+
+      # \`nix develop\`
+      devShell = pkgs.mkShell {
+        buildInputs = with pkgs; [ openssl ];
+        nativeBuildInputs = with pkgs; [ gcc ];
+      };
     });
 }

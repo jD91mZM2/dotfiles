@@ -2,7 +2,7 @@
 {
   programs.scaff = {
     enable = true;
-    extra-configs = "https://gitlab.com/jD91mZM2/scaff-repo/-/jobs/864649703/artifacts/raw/build/config.toml";
+    extra-configs = "https://gitlab.com/jD91mZM2/scaff-repo/-/jobs/864780388/artifacts/raw/build/config.toml";
   };
 
   programs.mpv = {
