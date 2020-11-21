@@ -97,7 +97,7 @@
 
           # Nix stuff
           cachix
-          nix-prefetch-scripts
+          # nix-prefetch-scripts # - broken. todo
           nix-review
           nixos-generators
           rnix-lsp

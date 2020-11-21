@@ -23,7 +23,7 @@ in
 
       users = lib.genAttrs cfg.users (_user: {
         # Hacky way to send extraArgs to home-manager
-        _module.args = self.lib.system."${system}".configInputs.extraArgs;
+        _module.args = self.lib."${system}".configInputs.extraArgs;
 
         imports = [
           inputs.nur.hmModules.all

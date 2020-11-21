@@ -1,7 +1,7 @@
 { config, pkgs, self, shared, inputs, system, ... }:
 
 let
-  mkNixosModule = self.lib.system."${system}".mkNixosModule;
+  inherit (self.lib."${system}") mkNixosModule;
 in
 {
   # Because most npm packages are horribly unsafe, embedding native libraries

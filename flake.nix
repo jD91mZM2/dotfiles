@@ -2,8 +2,8 @@
   description = "My personal dotfiles and configurations";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-master.url = "nixpkgs/master";
+    utils.url = "github:numtide/flake-utils";
 
     nur.url = "git+https://gitlab.com/jD91mZM2/nur-packages.git";
     st.url = "git+https://gitlab.com/jD91mZM2/st.git";
@@ -24,6 +24,7 @@
 
     , nixpkgs
     , nixpkgs-master
+    , utils
 
     , nur
     , st
@@ -37,9 +38,8 @@
 
     , crate2nix
     } @ inputs:
-    let
-      forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" ];
-    in {
+
+    {
       overlay = final: prev: (emacs-overlay.overlay final prev) // {
         clangd = (
           let
@@ -62,65 +62,59 @@
         st = st.defaultPackage."${prev.system}";
       };
 
-      lib = {
-        system = forAllSystems (system: let
-          pkgs = nixpkgs.legacyPackages."${system}";
-
-          shared = pkgs.callPackage ./shared {
-            inherit inputs;
-          };
-
-          configInputs = {
-            inherit system;
-            modules = [
-              # Base packages
-              nur.nixosModules.all
-              ./shared/base.nix
-            ];
-            extraArgs = {
-              inherit self shared inputs system;
-            };
-          };
-        in rec {
-          inherit configInputs;
-
-          mkNixosConfig = modules:
-            nixpkgs.lib.makeOverridable nixpkgs.lib.nixosSystem (configInputs // {
-              modules = configInputs.modules ++ modules;
-            });
-
-          mkNixosConfigWithHome = modules: mkNixosConfig ([
-            home-manager.nixosModules.home-manager
-          ] ++ modules);
-
-          mkNixosModule = module: {
-            # Hacky way to send extraArgs to a module directly
-            _module.args = configInputs.extraArgs;
-            imports = configInputs.modules ++ [ module ];
-          };
-
-          mkHomeModule = module: {
-            # Hacky way to send extraArgs to a module directly
-            _module.args = configInputs.extraArgs;
-            imports = [ module ];
-          };
-        });
-      };
-
       # NixOS configurations
-      nixosConfigurations = let
-        mkNixosConfigWithHome = self.lib.system."x86_64-linux".mkNixosConfigWithHome;
-      in {
+      nixosConfigurations = with self.lib."x86_64-linux"; {
         samuel-computer = mkNixosConfigWithHome [ ./etc/computer/configuration.nix ];
         samuel-laptop = mkNixosConfigWithHome [ ./etc/laptop/configuration.nix ];
 
         samuel-vm-gui = mkNixosConfigWithHome [ ./etc/vm/vm-gui.nix ];
         samuel-vm-headless = mkNixosConfigWithHome [ ./etc/vm/vm-headless.nix ];
       };
+    } // (utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages."${system}";
 
-      devShell = forAllSystems (system: let
-        pkgs = nixpkgs.legacyPackages."${system}";
-      in pkgs.mkShell {
+      shared = pkgs.callPackage ./shared {
+        inherit inputs;
+      };
+
+      configInputs = {
+        inherit system;
+        modules = [
+          # Base packages
+          nur.nixosModules.all
+          ./shared/base.nix
+        ];
+        extraArgs = {
+          inherit self shared inputs system;
+        };
+      };
+    in rec {
+      lib = rec {
+        inherit configInputs;
+
+        mkNixosConfig = modules:
+          nixpkgs.lib.makeOverridable nixpkgs.lib.nixosSystem (configInputs // {
+            modules = configInputs.modules ++ modules;
+          });
+
+        mkNixosConfigWithHome = modules: mkNixosConfig ([
+          home-manager.nixosModules.home-manager
+        ] ++ modules);
+
+        mkNixosModule = module: {
+          # Hacky way to send extraArgs to a module directly
+          _module.args = configInputs.extraArgs;
+          imports = configInputs.modules ++ [ module ];
+        };
+
+        mkHomeModule = module: {
+          # Hacky way to send extraArgs to a module directly
+          _module.args = configInputs.extraArgs;
+          imports = [ module ];
+        };
+      };
+
+      devShell = pkgs.mkShell {
         # Things to be put in $PATH
         nativeBuildInputs =
           # Convenient scripts
@@ -130,6 +124,6 @@
             "${pkgs.nixops}/bin/nixops" deploy -d main --check --allow-reboot "$@"
           '')
           ];
-      });
-    };
+      };
+    }));
 }

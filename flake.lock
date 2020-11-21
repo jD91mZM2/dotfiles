@@ -147,16 +147,15 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1605447878,
-        "narHash": "sha256-gvO1uqPhXOT9k5Gggfll0ZMipPIJuRu9+NFMkTfOya8=",
+        "lastModified": 1605716121,
+        "narHash": "sha256-CbHicvkzLTfEY+aSUeUY7dfFlDOgZH3uK+PpUfb/DPA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "069f183f16c3ea5d4b6e7625433b92eba77534f7",
+        "rev": "6625284c397b44bc9518a5a1567c1b5aae455c08",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "nixos-unstable",
         "type": "indirect"
       }
     },
@@ -296,7 +295,8 @@
         "nur": "nur",
         "nur-rycee": "nur-rycee",
         "redox-world-map": "redox-world-map",
-        "st": "st"
+        "st": "st",
+        "utils": "utils"
       }
     },
     "scaff": {
@@ -333,6 +333,21 @@
       "original": {
         "type": "git",
         "url": "https://gitlab.com/jD91mZM2/st.git"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1605370193,
+        "narHash": "sha256-YyMTf3URDL/otKdKgtoMChu4vfVL3vCMkRqpGifhUn0=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5021eac20303a61fafe17224c087f5519baed54d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
       }
     }
   },

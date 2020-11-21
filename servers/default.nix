@@ -1,6 +1,6 @@
 let
   flake = import <dotfiles>;
-  mkNixosModule = flake.lib.system."${builtins.currentSystem}".mkNixosModule;
+  inherit (flake.lib."${builtins.currentSystem}") mkNixosModule;
 in
 {
   network.description = "My personal VPS network";
