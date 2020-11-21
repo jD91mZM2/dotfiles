@@ -15,8 +15,8 @@ in
   # https://gitlab.com/simple-nixos-mailserver/nixos-mailserver
   imports = [
     (builtins.fetchTarball {
-      url    = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/4008d0cb53b9abd00d2dc568814566227ddd3825.tar.gz";
-      sha256 = "1y9svi3nrg24ky1gqbpa3zhnhhin399h0cmnf81hb4yn75mlqiqx";
+      url    = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/ee1ad50830b479ed8fb46c4c51d3bcdbc2184b8b.tar.gz";
+      sha256 = "1m9n95g2qh331cig3abj14sz5k8sscq1zv34gwjk2nnjrasdjsjx";
     })
   ];
 

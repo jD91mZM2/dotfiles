@@ -1,8 +1,6 @@
 { pkgs, inputs, system, shared, ... }:
 
 let
-  nur-no-pkgs = import (<dotfiles/shared/nur-no-pkgs.nix>);
-
   # Packages
   abottomod = import ~/Coding/Python/abottomod;
   timeywimey = import ~/Coding/Python/timeywimey;
@@ -38,9 +36,6 @@ in {
   imports = [
     # Shared base settings
     ../base.nix
-
-    # Custom modules
-    nur-no-pkgs.repos.jd91mzm2.modules.custom-services # <- recursion
 
     # Files
     ./bitwarden.nix

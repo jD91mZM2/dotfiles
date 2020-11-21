@@ -19,15 +19,14 @@
 
       # Allow nginx to access certs
       group = "nginx";
-      allowKeysForGroup = true;
 
       postRun = ''
         systemctl reload nginx
       '';
-      extraDomains = {
-        "vault.krake.one" = null;
-        "redox-os.club" = null;
-      };
+      extraDomainNames = [
+        "vault.krake.one"
+        "redox-os.club"
+      ];
     };
     certs."mail.krake.one" = {
       email = shared.consts.email;
@@ -35,7 +34,6 @@
 
       # Allow nginx to access certs
       group = "nginx";
-      allowKeysForGroup = true;
 
       # https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/blob/v2.2.1/mail-server/nginx.nix#L39-41
       postRun = ''
