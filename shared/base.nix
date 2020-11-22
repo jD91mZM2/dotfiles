@@ -1,4 +1,4 @@
-{ pkgs, self, shared, nur, inputs, ... }:
+{ pkgs, self, shared, inputs, ... }:
 
 {
   # Language settings

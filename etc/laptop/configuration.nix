@@ -10,13 +10,12 @@
   ];
 
   setup = {
+    name = "laptop";
     full = true;
-    network = {
-      name = "laptop";
-      id   = "e345d278";
-    };
   };
 
+  # Needed for ZFS
+  networking.hostId = "e345d278";
   boot.supportedFilesystems = [ "zfs" ];
 
   hardware.cpu.intel.updateMicrocode = true;

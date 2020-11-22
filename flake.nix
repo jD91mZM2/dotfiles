@@ -5,8 +5,8 @@
     nixpkgs-master.url = "nixpkgs/master";
     utils.url = "github:numtide/flake-utils";
 
-    nur.url = "git+https://gitlab.com/jD91mZM2/nur-packages.git";
-    st.url = "git+https://gitlab.com/jD91mZM2/st.git";
+    nix-exprs.url = "gitlab:jD91mZM2/nix-exprs";
+    st.url = "gitlab:jD91mZM2/st";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     home-manager.url = "github:nix-community/home-manager";
@@ -26,7 +26,7 @@
     , nixpkgs-master
     , utils
 
-    , nur
+    , nix-exprs
     , st
 
     , emacs-overlay
@@ -81,7 +81,7 @@
         inherit system;
         modules = [
           # Base packages
-          nur.nixosModules.all
+          nix-exprs.nixosModules.all
           ./shared/base.nix
         ];
         extraArgs = {

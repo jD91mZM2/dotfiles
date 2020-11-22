@@ -26,7 +26,7 @@ in
         _module.args = self.lib."${system}".configInputs.extraArgs;
 
         imports = [
-          inputs.nur.hmModules.all
+          inputs.nix-exprs.hmModules.all
           ../../home/full.nix
         ] ++ cfg.modules;
       });

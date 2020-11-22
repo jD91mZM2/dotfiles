@@ -1,5 +1,5 @@
-[submodule "nur-packages"]
-	path = nur-packages
+[submodule "nix-exprs"]
+	path = nix-exprs
 	url = git@gitlab.com:jD91mZM2/nur-packages.git
 	branch = master
 [submodule "forks/st"]
