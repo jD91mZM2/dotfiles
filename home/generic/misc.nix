@@ -2,7 +2,7 @@
 {
   programs.scaff = {
     enable = true;
-    extra-configs = "https://gitlab.com/jD91mZM2/scaff-repo/-/jobs/864780388/artifacts/raw/build/config.toml";
+    extra-configs = "https://gitlab.com/jD91mZM2/scaff-repo/-/jobs/907219563/artifacts/raw/build/config.toml";
   };
 
   programs.mpv = {
@@ -10,6 +10,11 @@
     config = {
       keep-open = true;
     };
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableNixDirenvIntegration = true;
   };
 
   home.file.".tmux.conf".source = ./misc/tmux.conf;
