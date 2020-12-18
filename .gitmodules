@@ -1,8 +1,8 @@
 [submodule "nix-exprs"]
 	path = nix-exprs
-	url = git@gitlab.com:jD91mZM2/nur-packages.git
+	url = ../nix-exprs.git
 	branch = master
 [submodule "forks/st"]
 	path = forks/st
-	url = git@gitlab.com:jD91mZM2/st.git
+	url = ../st.git
 	branch = master
