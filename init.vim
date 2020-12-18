@@ -3,6 +3,7 @@ let g:airline_theme = 'dracula'
 let g:airline_powerline_fonts = 1
 
 " Options --- {{{
+set mouse=a
 set ignorecase
 set number
 set relativenumber
@@ -41,6 +42,8 @@ call s:map('n', '<leader>V', 'vsplit')
 call s:map('n', '<leader>%', 'source %')
 call s:map('n', '<leader>1', 'only')
 call s:map('n', '<leader>q', 'q')
+call s:map('n', '<leader><leader>', 'Ranger')
+call s:map('n', '<leader>t', 'NERDTreeToggle')
 
 nnoremap D 0d$
 nnoremap <leader>h <C-w>h
@@ -56,20 +59,6 @@ augroup general
     au!
     au TermClose * :bdelete!
 augroup END
-
-" Browse with ranger
-function! RangerDone()
-    if filereadable(s:rangerfile)
-        exec 'edit ' . readfile(s:rangerfile)[0]
-    endif
-endfunction
-function! Ranger()
-    let s:rangerfile = tempname()
-    exec 'terminal ranger --choosefile ' . shellescape(s:rangerfile) . ' -- ' . shellescape(expand('%:p:h'))
-    normal! i
-    au TermClose * ++once :call RangerDone()
-endfunction
-call s:map('n', '<leader><leader>', 'call Ranger()')
 
 " Don't highlight search --- {{{
 call s:map('nvic', '<F1>noh', 'noh')
@@ -91,6 +80,9 @@ augroup END
 packloadall
 
 " Post-plugin styling
+colorscheme dracula
+hi Normal ctermbg=NONE guibg=NONE
+
 let s:clcolor = g:dracula#palette.bgdark[1]
-execute 'highlight CursorLine cterm=NONE gui=NONE guibg=' . s:clcolor . ' ctermbg=' . s:clcolor
+execute 'hi CursorLine cterm=NONE gui=NONE guibg=' . s:clcolor . ' ctermbg=' . s:clcolor
 set cursorline
