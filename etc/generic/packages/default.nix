@@ -26,7 +26,7 @@
     environment.systemPackages = with pkgs; [
       # Applications
       tmux
-      neovim # nice to have as backup if emacs would break
+      neovim
 
       # Must have utils
       bind
@@ -97,7 +97,7 @@
 
           # Nix stuff
           cachix
-          # nix-prefetch-scripts # - broken. todo
+          nix-prefetch-scripts # - broken. todo
           nix-review
           nixos-generators
           rnix-lsp

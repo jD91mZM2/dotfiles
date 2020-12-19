@@ -52,14 +52,16 @@
         );
 
         # Add rycee's nur packages
-        nur-rycee = prev.callPackage nur-rycee {};
+        nur-rycee = final.callPackage nur-rycee {};
 
         # Override or add packages
-        mkchromecast = nixpkgs-master.legacyPackages."${prev.system}".mkchromecast;
-        nixos-generators = nixos-generators.defaultPackage."${prev.system}";
-        crate2nix = prev.callPackage crate2nix {};
+        mkchromecast = nixpkgs-master.legacyPackages."${final.system}".mkchromecast;
+        nixos-generators = nixos-generators.defaultPackage."${final.system}";
+        crate2nix = final.callPackage crate2nix {};
 
-        st = st.defaultPackage."${prev.system}";
+        neovim = nix-exprs.packages."${final.system}".neovim;
+
+        st = st.defaultPackage."${final.system}";
       };
 
       # NixOS configurations
