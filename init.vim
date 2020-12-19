@@ -1,6 +1,7 @@
-" Styling
+" Styling --- {{{
 let g:airline_theme = 'dracula'
 let g:airline_powerline_fonts = 1
+" }}}
 
 " Options --- {{{
 set mouse=a
@@ -11,6 +12,7 @@ set clipboard=unnamedplus
 set expandtab
 set tabstop=4
 set shiftwidth=0
+set hidden
 " }}}
 
 " Keyboard shortcuts --- {{{
@@ -37,13 +39,26 @@ call s:map('nvic', '<Up>', 'echo "You must never use arrow keys!"')
 call s:map('nvic', '<Down>', 'echo "You must never use arrow keys!"')
 
 call s:map('n', '<C-S>', 'w')
+call s:map('n', 'gt', 'CtrlPBuffer')
+
 call s:map('n', '<leader>H', 'split')
 call s:map('n', '<leader>V', 'vsplit')
 call s:map('n', '<leader>%', 'source %')
 call s:map('n', '<leader>1', 'only')
 call s:map('n', '<leader>q', 'q')
 call s:map('n', '<leader><leader>', 'Ranger')
-call s:map('n', '<leader>t', 'NERDTreeToggle')
+
+call s:map('n', '<leader>g', 'Git')
+
+function! ToggleNERD()
+    if g:NERDTree.IsOpen()
+        NERDTreeClose
+    else
+        NERDTreeFind
+    endif
+endfunction
+
+call s:map('n', '<leader>t', 'call ToggleNERD()')
 
 nnoremap D 0d$
 nnoremap <leader>h <C-w>h
@@ -54,35 +69,57 @@ nnoremap <leader>: q:
 
 " }}}
 
-" Misc autocommands
+" Misc autocommands --- {{{
 augroup general
     au!
-    au TermClose * :bdelete!
+    au TermClose * bdelete!
+augroup END
+" }}}
+
+" NCM2 completion --- {{{
+augroup ncm2
+    au BufEnter * call ncm2#enable_for_buffer()
 augroup END
 
+set completeopt=noinsert,menuone,noselect
+" --- }}}
+
+
 " Don't highlight search --- {{{
-call s:map('nvic', '<F1>noh', 'noh')
+call s:map('nvic', '<Plug>noh', 'noh')
 function! NohTimer()
     if exists("s:nohtimerid")
         call timer_stop(s:nohtimerid)
     endif
-    let s:nohtimerid = timer_start(3000, { _id -> feedkeys("\<F1>noh") })
+    let s:nohtimerid = timer_start(3000, { _id -> feedkeys("\<Plug>noh") })
 endfunction
 nnoremap <silent> n :call NohTimer()<CR>n
 nnoremap <silent> N :call NohTimer()<CR>N
 augroup nosearch
     au!
-    au CmdlineLeave /,\? :call NohTimer()
+    au CmdlineLeave /,\? call NohTimer()
 augroup END
 " }}}
+
+" Language Server Protocol
+let g:LanguageClient_serverCommands = {
+            \ 'rust': ['rls'],
+            \ 'nix': ['rnix-lsp'],
+            \ }
 
 " Load all plugins
 packloadall
 
-" Post-plugin styling
+" Post-plugin styling --- {{{
 colorscheme dracula
 hi Normal ctermbg=NONE guibg=NONE
 
 let s:clcolor = g:dracula#palette.bgdark[1]
 execute 'hi CursorLine cterm=NONE gui=NONE guibg=' . s:clcolor . ' ctermbg=' . s:clcolor
 set cursorline
+" }}}
+
+" Operators --- {{{
+call operator#user#define_ex_command('sort', 'sort')
+map gs <Plug>(operator-sort)
+" }}}

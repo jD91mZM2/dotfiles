@@ -23,21 +23,33 @@ let
       packages.nixPackages = with vimPlugins; {
         # Required packages
         start = [
+          # Dependencies
+          nvim-yarp # ncm2
+
+          # Libraries
+          vim-operator-user
+
           # Style
           dracula-vim
           vim-airline
           vim-airline-themes
 
           # Navigation
+          ctrlp
           nerdtree
+          ranger-vim2
+
+          # VCS
+          fugitive
 
           # Editing
-          vim-surround
+          LanguageClient-neovim
           auto-pairs
+          ncm2
+          vim-surround
 
           # Languages
           vim-nix
-          ranger-vim2
         ];
 
         # Packages that might be lazy-loaded
