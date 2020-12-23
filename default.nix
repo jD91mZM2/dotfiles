@@ -1,8 +1,11 @@
-{ lib, symlinkJoin, makeWrapper, ranger, neovim, vimPlugins, vimUtils, fetchFromGitHub }:
+{ lib, symlinkJoin, makeWrapper, pkgs, neovim, vimPlugins, vimUtils, fetchFromGitHub }:
 
 let
-  runtimeDeps = [
+  runtimeDeps = with pkgs; [
+    fd
+    fzf
     ranger
+    ripgrep
   ];
 
   ranger-vim2 = vimUtils.buildVimPlugin {
@@ -36,8 +39,10 @@ let
 
           # Navigation
           ctrlp
+          fzf-vim
           nerdtree
           ranger-vim2
+          vim-rooter
 
           # VCS
           fugitive
@@ -46,6 +51,7 @@ let
           LanguageClient-neovim
           auto-pairs
           ncm2
+          vim-commentary
           vim-surround
 
           # Languages

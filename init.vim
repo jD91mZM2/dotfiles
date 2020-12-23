@@ -39,14 +39,15 @@ call s:map('nvic', '<Up>', 'echo "You must never use arrow keys!"')
 call s:map('nvic', '<Down>', 'echo "You must never use arrow keys!"')
 
 call s:map('n', '<C-S>', 'w')
-call s:map('n', 'gt', 'CtrlPBuffer')
+call s:map('n', 'gt', 'Buffers')
 
 call s:map('n', '<leader>H', 'split')
 call s:map('n', '<leader>V', 'vsplit')
 call s:map('n', '<leader>%', 'source %')
 call s:map('n', '<leader>1', 'only')
 call s:map('n', '<leader>q', 'q')
-call s:map('n', '<leader><leader>', 'Ranger')
+call s:map('n', '<leader><leader>', 'Files')
+call s:map('n', '<leader>f', 'Ranger')
 
 call s:map('n', '<leader>g', 'Git')
 
@@ -60,12 +61,13 @@ endfunction
 
 call s:map('n', '<leader>t', 'call ToggleNERD()')
 
-nnoremap D 0d$
+exec 'nnoremap <leader>/ :Rg '
+nnoremap <leader>: q:
 nnoremap <leader>h <C-w>h
-nnoremap <leader>l <C-w>l
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
-nnoremap <leader>: q:
+nnoremap <leader>l <C-w>l
+nnoremap D 0d$
 
 " }}}
 
@@ -75,14 +77,6 @@ augroup general
     au TermClose * bdelete!
 augroup END
 " }}}
-
-" NCM2 completion --- {{{
-augroup ncm2
-    au BufEnter * call ncm2#enable_for_buffer()
-augroup END
-
-set completeopt=noinsert,menuone,noselect
-" --- }}}
 
 
 " Don't highlight search --- {{{
@@ -101,11 +95,28 @@ augroup nosearch
 augroup END
 " }}}
 
-" Language Server Protocol
+" Plugin configuration --- {{{
+
+" Language Server Protocol --- {{{
 let g:LanguageClient_serverCommands = {
             \ 'rust': ['rls'],
             \ 'nix': ['rnix-lsp'],
             \ }
+" }}}
+
+" NCM2 completion --- {{{
+augroup ncm2
+    au BufEnter * call ncm2#enable_for_buffer()
+augroup END
+
+set completeopt=noinsert,menuone,noselect
+" --- }}}
+
+" FZF --- {{{
+let $FZF_DEFAULT_COMMAND = 'fd'
+" }}}
+
+" }}}
 
 " Load all plugins
 packloadall
