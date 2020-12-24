@@ -55,6 +55,8 @@ let
           ncm2
           vim-commentary
           vim-surround
+          ultisnips
+          ncm2-ultisnips
 
           # Languages
           vim-nix

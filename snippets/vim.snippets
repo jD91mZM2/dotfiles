@@ -1,0 +1,24 @@
+snippet fun "Function"
+function! ${1:name}(${2:one, two, ...})
+	$0
+endfunction
+endsnippet
+
+snippet aug "Autogroup"
+augroup ${1:group}
+	au!
+
+	" ${2:Automatically Does Stuff}
+	au ${3:FileType} ${4:*} $0
+augroup END
+endsnippet
+
+snippet # "Region"
+" $1 --- {{{
+$0
+" }}}
+endsnippet
+
+snippet map "Mappings"
+nnoremap ${1:<leader>n} :$0<CR>
+endsnippet

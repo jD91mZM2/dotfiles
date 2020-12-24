@@ -1,7 +1,7 @@
-let s:dir = expand('<sfile>:p:h')
+let g:VimrcDir = expand('<sfile>:p:h')
 
 function! s:load(relative)
-    let absolute = s:dir . '/' . a:relative
+    let absolute = g:VimrcDir . '/' . a:relative
     exec 'source ' . absolute
 endfunction
 
@@ -20,7 +20,6 @@ set expandtab
 set tabstop=4
 set shiftwidth=0
 set hidden
-set formatoptions-=o
 " }}}
 
 " Keyboard shortcuts --- {{{
@@ -30,7 +29,16 @@ call s:load('./keymap.vim')
 " Misc autocommands --- {{{
 augroup general
     au!
+
+    " Don't show "Terminal Closed" screen
     au TermClose * bdelete!
+
+    " Don't continue comment on 'o'
+    au FileType * set formatoptions-=o
+
+    " Use foldmethod=marker in vimrc
+    au FileType vim setlocal foldmethod=marker
+    au FileType vim normal! zR
 augroup END
 " }}}
 
@@ -51,12 +59,11 @@ augroup nosearch
 augroup END
 " }}}
 
-" Plugin configuration --- {{{
-call s:load('./plugins.vim')
-" }}}
-
-" Load all plugins
+" Load all plugins --- {{{
+call s:load('./pre-plugins.vim')
 packloadall
+call s:load('./post-plugins.vim')
+" }}}
 
 " Post-plugin styling --- {{{
 colorscheme dracula
@@ -65,9 +72,4 @@ hi Normal ctermbg=NONE guibg=NONE
 let s:clcolor = g:dracula#palette.bgdark[1]
 execute 'hi CursorLine cterm=NONE gui=NONE guibg=' . s:clcolor . ' ctermbg=' . s:clcolor
 set cursorline
-" }}}
-
-" Operators --- {{{
-call operator#user#define_ex_command('sort', 'sort')
-map gs <Plug>(operator-sort)
 " }}}
