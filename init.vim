@@ -66,10 +66,33 @@ call s:load('./post-plugins.vim')
 " }}}
 
 " Post-plugin styling --- {{{
+function! s:highlight(group, extra, ...)
+    let command = 'hi ' . a:group . a:extra
+    for assign in a:000
+        let list = split(assign, '=')
+        let color = execute('echon g:dracula#palette.' . list[1] . '[1]')
+        let command .= ' ' . list[0] . '=' . color
+    endfor
+    execute command
+endfunction
 colorscheme dracula
 hi Normal ctermbg=NONE guibg=NONE
 
-let s:clcolor = g:dracula#palette.bgdark[1]
-execute 'hi CursorLine cterm=NONE gui=NONE guibg=' . s:clcolor . ' ctermbg=' . s:clcolor
+call s:highlight('CursorLine', ' cterm=NONE gui=NONE', 'guibg=bgdark', 'ctermbg=bgdark')
 set cursorline
+" }}}
+
+" Highlight trailing spaces --- {{{
+" See https://vim.fandom.com/wiki/Highlight_unwanted_spaces#Highlighting_with_the_match_command
+hi ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+\%#\@<!$/
+
+augroup extraws
+    au!
+
+    " Redraws the highlights when leaving insert mode
+    au InsertLeave * redraw!
+augroup END
+
+call s:highlight('ExtraWhitespace', ' cterm=NONE gui=NONE', 'guibg=red', 'ctermbg=red')
 " }}}

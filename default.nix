@@ -53,10 +53,11 @@ let
           LanguageClient-neovim
           auto-pairs
           ncm2
-          vim-commentary
-          vim-surround
-          ultisnips
           ncm2-ultisnips
+          ultisnips
+          vim-commentary
+          vim-exchange
+          vim-surround
 
           # Languages
           vim-nix
