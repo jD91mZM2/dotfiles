@@ -56,7 +56,7 @@ awful.rules.rules = {
   },
 
   {
-    rule = { class = ".emacs-wrapped" },
+    rule = { instance = "neovim" },
     properties = { screen = 1, tag = "2" }
   },
   {
@@ -66,7 +66,7 @@ awful.rules.rules = {
   {
     rule_any = {
       class = { "Chromium-browser", "Thunderbird" },
-      name = { "weechat" },
+      instance = { "weechat" },
     },
     properties = { screen = 1, tag = "9" }
   },

@@ -66,6 +66,11 @@ in
           desktopName = "Redox Mattermost";
           exec = "${chromium}/bin/chromium --app=https://chat.redox-os.org/";
         })
+        (makeDesktopItem {
+          name = "neovim";
+          desktopName = "neovim gui";
+          exec = "${st}/bin/st nvr -s";
+        })
       ];
     });
   };

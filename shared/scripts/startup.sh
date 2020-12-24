@@ -18,8 +18,8 @@ xfce4-power-manager &
 
 st -e tmux &
 sleep 1 # wait for terminal to statup
-emacs &
-st -e weechat &
+st -n neovim nvr -s &
+st -n weechat -e weechat &
 
 chromium --app="https://chat.redox-os.org/" &
 sleep 10 # chrome doesn't handle stress well apparently

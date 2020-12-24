@@ -6,7 +6,6 @@ let
   aliases = {
     cal        = "cal -m";
     clear      = "clear; echo -ne \"\\e[3J\"";
-    e          = "env -u TMPDIR emacsclient -n"; # nix-shell sets $TMPDIR which messes up emacsclient's search
     ls         = "ls -CF --color=auto";
     nix-shell  = "nix-shell --command zsh";
     objdump    = "objdump -Mintel";
