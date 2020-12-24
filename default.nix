@@ -1,4 +1,4 @@
-{ lib, symlinkJoin, makeWrapper, pkgs, neovim, vimPlugins, vimUtils, fetchFromGitHub }:
+{ lib, symlinkJoin, makeWrapper, pkgs, neovim, neovim-remote, vimPlugins, vimUtils, fetchFromGitHub }:
 
 let
   runtimeDeps = with pkgs; [
@@ -66,11 +66,15 @@ let
   };
 in symlinkJoin {
   name = "nvim";
-  paths = [ nvim ];
+  paths = [ nvim neovim-remote ];
 
   nativeBuildInputs = [ makeWrapper ];
   postBuild = ''
+    # Add runtime deps to neovim
     rm "$out/bin/nvim"
     makeWrapper "${nvim}/bin/nvim" "$out/bin/nvim" --suffix PATH ':' ${lib.escapeShellArg (lib.makeBinPath runtimeDeps)}
+
+    # Alias neovim-remote as "e" (for edit)
+    cp "$out/bin/nvr" "$out/bin/e"
   '';
 }
