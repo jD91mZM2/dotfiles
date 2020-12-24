@@ -21,7 +21,9 @@ let
 
   nvim = neovim.override {
     configure = {
-      customRC = builtins.readFile ./init.vim;
+      customRC = ''
+        source ${./.}/init.vim
+      '';
 
       packages.nixPackages = with vimPlugins; {
         # Required packages

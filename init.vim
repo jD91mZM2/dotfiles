@@ -1,3 +1,10 @@
+let s:dir = expand('<sfile>:p:h')
+
+function! s:load(relative)
+    let absolute = s:dir . '/' . a:relative
+    exec 'source ' . absolute
+endfunction
+
 " Styling --- {{{
 let g:airline_theme = 'dracula'
 let g:airline_powerline_fonts = 1
@@ -13,62 +20,11 @@ set expandtab
 set tabstop=4
 set shiftwidth=0
 set hidden
+set formatoptions-=o
 " }}}
 
 " Keyboard shortcuts --- {{{
-let mapleader = ' '
-
-function! s:map(mode, key, command)
-    if a:mode =~# 'n'
-        execute 'nnoremap <silent> ' . a:key . ' :' . a:command . '<CR>'
-    endif
-    if a:mode =~# 'v'
-        execute 'vnoremap <silent> ' . a:key . ' <C-c>:' . a:command . '<CR>gv'
-    endif
-    if a:mode =~# 'i'
-        execute 'inoremap <silent> ' . a:key . ' <C-o>:' . a:command . '<CR>'
-    endif
-    if a:mode =~# 'c'
-        execute 'cnoremap <silent> ' . a:key . ' <C-c>:' . a:command . '<CR>:<C-p>'
-    endif
-endfunction
-
-call s:map('nvi', '<Left>', 'echo "You must never use arrow keys!"')
-call s:map('nvi', '<Right>', 'echo "You must never use arrow keys!"')
-call s:map('nvic', '<Up>', 'echo "You must never use arrow keys!"')
-call s:map('nvic', '<Down>', 'echo "You must never use arrow keys!"')
-
-call s:map('n', '<C-S>', 'w')
-call s:map('n', 'gt', 'Buffers')
-
-call s:map('n', '<leader>H', 'split')
-call s:map('n', '<leader>V', 'vsplit')
-call s:map('n', '<leader>%', 'source %')
-call s:map('n', '<leader>1', 'only')
-call s:map('n', '<leader>q', 'q')
-call s:map('n', '<leader><leader>', 'Files')
-call s:map('n', '<leader>f', 'Ranger')
-
-call s:map('n', '<leader>g', 'Git')
-
-function! ToggleNERD()
-    if g:NERDTree.IsOpen()
-        NERDTreeClose
-    else
-        NERDTreeFind
-    endif
-endfunction
-
-call s:map('n', '<leader>t', 'call ToggleNERD()')
-
-exec 'nnoremap <leader>/ :Rg '
-nnoremap <leader>: q:
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
-nnoremap D 0d$
-
+call s:load('./keymap.vim')
 " }}}
 
 " Misc autocommands --- {{{
@@ -80,7 +36,7 @@ augroup END
 
 
 " Don't highlight search --- {{{
-call s:map('nvic', '<Plug>noh', 'noh')
+call Map('nvic', '<Plug>noh', 'noh')
 function! NohTimer()
     if exists("s:nohtimerid")
         call timer_stop(s:nohtimerid)
@@ -96,26 +52,7 @@ augroup END
 " }}}
 
 " Plugin configuration --- {{{
-
-" Language Server Protocol --- {{{
-let g:LanguageClient_serverCommands = {
-            \ 'rust': ['rls'],
-            \ 'nix': ['rnix-lsp'],
-            \ }
-" }}}
-
-" NCM2 completion --- {{{
-augroup ncm2
-    au BufEnter * call ncm2#enable_for_buffer()
-augroup END
-
-set completeopt=noinsert,menuone,noselect
-" --- }}}
-
-" FZF --- {{{
-let $FZF_DEFAULT_COMMAND = 'fd'
-" }}}
-
+call s:load('./plugins.vim')
 " }}}
 
 " Load all plugins
