@@ -43,15 +43,20 @@ augroup END
 " }}}
 
 
-" Don't highlight search --- {{{
+" Highlight timer, stop highlighting after 3 seconds --- {{{
 call Map('nvic', '<Plug>noh', 'noh')
+function! NohReady(_id)
+    au CursorMoved,CursorHold,CursorHoldI * ++once :call feedkeys("\<Plug>noh")
+endfunction
 function! NohTimer()
     if exists("s:nohtimerid")
         call timer_stop(s:nohtimerid)
     endif
-    let s:nohtimerid = timer_start(3000, { _id -> feedkeys("\<Plug>noh") })
+    let s:nohtimerid = timer_start(3000, function('NohReady'))
 endfunction
 nnoremap <silent> n :call NohTimer()<CR>n
+nnoremap <silent> * :call NohTimer()<CR>*
+nnoremap <silent> # :call NohTimer()<CR>#
 nnoremap <silent> N :call NohTimer()<CR>N
 augroup nosearch
     au!
@@ -75,6 +80,7 @@ function! s:highlight(group, extra, ...)
     endfor
     execute command
 endfunction
+
 colorscheme dracula
 hi Normal ctermbg=NONE guibg=NONE
 

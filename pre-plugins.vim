@@ -14,7 +14,7 @@ set completeopt=noinsert,menuone,noselect
 " }}}
 
 " FZF --- {{{
-let $FZF_DEFAULT_COMMAND = 'fd'
+let $FZF_DEFAULT_COMMAND = 'fd -H -E .git'
 " }}}
 
 " NERDTree --- {{{
