@@ -56,6 +56,7 @@ let
           vim-commentary
           vim-exchange
           vim-surround
+          tabular
 
           # Validation
           LanguageClient-neovim
@@ -63,6 +64,7 @@ let
           # Languages
           vim-nix
           vim-toml
+          vim-markdown
         ];
 
         # Packages that might be lazy-loaded

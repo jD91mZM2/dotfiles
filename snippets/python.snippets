@@ -24,7 +24,7 @@ class ${1:Name}:
 	${0:name: int = 0}
 endsnippet
 
-snippet enum "Enum"
+snippet enum "Enum" b
 class ${1:Name}(Enum):
 	${0:RED} = auto()
 endsnippet
@@ -35,4 +35,8 @@ def ${1:my_decorator}(f):
 	def wrapper(*args, **kwargs):
 		$0return f(*args, **kwargs)
 	return wrapper
+endsnippet
+
+snippet im "from ... import ..."
+from ${1:dataclasses} import ${0:dataclass}
 endsnippet
