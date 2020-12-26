@@ -4,6 +4,7 @@ let
   # Packages
   abottomod = import ~/Coding/Python/abottomod;
   timeywimey = import ~/Coding/Python/timeywimey;
+  schedulebot = import ~/Coding/Python/schedulebot;
   redox-world-map = inputs.redox-world-map.defaultPackage."${system}".override {
     # TODO: Make these into runtime secrets
     clientId = "2247a648fd9f3f852ef66a5d876fed20421d0a974f67bc3e9bf0926048d831c1";
@@ -29,6 +30,7 @@ in {
       bitwarden = makeKey "${shared.consts.secrets}/bitwarden";
       discord-abottomod = makeKey "${shared.consts.secrets}/discord/abottomod";
       discord-timeywimey = makeKey "${shared.consts.secrets}/discord/timeywimey";
+      discord-schedulebot = makeKey "${shared.consts.secrets}/discord/schedulebot";
       znc = makeKey "${shared.consts.secrets}/znc";
     };
   };
@@ -70,6 +72,7 @@ in {
   in {
     abottomod       = withKeys "ABOTTOMOD_TOKEN=\"$(cat /run/keys/discord-abottomod)\" ${abottomod}/bin/abottomod";
     timeywimey      = withKeys "TIMEYWIMEY_TOKEN=\"$(cat /run/keys/discord-timeywimey)\" ${timeywimey}/bin/timeywimey";
+    schedulebot     = withKeys "SCHEDULEBOT_TOKEN=\"$(cat /run/keys/discord-schedulebot)\" ${schedulebot}/bin/schedulebot";
     redox-world-map = normal "${redox-world-map}/bin/redox-world-map";
   };
   services.syncthing = {
