@@ -90,11 +90,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1608824151,
-        "narHash": "sha256-yaU8PVjkCMMXT+5pskx89jY1ezeVMxlNeJ5LEyZiPSA=",
+        "lastModified": 1608979503,
+        "narHash": "sha256-D5u99PdDUz0yvIAExP7eGAFEJP34nc/c8RdfhWa3QaU=",
         "owner": "jD91mZM2",
         "repo": "nix-exprs",
-        "rev": "8124c8478eb4a781c079553dc3bee11129c96d5e",
+        "rev": "726b0d059286eacb70d2cf85fe2d8e30869b3b3e",
         "type": "gitlab"
       },
       "original": {

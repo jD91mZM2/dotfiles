@@ -54,7 +54,7 @@ in
         ++ lib.optionals cfg.python [
           poetry
           (python3.withPackages (p: with p; [
-            # python-language-server - broken?
+            python-language-server
             tkinter
           ]))
         ]
