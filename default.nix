@@ -40,7 +40,6 @@ let
           vim-airline-themes
 
           # Navigation
-          ctrlp
           fzf-vim
           nerdtree
           ranger-vim2
@@ -50,7 +49,6 @@ let
           fugitive
 
           # Editing
-          LanguageClient-neovim
           auto-pairs
           ncm2
           ncm2-ultisnips
@@ -59,8 +57,12 @@ let
           vim-exchange
           vim-surround
 
+          # Validation
+          LanguageClient-neovim
+
           # Languages
           vim-nix
+          vim-toml
         ];
 
         # Packages that might be lazy-loaded
@@ -80,6 +82,6 @@ in symlinkJoin {
     makeWrapper "${nvim}/bin/nvim" "$out/bin/nvim" --suffix PATH ':' ${lib.escapeShellArg (lib.makeBinPath runtimeDeps)}
 
     # Alias neovim-remote as "e" (for edit)
-    cp "$out/bin/nvr" "$out/bin/e"
+    makeWrapper "${neovim-remote}/bin/nvr" "$out/bin/e" --add-flags -s
   '';
 }

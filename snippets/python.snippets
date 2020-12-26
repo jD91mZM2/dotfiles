@@ -1,0 +1,38 @@
+snippet class "Class"
+class ${1:Name}${2:(Extends)}:
+	def __init__(self${3:, arg1, arg2}):
+		${3/, ([a-zA-Z0-9_]+)[^,]*/self.$1 = $1
+		/g}$0
+
+	${VISUAL:def some_method(self):
+		pass}
+endsnippet
+
+snippet met "Class Method"
+def ${1:name}(self${2:, arg}):
+	${VISUAL}$0
+endsnippet
+
+snippet def "Function"
+def ${1:name}(${2:arg, ...}):
+	${VISUAL}$0
+endsnippet
+
+snippet data "Struct"
+@dataclass
+class ${1:Name}:
+	${0:name: int = 0}
+endsnippet
+
+snippet enum "Enum"
+class ${1:Name}(Enum):
+	${0:RED} = auto()
+endsnippet
+
+snippet decorator "Decorator"
+def ${1:my_decorator}(f):
+	@functools.wraps(f)
+	def wrapper(*args, **kwargs):
+		$0return f(*args, **kwargs)
+	return wrapper
+endsnippet

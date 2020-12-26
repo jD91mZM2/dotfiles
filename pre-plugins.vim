@@ -2,6 +2,7 @@
 let g:LanguageClient_serverCommands = {
             \ 'rust': ['rls'],
             \ 'nix': ['rnix-lsp'],
+            \ 'python': ['pyls'],
             \ }
 " }}}
 

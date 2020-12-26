@@ -30,6 +30,7 @@ call Map('n', '<leader>1', 'only')
 call Map('n', '<leader>q', 'q')
 call Map('n', '<leader><leader>', 'Files')
 call Map('n', '<leader>f', 'Ranger')
+call Map('n', '<leader>p', 'History')
 call Map('n', '<leader>bk', 'bdelete!')
 
 call Map('n', '<leader>g', 'Git')
