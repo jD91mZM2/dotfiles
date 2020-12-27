@@ -16,10 +16,13 @@ nm-applet &
 thunderbird &
 xfce4-power-manager &
 
-st -e tmux &
+st tmux &
 sleep 1 # wait for terminal to statup
-st -n neovim nvr -s &
-st -n weechat -e weechat &
+
+rm /tmp/nvimsocket
+st -n neovim e &
+
+st -n weechat weechat &
 
 chromium --app="https://chat.redox-os.org/" &
 sleep 10 # chrome doesn't handle stress well apparently

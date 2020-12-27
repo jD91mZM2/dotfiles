@@ -69,7 +69,7 @@ in
         (makeDesktopItem {
           name = "neovim";
           desktopName = "neovim gui";
-          exec = "${st}/bin/st nvr -s";
+          exec = "${st}/bin/st e";
         })
       ];
     });
