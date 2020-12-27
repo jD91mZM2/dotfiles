@@ -52,11 +52,12 @@ let
           auto-pairs
           ncm2
           ncm2-ultisnips
+          tabular
           ultisnips
           vim-commentary
           vim-exchange
+          vim-repeat
           vim-surround
-          tabular
 
           # Validation
           LanguageClient-neovim
