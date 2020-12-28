@@ -9,12 +9,12 @@ let
   ];
 
   ranger-vim2 = vimUtils.buildVimPlugin {
-    pname = "ranger-vim";
+    pname   = "ranger-vim";
     version = "2019-10-30";
     src = fetchFromGitHub {
-      owner = "francoiscabrol";
-      repo = "ranger.vim";
-      rev = "91e82debdf566dfaf47df3aef0a5fd823cedf41c";
+      owner  = "francoiscabrol";
+      repo   = "ranger.vim";
+      rev    = "91e82debdf566dfaf47df3aef0a5fd823cedf41c";
       sha256 = "sha256-6ut7u6AwtyYbHLHa2jelf5PkbtlfHvuHfWRL5z1CTUQ=";
     };
   };
@@ -75,7 +75,7 @@ let
     };
   };
 in symlinkJoin {
-  name = "nvim";
+  name  = "nvim";
   paths = [ nvim neovim-remote ];
 
   nativeBuildInputs = [ makeWrapper ];

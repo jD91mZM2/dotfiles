@@ -74,8 +74,8 @@ call s:load('./post-plugins.vim')
 function! s:highlight(group, extra, ...)
     let command = 'hi ' . a:group . a:extra
     for assign in a:000
-        let list = split(assign, '=')
-        let color = execute('echon g:dracula#palette.' . list[1] . '[1]')
+        let list     = split(assign, '=')
+        let color    = execute('echon g:dracula#palette.' . list[1] . '[1]')
         let command .= ' ' . list[0] . '=' . color
     endfor
     execute command
