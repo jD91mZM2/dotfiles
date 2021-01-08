@@ -1,0 +1,29 @@
+snippet fn "Function"
+fn ${1:name}($2) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet struct "Struct"
+struct ${1:Name} {
+	${2:arg}: ${3:u8},
+	${VISUAL}$0
+}
+endsnippet
+
+snippet new "fn new() { ... }"
+fn new() -> Self {
+	${0:${VISUAL:Self::default()}}
+}
+endsnippet
+
+snippet "{((?:[a-zA-Z:_]+,\s*)+[a-zA-Z:_]+)}" "Expand import group" r
+`!p
+snip.rv = "{"
+snip >> 1
+for im in match[1].split(","):
+	snip += im.strip() + ","
+snip << 1
+snip += "}"
+`
+endsnippet

@@ -11,15 +11,16 @@ let g:airline_powerline_fonts = 1
 " }}}
 
 " Options --- {{{
-set mouse=a
-set ignorecase
-set number
-set relativenumber
 set clipboard=unnamedplus
 set expandtab
-set tabstop=4
-set shiftwidth=0
 set hidden
+set ignorecase
+set mouse=a
+set number
+set relativenumber
+set shiftwidth=0
+set signcolumn=yes
+set tabstop=4
 " }}}
 
 " Keyboard shortcuts --- {{{

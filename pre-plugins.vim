@@ -56,13 +56,17 @@ augroup END
 
 " Fugitive --- {{{
 function! s:fugitiveMain()
-    call MapKeys('b', 'p', { -> ':G push origin ' . FugitiveHead() })
-    call Map('nb', 'll', 'quit \| vert G log')
-    call Map('nb', 'lr', 'quit \| vert G reflog')
-    call Map('nb', 'q', 'quit')
+    call MapKeys('b', 'pp', ':G push')
+    call MapKeys('b', 'pf', ':G push --force-with-lease')
+    call MapKeys('b', 'b', ':G switch -c ')
+    call MapKeys('b', 'mm', ':G remote add ')
+    call MapKeys('b', 'mu', ':G branch --set-upstream-to ')
+    call Map('nb', 'll', 'close \| vert G log')
+    call Map('nb', 'lr', 'close \| vert G reflog')
+    call Map('nb', 'q', 'close')
 endfunction
 function! s:fugitiveGit()
-    call Map('nb', 'q', 'quit \| G')
+    call Map('nb', 'q', 'close \| G')
 endfunction
 function! s:fugitiveCommit()
     call Map('nb', '<C-c><C-c>', 'wq')
