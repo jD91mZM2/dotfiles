@@ -50,6 +50,7 @@ let
 
           # Editing
           auto-pairs
+          editorconfig-vim
           ncm2
           ncm2-ultisnips
           tabular

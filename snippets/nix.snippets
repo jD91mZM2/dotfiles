@@ -1,0 +1,10 @@
+snippet "\[\s*((?:[a-zA-Z0-9._-]+\s+)*)\]" "Expand list" r
+`!p
+snip.rv = "["
+snip >> 1
+for im in match[1].split():
+	snip += im.strip()
+snip << 1
+snip += "]"
+`
+endsnippet
