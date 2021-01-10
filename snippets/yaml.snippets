@@ -1,0 +1,20 @@
+snippet _skel_gitlab "GitLab CI Template"
+variables:
+	GIT_SUBMODULE_STRATEGY: recursive
+
+default:
+	image: jd91mzm2/nix-flakes
+	before_script:
+		# GitLab can't cache /nix directly
+		- mkdir -p .nix
+		- mount --bind /nix .nix
+	cache:
+		paths:
+			- .nix
+
+Build:
+	stage: build
+	script:
+		- nix flake test .
+		- nix build .
+endsnippet

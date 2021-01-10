@@ -4,13 +4,14 @@ let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
+let s:skelMapping = {
+            \ 'flake.nix':      '_flake',
+            \ '.gitlab-ci.yml': '_gitlab',
+            \ }
+
 function! s:skeleton(_id)
-    let type = ''
     let file = expand('%:t')
-    echom "FILE IS: " . file
-    if file == 'flake.nix'
-        let type = '_flake'
-    endif
+    let type = get(s:skelMapping, file, '')
     call feedkeys('i_skel' . type . "\<C-r>=UltiSnips#ExpandSnippet()\<CR>")
 endfunction
 
