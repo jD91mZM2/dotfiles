@@ -15,6 +15,6 @@ default:
 Build:
 	stage: build
 	script:
-		- nix flake test .
+		- nix flake check
 		- nix build .
 endsnippet
