@@ -90,5 +90,8 @@ in symlinkJoin {
 
     # Alias neovim-remote as "e" (for edit)
     makeWrapper "${neovim-remote}/bin/nvr" "$out/bin/e" --add-flags -s
+
+    # Alias neovim-remote as "e-wait" (for edit wait)
+    makeWrapper "${neovim-remote}/bin/nvr" "$out/bin/e-wait" --add-flags -s --add-flags --remote-tab-wait
   '';
 }
