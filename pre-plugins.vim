@@ -23,7 +23,13 @@ function! ToggleNERD()
     if g:NERDTree.IsOpen()
         NERDTreeClose
     else
-        NERDTreeFind
+        let path = expand('%:p')
+
+        " Open current directory (rooter makes this the project root)
+        NERDTreeCWD
+
+        " Select the current file
+        exec 'NERDTreeFind ' . path
     endif
 endfunction
 
