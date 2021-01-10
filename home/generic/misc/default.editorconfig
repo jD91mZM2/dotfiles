@@ -2,14 +2,10 @@
 indent_style = space
 indent_size = 4
 
-[**.nix]
+[**.{sh,nix,yml,md}]
 indent_style = space
 indent_size = 2
 
-[**.sh]
-indent_style = space
-indent_size = 2
-
-[**.{json,mcmeta,yml}]
+[**.{json,mcmeta}]
 indent_style = tab
 indent_size = 2
