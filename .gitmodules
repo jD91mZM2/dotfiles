@@ -2,7 +2,3 @@
 	path = nix-exprs
 	url = ../nix-exprs.git
 	branch = master
-[submodule "forks/st"]
-	path = forks/st
-	url = ../st.git
-	branch = master

@@ -13,8 +13,8 @@ in {
       PATH = "$PATH:$HOME/.cargo/bin";
 
       # Standard configs
-      EDITOR = "e";
-      VISUAL = "e";
+      EDITOR = "e-wait";
+      VISUAL = "e-wait";
 
       # Program configs
       RUST_BACKTRACE = "1";
