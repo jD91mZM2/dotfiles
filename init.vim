@@ -39,7 +39,12 @@ augroup s:general
 
     " Use foldmethod=marker in vimrc
     au FileType vim setlocal foldmethod=marker
+    au FileType vim call Map('nb', '<leader>%', 'source %')
     au FileType vim normal! zR
+
+    " Make terminals pretty
+    au TermOpen * setlocal norelativenumber nonumber
+    au TermOpen * normal! i
 augroup END
 " }}}
 

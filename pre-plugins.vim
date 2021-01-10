@@ -57,12 +57,12 @@ augroup END
 " Fugitive --- {{{
 function! s:fugitiveMain()
     call MapKeys('b', 'pp', ':G push')
+    call MapKeys('b', 'pu', { -> ':G push -u  ' . FugitiveHead() . "\<C-Left>\<Left>" })
     call MapKeys('b', 'pf', ':G push --force-with-lease')
     call MapKeys('b', 'bs', ':G switch -c ')
     call MapKeys('b', 'bb', ':G switch ')
     call MapKeys('b', 'mm', ':G merge ')
     call MapKeys('b', 'MM', ':G remote add ')
-    call MapKeys('b', 'Mu', ':G branch --set-upstream-to ')
     call Map('nb', 'll', 'close \| vert G log')
     call Map('nb', 'lr', 'close \| vert G reflog')
     call Map('nb', 'q', 'close')

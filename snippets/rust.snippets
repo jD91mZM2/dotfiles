@@ -1,3 +1,16 @@
+snippet _skel "Template"
+use std::{
+	error::Error,
+};
+
+pub type Result<T> = std::result::Result<T, Box<Error>>;
+
+fn main() -> Result<()> {
+	${0:println!("Hello World");}
+	Ok(())
+}
+endsnippet
+
 snippet fn "Function"
 fn ${1:name}($2) {
 	${VISUAL}$0

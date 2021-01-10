@@ -51,7 +51,6 @@ call Map('n', 'gt',    'Buffers')
 
 call Map('n', '<leader>H',        'split')
 call Map('n', '<leader>V',        'vsplit')
-call Map('n', '<leader>%',        'source %')
 call Map('n', '<leader>1',        'only')
 call Map('n', '<leader>q',        'close')
 call Map('n', '<leader>n',        'enew')
@@ -60,6 +59,7 @@ call Map('n', '<leader><leader>', 'Files')
 call Map('n', '<leader>f',        'Ranger')
 call Map('n', '<leader>p',        'History')
 call Map('n', '<leader>bk',       'bdelete!')
+call Map('n', '<leader>S',        'rightbelow vsplit +terminal')
 
 call Map('n', '<leader>g', 'Git')
 
