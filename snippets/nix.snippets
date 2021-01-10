@@ -8,3 +8,34 @@ snip << 1
 snip += "]"
 `
 endsnippet
+
+snippet _skel_flake "Template flake.nix"
+{
+	description = "${1:A really useful tool that does an awesome thing}";
+
+	inputs = {
+		utils.url = "github:numtide/flake-utils";
+	};
+
+	outputs = { self, nixpkgs, utils }:
+		utils.lib.eachDefaultSystem (system: let
+			pkgs = nixpkgs.legacyPackages."\${system}";
+		in rec {
+			# \`nix build\`
+			packages.${2:hello} = ${0:pkgs.writeShellScriptBin "$2" "echo Hello, World!"};
+			defaultPackage = packages.$2;
+
+			# \`nix run\`
+			apps.$2 = utils.lib.mkApp {
+				drv = packages.$2;
+			};
+			defaultApp = apps.$2;
+
+			# \`nix develop\`
+			devShell = pkgs.mkShell {
+				buildInputs = with pkgs; [ openssl ];
+				nativeBuildInputs = with pkgs; [ gcc ];
+			};
+		});
+}
+endsnippet
