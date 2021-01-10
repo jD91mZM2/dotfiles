@@ -6,6 +6,10 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
-[**.{json,mcmeta}]
+[**.sh]
+indent_style = space
+indent_size = 2
+
+[**.{json,mcmeta,yml}]
 indent_style = tab
 indent_size = 2

@@ -7,12 +7,18 @@
 
     # Include setup that's generic across my devices
     ../generic
+
+    # Flox :D
+    (import (fetchTarball "https://github.com/flox/nixos-module/archive/master.tar.gz"))
   ];
 
   setup = {
     name = "computer";
     full = true;
   };
+
+  # Flox
+  services.flox.substituterAdded = true;
 
   # Needed for ZFS
   networking.hostId = "c0122dbe";

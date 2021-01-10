@@ -79,6 +79,9 @@ in {
           allow-preset-passphrase
         '';
       };
+
+      # Allow manually restarting gpg-agent in case of failure
+      systemd.user.services.gpg-agent.Unit.RefuseManualStart = lib.mkForce false;
     }
 
     (lib.mkIf cfg.personal {
