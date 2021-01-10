@@ -1,5 +1,5 @@
 " UltiSnips --- {{{
-let g:UltiSnipsSnippetDirectories=[ expand('~/dotfiles/nix-exprs/pkgs/neovim/snippets') ]
+let g:UltiSnipsSnippetDirectories=[ (g:VimrcDirReal . '/snippets') ]
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'

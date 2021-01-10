@@ -52,6 +52,9 @@ let
           auto-pairs
           editorconfig-vim
           ncm2
+          ncm2-bufword
+          ncm2-path
+          ncm2-syntax
           ncm2-ultisnips
           tabular
           ultisnips

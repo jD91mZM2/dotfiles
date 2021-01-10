@@ -60,6 +60,8 @@ call Map('n', '<leader>f',        'Ranger')
 call Map('n', '<leader>p',        'History')
 call Map('n', '<leader>bk',       'bdelete!')
 call Map('n', '<leader>S',        'rightbelow vsplit +terminal')
+call Map('n', '<leader>%',        'source ' . g:VimrcDirReal . '/init.vim')
+call Map('n', '<leader>o',        'silent! !tmux new-window -c %:p:h')
 
 call Map('n', '<leader>g', 'Git')
 

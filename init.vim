@@ -5,6 +5,8 @@ function! s:load(relative)
     exec 'source ' . absolute
 endfunction
 
+let g:VimrcDirReal = expand('~/dotfiles/nix-exprs/pkgs/neovim')
+
 " Styling --- {{{
 let g:airline_theme = 'dracula'
 let g:airline_powerline_fonts = 1
@@ -39,7 +41,6 @@ augroup s:general
 
     " Use foldmethod=marker in vimrc
     au FileType vim setlocal foldmethod=marker
-    au FileType vim call Map('nb', '<leader>%', 'source %')
     au FileType vim normal! zR
 
     " Make terminals pretty
