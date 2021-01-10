@@ -6,7 +6,6 @@
     utils.url = "github:numtide/flake-utils";
 
     nix-exprs.url = "gitlab:jD91mZM2/nix-exprs";
-    st.url = "gitlab:jD91mZM2/st";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     home-manager.url = "github:nix-community/home-manager";
@@ -27,7 +26,6 @@
     , utils
 
     , nix-exprs
-    , st
 
     , emacs-overlay
     , home-manager
@@ -60,8 +58,7 @@
         crate2nix = final.callPackage crate2nix {};
 
         neovim = nix-exprs.packages."${final.system}".neovim;
-
-        st = st.defaultPackage."${final.system}";
+        st     = nix-exprs.packages."${final.system}".st;
       };
 
       # NixOS configurations
