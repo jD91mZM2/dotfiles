@@ -18,6 +18,9 @@ function! Map(opts, trigger, command)
     if a:opts =~# 'c'
         execute 'cnoremap ' . a:trigger . ' <C-c>:' . a:command . '<CR>:<C-p>'
     endif
+    if a:opts =~# 't'
+        execute 'tnoremap ' . a:trigger . ' <C-\><C-n>:' . a:command . '<CR>i'
+    endif
 endfunction
 
 let s:count = 0
@@ -27,14 +30,26 @@ function! MapKeys(opts, trigger, keys)
         let extra .= '<buffer> '
     endif
 
+    let modes = ['n', 'v', 'i', 'c', 't']
+
     if type(a:keys) == type("hello")
-        exec 'nnoremap ' . extra . a:trigger . ' ' . a:keys
+        for m in modes
+            if a:opts =~# m
+                exec m . 'noremap ' . extra . a:trigger . ' <C-\><C-n>' . a:keys
+            endif
+        endfor
     elseif type(a:keys) == type(function('MapKeys'))
+        let l:Lambda = { -> "\<C-\>\<C-n>" . a:keys() }
+
         " Assign stupid unique global name to lambda
-        exec 'let g:StupidMapExpr_' . string(s:count) . ' = a:keys'
+        exec 'let g:StupidMapExpr_' . string(s:count) . ' = l:Lambda'
 
         " Bind function
-        exec 'nnoremap <expr> ' . extra . a:trigger . ' g:StupidMapExpr_' . string(s:count) . '()'
+        for m in modes
+            if a:opts =~# m
+                exec m . 'noremap <expr> ' . extra . a:trigger . ' g:StupidMapExpr_' . string(s:count) . '()'
+            endif
+        endfor
 
         " Update counter
         let s:count += 1
@@ -59,17 +74,12 @@ call Map('n', '<leader><leader>', 'Files')
 call Map('n', '<leader>f',        'Ranger')
 call Map('n', '<leader>p',        'History')
 call Map('n', '<leader>bk',       'bdelete!')
-call Map('n', '<leader>S',        'rightbelow vsplit +terminal')
 call Map('n', '<leader>%',        'source ' . g:VimrcDirReal . '/init.vim')
 call Map('n', '<leader>o',        'silent! !tmux new-window -c %:p:h')
 
 call Map('n', '<leader>g', 'Git')
 
-call MapKeys('', '<leader>/', ':Rg ')
-call MapKeys('', '<leader>:', 'q:')
-call MapKeys('', '<leader>.', ':e %:p:h/')
-call MapKeys('', 'D',         '0d$')
-
-for m in ['h', 'j', 'k', 'l']
-    call MapKeys('', '<leader>' . m, '<C-w>' . m)
-endfor
+call MapKeys('n', '<leader>/', ':Rg ')
+call MapKeys('n', '<leader>:', 'q:')
+call MapKeys('n', '<leader>.', ':e %:p:h/')
+call MapKeys('n', 'D',         '0d$')

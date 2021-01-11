@@ -25,16 +25,14 @@ set signcolumn=yes
 set tabstop=4
 " }}}
 
-" Keyboard shortcuts --- {{{
+" Load files --- {{{
 call s:load('./keymap.vim')
+call s:load('./terminal.vim')
 " }}}
 
 " Misc autocommands --- {{{
 augroup s:general
     au!
-
-    " Don't show "Terminal Closed" screen
-    au TermClose * bdelete!
 
     " Don't continue comment on 'o'
     au FileType * set formatoptions-=o
@@ -42,10 +40,6 @@ augroup s:general
     " Use foldmethod=marker in vimrc
     au FileType vim setlocal foldmethod=marker
     au FileType vim normal! zR
-
-    " Make terminals pretty
-    au TermOpen * setlocal norelativenumber nonumber
-    au TermOpen * normal! i
 augroup END
 " }}}
 

@@ -62,16 +62,19 @@ augroup END
 
 " Fugitive --- {{{
 function! s:fugitiveMain()
-    call MapKeys('b', 'pp', ':G push')
-    call MapKeys('b', 'pu', { -> ':G push -u  ' . FugitiveHead() . "\<C-Left>\<Left>" })
-    call MapKeys('b', 'pf', ':G push --force-with-lease')
-    call MapKeys('b', 'bs', ':G switch -c ')
-    call MapKeys('b', 'bb', ':G switch ')
-    call MapKeys('b', 'mm', ':G merge ')
-    call MapKeys('b', 'MM', ':G remote add ')
+    call MapKeys('nb', 'pp', ':G push')
+    call MapKeys('nb', 'pu', { -> ':G push -u  ' . FugitiveHead() . "\<C-Left>\<Left>" })
+    call MapKeys('nb', 'pf', ':G push --force-with-lease')
+    call MapKeys('nb', 'bs', ':G switch -c ')
+    call MapKeys('nb', 'bb', ':G switch ')
+    call MapKeys('nb', 'bx', ':G branch -D ')
+    call MapKeys('nb', 'mm', ':G merge ')
+    call MapKeys('nb', 'MM', ':G remote add ')
+
+    call Map('nb', 'F',  'G pull')
     call Map('nb', 'll', 'close \| vert G log')
     call Map('nb', 'lr', 'close \| vert G reflog')
-    call Map('nb', 'q', 'close')
+    call Map('nb', 'q',  'close')
 endfunction
 function! s:fugitiveGit()
     call Map('nb', 'q', 'close \| G')

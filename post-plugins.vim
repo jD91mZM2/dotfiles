@@ -12,7 +12,7 @@ let s:skelMapping = {
 function! s:skeleton(_id)
     let file = expand('%:t')
     let type = get(s:skelMapping, file, '')
-    call feedkeys('i_skel' . type . "\<C-r>=UltiSnips#ExpandSnippet()\<CR>")
+    call feedkeys("\<Esc>i_skel" . type . "\<C-r>=UltiSnips#ExpandSnippet()\<CR>")
 endfunction
 
 augroup s:ultisnips

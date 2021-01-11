@@ -1,6 +1,6 @@
-snippet fun "Function"
+snippet fn "Function"
 function! ${1:name}(${2:one, two, ...})
-	$0
+	${0:${VISUAL}}
 endfunction
 endsnippet
 
@@ -15,10 +15,23 @@ endsnippet
 
 snippet # "Region"
 " $1 --- {{{
-$0
+${0:${VISUAL}}
 " }}}
 endsnippet
 
 snippet map "Mappings"
 nnoremap ${1:<leader>n} :$0<CR>
+endsnippet
+
+snippet cmd "Create command"
+function! g:Cmd$1(one, two, ...)
+	${0:${VISUAL}}
+endfunction
+command! -nargs=* ${1:Name} call Cmd$1(<f-args>)
+endsnippet
+
+snippet for "for loop"
+for $1 in ${2:['h', 'j', 'k', 'l']}
+    ${0:${VISUAL}}
+endfor
 endsnippet
