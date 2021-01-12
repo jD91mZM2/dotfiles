@@ -61,8 +61,8 @@ call Map('nvi',  '<Right>', 'echo "You must never use arrow keys!"')
 call Map('nvic', '<Up>',    'echo "You must never use arrow keys!"')
 call Map('nvic', '<Down>',  'echo "You must never use arrow keys!"')
 
-call Map('n', '<C-S>', 'w')
-call Map('n', 'gt',    'Buffers')
+call Map('n', '<C-s>', 'w')
+call Map('n', '<C-w>', '%s/\s\+$//')
 
 call Map('n', '<leader>H',        'split')
 call Map('n', '<leader>V',        'vsplit')
@@ -72,14 +72,16 @@ call Map('n', '<leader>n',        'enew')
 call Map('n', '<leader>s',        'wall')
 call Map('n', '<leader><leader>', 'Files')
 call Map('n', '<leader>f',        'Ranger')
-call Map('n', '<leader>p',        'History')
 call Map('n', '<leader>bk',       'bdelete!')
 call Map('n', '<leader>%',        'source ' . g:VimrcDirReal . '/init.vim')
 call Map('n', '<leader>o',        'silent! !tmux new-window -c %:p:h')
 
-call Map('n', '<leader>g', 'Git')
-
-call MapKeys('n', '<leader>/', ':Rg ')
 call MapKeys('n', '<leader>:', 'q:')
 call MapKeys('n', '<leader>.', ':e %:p:h/')
 call MapKeys('n', 'D',         '0d$')
+
+" Move left/right easier
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+cnoremap <A-h> <C-Left>
+cnoremap <A-l> <C-Right>

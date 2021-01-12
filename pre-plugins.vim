@@ -16,6 +16,9 @@ set completeopt=noinsert,menuone,noselect
 
 " FZF --- {{{
 let $FZF_DEFAULT_COMMAND = 'fd -H -E .git'
+call Map('n',     'gt',        'Buffers')
+call Map('n',     '<leader>p', 'History')
+call MapKeys('n', '<leader>/', ':Rg ')
 " }}}
 
 " NERDTree --- {{{
@@ -61,15 +64,25 @@ augroup END
 " }}}
 
 " Fugitive --- {{{
+call Map('n', '<leader>g', 'Git')
+
 function! s:fugitiveMain()
     call MapKeys('nb', 'pp', ':G push')
     call MapKeys('nb', 'pu', { -> ':G push -u  ' . FugitiveHead() . "\<C-Left>\<Left>" })
     call MapKeys('nb', 'pf', ':G push --force-with-lease')
+
     call MapKeys('nb', 'bs', ':G switch -c ')
     call MapKeys('nb', 'bb', ':G switch ')
     call MapKeys('nb', 'bx', ':G branch -D ')
+    call MapKeys('nb', 'bX', ":G push  :<Left><Left>")
+
     call MapKeys('nb', 'mm', ':G merge ')
+    call MapKeys('nb', 'ms', ':G merge --squash ')
+
     call MapKeys('nb', 'MM', ':G remote add ')
+
+    call MapKeys('nb', 'OO', ':G reset --hard HEAD^')
+    call MapKeys('nb', 'Os', ':G reset --soft HEAD^ ')
 
     call Map('nb', 'F',  'G pull')
     call Map('nb', 'll', 'close \| vert G log')
