@@ -1,4 +1,4 @@
-{ lib, symlinkJoin, makeWrapper, pkgs, neovim, neovim-remote, vimPlugins, vimUtils, fetchFromGitHub }:
+{ lib, symlinkJoin, makeWrapper, pkgs, neovim-nightly, neovim-remote, vimPlugins, vimUtils, fetchFromGitHub }:
 
 let
   runtimeDeps = with pkgs; [
@@ -30,7 +30,7 @@ let
     };
   };
 
-  nvim = neovim.override {
+  nvim = neovim-nightly.override {
     configure = {
       customRC = ''
         source ${./.}/init.vim
@@ -67,6 +67,7 @@ let
           ncm2-path
           ncm2-syntax
           ncm2-ultisnips
+          nvim-treesitter
           tabular
           ultisnips
           vim-argumentative
