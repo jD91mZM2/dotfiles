@@ -6,7 +6,8 @@
 
 let
   cfg = config.setup;
-in {
+in
+{
   options.setup = with lib; {
     name = mkOption {
       type = types.nullOr types.str;
@@ -67,7 +68,7 @@ in {
     boot.kernel.sysctl."kernel.sysrq" = 1;
 
     # Misc. settings
-    documentation.dev.enable  = true;
+    documentation.dev.enable = true;
     hardware.bluetooth.enable = true;
     time.hardwareClockInLocalTime = true; # fuck windows
 
@@ -81,7 +82,7 @@ in {
     i18n.defaultLocale = "en_GB.UTF-8";
     console = {
       keyMap = "dvorak";
-      font   = "Lat2-Terminus16";
+      font = "Lat2-Terminus16";
     };
 
     # User settings
@@ -91,8 +92,8 @@ in {
       uid = 1000;
 
       initialPassword = "nixos";
-      isNormalUser    = true;
-      extraGroups     = [ "libvirtd" "adbusers" "wheel" ];
+      isNormalUser = true;
+      extraGroups = [ "libvirtd" "adbusers" "wheel" ];
     };
 
     # Unlock GnuPG automagically

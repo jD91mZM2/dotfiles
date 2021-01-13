@@ -2,7 +2,8 @@
 
 let
   cfg = config.setup.env;
-in {
+in
+{
   options.setup.env = {
     enable = lib.mkEnableOption "env";
   };

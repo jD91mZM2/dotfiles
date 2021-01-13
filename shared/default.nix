@@ -2,12 +2,13 @@
 
 let
   inherit (pkgs) callPackage;
-in rec {
-  consts   = import ./consts.nix;
+in
+rec {
+  consts = import ./consts.nix;
   builders = callPackage ./builders { inherit inputs; };
-  theme    = callPackage ./theme.nix {};
+  theme = callPackage ./theme.nix { };
 
-  scripts = pkgs.runCommand "scripts" {} ''
+  scripts = pkgs.runCommand "scripts" { } ''
     cp -r ${./scripts} "$out"
     for f in $out/*; do
       substituteInPlace "$f" \
@@ -22,11 +23,11 @@ in rec {
     done
   '';
 
-  mkSymlink = path: pkgs.runCommand "symlink-${path}" {} ''
+  mkSymlink = path: pkgs.runCommand "symlink-${path}" { } ''
     ln -s "${consts.dotfiles}/${path}" "$out"
   '';
 
-  background = pkgs.runCommand "background.jpg" {} ''
+  background = pkgs.runCommand "background.jpg" { } ''
     cp "${pkgs.adapta-backgrounds}/share/backgrounds/adapta/tealized.jpg" "$out"
   '';
 }

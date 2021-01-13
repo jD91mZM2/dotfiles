@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "sd_mod" "rtsx_pci_sdmmc" ];
@@ -14,33 +15,37 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "main/root";
+    {
+      device = "main/root";
       fsType = "zfs";
     };
 
   fileSystems."/nix" =
-    { device = "main/root/nix";
+    {
+      device = "main/root/nix";
       fsType = "zfs";
     };
 
   fileSystems."/home" =
-    { device = "main/home";
+    {
+      device = "main/home";
       fsType = "zfs";
     };
 
   fileSystems."/var/lib/docker" =
-    { device = "main/docker";
+    {
+      device = "main/docker";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8D2E-4608";
+    {
+      device = "/dev/disk/by-uuid/8D2E-4608";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/0aa2138d-0a66-49b5-aed8-5524afa9db9d"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/0aa2138d-0a66-49b5-aed8-5524afa9db9d"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }

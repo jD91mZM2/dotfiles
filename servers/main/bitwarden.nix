@@ -5,8 +5,8 @@
     enable = true;
     config = {
       signupsAllowed = false;
-      rocketPort     = 27057;
-      logFile        = "/var/lib/bitwarden_rs/log";
+      rocketPort = 27057;
+      logFile = "/var/lib/bitwarden_rs/log";
     };
     # environmentFile = "/run/keys/bitwarden";
   };

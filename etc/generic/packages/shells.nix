@@ -4,7 +4,7 @@
   programs = {
     powerline-rs = {
       enable = true;
-      args = ["--cwd-max-depth" "3"];
+      args = [ "--cwd-max-depth" "3" ];
     };
     bash = {
       enableCompletion = true;

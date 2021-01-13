@@ -24,7 +24,8 @@
   home.file.".editorconfig".source = shared.mkSymlink "home/generic/misc/default.editorconfig";
 
   home.file.".stack/config.yaml".text =
-    builtins.toJSON { # YAML is a JSON superset
+    # YAML is a JSON superset
+    builtins.toJSON {
       templates.params = {
         "author-name" = shared.consts.name;
         "author-email" = shared.consts.email;

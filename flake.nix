@@ -41,22 +41,22 @@
           let
             clang = final.llvmPackages.clang-unwrapped;
           in
-            final.runCommand "clangd-${final.stdenv.lib.getVersion clang}" {} ''
+          final.runCommand "clangd-${final.stdenv.lib.getVersion clang}" { } ''
             mkdir -p "$out/bin"
             ln -s "${clang}/bin/clangd" "$out/bin/clangd"
           ''
         );
 
         # Add rycee's nur packages
-        nur-rycee = final.callPackage nur-rycee {};
+        nur-rycee = final.callPackage nur-rycee { };
 
         # Override or add packages
         mkchromecast = nixpkgs-master.legacyPackages."${final.system}".mkchromecast;
         nixos-generators = nixos-generators.defaultPackage."${final.system}";
-        crate2nix = final.callPackage crate2nix {};
+        crate2nix = final.callPackage crate2nix { };
 
         neovim = nix-exprs.packages."${final.system}".neovim;
-        st     = nix-exprs.packages."${final.system}".st;
+        st = nix-exprs.packages."${final.system}".st;
       };
 
       # NixOS configurations
@@ -67,7 +67,8 @@
         samuel-vm-gui = mkNixosConfigWithHome [ ./etc/vm/vm-gui.nix ];
         samuel-vm-headless = mkNixosConfigWithHome [ ./etc/vm/vm-headless.nix ];
       };
-    } // (utils.lib.eachDefaultSystem (system: let
+    } // (utils.lib.eachDefaultSystem (system:
+    let
       pkgs = nixpkgs.legacyPackages."${system}";
 
       shared = pkgs.callPackage ./shared {
@@ -84,7 +85,8 @@
           inherit self shared inputs system;
         };
       };
-    in rec {
+    in
+    rec {
       lib = rec {
         inherit configInputs;
 

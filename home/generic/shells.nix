@@ -4,12 +4,12 @@ let
   cfg = config.setup.shells;
 
   aliases = {
-    cal        = "cal -m";
-    clear      = "clear; echo -ne \"\\e[3J\"";
-    ls         = "ls -CF --color=auto";
-    nix-shell  = "nix-shell --command zsh";
-    objdump    = "objdump -Mintel";
-    rsynca     = "rsync -avzhP --delete";
+    cal = "cal -m";
+    clear = "clear; echo -ne \"\\e[3J\"";
+    ls = "ls -CF --color=auto";
+    nix-shell = "nix-shell --command zsh";
+    objdump = "objdump -Mintel";
+    rsynca = "rsync -avzhP --delete";
     screencast = "mkchromecast -n \"Living Room TV\" --video --screencast";
   };
 
@@ -25,7 +25,8 @@ let
           shared.theme.colors)}
     fi
   '';
-in {
+in
+{
   options.setup.shells = {
     enableZsh = lib.mkEnableOption "zsh";
     enableBash = lib.mkEnableOption "bash";
@@ -54,7 +55,7 @@ in {
 
       # Every shell needs some git...
       programs.git = lib.mkIf cfg.enableGit {
-        enable     = true;
+        enable = true;
         lfs.enable = true;
 
         aliases = {
@@ -69,12 +70,12 @@ in {
       # Every git needs some gpg...
       programs.gpg.enable = true;
       services.gpg-agent = lib.mkIf cfg.enableGnuPG {
-        enable             = true;
-        enableSshSupport   = true;
-        defaultCacheTtl    = 86400;
+        enable = true;
+        enableSshSupport = true;
+        defaultCacheTtl = 86400;
         defaultCacheTtlSsh = 86400;
-        maxCacheTtl        = 86400;
-        maxCacheTtlSsh     = 86400;
+        maxCacheTtl = 86400;
+        maxCacheTtlSsh = 86400;
         extraConfig = ''
           allow-preset-passphrase
         '';
@@ -87,10 +88,10 @@ in {
     (lib.mkIf cfg.personal {
       # SSH config
       programs.ssh = {
-        enable      = true;
+        enable = true;
         matchBlocks = {
           "main" = {
-            user     = "user";
+            user = "user";
             hostname = "krake.one";
           };
         };
@@ -98,8 +99,8 @@ in {
 
       # Git settings
       programs.git = {
-        userName   = shared.consts.name;
-        userEmail  = shared.consts.email;
+        userName = shared.consts.name;
+        userEmail = shared.consts.email;
 
         signing = {
           key = shared.consts.gpgKeys.signing;

@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" ];
@@ -14,27 +15,30 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "main/nixos";
+    {
+      device = "main/nixos";
       fsType = "zfs";
     };
 
   fileSystems."/nix" =
-    { device = "main/nixos/nix";
+    {
+      device = "main/nixos/nix";
       fsType = "zfs";
     };
 
   fileSystems."/home" =
-    { device = "main/nixos/home";
+    {
+      device = "main/nixos/home";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/66A9-3084";
+    {
+      device = "/dev/disk/by-uuid/66A9-3084";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/ca65ef98-d31f-40d3-a5fc-0647d5198c74"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/ca65ef98-d31f-40d3-a5fc-0647d5198c74"; }];
 
 }

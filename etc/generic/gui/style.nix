@@ -14,8 +14,8 @@ lib.mkIf config.setup.graphics.enable {
 
     xsession.pointerCursor = {
       package = pkgs.xorg.xcursorthemes;
-      name    = "whiteglass";
-      size    = 16;
+      name = "whiteglass";
+      size = 16;
     };
 
     # Xresources is kinda cool I guess :)
@@ -23,7 +23,7 @@ lib.mkIf config.setup.graphics.enable {
       properties =
         (builtins.foldl'
           (x: y: x // y)
-          {}
+          { }
           (lib.zipListsWith
             (index: color: {
               "*.color${toString index.number}" = "#${color.rgb}";
@@ -37,9 +37,9 @@ lib.mkIf config.setup.graphics.enable {
           "*.foreground" = "#${(shared.theme.getColor 5).rgb}";
 
           # XTerm stuff
-          "XTerm.termName"          = "xterm-256color";
-          "XTerm.vt100.faceName"    = "Hack:size =10";
-          "XTerm*decTerminalID"     = "vt340";
+          "XTerm.termName" = "xterm-256color";
+          "XTerm.vt100.faceName" = "Hack:size =10";
+          "XTerm*decTerminalID" = "vt340";
           "XTerm*numColorRegisters" = 256;
         };
     };
@@ -48,7 +48,7 @@ lib.mkIf config.setup.graphics.enable {
     gtk = {
       enable = true;
       font = {
-        name    = "Cantarell 11";
+        name = "Cantarell 11";
         package = pkgs.cantarell-fonts;
       };
       iconTheme = shared.theme.iconTheme;

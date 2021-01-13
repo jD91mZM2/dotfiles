@@ -15,15 +15,15 @@ in
   # https://gitlab.com/simple-nixos-mailserver/nixos-mailserver
   imports = [
     (builtins.fetchTarball {
-      url    = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/ee1ad50830b479ed8fb46c4c51d3bcdbc2184b8b.tar.gz";
+      url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/ee1ad50830b479ed8fb46c4c51d3bcdbc2184b8b.tar.gz";
       sha256 = "1m9n95g2qh331cig3abj14sz5k8sscq1zv34gwjk2nnjrasdjsjx";
     })
   ];
 
   mailserver = {
-    enable  = true;
-    localDnsResolver = false;  # kresd is broken
-    fqdn    = "mail.krake.one";
+    enable = true;
+    localDnsResolver = false; # kresd is broken
+    fqdn = "mail.krake.one";
     domains = [ "krake.one" ];
 
     loginAccounts = {
@@ -39,12 +39,12 @@ in
 
     # https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/blob/v2.2.1/default.nix#L295-303
     certificateScheme = 1;
-    certificateFile   = "${acmeRoot}/mail.krake.one/fullchain.pem";
-    keyFile           = "${acmeRoot}/mail.krake.one/key.pem";
+    certificateFile = "${acmeRoot}/mail.krake.one/fullchain.pem";
+    keyFile = "${acmeRoot}/mail.krake.one/key.pem";
 
     # Enable IMAP/POP
-    enableImap    = true;
-    enablePop3    = true;
+    enableImap = true;
+    enablePop3 = true;
     enableImapSsl = true;
     enablePop3Ssl = true;
 

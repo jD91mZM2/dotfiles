@@ -92,7 +92,7 @@
         translate-shell
         whois
         wildmidi
-        (runCommand "mgitstatus" {} ''
+        (runCommand "mgitstatus" { } ''
           cd "${fetchFromGitHub {
             owner = "fboender";
             repo = "multi-git-status";

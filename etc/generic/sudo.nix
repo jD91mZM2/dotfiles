@@ -12,7 +12,7 @@ let
 in
 {
   security.sudo.extraRules = lib.mkAfter [{
-    groups = ["wheel"];
+    groups = [ "wheel" ];
     commands = [
       { command = ''${ssh-scan}/bin/ssh-scan ""''; options = [ "SETENV" "NOPASSWD" ]; }
     ];

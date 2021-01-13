@@ -50,4 +50,5 @@ let
       package = pkgs.dracula-theme;
     };
   };
-in self
+in
+self

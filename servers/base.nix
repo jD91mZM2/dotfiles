@@ -11,15 +11,15 @@
   # Don't run out of space
   nix.gc = {
     automatic = true;
-    options   = "-d";
+    options = "-d";
   };
   nix.optimise.automatic = true;
 
   # OpenSSH settings
   services.openssh = {
-    enable                 = true;
-    forwardX11             = true;
-    gatewayPorts           = "clientspecified";
+    enable = true;
+    forwardX11 = true;
+    gatewayPorts = "clientspecified";
     passwordAuthentication = false;
   };
 

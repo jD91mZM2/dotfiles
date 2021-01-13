@@ -5,8 +5,8 @@
     # Nix flakes
     package = pkgs.nixUnstable;
     extraOptions = ''
-        experimental-features = nix-command flakes
-      '';
+      experimental-features = nix-command flakes
+    '';
 
     binaryCaches = [
       # Input Output HK - Hydra cache for haskell.nix
@@ -33,10 +33,10 @@
         id = "nixpkgs";
       };
       to = lib.mkForce {
-        type  = "github";
+        type = "github";
         owner = "NixOS";
-        repo  = "nixpkgs";
-        rev   = "nixos-unstable";
+        repo = "nixpkgs";
+        rev = "nixos-unstable";
       };
     };
 

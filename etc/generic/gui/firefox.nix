@@ -2,7 +2,8 @@
 
 let
   cfg = config.setup.graphics.firefox;
-in {
+in
+{
   options.setup.graphics.firefox = {
     enable = lib.mkEnableOption "firefox";
   };
@@ -33,10 +34,10 @@ in {
           };
           settings = {
             # Fix issues with having a dark GTK theme
-            "ui.use_standins_for_native_colors"   = true;
+            "ui.use_standins_for_native_colors" = true;
             "widget.content.allow-gtk-dark-theme" = false;
-            "widget.chrome.allow-gtk-dark-theme"  = false;
-            "widget.content.gtk-theme-override"   = "Adwaita:light";
+            "widget.chrome.allow-gtk-dark-theme" = false;
+            "widget.content.gtk-theme-override" = "Adwaita:light";
 
             # Disable WebRTC because it's scary
             "media.peerconnection.enabled" = false;

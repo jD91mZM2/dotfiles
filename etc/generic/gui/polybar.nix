@@ -2,7 +2,8 @@
 
 let
   cfg = config.setup.graphics.polybar;
-in {
+in
+{
   options.setup.graphics.polybar = {
     enable = lib.mkEnableOption "polybar";
   };
@@ -25,33 +26,33 @@ in {
         '';
         config = {
           "bar/main" = {
-            monitor    = "\${env:MONITOR}";
+            monitor = "\${env:MONITOR}";
             background = (shared.theme.getColor 0).rgb;
-            font-0     = "Hack:size=10;2";
-            font-1     = "Font Awesome 5 Free Solid:size=10;2";
-            height     = 30;
-            padding    = 3;
+            font-0 = "Hack:size=10;2";
+            font-1 = "Font Awesome 5 Free Solid:size=10;2";
+            height = 30;
+            padding = 3;
 
-            modules-left  = "ewmh_taskbar";
+            modules-left = "ewmh_taskbar";
             modules-right = "date pulseaudio battery";
             module-margin = 1;
             tray-position = "right";
           };
 
           "bar/secondary" = {
-            monitor    = "\${env:MONITOR}";
+            monitor = "\${env:MONITOR}";
             background = (shared.theme.getColor 0).rgb;
-            font-0     = "Hack:size=10;2";
-            font-1     = "Font Awesome 5 Free Solid:size=10;2";
-            height     = 30;
-            padding    = 3;
+            font-0 = "Hack:size=10;2";
+            font-1 = "Font Awesome 5 Free Solid:size=10;2";
+            height = 30;
+            padding = 3;
 
-            modules-left  = "ewmh_taskbar";
+            modules-left = "ewmh_taskbar";
             module-margin = 3;
           };
 
           "module/ewmh_taskbar" = {
-            type                    = "internal/xworkspaces";
+            type = "internal/xworkspaces";
             label-active-foreground = (shared.theme.getColor 5).rgb;
             label-active-background = (shared.theme.getColor 1).rgb;
             label-urgent-foreground = (shared.theme.getColor 5).rgb;
@@ -66,44 +67,44 @@ in {
             icon-7 = "8;";
             icon-8 = "9;";
 
-            label-active   = "%icon%";
+            label-active = "%icon%";
             label-occupied = "%icon%";
-            label-urgent   = "%icon%";
-            label-empty    = "%icon%";
+            label-urgent = "%icon%";
+            label-empty = "%icon%";
 
-            label-active-padding   = 2;
+            label-active-padding = 2;
             label-occupied-padding = 2;
-            label-urgent-padding   = 2;
-            label-empty-padding    = 2;
+            label-urgent-padding = 2;
+            label-empty-padding = 2;
           };
 
           "module/date" = {
-            type             = "internal/date";
-            date             = "%b %d";
-            time             = "%H:%M";
-            label            = "%date% %time%";
+            type = "internal/date";
+            date = "%b %d";
+            time = "%H:%M";
+            label = "%date% %time%";
             label-background = (shared.theme.getColor 0).rgb;
-            interval         = 30;
+            interval = 30;
           };
 
           "module/pulseaudio" = {
-            type          = "internal/pulseaudio";
+            type = "internal/pulseaudio";
             format-volume = "<label-volume> <bar-volume>";
 
             label-muted = "";
 
             label-volume = " %percentage%%";
 
-            bar-volume-width            = 10;
-            bar-volume-empty            = "█";
+            bar-volume-width = 10;
+            bar-volume-empty = "█";
             bar-volume-empty-foreground = (shared.theme.getColor 3).rgb;
-            bar-volume-fill             = "█";
-            bar-volume-indicator        = "";
+            bar-volume-fill = "█";
+            bar-volume-indicator = "";
           };
 
           "module/battery" = {
-            type               = "internal/battery";
-            format-charging    = "<animation-charging> <label-charging>";
+            type = "internal/battery";
+            format-charging = "<animation-charging> <label-charging>";
             format-discharging = "<ramp-capacity> <label-discharging>";
 
             animation-charging-0 = "";

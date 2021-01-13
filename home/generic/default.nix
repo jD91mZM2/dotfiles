@@ -2,7 +2,8 @@
 
 let
   cfg = config.setup;
-in {
+in
+{
   options.setup = with lib; {
     source = mkOption {
       type = types.path;

@@ -10,7 +10,7 @@
   setup = {
     graphics = {
       enable = true;
-      fast   = true;
+      fast = true;
     };
     packages.languages.wasm = true;
   };

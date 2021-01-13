@@ -1,7 +1,8 @@
 let
   flake = import <dotfiles>;
   inherit (flake.lib."${builtins.currentSystem}") mkHomeModule;
-in mkHomeModule ({
+in
+mkHomeModule ({
   imports = [
     ./generic
   ];

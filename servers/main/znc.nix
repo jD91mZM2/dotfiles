@@ -15,27 +15,28 @@
         Port = 5000;
         IPv4 = true;
         IPv6 = true;
-        SSL  = true;
+        SSL = true;
       };
       User."${shared.consts.name}" = {
         Admin = true;
         Nick = shared.consts.name;
         AltNick = shared.consts.name + "_";
         LoadModule = [ "chansaver" "controlpanel" ];
-        Network = let
-          createZncServers = servers:
-            lib.mapAttrs
-              (_name: cfg: {
-                Server = "${cfg.ip} +6697";
-                LoadModule = [ "simple_away" "sasl" "keepnick" ];
-                Chan = lib.listToAttrs (
-                  map
-                    (name: lib.nameValuePair name {})
-                    cfg.chan
-                );
-              })
-              servers;
-        in
+        Network =
+          let
+            createZncServers = servers:
+              lib.mapAttrs
+                (_name: cfg: {
+                  Server = "${cfg.ip} +6697";
+                  LoadModule = [ "simple_away" "sasl" "keepnick" ];
+                  Chan = lib.listToAttrs (
+                    map
+                      (name: lib.nameValuePair name { })
+                      cfg.chan
+                  );
+                })
+                servers;
+          in
           createZncServers {
             freenode = {
               ip = "chat.freenode.net";

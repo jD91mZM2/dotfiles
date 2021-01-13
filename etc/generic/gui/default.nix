@@ -102,10 +102,10 @@ in
         # backend) seems to cause all kinds of weird issues.
         backend = "xrender";
 
-        fade        = true;
-        fadeDelta   = 5;
+        fade = true;
+        fadeDelta = 5;
         inactiveDim = "0.1";
-        shadow      = true;
+        shadow = true;
       };
     };
   };
