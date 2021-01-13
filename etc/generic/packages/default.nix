@@ -45,7 +45,6 @@
       mosh
       ncdu
       nethogs
-      nix-index
       patchelf
       pciutils
       socat
@@ -105,9 +104,11 @@
 
         # Nix stuff
         cachix
-        nix-prefetch-scripts # - broken. todo
+        nix-index
+        nix-prefetch-scripts
         nix-review
         nixos-generators
+        nixpkgs-fmt
         rnix-lsp
       ];
     };

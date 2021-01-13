@@ -5,16 +5,18 @@
     nixpkgs-master.url = "nixpkgs/master";
     utils.url = "github:numtide/flake-utils";
 
+    # My stuff
     nix-exprs.url = "gitlab:jD91mZM2/nix-exprs";
+    redox-world-map.url = "gitlab:jD91mZM2/redox-world-map";
 
+    # Nix tools
     home-manager.url = "github:nix-community/home-manager";
     nixos-generators.url = "github:jD91mZM2/nixos-generators/flake";
-    redox-world-map.url = "git+https://gitlab.com/jD91mZM2/redox-world-map.git";
-
-    nur-rycee = { url = "git+https://gitlab.com/rycee/nur-expressions.git"; flake = false; };
+    nixpkgs-fmt.url = "github:nix-community/nixpkgs-fmt";
 
     # Packages
     crate2nix = { url = "github:kolloch/crate2nix"; flake = false; };
+    nur-rycee = { url = "gitlab:rycee/nur-expressions"; flake = false; };
   };
 
   outputs =
@@ -25,14 +27,14 @@
     , utils
 
     , nix-exprs
+    , redox-world-map
 
     , home-manager
     , nixos-generators
-    , redox-world-map
-
-    , nur-rycee
+    , nixpkgs-fmt
 
     , crate2nix
+    , nur-rycee
     } @ inputs:
 
     {
@@ -51,9 +53,9 @@
         nur-rycee = final.callPackage nur-rycee { };
 
         # Override or add packages
-        mkchromecast = nixpkgs-master.legacyPackages."${final.system}".mkchromecast;
         nixos-generators = nixos-generators.defaultPackage."${final.system}";
         crate2nix = final.callPackage crate2nix { };
+        nixpkgs-fmt = nixpkgs-fmt.defaultPackage."${final.system}";
 
         neovim = nix-exprs.packages."${final.system}".neovim;
         st = nix-exprs.packages."${final.system}".st;
