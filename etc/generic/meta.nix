@@ -48,12 +48,12 @@
     # Keep my harddrive relatively small
     gc = {
       automatic = true;
-      dates = "17:00";
+      dates = "Mon *-*-* 17:00";
       options = "--delete-older-than 10d";
     };
     optimise = {
       automatic = true;
       dates = [ "17:00" ];
     };
-    };
+  };
 }
