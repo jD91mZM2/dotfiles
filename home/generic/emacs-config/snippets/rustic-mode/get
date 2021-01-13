@@ -1,9 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil; -*-
-# name: thing.property()
-# key: get
-# --
-
-/// Getter for the inner $1
-pub fn $1(&self) -> &$2 {
-    &self.$1$0
-}

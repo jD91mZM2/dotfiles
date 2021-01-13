@@ -7,7 +7,6 @@
 
     nix-exprs.url = "gitlab:jD91mZM2/nix-exprs";
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
     home-manager.url = "github:nix-community/home-manager";
     nixos-generators.url = "github:jD91mZM2/nixos-generators/flake";
     redox-world-map.url = "git+https://gitlab.com/jD91mZM2/redox-world-map.git";
@@ -27,7 +26,6 @@
 
     , nix-exprs
 
-    , emacs-overlay
     , home-manager
     , nixos-generators
     , redox-world-map
@@ -38,7 +36,7 @@
     } @ inputs:
 
     {
-      overlay = final: prev: (emacs-overlay.overlay final prev) // {
+      overlay = final: prev: {
         clangd = (
           let
             clang = final.llvmPackages.clang-unwrapped;
