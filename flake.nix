@@ -81,7 +81,6 @@
         modules = [
           # Base packages
           nix-exprs.nixosModules.all
-          ./shared/base.nix
         ];
         extraArgs = {
           inherit self shared inputs system;

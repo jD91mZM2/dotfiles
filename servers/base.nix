@@ -1,6 +1,10 @@
 { system, shared, pkgs, ... }:
 
 {
+  imports = [
+    ./etc/generic
+  ];
+
   # System config
   networking.firewall.enable = false;
 

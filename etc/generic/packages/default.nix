@@ -5,6 +5,7 @@
     ./graphics.nix
     ./languages.nix
     ./scripts.nix
+    ./shells.nix
   ];
 
   config = {
@@ -23,26 +24,37 @@
 
     environment.systemPackages = with pkgs; [
       # Applications
-      tmux
+      autojump
+      direnv
       neovim
+      tmux
 
       # Must have utils
+      bc
       bind
       binutils
       cryptsetup
       efibootmgr
+      file
       gist
+      git
+      gnupg
+      htop
       httpie
       manpages
       mosh
+      ncdu
+      nethogs
       nix-index
       patchelf
       pciutils
       socat
+      trash-cli
+      tree
       unzip
       wget
       zip
-  ];
+    ];
 
     # Most of my installed applications are nowadays installed through
     # here. The line between what I want as a "system package" and a "user

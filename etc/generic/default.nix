@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, shared, ... }:
+{ self, config, lib, pkgs, shared, ... }:
 
 let
   cfg = config.setup;
@@ -55,6 +55,9 @@ in {
       };
     };
 
+    # System overlays
+    nixpkgs.overlays = [ self.overlay ];
+
     # Specify hostname, if set
     networking = lib.mkIf (cfg.name != null) {
       hostName = "samuel-${cfg.name}";
@@ -73,11 +76,23 @@ in {
       application/wasm  wasm
     '';
 
+    # Language settings
+    time.timeZone = "Europe/Stockholm";
+    i18n.defaultLocale = "en_GB.UTF-8";
+    console = {
+      keyMap = "dvorak";
+      font   = "Lat2-Terminus16";
+    };
+
     # User settings
     users.users."${shared.consts.user}" = {
+      # This is a hardcoded uid, used by any container. This means files shared
+      # with containers are accessible.
+      uid = 1000;
+
       initialPassword = "nixos";
       isNormalUser    = true;
-      extraGroups     = [ "libvirtd" "adbusers" ];
+      extraGroups     = [ "libvirtd" "adbusers" "wheel" ];
     };
 
     # Unlock GnuPG automagically
