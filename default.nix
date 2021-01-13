@@ -9,12 +9,12 @@ let
   ];
 
   ranger-vim2 = vimUtils.buildVimPlugin {
-    pname   = "ranger-vim";
+    pname = "ranger-vim";
     version = "2019-10-30";
     src = fetchFromGitHub {
-      owner  = "francoiscabrol";
-      repo   = "ranger.vim";
-      rev    = "91e82debdf566dfaf47df3aef0a5fd823cedf41c";
+      owner = "francoiscabrol";
+      repo = "ranger.vim";
+      rev = "91e82debdf566dfaf47df3aef0a5fd823cedf41c";
       sha256 = "sha256-6ut7u6AwtyYbHLHa2jelf5PkbtlfHvuHfWRL5z1CTUQ=";
     };
   };
@@ -23,9 +23,9 @@ let
     pname = "vim-argumentative";
     version = "2014-11-24";
     src = fetchFromGitHub {
-      owner  = "PeterRincker";
-      repo   = "vim-argumentative";
-      rev    = "63a5f7deb675c38126de626f4c00e000902462fe";
+      owner = "PeterRincker";
+      repo = "vim-argumentative";
+      rev = "63a5f7deb675c38126de626f4c00e000902462fe";
       sha256 = "sha256-cgcNlsmEhZ8aWicJKgpnVJRl7nrMllFRDkXBhwBv7xk=";
     };
   };
@@ -87,12 +87,13 @@ let
 
         # Packages that might be lazy-loaded
         # with :packadd <name>
-        opt = [];
+        opt = [ ];
       };
     };
   };
-in symlinkJoin {
-  name  = "nvim";
+in
+symlinkJoin {
+  name = "nvim";
   paths = [ nvim neovim-remote ];
 
   nativeBuildInputs = [ makeWrapper ];
