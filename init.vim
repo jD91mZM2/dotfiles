@@ -26,6 +26,8 @@ set tabstop=4
 " }}}
 
 " Load files --- {{{
+call s:load('./utils.vim')
+
 call s:load('./keymap.vim')
 call s:load('./terminal.vim')
 " }}}

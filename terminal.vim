@@ -18,8 +18,17 @@ augroup s:terminal
     au BufEnter * call s:maybeInsert()
 augroup END
 
-" Open Terminal
-call Map('n', '<leader>S', 'rightbelow vsplit +terminal')
+" Open Terminal in the correct pwd
+function! s:terminal()
+    let entry = ShellScript([
+                \ [ 'cd', expand('%:p:h') ],
+                \ 'exec "$0"',
+                \ ])
+    let command = 'terminal ${SHELL:/bin/sh} -c ' . shellescape(entry)
+
+    return 'rightbelow vsplit +' . escape(command, ' ')
+endfunction
+call Map('n', '<leader>S', function('s:terminal'))
 
 " Map navigation keys
 for m in ['h', 'j', 'k', 'l']

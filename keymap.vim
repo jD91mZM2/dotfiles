@@ -1,59 +1,64 @@
 let mapleader = ' '
 
+let s:modes = ['n', 'v', 'i', 'c', 't']
+
+function! s:rawMap(mode, extra, trigger, prefix, keys, suffix)
+    let extra = a:extra
+
+    if IsString(a:keys)
+        let bindTo = a:prefix . a:keys . a:suffix
+    elseif IsFunction(a:keys)
+        let name = AnonFunc({ -> a:prefix . a:keys() . a:suffix })
+
+        let extra  .= '<expr> '
+        let bindTo  = name . '()'
+    endif
+
+    exec a:mode . 'noremap ' . extra . a:trigger . ' ' . bindTo
+endfunction
+
 function! Map(opts, trigger, command)
     let extra = ''
     if a:opts =~# 'b'
         let extra .= '<buffer> '
     endif
 
-    if a:opts =~# 'n'
-        execute 'nnoremap <silent> ' . extra . a:trigger . ' :' . a:command . '<CR>'
-    endif
-    if a:opts =~# 'v'
-        execute 'vnoremap <silent> ' . extra . a:trigger . ' <C-c>:' . a:command . '<CR>gv'
-    endif
-    if a:opts =~# 'i'
-        execute 'inoremap <silent> ' . extra . a:trigger . ' <C-o>:' . a:command . '<CR>'
-    endif
-    if a:opts =~# 'c'
-        execute 'cnoremap ' . a:trigger . ' <C-c>:' . a:command . '<CR>:<C-p>'
-    endif
-    if a:opts =~# 't'
-        execute 'tnoremap ' . a:trigger . ' <C-\><C-n>:' . a:command . '<CR>i'
-    endif
+    let wrapper = {
+                \ 'n': [ ':',           "\<CR>"       ],
+                \ 'v': [ "\<C-c>:",      "\<CR>gv"     ],
+                \ 'i': [ "\<C-o>:",      "\<CR>"       ],
+                \ 'c': [ "\<C-o>:",      "\<CR>:\<C-p>" ],
+                \ 't': [ "\<C-\>\<C-n>:", "\<CR>i"      ],
+                \ }
+
+    for m in s:modes
+        if a:opts !~# m
+            continue
+        endif
+
+        let silent = ''
+        if m !=# 'c'
+            let silent .= '<silent> '
+        endif
+
+        let prefix = wrapper[m][0]
+        let suffix = wrapper[m][1]
+
+        call s:rawMap(m, silent . extra, a:trigger, prefix, a:command, suffix)
+    endfor
 endfunction
 
-let s:count = 0
 function! MapKeys(opts, trigger, keys)
     let extra = ''
     if a:opts =~# 'b'
         let extra .= '<buffer> '
     endif
 
-    let modes = ['n', 'v', 'i', 'c', 't']
-
-    if type(a:keys) == type("hello")
-        for m in modes
-            if a:opts =~# m
-                exec m . 'noremap ' . extra . a:trigger . ' <C-\><C-n>' . a:keys
-            endif
-        endfor
-    elseif type(a:keys) == type(function('MapKeys'))
-        let l:Lambda = { -> "\<C-\>\<C-n>" . a:keys() }
-
-        " Assign stupid unique global name to lambda
-        exec 'let g:StupidMapExpr_' . string(s:count) . ' = l:Lambda'
-
-        " Bind function
-        for m in modes
-            if a:opts =~# m
-                exec m . 'noremap <expr> ' . extra . a:trigger . ' g:StupidMapExpr_' . string(s:count) . '()'
-            endif
-        endfor
-
-        " Update counter
-        let s:count += 1
-    endif
+    for m in s:modes
+        if a:opts =~# m
+            call s:rawMap(m, extra, a:trigger, '<C-\><C-n>', a:keys, '')
+        endif
+    endfor
 endfunction
 
 call Map('nvi',  '<Left>',  'echo "You must never use arrow keys!"')
@@ -62,7 +67,7 @@ call Map('nvic', '<Up>',    'echo "You must never use arrow keys!"')
 call Map('nvic', '<Down>',  'echo "You must never use arrow keys!"')
 
 call Map('n', '<C-s>', 'w')
-call Map('n', '<C-w>', '%s/\s\+$//')
+call Map('n', '<C-f>', '%s/\s\+$//')
 
 call Map('n', '<leader>H',        'split')
 call Map('n', '<leader>V',        'vsplit')

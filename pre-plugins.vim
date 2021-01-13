@@ -50,6 +50,7 @@ call s:align('/^[^=]\{-}\zs[.&+\-]*=/l1r1', '=')
 call s:align('/:\zs/l1l0',                  ':')
 call s:align('/\s\+\zs\(\/\/\\|#\)',        '#')
 call s:align('/,\s\zs/l1l0',                ',')
+call s:align('/[][]/',                      '[')
 
 nnoremap ga/ :Tabularize /
 vnoremap ga/ :Tabularize /

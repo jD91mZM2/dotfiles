@@ -19,6 +19,17 @@ let
     };
   };
 
+  vim-argumentative = vimUtils.buildVimPlugin {
+    pname = "vim-argumentative";
+    version = "2014-11-24";
+    src = fetchFromGitHub {
+      owner  = "PeterRincker";
+      repo   = "vim-argumentative";
+      rev    = "63a5f7deb675c38126de626f4c00e000902462fe";
+      sha256 = "sha256-cgcNlsmEhZ8aWicJKgpnVJRl7nrMllFRDkXBhwBv7xk=";
+    };
+  };
+
   nvim = neovim.override {
     configure = {
       customRC = ''
@@ -58,6 +69,7 @@ let
           ncm2-ultisnips
           tabular
           ultisnips
+          vim-argumentative
           vim-commentary
           vim-exchange
           vim-repeat
