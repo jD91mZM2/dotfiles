@@ -18,8 +18,10 @@
   };
 
   home.file.".tmux.conf".source = ./misc/tmux.conf;
-  home.file.".editorconfig".source = ./misc/default.editorconfig;
   home.file.".gdbinit".source = ./misc/gdbinit;
+
+  # Might wanna update frequently
+  home.file.".editorconfig".source = shared.mkSymlink "home/generic/misc/default.editorconfig";
 
   home.file.".stack/config.yaml".text =
     builtins.toJSON { # YAML is a JSON superset

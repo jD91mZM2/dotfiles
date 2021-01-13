@@ -22,6 +22,10 @@ in rec {
     done
   '';
 
+  mkSymlink = path: pkgs.runCommand "symlink-${path}" {} ''
+    ln -s "${consts.dotfiles}/${path}" "$out"
+  '';
+
   background = pkgs.runCommand "background.jpg" {} ''
     cp "${pkgs.adapta-backgrounds}/share/backgrounds/adapta/tealized.jpg" "$out"
   '';
