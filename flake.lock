@@ -16,21 +16,6 @@
         "type": "github"
       }
     },
-    "emacs-overlay": {
-      "locked": {
-        "lastModified": 1610526079,
-        "narHash": "sha256-7tzvHBNwwAyQB81kC8KesKfRwA9+uAk3rYIecmkmUIs=",
-        "owner": "nix-community",
-        "repo": "emacs-overlay",
-        "rev": "bde23b35c9767a2cb8b7f162cebc6f640d975b76",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "emacs-overlay",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -83,19 +68,38 @@
         "type": "github"
       }
     },
+    "neovim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1610488054,
+        "narHash": "sha256-m2NeQF9vv3GMPt8p5Q3sgrRxiTW+igZOCdyQkE54KNY=",
+        "owner": "neovim",
+        "repo": "neovim",
+        "rev": "77a6049e07d070470d3274348ac61ab9b96cac6f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neovim",
+        "ref": "nightly",
+        "repo": "neovim",
+        "type": "github"
+      }
+    },
     "nix-exprs": {
       "inputs": {
+        "neovim": "neovim",
         "nixpkgs": "nixpkgs_2",
+        "nvim-treesitter": "nvim-treesitter",
         "scaff": "scaff",
         "st": "st",
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1610529527,
-        "narHash": "sha256-02NTWxsY2Tcznv4l1jWy1uwEjcUWXXr0oW8hLgdkhEw=",
+        "lastModified": 1610533564,
+        "narHash": "sha256-xBte59iDe2/1JOG4CqOcB/icuCDVZVHZ8gBWkP9Hd2o=",
         "owner": "jD91mZM2",
         "repo": "nix-exprs",
-        "rev": "5278f92caa8bddf0f03004efc9615227b5910b43",
+        "rev": "fa7a301081f361baa6acfe2de36d417480ca5e07",
         "type": "gitlab"
       },
       "original": {
@@ -266,6 +270,22 @@
         "url": "https://gitlab.com/rycee/nur-expressions.git"
       }
     },
+    "nvim-treesitter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1610432471,
+        "narHash": "sha256-d5F/WFs62EpcDg+nLXM1IKCtjX2r0pU9dddrn/sZlVE=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "rev": "39968ca258c89b796fc9ce5f3643ca8781150dd8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
     "redox-world-map": {
       "inputs": {
         "mozillapkgs": "mozillapkgs",
@@ -289,7 +309,6 @@
     "root": {
       "inputs": {
         "crate2nix": "crate2nix",
-        "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "nix-exprs": "nix-exprs",
         "nixos-generators": "nixos-generators",
