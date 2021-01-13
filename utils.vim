@@ -43,3 +43,16 @@ endfunction
 function! ShellScript(lines)
     return join(map(a:lines, function('s:shellLine')), ';')
 endfunction
+
+function! Maybe(cond, str)
+    return a:cond ? a:str : ''
+endfunction
+
+function! Opts(opts)
+    let options = a:opts
+
+    return {
+                \ 'Has': { opt -> options =~# opt },
+                \ 'Intersecting': { list -> filter(copy(list), { _i, opt -> options =~# opt }) },
+                \ }
+endfunction

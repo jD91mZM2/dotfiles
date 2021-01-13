@@ -18,28 +18,19 @@ function! s:rawMap(mode, extra, trigger, prefix, keys, suffix)
 endfunction
 
 function! Map(opts, trigger, command)
-    let extra = ''
-    if a:opts =~# 'b'
-        let extra .= '<buffer> '
-    endif
+    let opts = Opts(a:opts)
+    let extra = Maybe(opts.Has('b'), '<buffer> ')
 
     let wrapper = {
-                \ 'n': [ ':',           "\<CR>"       ],
-                \ 'v': [ "\<C-c>:",      "\<CR>gv"     ],
-                \ 'i': [ "\<C-o>:",      "\<CR>"       ],
-                \ 'c': [ "\<C-o>:",      "\<CR>:\<C-p>" ],
-                \ 't': [ "\<C-\>\<C-n>:", "\<CR>i"      ],
+                \ 'n': [ ':',             "\<CR>"        ],
+                \ 'v': [ "\<C-c>:",       "\<CR>gv"      ],
+                \ 'i': [ "\<C-o>:",       "\<CR>"        ],
+                \ 'c': [ "\<C-o>:",       "\<CR>:\<C-p>" ],
+                \ 't': [ "\<C-\>\<C-n>:", "\<CR>i"       ],
                 \ }
 
-    for m in s:modes
-        if a:opts !~# m
-            continue
-        endif
-
-        let silent = ''
-        if m !=# 'c'
-            let silent .= '<silent> '
-        endif
+    for m in opts.Intersecting(s:modes)
+        let silent = Maybe(m !=# 'c', '<silent> ')
 
         let prefix = wrapper[m][0]
         let suffix = wrapper[m][1]
@@ -49,15 +40,11 @@ function! Map(opts, trigger, command)
 endfunction
 
 function! MapKeys(opts, trigger, keys)
-    let extra = ''
-    if a:opts =~# 'b'
-        let extra .= '<buffer> '
-    endif
+    let opts = Opts(a:opts)
+    let extra = Maybe(opts.Has('b'), '<buffer> ')
 
-    for m in s:modes
-        if a:opts =~# m
-            call s:rawMap(m, extra, a:trigger, '<C-\><C-n>', a:keys, '')
-        endif
+    for m in opts.Intersecting(s:modes)
+        call s:rawMap(m, extra, a:trigger, '<C-\><C-n>', a:keys, '')
     endfor
 endfunction
 
