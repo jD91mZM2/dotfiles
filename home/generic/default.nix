@@ -13,7 +13,6 @@ in {
   };
 
   imports = [
-    ./emacs.nix
     ./env.nix
     ./fonts.nix
     ./misc.nix
