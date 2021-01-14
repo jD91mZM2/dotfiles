@@ -25,7 +25,7 @@ function! Map(opts, trigger, command)
                 \ 'n': [ ':',             "\<CR>"        ],
                 \ 'v': [ "\<C-c>:",       "\<CR>gv"      ],
                 \ 'i': [ "\<C-o>:",       "\<CR>"        ],
-                \ 'c': [ "\<C-o>:",       "\<CR>:\<C-p>" ],
+                \ 'c': [ "\<C-c>:",       "\<CR>:\<C-p>" ],
                 \ 't': [ "\<C-\>\<C-n>:", "\<CR>i"       ],
                 \ }
 
@@ -44,12 +44,12 @@ function! MapKeys(opts, trigger, keys)
     let extra = Maybe(opts.Has('b'), '<buffer> ')
 
     for m in opts.Intersecting(s:modes)
-        call s:rawMap(m, extra, a:trigger, '<C-\><C-n>', a:keys, '')
+        call s:rawMap(m, extra, a:trigger, "\<C-\>\<C-n>", a:keys, '')
     endfor
 endfunction
 
-call Map('nvi',  '<Left>',  'echo "You must never use arrow keys!"')
-call Map('nvi',  '<Right>', 'echo "You must never use arrow keys!"')
+call Map('nvic', '<Left>',  'echo "You must never use arrow keys!"')
+call Map('nvic', '<Right>', 'echo "You must never use arrow keys!"')
 call Map('nvic', '<Up>',    'echo "You must never use arrow keys!"')
 call Map('nvic', '<Down>',  'echo "You must never use arrow keys!"')
 

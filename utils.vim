@@ -2,11 +2,17 @@ let s:count = 0
 
 function! AnonFunc(func)
     " Create placeholder name
-    let name = 'g:AnonFunc_' . string(s:count)
+    let name = 'AnonFunc_' . string(s:count)
     let s:count += 1
 
-    " Bind to a:func
-    exec 'let ' . name . ' = a:func'
+    " Bind global variable to a:func
+    let code = "let g:" . name . "_Var = a:func\n"
+
+    " Use variable in global function
+    let code .= "function! " . name . "(...)\n"
+    let code .= "return g:" . name . "_Var(a:000)\n"
+    let code .= "endfunction"
+    exec code
 
     " Return
     return name

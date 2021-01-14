@@ -40,3 +40,14 @@ endsnippet
 snippet im "from ... import ..."
 from ${1:dataclasses} import ${0:dataclass}
 endsnippet
+
+snippet get "@property"
+@property
+def ${1:name}(self):
+	return ${0:self.list[0]}
+endsnippet
+snippet set "@property"
+@$1.setter
+def ${1:name}(self, value):
+	${0:self.list[0] = value}
+endsnippet
