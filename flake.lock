@@ -144,11 +144,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1610533564,
-        "narHash": "sha256-xBte59iDe2/1JOG4CqOcB/icuCDVZVHZ8gBWkP9Hd2o=",
+        "lastModified": 1610642762,
+        "narHash": "sha256-Jt47O5aYwaOMivBjMDY4xrX7ZUaHQCe60ebX8Wwj8RE=",
         "owner": "jD91mZM2",
         "repo": "nix-exprs",
-        "rev": "fa7a301081f361baa6acfe2de36d417480ca5e07",
+        "rev": "2bda58d9a3b7ce0c37f1ac3768dea0d77b75043d",
         "type": "gitlab"
       },
       "original": {

@@ -90,7 +90,6 @@ in
       # with containers are accessible.
       uid = 1000;
 
-      initialPassword = "nixos";
       isNormalUser = true;
       extraGroups = [ "libvirtd" "adbusers" "wheel" ];
     };

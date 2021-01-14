@@ -63,11 +63,8 @@
 
       # NixOS configurations
       nixosConfigurations = with self.lib."x86_64-linux"; {
-        samuel-computer = mkNixosConfigWithHome [ ./etc/computer/configuration.nix ];
-        samuel-laptop = mkNixosConfigWithHome [ ./etc/laptop/configuration.nix ];
-
-        samuel-vm-gui = mkNixosConfigWithHome [ ./etc/vm/vm-gui.nix ];
-        samuel-vm-headless = mkNixosConfigWithHome [ ./etc/vm/vm-headless.nix ];
+        samuel-computer = mkNixosConfigWithHome ./etc/computer/configuration.nix;
+        samuel-laptop = mkNixosConfigWithHome ./etc/laptop/configuration.nix;
       };
     } // (utils.lib.eachDefaultSystem (system:
     let
@@ -94,12 +91,12 @@
 
         mkNixosConfig = modules:
           nixpkgs.lib.makeOverridable nixpkgs.lib.nixosSystem (configInputs // {
-            modules = configInputs.modules ++ modules;
+            modules = configInputs.modules ++ nixpkgs.lib.toList modules;
           });
 
         mkNixosConfigWithHome = modules: mkNixosConfig ([
           home-manager.nixosModules.home-manager
-        ] ++ modules);
+        ] ++ nixpkgs.lib.toList modules);
 
         mkNixosModule = module: {
           # Hacky way to send extraArgs to a module directly
@@ -112,6 +109,10 @@
           _module.args = configInputs.extraArgs;
           imports = [ module ];
         };
+      };
+
+      packages = {
+        iso = (lib.mkNixosConfigWithHome ./etc/iso/configuration.nix).config.system.build.isoImage;
       };
 
       devShell = pkgs.mkShell {
