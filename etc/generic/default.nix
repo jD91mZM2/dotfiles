@@ -30,7 +30,6 @@ in
     ./meta.nix
     ./packages
     ./services.nix
-    ./sudo.nix
   ];
 
   config = {
