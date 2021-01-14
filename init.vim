@@ -42,9 +42,6 @@ augroup s:general
     " Use foldmethod=marker in vimrc
     au FileType vim setlocal foldmethod=marker
     au FileType vim normal! zR
-
-    " Autoformat Nix
-    au BufWrite *.nix %!nixpkgs-fmt
 augroup END
 " }}}
 

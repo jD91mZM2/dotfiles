@@ -106,6 +106,15 @@ augroup s:fugitive
 augroup END
 " }}}
 
+" Neoformat --- {{{
+augroup s:fmt
+    au!
+
+    " Run formatters on save
+    au BufWritePre *.nix Neoformat
+augroup END
+" }}}
+
 " NeoVim Treesitter --- {{{
 lua <<EOF
 require'nvim-treesitter.configs'.setup {

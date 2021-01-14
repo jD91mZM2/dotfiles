@@ -67,6 +67,7 @@ let
           ncm2-path
           ncm2-syntax
           ncm2-ultisnips
+          neoformat
           nvim-treesitter
           tabular
           ultisnips
