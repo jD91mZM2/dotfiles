@@ -9,7 +9,7 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
@@ -20,21 +20,21 @@
       fsType = "zfs";
     };
 
-  fileSystems."/nix" =
-    {
-      device = "main/nixos/nix";
-      fsType = "zfs";
-    };
-
   fileSystems."/home" =
     {
       device = "main/nixos/home";
       fsType = "zfs";
     };
 
+  fileSystems."/nix" =
+    {
+      device = "main/nixos/nix";
+      fsType = "zfs";
+    };
+
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/66A9-3084";
+      device = "/dev/disk/by-uuid/9F62-CF9C";
       fsType = "vfat";
     };
 
