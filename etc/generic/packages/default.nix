@@ -35,6 +35,7 @@
       binutils
       cryptsetup
       efibootmgr
+      fd
       file
       gist
       git
@@ -47,6 +48,8 @@
       nethogs
       patchelf
       pciutils
+      pv
+      ripgrep
       socat
       trash-cli
       tree
@@ -68,15 +71,12 @@
         # Must have utils
         ascii
         ctags
-        fd
         ffmpeg
         figlet
         libnotify
         neofetch
-        pv
         rclone
         rename
-        ripgrep
         sqlite
         weechat
         youtube-dl
