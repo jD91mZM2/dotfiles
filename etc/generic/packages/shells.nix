@@ -1,6 +1,7 @@
 { config, pkgs, lib, shared, ... }:
 
 {
+  users.defaultUserShell = pkgs.zsh;
   programs = {
     powerline-rs = {
       enable = true;
