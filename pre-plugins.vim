@@ -68,6 +68,8 @@ augroup END
 call Map('n', '<leader>g', 'Git')
 
 function! s:fugitiveMain()
+    call MapKeys('nb', ':', ':G ')
+
     call MapKeys('nb', 'pp', ':G push')
     call MapKeys('nb', 'pu', { -> ':G push -u  ' . FugitiveHead() . "\<C-Left>\<Left>" })
     call MapKeys('nb', 'pf', ':G push --force-with-lease')
