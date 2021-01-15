@@ -24,7 +24,8 @@ function! s:terminal()
                 \ [ 'cd', expand('%:p:h') ],
                 \ 'exec "$0"',
                 \ ])
-    let command = 'terminal ${SHELL:/bin/sh} -c ' . shellescape(entry)
+    let shell = exists('$SHELL') ? $SHELL : "/bin/sh"
+    let command = 'terminal ' . shell . ' -c ' . shellescape(entry)
 
     return 'rightbelow vsplit +' . escape(command, ' ')
 endfunction

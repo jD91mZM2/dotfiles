@@ -2,10 +2,16 @@
 
 let
   runtimeDeps = with pkgs; [
+    # Need C compiler for nvim-treesitter
+    gcc
+
+    # For fzf
     fd
     fzf
-    ranger
     ripgrep
+
+    # For ranger
+    ranger
   ];
 
   ranger-vim2 = vimUtils.buildVimPlugin {
