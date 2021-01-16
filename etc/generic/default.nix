@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ self, config, lib, pkgs, shared, ... }:
+{ self, config, lib, pkgs, shared, inputs, system, ... }:
 
 let
   cfg = config.setup;
@@ -85,13 +85,19 @@ in
     };
 
     # User settings
-    users.users."${shared.consts.user}" = {
-      # This is a hardcoded uid, used by any container. This means files shared
-      # with containers are accessible.
-      uid = 1000;
+    users = {
+      # Use z shell
+      defaultUserShell = inputs.nix-exprs.packages."${system}".zsh;
 
-      isNormalUser = true;
-      extraGroups = [ "libvirtd" "adbusers" "wheel" ];
+      # Create standard user
+      users."${shared.consts.user}" = {
+        # This is a hardcoded uid, used by any container. This means files shared
+        # with containers are accessible.
+        uid = 1000;
+
+        isNormalUser = true;
+        extraGroups = [ "libvirtd" "adbusers" "wheel" ];
+      };
     };
 
     # Unlock GnuPG automagically

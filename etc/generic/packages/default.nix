@@ -5,7 +5,6 @@
     ./graphics.nix
     ./languages.nix
     ./scripts.nix
-    ./shells.nix
   ];
 
   config = {
