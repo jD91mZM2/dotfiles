@@ -54,14 +54,6 @@ call s:align('/[]]/l1l0',                   ']')
 
 nnoremap ga/ :Tabularize /
 vnoremap ga/ :Tabularize /
-
-augroup s:tabular
-    au!
-
-    " Format markdown tables
-    au FileType markdown inoremap <silent> <buffer> \| \|<C-o>:TableFormat<CR><C-o>f\|<Right>
-    au FileType markdown nnoremap <silent> <buffer> <C-c><C-c> :TableFormat<CR>
-augroup END
 " }}}
 
 " Fugitive --- {{{
@@ -115,6 +107,14 @@ augroup s:fmt
     " Run formatters on save
     au BufWritePre *.nix Neoformat
 augroup END
+" }}}
+
+" vim-table-mode  --- {{{
+" Always look for '|' on new lines
+let g:table_mode_always_active = 1
+
+" Disable table mode mappings
+let g:table_mode_map_prefix = '<Plug>table-mode'
 " }}}
 
 " NeoVim Treesitter --- {{{

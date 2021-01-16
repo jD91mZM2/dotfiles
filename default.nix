@@ -95,6 +95,7 @@ purepkgs.packages.neovim.configure ({ pkgs, lib, config, ... }:
         vim-exchange
         vim-repeat
         vim-surround
+        vim-table-mode
 
         # Validation
         LanguageClient-neovim
