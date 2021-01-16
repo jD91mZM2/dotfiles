@@ -81,7 +81,8 @@ in
     i18n.defaultLocale = "en_GB.UTF-8";
     console = {
       keyMap = "dvorak";
-      font = "Lat2-Terminus16";
+      packages = [ pkgs.powerline-fonts ];
+      font = "ter-powerline-v16n";
     };
 
     # User settings

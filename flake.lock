@@ -145,11 +145,11 @@
         "utils": "utils_3"
       },
       "locked": {
-        "lastModified": 1610790400,
-        "narHash": "sha256-euLGwlhUyaQ4iaJ3BJTif/DTAB51EED8d0QcKG9zNKs=",
+        "lastModified": 1610806324,
+        "narHash": "sha256-Aujm7W3fbZi25T65+gMj/NBVdwb5BnD0YFQ8CJwsrfI=",
         "owner": "jD91mZM2",
         "repo": "nix-exprs",
-        "rev": "073b0918d115d506f87f4f897f4744fb8e48c0b9",
+        "rev": "52763088f8b84d5ae817d32bfb88738b97da3354",
         "type": "gitlab"
       },
       "original": {
@@ -405,11 +405,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1610790356,
-        "narHash": "sha256-sdD+ybobdhN9JbM+ZsTvBrf9Oeqj1exMOhJhWKhAIMY=",
+        "lastModified": 1610804065,
+        "narHash": "sha256-6v0p5BvjgVgt6FA7NMWBDeCLjJm+UI1vZB34HGMlb3Q=",
         "owner": "jD91mZM2",
         "repo": "purepkgs",
-        "rev": "c2255d79c667e5d3f5741fc5a633de1c1b141223",
+        "rev": "a9993c97ad24185a5610422b03c42e41c8ec387b",
         "type": "gitlab"
       },
       "original": {

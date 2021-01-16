@@ -2,29 +2,6 @@
 
 let
   cfg = config.setup.shells;
-
-  aliases = {
-    cal = "cal -m";
-    clear = "clear; echo -ne \"\\e[3J\"";
-    ls = "ls -CF --color=auto";
-    nix-shell = "nix-shell --command zsh";
-    objdump = "objdump -Mintel";
-    rsynca = "rsync -avzhP --delete";
-    screencast = "mkchromecast -n \"Living Room TV\" --video --screencast";
-  };
-
-  bashConfig = builtins.replaceStrings [ "  " ] [ "\t" ] ''
-    # No dircolors, the defaults look good to me... for now
-
-    if [ "$TERM" = "linux" ]; then
-      ${toString
-        (map
-          (color: ''
-            echo -ne "\e]P${color.hex}${color.rgb}"
-          '')
-          shared.theme.colours)}
-    fi
-  '';
 in
 {
   options.setup.shells = {
@@ -38,21 +15,6 @@ in
 
   config = lib.mkMerge [
     {
-      # Shells
-      programs.bash = lib.mkIf cfg.enableBash {
-        enable = true;
-        shellAliases = aliases;
-        initExtra = bashConfig;
-      };
-      programs.zsh = lib.mkIf cfg.enableZsh {
-        enable = true;
-        shellAliases = aliases;
-        initExtra = ''
-          ${bashConfig}
-          unset -f trans # some alias by grml-zsh-config
-        '';
-      };
-
       # Every shell needs some git...
       programs.git = lib.mkIf cfg.enableGit {
         enable = true;
