@@ -57,6 +57,7 @@
         crate2nix = final.callPackage crate2nix { };
         nixpkgs-fmt = nixpkgs-fmt.defaultPackage."${final.system}";
 
+        less = nix-exprs.packages."${final.system}".less;
         neovim = nix-exprs.packages."${final.system}".neovim;
         st = nix-exprs.packages."${final.system}".st;
       };
