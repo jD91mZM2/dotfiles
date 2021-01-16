@@ -39,3 +39,38 @@ snippet _skel_flake "Template flake.nix"
 		});
 }
 endsnippet
+
+snippet mod "Nix module"
+{ pkgs, lib, config, ... }:
+
+with lib;
+let
+	cfg = config.$1;
+in
+{
+	options.${1:programs.hello} = {
+		enable = mkEnableOption "${2:Enable GNU Hello}";
+		option = mkOption {
+			type = types.str;
+			description = "Greeting";
+			default = "";
+		};
+	};
+
+	config = mkIf cfg.enable {
+		${0:${VISUAL}}
+	};
+}
+endsnippet
+
+snippet mkOption "Make option"
+mkOption {
+	type = types.${1:str};
+	description = "${2:A string option}";
+	default = ${3:""};
+}
+endsnippet
+
+snippet "([a-zA-Z0-9_-]+\s*)=" "Set entry" Ar
+`!p snip.rv = match[1]`=$0;
+endsnippet
