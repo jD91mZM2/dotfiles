@@ -27,7 +27,7 @@ in
         config = {
           "bar/main" = {
             monitor = "\${env:MONITOR}";
-            background = (shared.theme.getColor 0).rgb;
+            background = (shared.theme.getColour 0).rgb;
             font-0 = "Hack:size=10;2";
             font-1 = "Font Awesome 5 Free Solid:size=10;2";
             height = 30;
@@ -41,7 +41,7 @@ in
 
           "bar/secondary" = {
             monitor = "\${env:MONITOR}";
-            background = (shared.theme.getColor 0).rgb;
+            background = (shared.theme.getColour 0).rgb;
             font-0 = "Hack:size=10;2";
             font-1 = "Font Awesome 5 Free Solid:size=10;2";
             height = 30;
@@ -53,9 +53,9 @@ in
 
           "module/ewmh_taskbar" = {
             type = "internal/xworkspaces";
-            label-active-foreground = (shared.theme.getColor 5).rgb;
-            label-active-background = (shared.theme.getColor 1).rgb;
-            label-urgent-foreground = (shared.theme.getColor 5).rgb;
+            label-active-foreground = (shared.theme.getColour 5).rgb;
+            label-active-background = (shared.theme.getColour 1).rgb;
+            label-urgent-foreground = (shared.theme.getColour 5).rgb;
 
             icon-0 = "1;";
             icon-1 = "2;";
@@ -83,7 +83,7 @@ in
             date = "%b %d";
             time = "%H:%M";
             label = "%date% %time%";
-            label-background = (shared.theme.getColor 0).rgb;
+            label-background = (shared.theme.getColour 0).rgb;
             interval = 30;
           };
 
@@ -97,7 +97,7 @@ in
 
             bar-volume-width = 10;
             bar-volume-empty = "█";
-            bar-volume-empty-foreground = (shared.theme.getColor 3).rgb;
+            bar-volume-empty-foreground = (shared.theme.getColour 3).rgb;
             bar-volume-fill = "█";
             bar-volume-indicator = "";
           };

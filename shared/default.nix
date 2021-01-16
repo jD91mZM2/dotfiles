@@ -6,7 +6,7 @@ in
 rec {
   consts = import ./consts.nix;
   builders = callPackage ./builders { inherit inputs; };
-  theme = callPackage ./theme.nix { };
+  theme = callPackage ./theme.nix { inherit inputs; };
 
   scripts = pkgs.runCommand "scripts" { } ''
     cp -r ${./scripts} "$out"
@@ -14,10 +14,10 @@ rec {
       substituteInPlace "$f" \
         ${toString
           (map
-            (color: ''
-              --subst-var-by "base${color.hex}" "${color.rgb}" \
+            (colour: ''
+              --subst-var-by "base${colour.hex}" "${colour.rgb}" \
             '')
-            theme.colors)
+            theme.colours)
          }
          # empty line to allow trailing \
     done

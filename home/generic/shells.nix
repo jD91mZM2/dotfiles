@@ -22,7 +22,7 @@ let
           (color: ''
             echo -ne "\e]P${color.hex}${color.rgb}"
           '')
-          shared.theme.colors)}
+          shared.theme.colours)}
     fi
   '';
 in

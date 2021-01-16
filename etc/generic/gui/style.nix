@@ -21,20 +21,19 @@ lib.mkIf config.setup.graphics.enable {
     # Xresources is kinda cool I guess :)
     xresources = {
       properties =
-        (builtins.foldl'
-          (x: y: x // y)
-          { }
-          (lib.zipListsWith
-            (index: color: {
-              "*.color${toString index.number}" = "#${color.rgb}";
-            })
-            shared.theme.colors
-            shared.theme.xresources)
+        (
+          lib.listToAttrs (
+            map
+              (colour: (
+                lib.nameValuePair "*.color${toString colour.number}" "#${colour.rgb}"
+              ))
+              shared.theme.xresources.colours
+          )
         ) // {
           # Everything
           "*.font" = "Hack:pixelsize=13:antialias=true:autohint=true";
-          "*.background" = "#${(shared.theme.getColor 0).rgb}";
-          "*.foreground" = "#${(shared.theme.getColor 5).rgb}";
+          "*.background" = "#${(shared.theme.getColour 0).rgb}";
+          "*.foreground" = "#${(shared.theme.getColour 5).rgb}";
 
           # XTerm stuff
           "XTerm.termName" = "xterm-256color";
