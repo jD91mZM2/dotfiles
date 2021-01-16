@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./gpg.nix
     ./graphics.nix
     ./languages.nix
     ./scripts.nix

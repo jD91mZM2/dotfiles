@@ -40,6 +40,7 @@ in
       graphics.enable = true;
 
       packages = {
+        gpg.enable = true;
         languages = {
           c = true;
           elm = true;
@@ -99,13 +100,6 @@ in
         isNormalUser = true;
         extraGroups = [ "libvirtd" "adbusers" "wheel" ];
       };
-    };
-
-    # Unlock GnuPG automagically
-    security.pam.services.login.gnupg = {
-      enable = true;
-      noAutostart = true;
-      storeOnly = true;
     };
 
     # This value determines the NixOS release with which your system is to be

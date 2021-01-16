@@ -11,7 +11,6 @@
     shells.enableZsh = true;
     shells.enableBash = true;
     shells.enableGit = true;
-    shells.enableGnuPG = true;
     shells.personal = true;
   };
 }
