@@ -13,12 +13,13 @@
     (import (fetchTarball "https://github.com/flox/nixos-module/archive/master.tar.gz"))
 
     ../../modules/base
-    ../../modules/neovim.nix
     ../../modules/console.nix
     ../../modules/efi-boot.nix
+    ../../modules/gpg.nix
+    ../../modules/meta.nix
+    ../../modules/neovim.nix
     ../../modules/user
     ../../modules/x11
-    ../../modules/meta.nix
   ];
 
   # Flox
