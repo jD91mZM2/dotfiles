@@ -260,11 +260,11 @@
         "utils": "utils_4"
       },
       "locked": {
-        "lastModified": 1610534163,
-        "narHash": "sha256-rIL5+0oX5uL6hQREoxoRYFPaabM49/OGL2Cnz6i8BFs=",
+        "lastModified": 1610884512,
+        "narHash": "sha256-zVIcGtjC83RDOsixaocQLOvUAVqOLZ4E2ZsuYQpRa/o=",
         "owner": "jD91mZM2",
         "repo": "st",
-        "rev": "0a80eac3a1fcebc88a367d227fc93f56595cc478",
+        "rev": "05ab2a7493add00d4133a09b199025a451e2efff",
         "type": "gitlab"
       },
       "original": {
