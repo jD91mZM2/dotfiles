@@ -22,15 +22,27 @@ in
         default = "dvorak";
       };
     };
+
     colourscheme = mkOption {
       type = types.attrs;
       description = "Colours that look good";
       default = import ./colours.nix { inherit lib; };
     };
+
     userName = mkOption {
       type = types.str;
       description = "Username of my primary user";
       default = "user";
+    };
+    name = mkOption {
+      type = types.str;
+      description = "My online alias";
+      default = "jD91mZM2";
+    };
+    email = mkOption {
+      type = types.str;
+      description = "My email address";
+      default = "me@krake.one";
     };
   };
 }

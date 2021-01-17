@@ -74,7 +74,7 @@ local globalkeys = gears.table.join(
   awful.key({}, "F11", script("volume.perl up"), { description = "higher the volume", group = "volume" }),
 
   -- Misc
-  awful.key({ modkey }, "p", spawn_cmd("j4-dmenu-desktop --dmenu \"" .. scripts .. "dmenu.sh -p 'Execute:'\""), { description = "show the menubar", group = "misc" }),
+  awful.key({ modkey }, "p", script("dmenu-desktop.sh"), { description = "show the menubar", group = "misc" }),
   awful.key({ modkey, "Shift" }, "l", spawn_cmd("slock"), { description = "lock screen", group = "misc" }),
   awful.key({ modkey }, "z", spawn_cmd("echo -n \"\xE2\x80\x8B\" | xclip -sel clip"), { description = "clear the clipboard (zero-width space)", group = "misc" })
 )

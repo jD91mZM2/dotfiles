@@ -5,9 +5,15 @@ with lib;
     # Enable X server
     enable = true;
 
+    # Add way to kill if unresponsive
+    enableCtrlAltBackspace = true;
+
     # Set my keyboard layout
     layout = config.globals.keyboard.layout;
     xkbVariant = config.globals.keyboard.variant;
+
+    # Input drivers
+    libinput.enable = true;
   };
 
   # Base packages

@@ -6,6 +6,11 @@
 
     # Required by modules
     st.url = "gitlab:jD91mZM2/st";
+    nix-exprs.url = "gitlab:jD91mZM2/nix-exprs";
+    nur-rycee = {
+      url = "gitlab:rycee/nur-expressions";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, ... } @ inputs:

@@ -1,5 +1,9 @@
 { config, ... }:
 {
+  imports = [
+    ./git.nix
+  ];
+
   users.users."${config.globals.userName}" = {
     # This is a hardcoded uid, used by any container. This means files shared
     # with containers are accessible.

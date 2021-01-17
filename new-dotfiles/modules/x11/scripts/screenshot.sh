@@ -10,9 +10,9 @@ case "$1" in
         # FORK:   https://gist.github.com/jD91mZM2/99cfe5e74e34a08f4b0854c82f9bc0b3
         # ALL CREDITS GO TO THE CREATOR OF THE SOURCE SCRIPT
         # -----------------------------------------------------------------------------------
-        monitors="$(xrandr | grep -o '[0-9]*x[0-9]*[+-][0-9]*[+-][0-9]*')"
+        monitors="$(@xrandr@ | grep -o '[0-9]*x[0-9]*[+-][0-9]*[+-][0-9]*')"
         # Get the location of the mouse
-        eval "$(xdotool getmouselocation --shell --prefix mouse_)"
+        eval "$(@xdotool@ getmouselocation --shell --prefix mouse_)"
 
         while read -r line; do
             if [[ "$line" =~ ([0-9]+)x([0-9]+)([+-][0-9]+)([+-][0-9]+) ]]; then
@@ -25,18 +25,18 @@ case "$1" in
 
                 if (( $mouse_X >= $x )) && (( $mouse_X <= $x+$width )) \
                        && (( $mouse_Y >= $y )) && (( $mouse_Y <= $y+$height )); then
-                    import -window root -crop "$specs" /tmp/screenshot.png
+                    @import@ -window root -crop "$specs" /tmp/screenshot.png
                     break
                 fi
             fi
-        done < <(xrandr)
+        done < <(@xrandr@)
         # -----------------------------------------------------------------------------------
         ;;
     window)
-        import -window "$(xdotool getactivewindow)" /tmp/screenshot.png
+        @import@ -window "$(@xdotool@ getactivewindow)" /tmp/screenshot.png
         ;;
     region)
-        import /tmp/screenshot.png
+        @import@ /tmp/screenshot.png
         ;;
     *)
         echo "Invalid argument. Must be one of screen, window or region." >&2
@@ -44,5 +44,5 @@ case "$1" in
         ;;
 esac
 
-xclip -sel clip -t image/png /tmp/screenshot.png
-mpv /tmp/screenshot.png
+@xclip@ -sel clip -t image/png /tmp/screenshot.png
+@mpv@ /tmp/screenshot.png

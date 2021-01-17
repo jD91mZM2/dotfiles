@@ -17,7 +17,6 @@ in
           repository = pkgs.nur-rycee.firefox-addons;
         };
         extensions = with pkgs.nur-rycee.firefox-addons; [
-          # Other addons
           bitwarden
           stylus
           vimium
