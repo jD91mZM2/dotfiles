@@ -12,14 +12,8 @@
     # Flox :D
     (import (fetchTarball "https://github.com/flox/nixos-module/archive/master.tar.gz"))
 
-    ../../modules/base
-    ../../modules/console.nix
-    ../../modules/efi-boot.nix
-    ../../modules/gpg.nix
-    ../../modules/meta.nix
-    ../../modules/neovim.nix
-    ../../modules/user
-    ../../modules/x11
+    # This is my main computer, use all modules
+    ../../modules/all.nix
   ];
 
   # Flox
@@ -36,12 +30,13 @@
     loader.timeout = 99;
   };
 
-  # Add some extra drivers
+  # Add some extra kernel drivers
   hardware = {
     cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
   };
 
+  # Video Drivers
   services.xserver = {
     videoDrivers = [ "amdgpu" ];
     displayManager.sessionCommands = ''
@@ -50,45 +45,11 @@
     '';
   };
 
-  # TODO:
-  #
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  #
+  # Networking
   networking.useDHCP = false;
   networking.interfaces.enp7s0.useDHCP = true;
   networking.interfaces.virbr0.useDHCP = true;
   networking.interfaces.virbr0-nic.useDHCP = true;
-
-  # -------------------
-
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   wget vim
-  #   firefox
-  # ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -97,5 +58,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.03"; # Did you read the comment?
-
 }
