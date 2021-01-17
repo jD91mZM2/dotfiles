@@ -8,5 +8,7 @@
     ./neovim.nix
     ./user
     ./x11
+
+    ./packages/programming/nix.nix
   ];
 }
