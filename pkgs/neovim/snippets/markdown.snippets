@@ -1,0 +1,22 @@
+snippet toc "TOC Entry"
+- [$1](#`!p
+snip.rv = re.sub("[^a-zA-Z0-9-]+", "",
+	re.sub("\s", "-",
+		t[1].lower()))
+`)
+endsnippet
+
+snippet --- "Frontmatter"
+---
+name: $1
+date: `date -Iseconds`
+---
+
+# $1
+endsnippet
+
+snippet fn "Code Block"
+\`\`\` ${1:sh}
+${0:${VISUAL}}
+\`\`\`
+endsnippet

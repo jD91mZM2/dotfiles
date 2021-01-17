@@ -1,0 +1,43 @@
+snippet fn "Function"
+function! ${1:name}(${2:one, two, ...})
+	${0:${VISUAL}}
+endfunction
+endsnippet
+
+snippet aug "Autogroup"
+augroup ${1:s:group}
+	au!
+
+	" ${2:Automatically Does Stuff}
+	au ${3:FileType} ${4:*} $0
+augroup END
+endsnippet
+
+snippet # "Region"
+" $1 --- {{{
+${0:${VISUAL}}
+" }}}
+endsnippet
+
+snippet map "Mappings"
+nnoremap ${1:<leader>n} :$0<CR>
+endsnippet
+
+snippet cmd "Create command"
+function! g:Cmd$1(one, two, ...)
+	${0:${VISUAL}}
+endfunction
+command! -nargs=* ${1:Name} call Cmd$1(<f-args>)
+endsnippet
+
+snippet for "for loop"
+for $1 in ${2:['h', 'j', 'k', 'l']}
+	${0:${VISUAL}}
+endfor
+endsnippet
+
+snippet if "if statement"
+if $1
+	${0:${VISUAL}}
+endif
+endsnippet

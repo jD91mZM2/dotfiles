@@ -1,0 +1,13 @@
+snippet _skel "Template"
+#include <stdio.h>
+
+int main() {
+	${0:puts("Hello, World!");}
+}
+endsnippet
+
+snippet fn "Function"
+${3:void} ${1:name}($2) {
+	${0:${VISUAL}}
+}
+endsnippet

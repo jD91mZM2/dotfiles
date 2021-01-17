@@ -1,0 +1,34 @@
+global !p
+
+def expand():
+	"""
+	Simply expand the snippet's first group
+	"""
+	snip.rv = match[1]
+
+endglobal
+
+snippet "([0-9]+(?:\.[0-9]+)?)\$" "1$ -> $1" Ar
+$`!p expand()`
+endsnippet
+snippet "([0-9]+(?:\.[0-9]+)?)eu" "1eu -> €1" Ar
+€`!p expand()`
+endsnippet
+snippet "([0-9]+(?:\.[0-9]+)?)po" "1po -> £1" Ar
+£`!p expand()`
+endsnippet
+
+snippet #! "Shebang" b
+#!/usr/bin/env ${1:bash}
+
+endsnippet
+
+snippet rickroll "Never Gonna Give You Up..."
+https://youtu.be/dQw4w9WgXcQ
+endsnippet
+
+priority -1
+snippet _skel "Default File Template" b
+$0
+endsnippet
+priority 0

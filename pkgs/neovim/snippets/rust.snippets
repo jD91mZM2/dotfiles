@@ -1,0 +1,81 @@
+snippet _skel "Template"
+use std::{
+	error::Error,
+};
+
+pub type Result<T> = std::result::Result<T, Box<Error>>;
+
+fn main() -> Result<()> {
+	${0:println!("Hello World");}
+	Ok(())
+}
+endsnippet
+
+snippet fn "Function"
+fn ${1:name}($2) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet struct "Struct"
+struct ${1:Name} {
+	${2:arg}: ${3:u8},
+	${VISUAL}$0
+}
+endsnippet
+
+snippet new "fn new() { ... }"
+fn new() -> Self {
+	${0:${VISUAL:Self::default()}}
+}
+endsnippet
+
+snippet "{((?:[a-zA-Z:_]+,\s*)+[a-zA-Z:_]+)}" "Expand import group" r
+`!p
+snip.rv = "{"
+snip >> 1
+for im in match[1].split(","):
+	snip += im.strip() + ","
+snip << 1
+snip += "}"
+`
+endsnippet
+
+snippet display "impl Display { ... }"
+// use std::fmt::{self, Display};
+impl Display for $1 {
+	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+		${0:write!(f, "${2:$1({})}", ${3:self.0})}
+	}
+}
+endsnippet
+
+snippet debug "impl Debug { ... }"
+// use std::fmt::{self, Debug};
+impl Debug for $1 {
+	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+		${0:write!(f, "${2:$1({:?})}", ${3:self.0})}
+	}
+}
+endsnippet
+
+global !p
+def complete(search, options):
+	options.sort()
+	matches = list(map(
+		lambda opt: opt[len(search):],
+		filter(lambda opt: opt.startswith(search), options),
+	))
+	if len(matches) == 1:
+		return matches[0]
+	elif not matches:
+		return ""
+	else:
+		return "(" + "|".join(matches) + ")"
+endglobal
+
+priority 1
+snippet #! "Options" A
+#![$1`!p snip.rv = complete(t[1], ["allow", "cfg", "deny"])`($0)]
+endsnippet
+priority 0

@@ -1,0 +1,19 @@
+snippet _skel "Template"
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+$0
+endsnippet
+
+snippet "([a-zA-Z0-9_]+)=<<" "Multiline string" Ar
+read -d '' `!p snip.rv = match[1]` <<${1:EOF}
+$0
+$1
+endsnippet
+
+snippet "cat <<" "Multiline file write"
+cat > $1 <<${2:EOF}
+$0
+$2
+endsnippet
