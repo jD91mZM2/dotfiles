@@ -18,7 +18,7 @@
   # AwesomeWM config
   home.xdg.configFile."awesome".source = ./awesome-config;
 
-  # Hack font
+  # Hack font for monospace
   fonts = {
     fonts = with pkgs; [ hack-font ];
     fontconfig.defaultFonts = {
@@ -27,7 +27,11 @@
   };
   home.xresources.properties."*.font" = "Hack:pixelsize=13:antialias=true:autohint=true";
 
-  # Compositor for styling
+  # Sound
+  hardware.pulseaudio.enable = true;
+  sound.enable = true;
+
+  # Compositor for asthetics
   services.picom = {
     enable = true;
     backend = "glx";
