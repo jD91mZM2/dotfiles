@@ -21,7 +21,37 @@
 
   # Base packages
   environment.systemPackages = with pkgs; [
+    # Git
     git
+    git-lfs
+
+    # C compiler utilities
+    binutils
+
+    # zip/unzip
+    zip
+    unzip
+
+    # Must have CLI applications
+    bc
+    htop
+    mosh
+    ncdu
     tmux
+    trash-cli
+
+    # Must have CLI utils
+    file
+    patchelf
+    pciutils
+    pv
+    tree
+    wget
+
+    # Better versions of coreutils
+    bat
+    exa
+    fd
+    ripgrep
   ];
 }

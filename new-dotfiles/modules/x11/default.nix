@@ -56,4 +56,17 @@
   environment.systemPackages = [
     pkgs.nixos-artwork.wallpapers.dracula
   ];
+
+  home = {
+    # Set GTK theme
+    gtk.theme = {
+      name = "Dracula";
+      package = pkgs.dracula-theme;
+    };
+    # Use GTK theme for QT
+    qt = {
+      enable = true;
+      platformTheme = "gtk";
+    };
+  };
 }

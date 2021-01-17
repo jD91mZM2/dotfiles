@@ -24,11 +24,14 @@ in
       shellAliases = {
         cal = "cal -m";
         clear = "clear; echo -ne \"\\e[3J\"";
-        ls = "ls -CF --color=auto";
         nix-shell = "nix-shell --command zsh";
         objdump = "objdump -Mintel";
         rsynca = "rsync -avzhP --delete";
         screencast = "mkchromecast -n \"Living Room TV\" --video --screencast";
+
+        ls = "exa";
+        ll = "exa --git --long";
+        cat = "bat";
       };
 
       interactiveShellInit = ''
