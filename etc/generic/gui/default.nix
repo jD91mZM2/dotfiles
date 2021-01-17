@@ -82,7 +82,7 @@ in
     setup.home.modules = lib.singleton {
       # Save awesome's config file
       xdg.dataFile."scripts".source = shared.scripts;
-      xdg.configFile."awesome".source = ./awesome-config;
+      xdg.configFile."awesome".source = ../../../new-dotfiles/modules/x11/awesome-config;
 
       # Configure xsession
       xsession = {

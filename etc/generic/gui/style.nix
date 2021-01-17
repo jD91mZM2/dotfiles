@@ -37,7 +37,7 @@ lib.mkIf config.setup.graphics.enable {
 
           # XTerm stuff
           "XTerm.termName" = "xterm-256color";
-          "XTerm.vt100.faceName" = "Hack:size =10";
+          "XTerm.vt100.faceName" = "Hack:size=12";
           "XTerm*decTerminalID" = "vt340";
           "XTerm*numColorRegisters" = 256;
         };

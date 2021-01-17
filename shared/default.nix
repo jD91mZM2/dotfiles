@@ -9,7 +9,7 @@ rec {
   theme = callPackage ./theme.nix { inherit inputs; };
 
   scripts = pkgs.runCommand "scripts" { } ''
-    cp -r ${./scripts} "$out"
+    cp -r ${./new-dotfiles/modules/x11/scripts} "$out"
     for f in $out/*; do
       substituteInPlace "$f" \
         ${toString

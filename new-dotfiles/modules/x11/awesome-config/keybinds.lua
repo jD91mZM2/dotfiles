@@ -41,7 +41,7 @@ local globalkeys = gears.table.join(
   awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
 
   -- Standard program
-  awful.key({ modkey, "Shift" }, "Return", spawn_cmd("st -e tmux"), { description = "open a terminal", group = "launcher" }),
+  awful.key({ modkey, "Shift" }, "Return", spawn_cmd("st"), { description = "open a terminal", group = "launcher" }),
   awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
   awful.key({ modkey }, "Pause", script("dmenu-confirm.sh Shutdown && systemctl poweroff"), { description = "turn off computer", group = "awesome" }),
   awful.key({ modkey, "Shift" }, "q", script("dmenu-confirm.sh \"Exit AwesomeWM\" && awesome-client \"awesome.quit()\""), { description = "quit awesome", group = "awesome" }),
