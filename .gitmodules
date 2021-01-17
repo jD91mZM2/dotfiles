@@ -1,4 +1,4 @@
-[submodule "nix-exprs"]
-	path = nix-exprs
+[submodule "old-dotfiles/nix-exprs"]
+	path = old-dotfiles/nix-exprs
 	url = ../nix-exprs.git
-	branch = master
+    branch = master
