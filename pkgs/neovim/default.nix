@@ -1,113 +1,134 @@
-{ purepkgs, ... }:
+{ pkgs, lib, inputs, ... }:
 
-purepkgs.packages.neovim.configure ({ pkgs, lib, config, ... }:
-  let
-    ranger-vim2 = pkgs.vimUtils.buildVimPlugin {
-      pname = "ranger-vim";
-      version = "2019-10-30";
-      src = pkgs.fetchFromGitHub {
-        owner = "francoiscabrol";
-        repo = "ranger.vim";
-        rev = "91e82debdf566dfaf47df3aef0a5fd823cedf41c";
-        sha256 = "sha256-6ut7u6AwtyYbHLHa2jelf5PkbtlfHvuHfWRL5z1CTUQ=";
-      };
+with lib;
+let
+  ranger-vim2 = pkgs.vimUtils.buildVimPlugin {
+    pname = "ranger-vim";
+    version = "2019-10-30";
+    src = pkgs.fetchFromGitHub {
+      owner = "francoiscabrol";
+      repo = "ranger.vim";
+      rev = "91e82debdf566dfaf47df3aef0a5fd823cedf41c";
+      sha256 = "sha256-6ut7u6AwtyYbHLHa2jelf5PkbtlfHvuHfWRL5z1CTUQ=";
     };
+  };
 
-    vim-argumentative = pkgs.vimUtils.buildVimPlugin {
-      pname = "vim-argumentative";
-      version = "2014-11-24";
-      src = pkgs.fetchFromGitHub {
-        owner = "PeterRincker";
-        repo = "vim-argumentative";
-        rev = "63a5f7deb675c38126de626f4c00e000902462fe";
-        sha256 = "sha256-cgcNlsmEhZ8aWicJKgpnVJRl7nrMllFRDkXBhwBv7xk=";
-      };
+  vim-argumentative = pkgs.vimUtils.buildVimPlugin {
+    pname = "vim-argumentative";
+    version = "2014-11-24";
+    src = pkgs.fetchFromGitHub {
+      owner = "PeterRincker";
+      repo = "vim-argumentative";
+      rev = "63a5f7deb675c38126de626f4c00e000902462fe";
+      sha256 = "sha256-cgcNlsmEhZ8aWicJKgpnVJRl7nrMllFRDkXBhwBv7xk=";
     };
-  in
-  {
-    neovim = pkgs.neovim-nightly;
-    program = {
-      extraDrvs = with pkgs; [ neovim-remote ];
+  };
 
-      runtimeDeps = with pkgs; [
-        # Need C compiler for nvim-treesitter
-        gcc
+  neovim-unwrapped = pkgs.wrapNeovim
+    (pkgs.neovim-unwrapped.overrideAttrs (attrs: {
+      version = "nightly";
+      src = inputs.neovim-nightly;
 
-        # For fzf
-        fd
-        fzf
-        ripgrep
+      buildInputs = attrs.buildInputs ++ (with pkgs; [ tree-sitter ]);
+    }))
+    { };
 
-        # For ranger
-        ranger
-      ];
+  runtimeDeps = with pkgs; [
+    # Need C compiler for nvim-treesitter
+    gcc
 
-      installScript = ''
-        # Alias neovim-remote as "e" (for edit)
-        makeWrapper "${pkgs.neovim-remote}/bin/nvr" "$out/bin/e" ''${makeWrapperArgs[@]} --add-flags -s
+    # For fzf
+    bat
+    fd
+    fzf
+    ripgrep
 
-        # Alias neovim-remote as "e-wait" (for edit wait)
-        makeWrapper "${pkgs.neovim-remote}/bin/nvr" "$out/bin/e-wait" ''${makeWrapperArgs[@]} --add-flags "-s --remote-tab-wait"
-      '';
-    };
+    # For ranger
+    ranger
+  ];
 
-    customRC = ''
-      source ${./.}/init.vim
+  self = pkgs.symlinkJoin {
+    name = "nvim";
+
+    paths = [ neovim pkgs.neovim-remote ];
+
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+
+    postBuild = ''
+      # Wrap neovim
+      rm "$out/bin/nvim"
+      makeWrapper "${neovim}/bin/nvim" "$out/bin/nvim" --prefix PATH : "${makeBinPath runtimeDeps}"
+
+      # Alias neovim-remote as "e" (for edit)
+      makeWrapper "${pkgs.neovim-remote}/bin/nvr" "$out/bin/e" --add-flags -s
+
+      # Alias neovim-remote as "e-wait" (for edit wait)
+      makeWrapper "${pkgs.neovim-remote}/bin/nvr" "$out/bin/e-wait" --add-flags "-s --remote-tab-wait"
     '';
+  };
 
-    packages.nixPackages = with pkgs.vimPlugins; {
-      # Required packages
-      start = [
-        # Dependencies
-        nvim-yarp # ncm2
+  neovim = neovim-unwrapped.override {
+    configure = {
+      customRC = ''
+        source ${./.}/init.vim
+      '';
 
-        # Libraries
-        vim-operator-user
+      packages.nixPackages = with pkgs.vimPlugins; {
+        # Required packages
+        start = [
+          # Dependencies
+          nvim-yarp # ncm2
 
-        # Style
-        dracula-vim
-        vim-airline
-        vim-airline-themes
+          # Libraries
+          vim-operator-user
 
-        # Navigation
-        fzf-vim
-        nerdtree
-        ranger-vim2
-        vim-rooter
+          # Style
+          dracula-vim
+          vim-airline
+          vim-airline-themes
 
-        # VCS
-        fugitive
+          # Navigation
+          fzf-vim
+          nerdtree
+          ranger-vim2
+          vim-rooter
 
-        # Editing
-        auto-pairs
-        editorconfig-vim
-        ncm2
-        ncm2-bufword
-        ncm2-path
-        ncm2-syntax
-        ncm2-ultisnips
-        neoformat
-        nvim-treesitter
-        tabular
-        ultisnips
-        vim-argumentative
-        vim-commentary
-        vim-exchange
-        vim-repeat
-        vim-surround
-        vim-table-mode
+          # VCS
+          fugitive
 
-        # Validation
-        LanguageClient-neovim
+          # Editing
+          auto-pairs
+          editorconfig-vim
+          ncm2
+          ncm2-bufword
+          ncm2-path
+          ncm2-syntax
+          ncm2-ultisnips
+          neoformat
+          nvim-treesitter
+          tabular
+          ultisnips
+          vim-argumentative
+          vim-commentary
+          vim-exchange
+          vim-repeat
+          vim-surround
+          vim-table-mode
 
-        # Languages
-        vim-nix
-        vim-toml
-        vim-markdown
-      ];
+          # Validation
+          LanguageClient-neovim
 
-      # Packages that might be lazy-loaded
-      # with :packadd <name>
-      opt = [ ];
+          # Languages
+          vim-nix
+          vim-toml
+          vim-markdown
+        ];
+
+        # Packages that might be lazy-loaded
+        # with :packadd <name>
+        opt = [ ];
+      };
     };
-  })
+  };
+in
+self

@@ -2,18 +2,23 @@
   description = "A new WIP configuration to replace my dotfiles";
 
   inputs = {
+    utils.url = "github:numtide/flake-utils";
     home-manager.url = "github:nix-community/home-manager";
-
-    # Required by modules
     st.url = "gitlab:jD91mZM2/st";
     nix-exprs.url = "gitlab:jD91mZM2/nix-exprs";
+
+    # Required by modules
+    neovim-nightly = {
+      url = "github:neovim/neovim/nightly";
+      flake = false;
+    };
     nur-rycee = {
       url = "gitlab:rycee/nur-expressions";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, nix-exprs, ... } @ inputs:
+  outputs = { self, nixpkgs, utils, ... } @ inputs:
     with nixpkgs.lib;
     let
       makeSystem = system: modules: nixosSystem {
@@ -23,14 +28,14 @@
           ./modules/globals
 
           # Need to be placed here to avoid infinite recursion
-          nix-exprs.nixosModules.zsh-vi
-          nix-exprs.nixosModules.powerline-rs
+          inputs.nix-exprs.nixosModules.zsh-vi
+          inputs.nix-exprs.nixosModules.powerline-rs
 
           # Home-manager modules
           inputs.home-manager.nixosModules.home-manager
         ];
         extraArgs = {
-          inherit inputs system;
+          inherit self inputs system;
         };
       };
     in
@@ -39,5 +44,16 @@
       nixosConfigurations = {
         samuel-computer = makeSystem "x86_64-linux" [ ./systems/personal-computer ];
       };
-    };
+    } // (utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages."${system}";
+      in
+      {
+        packages = {
+          neovim = pkgs.callPackage ./pkgs/neovim {
+            inherit inputs;
+          };
+          st = inputs.st.defaultPackage."${system}";
+        };
+      }));
 }

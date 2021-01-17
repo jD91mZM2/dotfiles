@@ -35,6 +35,23 @@
         "type": "github"
       }
     },
+    "neovim-nightly": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1610858436,
+        "narHash": "sha256-99hzeNNyk0AFt2Dk73tIVMpRVqiM8BGiTHXD2TY0IfU=",
+        "owner": "neovim",
+        "repo": "neovim",
+        "rev": "0f2d37f11fac7eed4617684bad2771e864818a8f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neovim",
+        "ref": "nightly",
+        "repo": "neovim",
+        "type": "github"
+      }
+    },
     "nix-exprs": {
       "inputs": {
         "neovim": "neovim",
@@ -211,10 +228,12 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "neovim-nightly": "neovim-nightly",
         "nix-exprs": "nix-exprs",
         "nixpkgs": "nixpkgs_6",
         "nur-rycee": "nur-rycee",
-        "st": "st_2"
+        "st": "st_2",
+        "utils": "utils_5"
       }
     },
     "scaff": {
@@ -319,6 +338,21 @@
       }
     },
     "utils_4": {
+      "locked": {
+        "lastModified": 1610051610,
+        "narHash": "sha256-U9rPz/usA1/Aohhk7Cmc2gBrEEKRzcW4nwPWMPwja4Y=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3982c9903e93927c2164caa727cd3f6a0e6d14cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_5": {
       "locked": {
         "lastModified": 1610051610,
         "narHash": "sha256-U9rPz/usA1/Aohhk7Cmc2gBrEEKRzcW4nwPWMPwja4Y=",
