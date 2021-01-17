@@ -1,10 +1,10 @@
-{ pkgs, inputs, system, ... }:
+{ pkgs, self, system, ... }:
 let
   # My favorite terminal
-  st = inputs.st.packages."${system}".st;
+  st = self.packages."${system}".st;
 
   # Pre-configured neovim binary
-  neovim = inputs.nix-exprs.packages."${system}".neovim;
+  neovim = self.packages."${system}".neovim;
 in
 {
   # Add the package

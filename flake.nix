@@ -2,9 +2,12 @@
   description = "A new WIP configuration to replace my dotfiles";
 
   inputs = {
+    # Misc
     utils.url = "github:numtide/flake-utils";
-    home-manager.url = "github:nix-community/home-manager";
     st.url = "gitlab:jD91mZM2/st";
+
+    # NixOS Modules
+    home-manager.url = "github:nix-community/home-manager";
     nix-exprs.url = "gitlab:jD91mZM2/nix-exprs";
 
     # Required by modules

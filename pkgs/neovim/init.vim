@@ -5,7 +5,7 @@ function! s:load(relative)
     exec 'source ' . absolute
 endfunction
 
-let g:VimrcDirReal = expand('~/dotfiles/nix-exprs/pkgs/neovim')
+let g:VimrcDirReal = expand('~/dotfiles/pkgs/neovim')
 
 " Styling --- {{{
 let g:airline_theme = 'dracula'

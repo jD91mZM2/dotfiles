@@ -1,4 +1,4 @@
-{ config, lib, inputs, system, ... }:
+{ config, lib, self, system, ... }:
 with lib;
 {
   services.xserver = {
@@ -18,7 +18,7 @@ with lib;
 
   # All you really need is a terminal
   environment.systemPackages = [
-    inputs.st.defaultPackage."${system}"
+    self.packages."${system}".st
   ];
 
   # Set my colourscheme in xresources
