@@ -2,9 +2,11 @@
 {
   imports = [
     ./base.nix
+    ./compositor.nix
     ./firefox.nix
     ./polybar.nix
     ./scripts.nix
+    ./theme.nix
   ];
 
   services.xserver = {
@@ -31,42 +33,9 @@
   hardware.pulseaudio.enable = true;
   sound.enable = true;
 
-  # Compositor for asthetics
-  services.picom = {
-    enable = true;
-    backend = "glx";
-    experimentalBackends = true;
-
-    fade = true;
-    fadeDelta = 5;
-    inactiveOpacity = 0.8;
-    shadow = true;
-
-    settings = {
-      blur = {
-        method = "gaussian";
-        size = 10;
-        deviation = 2.0;
-      };
-    };
-  };
-
   # Add background image
   environment.pathsToLink = [ "/share/backgrounds" ];
   environment.systemPackages = [
     pkgs.nixos-artwork.wallpapers.dracula
   ];
-
-  home = {
-    # Set GTK theme
-    gtk.theme = {
-      name = "Dracula";
-      package = pkgs.dracula-theme;
-    };
-    # Use GTK theme for QT
-    qt = {
-      enable = true;
-      platformTheme = "gtk";
-    };
-  };
 }
