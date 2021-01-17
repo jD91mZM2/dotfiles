@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./shell.nix
+  ];
+
   # Set default locale
   i18n.defaultLocale = "en_GB.UTF-8";
 

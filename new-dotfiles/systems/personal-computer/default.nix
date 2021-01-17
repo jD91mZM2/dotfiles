@@ -12,7 +12,7 @@
     # Flox :D
     (import (fetchTarball "https://github.com/flox/nixos-module/archive/master.tar.gz"))
 
-    ../../modules/base.nix
+    ../../modules/base
     ../../modules/neovim.nix
     ../../modules/console.nix
     ../../modules/efi-boot.nix

@@ -16,15 +16,15 @@ with lib;
     libinput.enable = true;
   };
 
-  # Base packages
+  # All you really need is a terminal
   environment.systemPackages = [
     inputs.st.defaultPackage."${system}"
   ];
 
-  home = {
-    # Set my colourscheme in xresources
-    xresources.properties = (
-      (
+  # Set my colourscheme in xresources
+  home = [
+    {
+      xresources.properties = (
         listToAttrs (
           imap0
             (index: colour: (
@@ -32,10 +32,13 @@ with lib;
             ))
             config.globals.colourscheme.xresources
         )
-      ) // {
+      );
+    }
+    {
+      xresources.properties = {
         "*.background" = "#${builtins.elemAt config.globals.colourscheme.colours 0}";
         "*.foreground" = "#${builtins.elemAt config.globals.colourscheme.colours 5}";
-      }
-    );
-  };
+      };
+    }
+  ];
 }

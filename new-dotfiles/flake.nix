@@ -13,13 +13,20 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... } @ inputs:
+  outputs = { self, nixpkgs, nix-exprs, ... } @ inputs:
     with nixpkgs.lib;
     let
       makeSystem = system: modules: nixosSystem {
         inherit system;
         modules = toList modules ++ [
+          # Global modules
           ./modules/globals
+
+          # Need to be placed here to avoid infinite recursion
+          nix-exprs.nixosModules.zsh-vi
+          nix-exprs.nixosModules.powerline-rs
+
+          # Home-manager modules
           inputs.home-manager.nixosModules.home-manager
         ];
         extraArgs = {

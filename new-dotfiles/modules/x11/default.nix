@@ -27,6 +27,26 @@
   };
   home.xresources.properties."*.font" = "Hack:pixelsize=13:antialias=true:autohint=true";
 
+  # Compositor for styling
+  services.picom = {
+    enable = true;
+    backend = "glx";
+    experimentalBackends = true;
+
+    fade = true;
+    fadeDelta = 5;
+    inactiveOpacity = 0.8;
+    shadow = true;
+
+    settings = {
+      blur = {
+        method = "gaussian";
+        size = 10;
+        deviation = 2.0;
+      };
+    };
+  };
+
   # Add background image
   environment.pathsToLink = [ "/share/backgrounds" ];
   environment.systemPackages = [
