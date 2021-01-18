@@ -63,11 +63,11 @@
         "utils": "utils_3"
       },
       "locked": {
-        "lastModified": 1610812758,
-        "narHash": "sha256-/cwUZ2ny3gQbXJpMQb9Q7svNF91AB/AEYfxxlrEvlu0=",
+        "lastModified": 1610915847,
+        "narHash": "sha256-IQ9dCEvGQpIGb0hMmZ/+VStFg69a05rZDX3z6Kh1p6g=",
         "owner": "jD91mZM2",
         "repo": "nix-exprs",
-        "rev": "5f58f092059c17cc009cc63b968ffb94d17e156b",
+        "rev": "e3995955c2e5add021a5613081db4a4faaf70888",
         "type": "gitlab"
       },
       "original": {

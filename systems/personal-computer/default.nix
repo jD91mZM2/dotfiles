@@ -48,8 +48,6 @@
   # Networking
   networking.useDHCP = false;
   networking.interfaces.enp7s0.useDHCP = true;
-  networking.interfaces.virbr0.useDHCP = true;
-  networking.interfaces.virbr0-nic.useDHCP = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
