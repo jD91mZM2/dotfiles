@@ -12,6 +12,11 @@
     xsession = {
       enable = true;
       windowManager.awesome.enable = true;
+
+      # Autostart applications
+      initExtra = ''
+        "${./startup.sh}" &
+      '';
     };
   };
 }

@@ -1,28 +1,23 @@
 #!/bin/sh
 
-dirname="$(dirname "$0")"
-
 cd
-# Setup
-
-xsetroot -cursor_name left_ptr
-
-# Always running
-
-nm-applet &
 
 # Applications
 
-thunderbird &
-xfce4-power-manager &
+## Start terminal
 
-st tmux &
-sleep 1 # wait for terminal to statup
+st &
+
+## Start editor
 
 rm /tmp/nvimsocket
 st -n neovim e &
 
+## Start chats
+
 st -n weechat weechat &
+
+thunderbird &
 
 chromium --app="https://chat.redox-os.org/" &
 sleep 10 # chrome doesn't handle stress well apparently

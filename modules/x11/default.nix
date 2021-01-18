@@ -1,6 +1,7 @@
 { pkgs, config, inputs, ... }:
 {
   imports = [
+    ./awesomewm.nix
     ./base.nix
     ./compositor.nix
     ./firefox.nix
