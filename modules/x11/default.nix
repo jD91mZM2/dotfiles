@@ -9,16 +9,8 @@
     ./theme.nix
   ];
 
-  services.xserver = {
-    # Display Manager
-    displayManager.gdm.enable = true;
-
-    # AwesomeWM
-    windowManager.awesome.enable = true;
-  };
-
-  # AwesomeWM config
-  home.xdg.configFile."awesome".source = ./awesome-config;
+  # Display Manager
+  services.xserver.displayManager.gdm.enable = true;
 
   # Hack font for monospace
   fonts = {

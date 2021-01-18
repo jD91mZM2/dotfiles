@@ -40,7 +40,7 @@
       # Better copy mode --- {{{
 
       # Escape opens
-      bind -n Escape copy-mode
+      bind -n C-g copy-mode
 
       # Disable tmux clipboard in favor of xclip which won't truncate the
       # region.

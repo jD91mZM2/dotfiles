@@ -55,7 +55,10 @@ in
       dotDir = ".config/zsh";
     };
 
+    # Faster navigation between directories
     programs.autojump.enable = true;
+
+    # Automatically load project-specific environments
     programs.direnv = {
       enable = true;
       enableNixDirenvIntegration = true;
