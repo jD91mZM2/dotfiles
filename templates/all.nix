@@ -9,7 +9,14 @@
     ../modules/user
     ../modules/x11
 
-    ../modules/packages/media.nix
+    # Graphical packages
+    ../modules/x11/packages/firefox.nix
+    ../modules/x11/packages/media.nix
+    ../modules/x11/packages/st.nix
+    ../modules/x11/packages/surf.nix
+    ../modules/x11/packages/thunderbird.nix
+
+    # CLI Packages
     ../modules/packages/programming/nix.nix
   ];
 }

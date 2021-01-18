@@ -1,4 +1,4 @@
-{ config, lib, self, system, ... }:
+{ pkgs, config, lib, self, system, ... }:
 with lib;
 {
   services.xserver = {
@@ -21,6 +21,14 @@ with lib;
     self.packages."${system}".st
   ];
 
+  # Hack font for monospace (used by st terminal)
+  fonts = {
+    fonts = with pkgs; [ hack-font ];
+    fontconfig.defaultFonts = {
+      monospace = [ "Hack" ];
+    };
+  };
+
   # Set my colourscheme in xresources
   home = [
     {
@@ -38,6 +46,7 @@ with lib;
       xresources.properties = {
         "*.background" = "#${builtins.elemAt config.globals.colourscheme.colours 0}";
         "*.foreground" = "#${builtins.elemAt config.globals.colourscheme.colours 5}";
+        "*.font" = "Hack:pixelsize=13:antialias=true:autohint=true";
       };
     }
   ];
