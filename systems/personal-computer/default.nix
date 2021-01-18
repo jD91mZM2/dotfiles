@@ -13,7 +13,7 @@
     (import (fetchTarball "https://github.com/flox/nixos-module/archive/master.tar.gz"))
 
     # This is my main computer, use all modules
-    ../../modules/all.nix
+    ../../templates/all.nix
   ];
 
   # Flox

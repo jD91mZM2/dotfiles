@@ -3,6 +3,7 @@
 {
   imports = [
     ./shell.nix
+    ./tmux.nix
   ];
 
   # Set default locale
@@ -37,7 +38,6 @@
     htop
     mosh
     ncdu
-    tmux
     trash-cli
 
     # Must have CLI utils

@@ -23,7 +23,7 @@ let
         ${pkgArg pkgs.xdotool "xdotool"} \
         ${pkgArg pkgs.xorg.xrandr "xrandr"} \
         ${pkgArg pkgs.imagemagick "import"} \
-        ${pkgArg pkgs.mpv "mpv"} \
+        ${pkgArg pkgs.sxiv "sxiv"} \
         ${pkgArg pkgs.j4-dmenu-desktop "j4-dmenu-desktop"}
     done
   '';

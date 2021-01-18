@@ -45,4 +45,4 @@ case "$1" in
 esac
 
 @xclip@ -sel clip -t image/png /tmp/screenshot.png
-@mpv@ /tmp/screenshot.png
+@sxiv@ /tmp/screenshot.png
