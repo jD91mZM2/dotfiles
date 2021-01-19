@@ -15,6 +15,6 @@ Build ISO:
     - nix build .#iso
     - cp result/iso/nixos.iso nixos.iso
   artifacts:
-    expire: never
+    expire_in: never
     paths:
       - nixos.iso
