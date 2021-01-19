@@ -31,6 +31,9 @@ in
     defaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
 
     extraOpts = {
+      # Hack: NixOS should set this, see https://github.com/NixOS/nixpkgs/pull/109913
+      DefaultSearchProviderEnabled = true;
+
       # Enable good options
       BlockThirdPartyCookies = true;
       BookmarkBarEnabled = true;
@@ -42,7 +45,7 @@ in
 
     extensions = [
       "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-      "fjnbnpbmkenffdnngjfgmeleoegfcffe" # Stylish
+      "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
       "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
       "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
       "bmnlcjabgnpnenekpadlanbbkooimhnj" # Honey
