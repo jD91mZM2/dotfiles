@@ -10,13 +10,13 @@
     ../modules/x11
 
     # Graphical packages
-    ../modules/x11/packages/firefox.nix
+    ../modules/x11/packages/chromium.nix
     ../modules/x11/packages/media.nix
     ../modules/x11/packages/st.nix
-    ../modules/x11/packages/surf.nix
     ../modules/x11/packages/thunderbird.nix
 
     # CLI Packages
+    ../modules/packages/git.nix
     ../modules/packages/programming/nix.nix
   ];
 }

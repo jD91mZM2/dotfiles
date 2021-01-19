@@ -42,6 +42,7 @@
 
     # Must have CLI utils
     file
+    jq
     patchelf
     pciutils
     pv
@@ -54,4 +55,8 @@
     fd
     ripgrep
   ];
+
+  home = {
+    home.file.".editorconfig".source = ./default.editorconfig;
+  };
 }

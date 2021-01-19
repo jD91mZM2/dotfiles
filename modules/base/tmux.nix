@@ -25,8 +25,8 @@
       unbind "\""
 
       # Split with current path
-      bind "H" split-window -h -c "#{pane_current_path}"
-      bind "V" split-window -v -c "#{pane_current_path}"
+      bind "H" split-window -v -c "#{pane_current_path}"
+      bind "V" split-window -h -c "#{pane_current_path}"
       bind "c" new-window -c "#{pane_current_path}"
 
       # Select panes with vi bindings

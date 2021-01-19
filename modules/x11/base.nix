@@ -12,6 +12,9 @@ with lib;
     layout = config.globals.keyboard.layout;
     xkbVariant = config.globals.keyboard.variant;
 
+    # Add composite key
+    xkbOptions = "compose:ralt";
+
     # Input drivers
     libinput.enable = true;
   };

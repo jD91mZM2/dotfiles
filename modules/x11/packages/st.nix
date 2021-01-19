@@ -17,12 +17,12 @@ in
     (pkgs.makeDesktopItem {
       name = "neovim";
       desktopName = "NeoVim";
-      exec = "${st}/bin/st ${neovim}/bin/e";
+      exec = "${st}/bin/st -n neovim ${neovim}/bin/e";
     })
     (pkgs.makeDesktopItem {
       name = "weechat";
       desktopName = "WeeChat";
-      exec = "${st}/bin/st ${pkgs.weechat}/bin/weechat";
+      exec = "${st}/bin/st -n weechat ${pkgs.weechat}/bin/weechat";
     })
   ];
 
@@ -32,9 +32,9 @@ in
     ${st}/bin/st &
 
     # Neovim
-    ${st}/bin/st ${neovim}/bin/e &
+    ${st}/bin/st -n neovim ${neovim}/bin/e &
 
     # WeeChat
-    ${st}/bin/st ${pkgs.weechat}/bin/weechat &
+    ${st}/bin/st -n weechat ${pkgs.weechat}/bin/weechat &
   '';
 }
