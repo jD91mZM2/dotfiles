@@ -50,10 +50,16 @@
     } // (utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages."${system}";
+
+        # Used by neovim which relies on tree-sitter which apparently is marked as "broken" in my version of nixpkgs
+        broken-pkgs = import nixpkgs {
+          inherit system;
+          config.allowBroken = true;
+        };
       in
       {
         packages = {
-          neovim = pkgs.callPackage ./pkgs/neovim {
+          neovim = broken-pkgs.callPackage ./pkgs/neovim {
             inherit inputs;
           };
           st = inputs.st.defaultPackage."${system}";

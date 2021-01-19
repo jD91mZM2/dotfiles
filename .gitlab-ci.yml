@@ -11,7 +11,7 @@ default:
 Build ISO:
   stage: build
   script:
-    - nix flake check
+    - nix flake check --impure
     - nix build .#iso
     - cp result/iso/nixos.iso nixos.iso
   artifacts:
