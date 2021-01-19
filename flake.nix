@@ -45,7 +45,7 @@
     {
       # NixOS configurations
       nixosConfigurations = {
-        samuel-computer = makeSystem "x86_64-linux" [ ./systems/personal-computer ];
+        samuel-computer = makeSystem "x86_64-linux" ./systems/personal-computer;
       };
     } // (utils.lib.eachDefaultSystem (system:
       let
@@ -57,6 +57,8 @@
             inherit inputs;
           };
           st = inputs.st.defaultPackage."${system}";
+
+          iso = (makeSystem "x86_64-linux" ./systems/iso).config.system.build.isoImage;
         };
       }));
 }

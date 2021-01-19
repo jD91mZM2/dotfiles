@@ -5,7 +5,6 @@
     ../modules/efi-boot.nix
     ../modules/gpg.nix
     ../modules/meta.nix
-    ../modules/neovim.nix
     ../modules/user
     ../modules/x11
 
@@ -17,6 +16,8 @@
 
     # CLI Packages
     ../modules/packages/git.nix
+    ../modules/packages/neovim.nix
     ../modules/packages/programming/nix.nix
+    ../modules/packages/qemu.nix
   ];
 }
