@@ -15,6 +15,8 @@
     shortcut = "t";
 
     extraConfig = ''
+      set -g mouse on
+
       # Better windowing --- {{{
 
       # Bind Ctrl-w for window jumping
