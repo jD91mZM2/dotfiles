@@ -50,6 +50,7 @@ in
       "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
       "bmnlcjabgnpnenekpadlanbbkooimhnj" # Honey
       "gfapcejdoghpoidkfodoiiffaaibpaem" # Dracula Theme
+      "djflhoibgkdhkhhcedjiklpkjnoahfmg" # User Agent Switcher
 
       # Extensions as recommended by https://www.privacytools.io/browsers/#addons
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
