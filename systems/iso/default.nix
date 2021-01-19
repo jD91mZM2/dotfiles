@@ -12,6 +12,8 @@
     ../../modules/packages/neovim.nix
   ];
 
+  isoImage.isoName = "nixos.iso";
+
   homeUsers = [ "nixos" ];
 
   system.stateVersion = "21.03";
