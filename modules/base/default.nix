@@ -28,6 +28,7 @@
 
     # C compiler utilities
     binutils
+    gcc
 
     # zip/unzip
     zip

@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-
   environment = {
     # Install rustup
     systemPackages = with pkgs; [

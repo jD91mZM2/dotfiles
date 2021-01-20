@@ -1,4 +1,4 @@
-{ modulesPath, ... }:
+{ modulesPath, lib, ... }:
 
 {
   imports = [
@@ -12,7 +12,7 @@
     ../../modules/packages/neovim.nix
   ];
 
-  isoImage.isoName = "nixos.iso";
+  isoImage.isoName = lib.mkForce "nixos.iso";
 
   homeUsers = [ "nixos" ];
 

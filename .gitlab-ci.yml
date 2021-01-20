@@ -10,9 +10,9 @@ default:
 
 Build ISO:
   stage: build
+  timeout: 2h
   script:
-    - nix flake check --impure
-    - nix build .#iso
+    - nix build .#iso -L
     - cp result/iso/nixos.iso nixos.iso
   artifacts:
     expire_in: never
