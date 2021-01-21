@@ -20,5 +20,6 @@
     ../modules/packages/programming/nix.nix
     ../modules/packages/programming/rust.nix
     ../modules/packages/qemu.nix
+    ../modules/packages/scaff.nix
   ];
 }

@@ -162,6 +162,20 @@
     },
     "nixpkgs_7": {
       "locked": {
+        "lastModified": 1604369895,
+        "narHash": "sha256-uB/ihiWdfTjVQ9sKdtj6xeyvb41uC2J4MXiOLkwJccs=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "34ad166a830d3ac1541dcce571c52231f2f0865a",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_8": {
+      "locked": {
         "lastModified": 1610219734,
         "narHash": "sha256-hCsGe2nDz+SX4uO+lj0qPVcSGZdt52R9Yk5MOYs4djw=",
         "owner": "NixOS",
@@ -232,6 +246,7 @@
         "nix-exprs": "nix-exprs",
         "nixpkgs": "nixpkgs_6",
         "nur-rycee": "nur-rycee",
+        "scaff": "scaff_2",
         "st": "st_2",
         "utils": "utils_5"
       }
@@ -239,6 +254,24 @@
     "scaff": {
       "inputs": {
         "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1604783351,
+        "narHash": "sha256-E5XRT21fTTQR1xGltHBw9nhuRYD1tOTk+Z8WTP0Xr/o=",
+        "owner": "jD91mZM2",
+        "repo": "scaff",
+        "rev": "b83ba0898a5de507bd9ad3f8f0cafbf0415f20fa",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "jD91mZM2",
+        "repo": "scaff",
+        "type": "gitlab"
+      }
+    },
+    "scaff_2": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_7"
       },
       "locked": {
         "lastModified": 1604783351,
@@ -275,7 +308,7 @@
     },
     "st_2": {
       "inputs": {
-        "nixpkgs": "nixpkgs_7",
+        "nixpkgs": "nixpkgs_8",
         "utils": "utils_4"
       },
       "locked": {

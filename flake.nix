@@ -11,6 +11,7 @@
     nix-exprs.url = "gitlab:jD91mZM2/nix-exprs";
 
     # Required by modules
+    scaff.url = "gitlab:jD91mZM2/scaff";
     neovim-nightly = {
       url = "github:neovim/neovim/nightly";
       flake = false;

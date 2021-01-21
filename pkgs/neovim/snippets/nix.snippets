@@ -1,14 +1,3 @@
-snippet "\[\s*((?:[a-zA-Z0-9._-]+\s+)*)\]" "Expand list" r
-`!p
-snip.rv = "["
-snip >> 1
-for im in match[1].split():
-	snip += im.strip()
-snip << 1
-snip += "]"
-`
-endsnippet
-
 snippet _skel_flake "Template flake.nix"
 {
 	description = "${1:A really useful tool that does an awesome thing}";
@@ -40,6 +29,21 @@ snippet _skel_flake "Template flake.nix"
 }
 endsnippet
 
+snippet "\[\s*((?:[a-zA-Z0-9._-]+\s+)*)\]" "Expand list" r
+`!p
+snip.rv = "["
+snip >> 1
+for im in match[1].split():
+	snip += im.strip()
+snip << 1
+snip += "]"
+`
+endsnippet
+
+snippet "([a-zA-Z0-9_-]+\s+)=" "Set entry" Ar
+`!p snip.rv = match[1]`=$0;
+endsnippet
+
 snippet mod "Nix module"
 { pkgs, lib, config, ... }:
 
@@ -63,7 +67,7 @@ in
 }
 endsnippet
 
-snippet mkOption "Make option"
+snippet mkOption "lib.mkOption { ... }"
 mkOption {
 	type = types.${1:str};
 	description = "${2:A string option}";
@@ -71,6 +75,16 @@ mkOption {
 }
 endsnippet
 
-snippet "([a-zA-Z0-9_-]+\s+)=" "Set entry" Ar
-`!p snip.rv = match[1]`=$0;
+snippet symlinkJoin "pkgs.symlinkJoin { ... }"
+pkgs.symlinkJoin {
+	name = "$1";
+	paths = [ ${2:pkgs.$1} ];
+
+	nativeBuildInputs = [ pkgs.makeWrapper ];
+
+	postBuild = ''
+		rm "$out/bin/$3"
+		makeWrapper "${$2}/bin/${3:$1}" "$out/bin/$3"
+	'';
+}
 endsnippet

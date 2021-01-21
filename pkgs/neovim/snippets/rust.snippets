@@ -25,8 +25,11 @@ struct ${1:Name} {
 endsnippet
 
 snippet new "fn new() { ... }"
-fn new() -> Self {
-	${0:${VISUAL:Self::default()}}
+fn new($1) -> Self {
+	Self {
+		${1/([a-zA-Z0-9_]+):\s*(?:[a-zA-Z0-9_]+),?\s*/$1,
+		/g}$0
+	}
 }
 endsnippet
 
