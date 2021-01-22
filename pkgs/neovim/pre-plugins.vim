@@ -1,3 +1,32 @@
+" NCM2 completion --- {{{
+augroup s:ncm2
+    au BufEnter * call ncm2#enable_for_buffer()
+augroup END
+
+set completeopt=noinsert,menuone,noselect
+" }}}
+
+" ALE --- {{{
+" I use LanguageClient-neovim for its ncm2 support
+let g:ale_disable_lsp = 1
+
+" Fix on save
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+            \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'rust': ['rustfmt'],
+            \ 'go': ['gofmt'],
+            \ 'nix': ['nixpkgs-fmt'],
+            \ }
+
+" Toggle whether to fix on save
+call Map('n', '<C-f>', 'let g:ale_fix_on_save = !g:ale_fix_on_save')
+
+" Jump to errors
+call Map('n', '<M-n>', 'ALENextWrap')
+call Map('n', '<M-p>', 'ALEPreviousWrap')
+" }}}
+
 " Language Server Protocol --- {{{
 let g:LanguageClient_serverCommands = {
             \ 'rust':   ['rls'],
@@ -6,12 +35,10 @@ let g:LanguageClient_serverCommands = {
             \ }
 " }}}
 
-" NCM2 completion --- {{{
-augroup s:ncm2
-    au BufEnter * call ncm2#enable_for_buffer()
-augroup END
-
-set completeopt=noinsert,menuone,noselect
+" Autopairs --- {{{
+" Free up M-n and M-p for ALE
+let g:AutoPairsShortcutJump = "<Plug>(autopairs-jump)"
+let g:AutoPairsShortcutToggle = "<Plug>(autopairs-toggle)"
 " }}}
 
 " FZF --- {{{
@@ -97,15 +124,6 @@ augroup s:fugitive
     au FileType fugitive  call s:fugitiveMain()
     au FileType git       call s:fugitiveGit()
     au FileType gitcommit call s:fugitiveCommit()
-augroup END
-" }}}
-
-" Neoformat --- {{{
-augroup s:fmt
-    au!
-
-    " Run formatters on save
-    au BufWritePre *.nix Neoformat
 augroup END
 " }}}
 

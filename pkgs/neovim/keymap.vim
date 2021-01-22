@@ -54,7 +54,6 @@ call Map('nvic', '<Up>',    'echo "You must never use arrow keys!"')
 call Map('nvic', '<Down>',  'echo "You must never use arrow keys!"')
 
 call Map('n', '<C-s>', 'w')
-call Map('n', '<C-f>', '%s/\s\+$//')
 
 call Map('n', '<leader>H',        'split')
 call Map('n', '<leader>V',        'vsplit')
@@ -75,5 +74,5 @@ call MapKeys('n', 'D',         '0d$')
 " Move left/right easier
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
-cnoremap <A-h> <C-Left>
-cnoremap <A-l> <C-Right>
+cnoremap <M-h> <C-Left>
+cnoremap <M-l> <C-Right>

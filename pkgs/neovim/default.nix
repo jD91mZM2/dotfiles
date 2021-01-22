@@ -97,6 +97,7 @@ let
           fugitive
 
           # Editing
+          LanguageClient-neovim
           auto-pairs
           editorconfig-vim
           ncm2
@@ -104,7 +105,6 @@ let
           ncm2-path
           ncm2-syntax
           ncm2-ultisnips
-          neoformat
           nvim-treesitter
           tabular
           ultisnips
@@ -116,7 +116,7 @@ let
           vim-table-mode
 
           # Validation
-          LanguageClient-neovim
+          ale
 
           # Languages
           vim-nix
