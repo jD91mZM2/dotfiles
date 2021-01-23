@@ -14,6 +14,9 @@
 
     # This is my main computer, use all modules
     ../../templates/all.nix
+
+    # Use ZFS filesystem
+    ../../modules/zfs.nix
   ];
 
   # Flox
@@ -23,7 +26,7 @@
   networking.hostId = "c0122dbe";
 
   boot = {
-    supportedFilesystems = [ "btrfs" "zfs" ];
+    supportedFilesystems = [ "btrfs" ];
 
     # Make timeout long so I have time to plug in my keyboard. Using `null` here
     # seems to cause it to be selected immediately, unlike what the man page says
