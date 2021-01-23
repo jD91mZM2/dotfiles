@@ -6,5 +6,6 @@
 
     # Editor tooling
     gotools
+    go-langserver
   ];
 }

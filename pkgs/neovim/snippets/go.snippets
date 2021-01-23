@@ -1,0 +1,25 @@
+snippet _skel "Template"
+package ${1:main}
+
+func main() {
+	$0
+}
+endsnippet
+
+snippet fn "Function"
+func ${1:name}() ${2:(err error) }{
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet struct "Struct"
+type ${1:Name} struct {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet for "For each loop"
+for ${1:_, ${2:item} := range ${3:list}} {
+	${0:${VISUAL}}
+}
+endsnippet

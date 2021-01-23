@@ -13,10 +13,10 @@ let g:ale_disable_lsp = 1
 " Fix on save
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-            \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ '*':    ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'go':   ['goimports'],
+            \ 'nix':  ['nixpkgs-fmt'],
             \ 'rust': ['rustfmt'],
-            \ 'go': ['gofmt'],
-            \ 'nix': ['nixpkgs-fmt'],
             \ }
 
 " Toggle whether to fix on save
@@ -29,9 +29,10 @@ call Map('n', '<M-p>', 'ALEPreviousWrap')
 
 " Language Server Protocol --- {{{
 let g:LanguageClient_serverCommands = {
-            \ 'rust':   ['rls'],
+            \ 'go':     ['go-langserver', '-gocodecompletion'],
             \ 'nix':    ['rnix-lsp'],
             \ 'python': ['pyls'],
+            \ 'rust':   ['rls'],
             \ }
 " }}}
 
