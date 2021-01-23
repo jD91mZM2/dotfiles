@@ -2,6 +2,7 @@
 {
   imports = [
     ./git.nix
+    ./syncthing.nix
   ];
 
   users.users."${config.globals.userName}" = {
