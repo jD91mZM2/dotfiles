@@ -1,11 +1,14 @@
 {
   imports = [
+
+    # Base modules
     ../modules/base
     ../modules/console.nix
     ../modules/efi-boot.nix
     ../modules/gpg.nix
     ../modules/meta.nix
     ../modules/user
+    ../modules/user/extra/syncthing.nix
     ../modules/x11
 
     # Graphical packages
@@ -23,5 +26,6 @@
     ../modules/packages/programming/rust.nix
     ../modules/packages/scaff.nix
     ../modules/packages/virt.nix
+
   ];
 }

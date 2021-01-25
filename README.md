@@ -16,3 +16,7 @@ needed is whether or not the module is imported or not. Obviously each module in
 
 - Each .nix file in `modules/` must be standalone or import all necessary components.
 - Each directory in `modules/` must have a `default.nix` that imports all other stuff in that directory.
+  - The following names are **exceptions**. They can appear anywhere and
+    indicate extra modules available for import.
+    - `extra/`
+    - `packages/`

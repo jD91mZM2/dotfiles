@@ -1,11 +1,6 @@
-(import ../..).lib.makeModule "x86_64-linux" {
+{
   imports = [
-    ./minimal.nix
-
-    ../../modules/base
-    ../../modules/user
-
-    ../../modules/packages/neovim.nix
+    ../base
   ];
 
   system.stateVersion = "21.03";

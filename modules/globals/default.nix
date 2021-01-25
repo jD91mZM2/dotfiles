@@ -44,5 +44,11 @@ in
       description = "My email address";
       default = "me@krake.one";
     };
+
+    sshKey = mkOption {
+      type = types.str;
+      description = "My SSH public key - managed by GPG";
+      default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPRNU1yPnVxZtK/qrOkAnp5J+EqXJ6wTeXOScw2lhqWg (none)";
+    };
   };
 }

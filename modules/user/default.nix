@@ -3,7 +3,6 @@
   imports = [
     ./git.nix
     ./ssh.nix
-    ./syncthing.nix
   ];
 
   users.users."${config.globals.userName}" = {

@@ -82,7 +82,10 @@
         };
 
         devShell = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [ terraform_0_14 ];
+          nativeBuildInputs = with pkgs; [
+            morph
+            terraform_0_14
+          ];
         };
       }));
 }

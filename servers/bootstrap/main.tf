@@ -33,19 +33,10 @@ resource "vultr_instance" "main" {
   plan = "vc2-1c-1gb" # $5 server plan
   region = "ams"
 
-  label = "krake.one"
-  hostname = "krake.one"
-
   os_id = 413 # Ubuntu 20.10 x64
   script_id = vultr_startup_script.install_nixos.id
 
   ssh_key_ids = [ vultr_ssh_key.main.id ]
-}
-
-resource "time_sleep" "wait_for_nixos_infect" {
-  depends_on = [ vultr_instance.main ]
-
-  create_duration = "5m"
 }
 
 output "server-ip" {
