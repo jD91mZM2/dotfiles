@@ -41,3 +41,13 @@ resource "vultr_instance" "main" {
 
   ssh_key_ids = [ vultr_ssh_key.main.id ]
 }
+
+resource "time_sleep" "wait_for_nixos_infect" {
+  depends_on = [ vultr_instance.main ]
+
+  create_duration = "5m"
+}
+
+output "server-ip" {
+  value = vultr_instance.main.main_ip
+}

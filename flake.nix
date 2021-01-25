@@ -25,28 +25,41 @@
   outputs = { self, nixpkgs, utils, ... } @ inputs:
     with nixpkgs.lib;
     let
-      makeSystem = system: modules: nixosSystem {
-        inherit system;
-        modules = toList modules ++ [
-          # Global modules
-          ./modules/globals
+      coreModules = [
+        # Global modules
+        ./modules/globals
 
-          # Need to be placed here to avoid infinite recursion
-          inputs.nix-exprs.nixosModules.zsh-vi
-          inputs.nix-exprs.nixosModules.powerline-rs
+        # Need to be placed here to avoid infinite recursion
+        inputs.nix-exprs.nixosModules.zsh-vi
+        inputs.nix-exprs.nixosModules.powerline-rs
 
-          # Home-manager modules
-          inputs.home-manager.nixosModules.home-manager
-        ];
-        extraArgs = {
-          inherit self inputs system;
-        };
+        # Home-manager modules
+        inputs.home-manager.nixosModules.home-manager
+      ];
+      args = {
+        inherit self inputs;
       };
     in
     {
+      lib = {
+        makeModule = system: modules: {
+          imports = coreModules ++ toList modules;
+          _module.args = args // {
+            inherit system;
+          };
+        };
+        makeSystem = system: modules: nixosSystem {
+          inherit system;
+          modules = coreModules ++ toList modules;
+          extraArgs = args // {
+            inherit system;
+          };
+        };
+      };
+
       # NixOS configurations
       nixosConfigurations = {
-        samuel-computer = makeSystem "x86_64-linux" ./systems/personal-computer;
+        samuel-computer = self.lib.makeSystem "x86_64-linux" ./systems/personal-computer;
       };
     } // (utils.lib.eachDefaultSystem (system:
       let
