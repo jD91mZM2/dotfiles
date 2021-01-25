@@ -51,6 +51,7 @@ in
       "bmnlcjabgnpnenekpadlanbbkooimhnj" # Honey
       "gfapcejdoghpoidkfodoiiffaaibpaem" # Dracula Theme
       "djflhoibgkdhkhhcedjiklpkjnoahfmg" # User Agent Switcher
+      "gbmdgpbipfallnflgajpaliibnhdgobh" # JSON Viewer
 
       # Extensions as recommended by https://www.privacytools.io/browsers/#addons
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
