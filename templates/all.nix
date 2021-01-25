@@ -15,6 +15,7 @@
     ../modules/x11/packages/thunderbird.nix
 
     # CLI Packages
+    ../modules/packages/convenience.nix
     ../modules/packages/git.nix
     ../modules/packages/neovim.nix
     ../modules/packages/programming/go.nix
@@ -22,6 +23,5 @@
     ../modules/packages/programming/rust.nix
     ../modules/packages/scaff.nix
     ../modules/packages/virt.nix
-    ../modules/packages/convenience.nix
   ];
 }

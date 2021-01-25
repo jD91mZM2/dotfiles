@@ -119,9 +119,10 @@ let
           ale
 
           # Languages
-          vim-nix
-          vim-toml
           vim-markdown
+          vim-nix
+          vim-terraform
+          vim-toml
         ];
 
         # Packages that might be lazy-loaded
