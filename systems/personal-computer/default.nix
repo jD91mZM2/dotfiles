@@ -3,7 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  home = "/home/${config.globals.userName}";
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -51,6 +53,12 @@
   # Networking
   networking.useDHCP = false;
   networking.interfaces.enp7s0.useDHCP = true;
+
+  # Syncthing
+  services.syncthing.declarative = {
+    cert = "${home}/Sync/secrets/syncthing/personal-computer/cert.pem";
+    key = "${home}/Sync/secrets/syncthing/personal-computer/key.pem";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

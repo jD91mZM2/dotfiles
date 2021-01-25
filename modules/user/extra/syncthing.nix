@@ -25,7 +25,7 @@ in
           introducer = true;
         };
         computer = {
-          id = "2U6NZVJ-PNN6BW5-4FXVOUH-DLOIQRT-IPZIDNB-FHQTKPL-OQGYFOA-QBZ3SQU";
+          id = "BI3H434-HTJX2DV-WG3SNFJ-ONAFD4O-Q3CAY47-UU5ICNW-L7NQVGL-76I3KQQ";
           introducer = true;
         };
         droplet = {
