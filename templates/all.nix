@@ -22,5 +22,6 @@
     ../modules/packages/programming/rust.nix
     ../modules/packages/scaff.nix
     ../modules/packages/virt.nix
+    ../modules/packages/convenience.nix
   ];
 }
