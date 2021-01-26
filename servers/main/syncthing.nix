@@ -21,7 +21,7 @@
 
   # Syncthing
   services.syncthing.declarative = {
-    key = "/run/keys/syncthing-key";
-    cert = "/run/keys/syncthing-cert";
+    key = "/var/lib/secrets/syncthing-key";
+    cert = "/var/lib/secrets/syncthing-cert";
   };
 }

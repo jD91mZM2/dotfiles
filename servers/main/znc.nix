@@ -49,7 +49,7 @@
           };
 
         # TODO: Find some way to use `passwordFile`-like thing with ZNC
-        # extraConfigFile = "/run/keys/znc";
+        # extraConfigFile = "/var/lib/secrets/znc";
         extraConfig = builtins.readFile "${config.globals.syncthingHome}/secrets/znc";
       };
     };

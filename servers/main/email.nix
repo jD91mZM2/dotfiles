@@ -15,7 +15,7 @@
 
     loginAccounts = {
       "me@krake.one" = {
-        hashedPasswordFile = "/run/keys/email";
+        hashedPasswordFile = "/var/lib/secrets/email";
 
         # Really, really, old email address. Don't judge.
         aliases = [ "legolord208@krake.one" ];

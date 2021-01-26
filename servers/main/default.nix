@@ -32,11 +32,19 @@ in
       repo = "/var/lib/backup";
     in
     {
-      paths = "/var/lib";
+      paths = [
+        "/var/lib"
+        "/home/user"
+      ];
       exclude = [ repo ];
       inherit repo;
       encryption.mode = "none";
       startAt = "daily";
+      prune.keep = {
+        daily = 7;
+        weekly = 4;
+        monthly = 3;
+      };
       postHook = ''
         echo "\$archiveName = $archiveName"
         "${pkgs.rclone}/bin/rclone" sync -v "${repo}" "BackBlaze:jD91mZM2-backups/vultr-main"

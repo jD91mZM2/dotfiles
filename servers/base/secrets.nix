@@ -14,7 +14,7 @@ in
       };
       config = {
         source = "${secrets}/${config.keySource}";
-        destination = "/run/keys/${name}";
+        destination = "/var/lib/secrets/${name}";
       };
     }));
   };

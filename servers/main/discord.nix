@@ -34,8 +34,8 @@ in
       };
     in
     {
-      abottomod = normal "ABOTTOMOD_TOKEN=\"$(cat /run/keys/discord-abottomod)\" ${abottomod}/bin/abottomod";
-      timeywimey = normal "TIMEYWIMEY_TOKEN=\"$(cat /run/keys/discord-timeywimey)\" ${timeywimey}/bin/timeywimey";
-      schedulebot = normal "SCHEDULEBOT_TOKEN=\"$(cat /run/keys/discord-schedulebot)\" ${schedulebot}/bin/schedulebot";
+      abottomod = normal "ABOTTOMOD_TOKEN=\"$(cat /var/lib/secrets/discord-abottomod)\" ${abottomod}/bin/abottomod";
+      timeywimey = normal "TIMEYWIMEY_TOKEN=\"$(cat /var/lib/secrets/discord-timeywimey)\" ${timeywimey}/bin/timeywimey";
+      schedulebot = normal "SCHEDULEBOT_TOKEN=\"$(cat /var/lib/secrets/discord-schedulebot)\" ${schedulebot}/bin/schedulebot";
     };
 }
