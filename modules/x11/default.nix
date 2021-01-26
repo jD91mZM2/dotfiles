@@ -22,8 +22,11 @@
   environment.systemPackages = with pkgs; [
     nixos-artwork.wallpapers.dracula
 
-    # Base packages
+    # Must have CLI utils
     xclip
     xdotool
+
+    # Must have applications
+    pavucontrol
   ];
 }

@@ -78,7 +78,7 @@
           };
           st = inputs.st.defaultPackage."${system}";
 
-          iso = (makeSystem "x86_64-linux" ./systems/iso).config.system.build.isoImage;
+          iso = (self.lib.makeSystem "x86_64-linux" ./systems/iso).config.system.build.isoImage;
         };
 
         devShell = pkgs.mkShell {
