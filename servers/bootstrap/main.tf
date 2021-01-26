@@ -7,20 +7,20 @@ terraform {
   }
 }
 
-variable "vultr_api_key" {}
+variable vultr_api_key {}
 
-provider "vultr" {
+provider vultr {
   api_key = var.vultr_api_key
   rate_limit = 700
   retry_limit = 3
 }
 
-resource "vultr_ssh_key" "main" {
+resource vultr_ssh_key main {
   name = "Personal"
   ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPRNU1yPnVxZtK/qrOkAnp5J+EqXJ6wTeXOScw2lhqWg (none)"
 }
 
-resource "vultr_startup_script" "install_nixos" {
+resource vultr_startup_script install_nixos {
   name = "nixos-infect"
   script = base64encode(
     <<EOF
@@ -29,7 +29,7 @@ resource "vultr_startup_script" "install_nixos" {
   )
 }
 
-resource "vultr_instance" "main" {
+resource vultr_instance main {
   plan = "vc2-1c-1gb" # $5 server plan
   region = "ams"
 
@@ -39,6 +39,12 @@ resource "vultr_instance" "main" {
   ssh_key_ids = [ vultr_ssh_key.main.id ]
 }
 
-output "server-ip" {
+resource vultr_reverse_ipv4 rdns {
+  instance_id = vultr_instance.main.id
+  ip = vultr_instance.main.main_ip
+  reverse = "krake.one"
+}
+
+output server_ip {
   value = vultr_instance.main.main_ip
 }

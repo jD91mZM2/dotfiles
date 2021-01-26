@@ -1,4 +1,4 @@
-{ pkgs, inputs, system, config, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../base
@@ -15,6 +15,10 @@
   ];
 
   deployment.targetHost = "root@krake.one";
+
+  environment.systemPackages = with pkgs; [
+    rclone
+  ];
 
   # Backup
   services.borgbackup.jobs.main =
