@@ -42,7 +42,7 @@ resource vultr_instance main {
 resource vultr_reverse_ipv4 rdns {
   instance_id = vultr_instance.main.id
   ip = vultr_instance.main.main_ip
-  reverse = "krake.one"
+  reverse = "mail.krake.one"
 }
 
 output server_ip {
