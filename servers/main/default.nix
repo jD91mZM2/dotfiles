@@ -1,14 +1,4 @@
 { pkgs, inputs, system, config, ... }:
-let
-  # Packages
-  redox-world-map = inputs.redox-world-map.defaultPackage."${system}".override {
-    # TODO: Make these into runtime secrets
-    clientId = "2247a648fd9f3f852ef66a5d876fed20421d0a974f67bc3e9bf0926048d831c1";
-    clientSecret = builtins.readFile /home/user/Sync/secrets/redox-world-map;
-  };
-
-  # Helpers
-in
 {
   imports = [
     ../base
@@ -50,16 +40,5 @@ in
         "${pkgs.rclone}/bin/rclone" sync -v "${repo}" "BackBlaze:jD91mZM2-backups/vultr-main"
         "${pkgs.rclone}/bin/rclone" cleanup -v "BackBlaze:jD91mZM2-backups/vultr-main"
       '';
-    };
-
-  # Services
-  custom.services =
-    let
-      normal = script: { inherit script; };
-    in
-    {
-      redox-world-map = {
-        script = "${redox-world-map}/bin/redox-world-map";
-      };
     };
 }

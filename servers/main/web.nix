@@ -25,7 +25,6 @@
       '';
       extraDomainNames = [
         "vault.krake.one"
-        "redox-os.club"
       ];
     };
     certs."mail.krake.one" = {
@@ -110,24 +109,6 @@
         locations."/" = {
           extraConfig = ''
             return 302 https://www.youtube.com/watch?v=dQw4w9WgXcQ;
-          '';
-        };
-      };
-      "redox-os.club" = {
-        useACMEHost = "krake.one";
-        acmeRoot = "/var/www/challenges";
-        forceSSL = true;
-
-        locations."/" = {
-          proxyPass = "http://localhost:22165";
-          extraConfig = ''
-            error_page 502 /drop/502.html;
-          '';
-        };
-        locations."/drop" = {
-          proxyPass = "https://krake.one:1337/";
-          extraConfig = ''
-            internal;
           '';
         };
       };

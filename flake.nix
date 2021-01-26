@@ -22,8 +22,6 @@
     };
 
     # Required by server
-    redox-world-map.url = "gitlab:jD91mZM2/redox-world-map";
-
     abottomod.url = "gitlab:jD91mZM2/abottomod";
     schedulebot.url = "gitlab:jD91mZM2/schedulebot";
     timeywimey.url = "gitlab:jD91mZM2/timeywimey";
