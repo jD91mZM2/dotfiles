@@ -1,4 +1,4 @@
-{ pkgs, lib, shared, ... }:
+{ pkgs, lib, config, ... }:
 
 {
   services.znc = {
@@ -17,10 +17,10 @@
         IPv6 = true;
         SSL = true;
       };
-      User."${shared.consts.name}" = {
+      User."${config.globals.name}" = {
         Admin = true;
-        Nick = shared.consts.name;
-        AltNick = shared.consts.name + "_";
+        Nick = config.globals.name;
+        AltNick = config.globals.name + "_";
         LoadModule = [ "chansaver" "controlpanel" ];
         Network =
           let
@@ -50,7 +50,7 @@
 
         # TODO: Find some way to use `passwordFile`-like thing with ZNC
         # extraConfigFile = "/run/keys/znc";
-        extraConfig = builtins.readFile "${shared.consts.secrets}/znc";
+        extraConfig = builtins.readFile "${config.globals.syncthingHome}/secrets/znc";
       };
     };
   };

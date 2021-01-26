@@ -4,5 +4,5 @@ let
   makeModule = (import ../.).lib.makeModule "x86_64-linux";
 in
 {
-  main = makeModule ./main;
+  "main" = makeModule ./main;
 }

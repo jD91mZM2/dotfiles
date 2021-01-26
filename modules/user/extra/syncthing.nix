@@ -1,9 +1,16 @@
-{ config, ... }:
+{ config, lib, ... }:
+with lib;
 let
   home = "/home/${config.globals.userName}";
 in
 {
-  services.syncthing = {
+  options.globals.syncthingHome = mkOption {
+    type = types.str;
+    description = "Home path of syncthing";
+    default = "/home/${config.globals.userName}/Sync";
+  };
+
+  config.services.syncthing = {
     enable = true;
 
     user = config.globals.userName;
@@ -13,7 +20,7 @@ in
       # Set folders
       overrideFolders = true;
       folders.main = {
-        path = "${home}/Sync";
+        path = config.globals.syncthingHome;
         devices = [ "laptop" "computer" "droplet" "phone" ];
       };
 

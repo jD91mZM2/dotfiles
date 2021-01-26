@@ -1,4 +1,4 @@
-{ pkgs, lib, shared, ... }:
+{ pkgs, lib, ... }:
 
 {
   services.bitwarden_rs = {
@@ -8,7 +8,6 @@
       rocketPort = 27057;
       logFile = "/var/lib/bitwarden_rs/log";
     };
-    # environmentFile = "/run/keys/bitwarden";
   };
 
   # See https://github.com/dani-garcia/bitwarden_rs/wiki/Fail2Ban-Setup

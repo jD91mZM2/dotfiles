@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+with lib;
 {
   imports = [
+
+    ./secrets.nix
 
     # Base modules
     ../../modules/base
@@ -9,7 +12,7 @@
     ../../modules/user
 
     # CLI packages
-    ../modules/packages/neovim.nix
+    ../../modules/packages/neovim.nix
 
   ];
 
@@ -25,7 +28,10 @@
   };
 
   # Add SSH key to accounts
-  users.users."${config.userName}".openssh.authorizedKeys.keys = config.globals.sshKey;
+  users.users = {
+    root.openssh.authorizedKeys.keys = singleton config.globals.sshKey;
+    "${config.globals.userName}".openssh.authorizedKeys.keys = singleton config.globals.sshKey;
+  };
 
   # Install mosh for OpenSSH
   programs.mosh.enable = true;
@@ -36,10 +42,9 @@
     wheelNeedsPassword = false;
   };
 
-  # Don't run out of space
+  # Don't run out of space - override my default options
   nix.gc = {
     automatic = true;
-    options = "-d";
+    options = mkForce "-d";
   };
-  nix.optimise.automatic = true;
 }

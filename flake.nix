@@ -20,6 +20,15 @@
       url = "gitlab:rycee/nur-expressions";
       flake = false;
     };
+
+    # Required by server
+    redox-world-map.url = "gitlab:jD91mZM2/redox-world-map";
+
+    abottomod.url = "gitlab:jD91mZM2/abottomod";
+    schedulebot.url = "gitlab:jD91mZM2/schedulebot";
+    timeywimey.url = "gitlab:jD91mZM2/timeywimey";
+
+    mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
   };
 
   outputs = { self, nixpkgs, utils, ... } @ inputs:
@@ -35,6 +44,10 @@
 
         # Home-manager modules
         inputs.home-manager.nixosModules.home-manager
+
+        # Needed by server
+        inputs.nix-exprs.nixosModules.custom-services
+        inputs.mailserver.nixosModules.mailserver
       ];
       args = {
         inherit self inputs;

@@ -20,6 +20,9 @@
     '';
   };
 
+  # Clean /tmp
+  boot.cleanTmpDir = true;
+
   # Base packages
   environment.systemPackages = with pkgs; [
     # Git

@@ -1,4 +1,4 @@
-{ pkgs, shared, ... }:
+{ pkgs, config, ... }:
 
 {
   #  _____ _     ____
@@ -14,7 +14,7 @@
     # production = false;
 
     certs."krake.one" = {
-      email = shared.consts.email;
+      email = config.globals.email;
       webroot = "/var/www/challenges";
 
       # Allow nginx to access certs
@@ -29,7 +29,7 @@
       ];
     };
     certs."mail.krake.one" = {
-      email = shared.consts.email;
+      email = config.globals.email;
       webroot = "/var/www/challenges";
 
       # Allow nginx to access certs
