@@ -42,32 +42,6 @@ let g:AutoPairsShortcutJump = "<Plug>(autopairs-jump)"
 let g:AutoPairsShortcutToggle = "<Plug>(autopairs-toggle)"
 " }}}
 
-" FZF --- {{{
-let $FZF_DEFAULT_COMMAND = 'fd -H -E .git'
-call Map('n',     'gt',        'Buffers')
-call Map('n',     '<leader>p', 'History')
-call MapKeys('n', '<leader>/', ':Rg ')
-" }}}
-
-" NERDTree --- {{{
-function! ToggleNERD()
-    if g:NERDTree.IsOpen()
-        NERDTreeClose
-    else
-        let path = expand('%:p')
-
-        " Open current directory (rooter makes this the project root)
-        NERDTreeCWD
-
-        " Select the current file
-        exec 'NERDTreeFind ' . path
-    endif
-endfunction
-
-let g:NERDTreeQuitOnOpen = 1
-call Map('n', '<leader>t', 'call ToggleNERD()')
-" }}}
-
 " Tabularize --- {{{
 function! s:align(regex, mapping)
     call Map('n', 'ga' . a:mapping, 'Tabularize ' . a:regex)

@@ -30,6 +30,7 @@ call s:load('./utils.vim')
 
 call s:load('./keymap.vim')
 call s:load('./terminal.vim')
+call s:load('./navigation.vim')
 " }}}
 
 " Misc autocommands --- {{{

@@ -67,8 +67,8 @@ call Map('n', '<leader>bk',       'bdelete!')
 call Map('n', '<leader>%',        'source ' . g:VimrcDirReal . '/init.vim')
 call Map('n', '<leader>o',        'silent! !tmux new-window -c %:p:h')
 
-call MapKeys('n', '<leader>:', 'q:')
 call MapKeys('n', '<leader>.', ':e %:p:h/')
+call MapKeys('n', '<leader>:', 'q:')
 call MapKeys('n', 'D',         '0d$')
 
 " Move left/right easier

@@ -96,16 +96,19 @@ let
           # VCS
           fugitive
 
-          # Editing
+          # Completion
           LanguageClient-neovim
-          auto-pairs
-          editorconfig-vim
           ncm2
           ncm2-bufword
           ncm2-path
           ncm2-syntax
           ncm2-ultisnips
+
+          # Editing
+          auto-pairs
+          editorconfig-vim
           nvim-treesitter
+          quickfix-reflector-vim
           tabular
           ultisnips
           vim-argumentative
