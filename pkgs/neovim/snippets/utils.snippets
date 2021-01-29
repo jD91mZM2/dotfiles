@@ -1,0 +1,14 @@
+global !p
+def complete(search, options):
+	options.sort()
+	matches = list(map(
+		lambda opt: opt[len(search):],
+		filter(lambda opt: opt.startswith(search), options),
+	))
+	if len(matches) == 1:
+		return matches[0]
+	elif not matches:
+		return ""
+	else:
+		return "(" + "|".join(matches) + ")"
+endglobal

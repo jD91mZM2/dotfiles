@@ -68,6 +68,11 @@ let
   };
 
   neovim = neovim-unwrapped.override {
+    # Add python-based helpers
+    extraPython3Packages = pypkgs: singleton (
+      pkgs.callPackage ./vim-helpers { }
+    );
+
     configure = {
       customRC = ''
         source ${./.}/init.vim

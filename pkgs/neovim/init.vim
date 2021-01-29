@@ -1,8 +1,10 @@
 let g:VimrcDir = expand('<sfile>:p:h')
 
+function! s:abspath(relative)
+    return g:VimrcDir . '/' . a:relative
+endfunction
 function! s:load(relative)
-    let absolute = g:VimrcDir . '/' . a:relative
-    exec 'source ' . absolute
+    exec 'source ' . s:abspath(a:relative)
 endfunction
 
 let g:VimrcDirReal = expand('~/dotfiles/pkgs/neovim')
