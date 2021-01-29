@@ -23,6 +23,7 @@
     ../modules/packages/neovim.nix
     ../modules/packages/programming/go.nix
     ../modules/packages/programming/nix.nix
+    ../modules/packages/programming/python.nix
     ../modules/packages/programming/rust.nix
     ../modules/packages/scaff.nix
     ../modules/packages/virt.nix

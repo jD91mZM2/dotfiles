@@ -449,11 +449,11 @@
         "utils": "utils_8"
       },
       "locked": {
-        "lastModified": 1608748588,
-        "narHash": "sha256-7UN5cp7r11CKWsb5lp5s6kdRZ+OE037oObJsllggMJw=",
+        "lastModified": 1611767413,
+        "narHash": "sha256-9uaWkpwnxj/fDtXEN/tU3bG5PjTHQ3uDE+dWtGUwqHg=",
         "owner": "jD91mZM2",
         "repo": "timeywimey",
-        "rev": "9ad043f72e1f9a6ffc08824f648668a8b32b95be",
+        "rev": "db94f0f3f7366fc74a07baea1b37eeddc6f54f4f",
         "type": "gitlab"
       },
       "original": {

@@ -126,6 +126,9 @@ let
           vim-nix
           vim-terraform
           vim-toml
+
+          # Direnv
+          direnv-vim
         ];
 
         # Packages that might be lazy-loaded
