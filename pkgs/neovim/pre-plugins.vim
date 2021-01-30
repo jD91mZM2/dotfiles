@@ -19,6 +19,7 @@ let g:ale_fixers = {
             \ 'python': ['black'],
             \ 'rust':   ['rustfmt'],
             \ }
+let g:ale_rust_rustfmt_options = '+nightly'
 
 " Toggle whether to fix on save
 call Map('n', '<C-f>', 'let g:ale_fix_on_save = !g:ale_fix_on_save')
@@ -35,6 +36,17 @@ let g:LanguageClient_serverCommands = {
             \ 'python': ['pyls'],
             \ 'rust':   ['rls'],
             \ }
+
+call Map('n', '<leader>ld', 'call LanguageClient#textDocument_definition()')
+call Map('n', '<leader>lr', 'call LanguageClient#textDocument_rename()')
+call Map('n', '<leader>lf', 'call LanguageClient#textDocument_formatting()')
+call Map('n', '<leader>lt', 'call LanguageClient#textDocument_typeDefinition()')
+call Map('n', '<leader>lx', 'call LanguageClient#textDocument_references()')
+call Map('n', '<leader>la', 'call LanguageClient_workspace_applyEdit()')
+call Map('n', '<leader>lc', 'call LanguageClient#textDocument_completion()')
+call Map('n', '<leader>lh', 'call LanguageClient#textDocument_hover()')
+call Map('n', '<leader>ls', 'call LanguageClient_textDocument_documentSymbol()')
+call Map('n', '<leader>lm', 'call LanguageClient_contextMenu()')
 " }}}
 
 " Autopairs --- {{{
