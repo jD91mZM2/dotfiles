@@ -5,7 +5,11 @@ in
 {
   # Add the package
   environment.systemPackages = [
+    # Install the main package
     neovim
+
+    # Install vimscript linter
+    pkgs.vim-vint
   ];
 
   # Set as default editor

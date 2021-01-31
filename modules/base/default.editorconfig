@@ -4,15 +4,10 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 charset = utf-8
-
-[**.rs]
 indent_style = space
+
+[*.rs]
 indent_size = 4
 
-[**.{sh,nix,yml,md,lua}]
-indent_style = space
-indent_size = 2
-
-[**.{json,mcmeta}]
-indent_style = tab
+[*.{sh,nix,yml,md,lua,json,mcmeta}]
 indent_size = 2

@@ -2,6 +2,10 @@ global !p
 from vim_helpers.snips import complete
 endglobal
 
+snippet #! "Options" A
+#![$1`!p snip.rv = complete(t[1], ["allow", "cfg", "deny"])`($0)]
+endsnippet
+
 snippet fn "Function"
 fn ${1:name}($2) {
 	${VISUAL}$0
@@ -24,19 +28,32 @@ fn new($1) -> Self {
 }
 endsnippet
 
-snippet "{((?:[a-zA-Z:_]+,\s*)+[a-zA-Z:_]+)}" "Expand import group" r
-`!p
-snip.rv = "{"
-snip >> 1
-for im in match[1].split(","):
-	snip += im.strip() + ","
-snip << 1
-snip += "}"
-`
+# Properties {{{
+
+snippet get "fn option(...) { ... }"
+fn ${1:option}(&self) -> ${2:Type} {
+	self.${3:$1}$0
+}
 endsnippet
 
+snippet set "fn set_option(...) { ... }"
+fn set_${1:option}(&mut self, value: ${2:Type}) {
+	self.${3:$1} = value;$0
+}
+endsnippet
+
+snippet with "fn with_option(...) { ... }"
+fn with_${1:option}(mut self, value: ${2:Type}) -> Self {
+	self.${3:$1}$0 = value;$0
+	self
+}
+endsnippet
+
+# }}}
+
+# impls {{{
+
 snippet display "impl Display { ... }"
-// use std::fmt::{self, Display};
 impl Display for $1 {
 	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 		${0:write!(f, "${2:$1({})}", ${3:self.0})}
@@ -45,7 +62,6 @@ impl Display for $1 {
 endsnippet
 
 snippet debug "impl Debug { ... }"
-// use std::fmt::{self, Debug};
 impl Debug for $1 {
 	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 		${0:write!(f, "${2:$1({:?})}", ${3:self.0})}
@@ -53,6 +69,4 @@ impl Debug for $1 {
 }
 endsnippet
 
-snippet #! "Options" A
-#![$1`!p snip.rv = complete(t[1], ["allow", "cfg", "deny"])`($0)]
-endsnippet
+# }}}

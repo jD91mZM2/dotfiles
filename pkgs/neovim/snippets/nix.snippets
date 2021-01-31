@@ -7,25 +7,27 @@ snippet _skel_flake "Template flake.nix"
 	};
 
 	outputs = { self, nixpkgs, utils }:
-		utils.lib.eachDefaultSystem (system: let
-			pkgs = nixpkgs.legacyPackages."\${system}";
-		in rec {
-			# \`nix build\`
-			packages.${2:hello} = ${0:pkgs.writeShellScriptBin "$2" "echo Hello, World!"};
-			defaultPackage = packages.$2;
+		utils.lib.eachDefaultSystem (system:
+			let
+				pkgs = nixpkgs.legacyPackages."\${system}";
+			in
+			rec {
+				# \`nix build\`
+				packages.${2:hello} = ${0:pkgs.writeShellScriptBin "$2" "echo Hello, World!"};
+				defaultPackage = packages.$2;
 
-			# \`nix run\`
-			apps.$2 = utils.lib.mkApp {
-				drv = packages.$2;
-			};
-			defaultApp = apps.$2;
+				# \`nix run\`
+				apps.$2 = utils.lib.mkApp {
+					drv = packages.$2;
+				};
+				defaultApp = apps.$2;
 
-			# \`nix develop\`
-			devShell = pkgs.mkShell {
-				buildInputs = with pkgs; [ openssl ];
-				nativeBuildInputs = with pkgs; [ gcc ];
-			};
-		});
+				# \`nix develop\`
+				devShell = pkgs.mkShell {
+					buildInputs = with pkgs; [ openssl ];
+					nativeBuildInputs = with pkgs; [ gcc ];
+				};
+			});
 }
 endsnippet
 
@@ -42,6 +44,13 @@ endsnippet
 
 snippet "([a-zA-Z0-9_-]+\s+)=" "Set entry" Ar
 `!p snip.rv = match[1]`=$0;
+endsnippet
+
+# only one trailing ' here because my setup closes it automatically
+snippet ' "Multiline string" A
+''
+	$0
+'
 endsnippet
 
 snippet mod "Nix module"

@@ -29,11 +29,13 @@ class ${1:Name}(Enum):
 	${0:RED} = auto()
 endsnippet
 
-snippet decorator "Decorator"
+snippet dec "Decorator"
 def ${1:my_decorator}(f):
 	@functools.wraps(f)
 	def wrapper(*args, **kwargs):
-		$0return f(*args, **kwargs)
+		$0
+		return f(*args, **kwargs)
+
 	return wrapper
 endsnippet
 

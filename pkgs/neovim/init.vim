@@ -1,10 +1,10 @@
 let g:VimrcDir = expand('<sfile>:p:h')
 
-function! s:abspath(relative)
+function! Abspath(relative)
     return g:VimrcDir . '/' . a:relative
 endfunction
-function! s:load(relative)
-    exec 'source ' . s:abspath(a:relative)
+function! Load(relative)
+    exec 'source ' . Abspath(a:relative)
 endfunction
 
 let g:VimrcDirReal = expand('~/dotfiles/pkgs/neovim')
@@ -28,11 +28,12 @@ set tabstop=4
 " }}}
 
 " Load files --- {{{
-call s:load('./utils.vim')
+call Load('./utils.vim')
 
-call s:load('./keymap.vim')
-call s:load('./terminal.vim')
-call s:load('./navigation.vim')
+call Load('./keymap.vim')
+call Load('./navigation.vim')
+call Load('./terminal.vim')
+call Load('./validation.vim')
 " }}}
 
 " Misc autocommands --- {{{
@@ -43,8 +44,8 @@ augroup s:general
     au FileType * set formatoptions-=o
 
     " Use foldmethod=marker in vimrc
-    au FileType vim setlocal foldmethod=marker
-    au FileType vim normal! zR
+    au FileType vim,snippets setlocal foldmethod=marker
+    au FileType vim,snippets normal! zR
 augroup END
 " }}}
 
@@ -55,7 +56,7 @@ function! NohReady(_id)
     au CursorMoved,CursorHold,CursorHoldI * ++once :call feedkeys("\<Plug>noh")
 endfunction
 function! NohTimer()
-    if exists("s:nohtimerid")
+    if exists('s:nohtimerid')
         call timer_stop(s:nohtimerid)
     endif
     let s:nohtimerid = timer_start(3000, function('NohReady'))
@@ -71,9 +72,9 @@ augroup END
 " }}}
 
 " Load all plugins --- {{{
-call s:load('./pre-plugins.vim')
+call Load('./pre-plugins.vim')
 packloadall
-call s:load('./post-plugins.vim')
+call Load('./post-plugins.vim')
 " }}}
 
 " Post-plugin styling --- {{{

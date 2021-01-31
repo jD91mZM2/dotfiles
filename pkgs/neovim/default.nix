@@ -127,6 +127,7 @@ let
           ale
 
           # Languages
+          vader-vim
           vim-markdown
           vim-nix
           vim-terraform
