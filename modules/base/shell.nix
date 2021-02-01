@@ -21,25 +21,6 @@ in
       # Vi-like editing
       vi.enable = true;
 
-      shellAliases = {
-        # Override program settings
-        cal = "cal -m";
-        clear = "clear; echo -ne \"\\e[3J\"";
-        nix-shell = "nix-shell --command zsh";
-        objdump = "objdump -Mintel";
-
-        # Override programs
-        cat = "bat";
-
-        # Add new aliases
-        screencast = "mkchromecast -n \"Living Room TV\" --video --screencast";
-
-        # Override ls
-        ls = "exa";
-        ll = "exa --git -l";
-        la = "exa --git -laag";
-      };
-
       interactiveShellInit = ''
         # Load plugins
         source "${pkgs.grml-zsh-config}/etc/zsh/zshrc"
@@ -50,6 +31,22 @@ in
         unsetopt extendedglob
       '';
     };
+  };
+
+  environment.shellAliases = {
+    # Override program settings
+    cal = "cal -m";
+    clear = "clear; echo -ne \"\\e[3J\"";
+    nix-shell = "nix-shell --command zsh";
+    objdump = "objdump -Mintel";
+
+    # Override programs
+    cat = "bat";
+
+    # Override ls
+    ls = "exa";
+    ll = "exa --git -l";
+    la = "exa --git -laag";
   };
 
   home = {
