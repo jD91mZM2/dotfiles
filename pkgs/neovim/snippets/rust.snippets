@@ -14,8 +14,13 @@ endsnippet
 
 snippet struct "Struct"
 struct ${1:Name} {
-	${2:arg}: ${3:u8},
 	${VISUAL}$0
+}
+endsnippet
+
+snippet impl "impl Trait for Struct"
+impl ${1:Struct} {
+	$0
 }
 endsnippet
 
@@ -53,7 +58,7 @@ endsnippet
 
 # impls {{{
 
-snippet display "impl Display { ... }"
+snippet display "impl Display for ..."
 impl Display for $1 {
 	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 		${0:write!(f, "${2:$1({})}", ${3:self.0})}
@@ -61,10 +66,19 @@ impl Display for $1 {
 }
 endsnippet
 
-snippet debug "impl Debug { ... }"
+snippet debug "impl Debug for ..."
 impl Debug for $1 {
 	fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
 		${0:write!(f, "${2:$1({:?})}", ${3:self.0})}
+	}
+}
+endsnippet
+
+snippet iter "impl Iterator for ..."
+impl Iterator for $1 {
+	type Item = $2;
+	fn next(&mut self) -> Option<Self::Item> {
+		${0:${VISUAL}}
 	}
 }
 endsnippet
