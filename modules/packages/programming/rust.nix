@@ -8,6 +8,10 @@
 
     # Enable backtrace
     variables.RUST_BACKTRACE = "1";
+
+    shellAliases = {
+      crate = ''f() { cargo search "$1" --limit 1 | head -n1 | sed 's/\s*#.*$//g' | xclip -sel clip; }; f'';
+    };
   };
 
   home = {
