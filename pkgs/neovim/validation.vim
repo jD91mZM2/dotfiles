@@ -34,7 +34,7 @@ call Map('n', '<M-p>', 'ALEPreviousWrap')
 " Language Server Protocol --- {{{
 " Configure language servers
 let g:LanguageClient_serverCommands = {
-            \ 'go':     ['go-langserver', '-gocodecompletion'],
+            \ 'go':     ['gopls'],
             \ 'nix':    ['rnix-lsp'],
             \ 'python': ['pyls'],
             \ 'rust':   ['rls'],

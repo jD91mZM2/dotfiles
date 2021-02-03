@@ -5,8 +5,8 @@
     go
 
     # Editor tooling
+    gopls
     gotools
-    go-langserver
   ];
 
   home = { config, ... }: {
