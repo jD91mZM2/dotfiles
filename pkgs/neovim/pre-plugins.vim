@@ -68,7 +68,7 @@ let g:table_mode_map_prefix = '<Plug>table-mode'
 
 " NeoVim Treesitter --- {{{
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
     ensure_installed = "maintained",
     highlight = {
         enable = true,

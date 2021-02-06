@@ -25,6 +25,8 @@ set relativenumber
 set shiftwidth=0
 set signcolumn=yes
 set tabstop=4
+
+let g:vimsyn_embed='lPr'
 " }}}
 
 " Load files --- {{{

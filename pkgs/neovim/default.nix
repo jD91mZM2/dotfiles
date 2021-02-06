@@ -131,7 +131,6 @@ let
           vim-markdown
           vim-nix
           vim-terraform
-          vim-toml
 
           # Direnv
           direnv-vim
