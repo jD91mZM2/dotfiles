@@ -24,6 +24,11 @@ let
     };
   };
 
+  # ale = pkgs.vimUtils.buildVimPlugin {
+  #   name = "ale";
+  #   src = ~/Coding/Vim/ale;
+  # };
+
   neovim-unwrapped = pkgs.wrapNeovim
     (pkgs.neovim-unwrapped.overrideAttrs (attrs: {
       version = "nightly";
@@ -47,6 +52,17 @@ let
     ranger
   ];
 
+  preRun = ''
+    # Load the direnv environment of root before starting. This basically
+    # unloads the current direnv environment, which lets us change $PATH using
+    # makeWrapper. If we don't do this, the direnv vim plugin will errnously
+    # unload our injected $PATH once we leave the starting directory.
+
+    pushd / &>/dev/null
+    eval "$(direnv export bash)"
+    popd &>/dev/null
+  '';
+
   self = pkgs.symlinkJoin {
     name = "nvim";
 
@@ -57,7 +73,9 @@ let
     postBuild = ''
       # Wrap neovim
       rm "$out/bin/nvim"
-      makeWrapper "${neovim}/bin/nvim" "$out/bin/nvim" --prefix PATH : "${makeBinPath runtimeDeps}"
+      makeWrapper "${neovim}/bin/nvim" "$out/bin/nvim" \
+        --run ${escapeShellArg preRun} \
+        --prefix PATH : "${makeBinPath runtimeDeps}"
 
       # Alias neovim-remote as "e" (for edit)
       makeWrapper "${pkgs.neovim-remote}/bin/nvr" "$out/bin/e" --add-flags -s
