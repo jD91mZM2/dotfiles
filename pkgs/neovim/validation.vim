@@ -1,9 +1,21 @@
 " NCM2 completion --- {{{
-augroup s:ncm2
-    au BufEnter * call ncm2#enable_for_buffer()
-augroup END
-
 set completeopt=noinsert,menuone,noselect
+
+augroup s:ncm2
+    au!
+
+    au BufEnter * call ncm2#enable_for_buffer()
+
+    au User Ncm2Plugin call ncm2#register_source({
+                \ 'name' : 'html',
+                \ 'priority': 9,
+                \ 'scope': ['html'],
+                \ 'mark': 'html',
+                \ 'word_pattern': '[\w\-]+',
+                \ 'complete_pattern': '<',
+                \ 'on_complete': ['ncm2#on_complete#omni', 'htmlcomplete#CompleteTags'],
+                \ })
+augroup END
 " }}}
 
 " ALE --- {{{

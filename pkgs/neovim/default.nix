@@ -146,9 +146,7 @@ let
 
           # Languages
           vader-vim
-          vim-markdown
-          vim-nix
-          vim-terraform
+          vim-polyglot
 
           # Direnv
           direnv-vim

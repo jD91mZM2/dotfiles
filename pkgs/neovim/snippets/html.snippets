@@ -1,0 +1,45 @@
+snippet _skel "Template"
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>$1</title>
+	</head>
+	<body>
+		$0
+	</body>
+</html>
+endsnippet
+
+snippet "(\w+)<" "<tag> </tag>" Ar
+<`!p snip.rv = match[1]`>${0:${VISUAL}}</`!p snip.rv = match[1]`>
+endsnippet
+
+snippet "(\w+)>" "<tag>\n \n</tag>" Ar
+<`!p snip.rv = match[1]`>
+	${0:${VISUAL}}
+</`!p snip.rv = match[1]`>
+endsnippet
+
+priority 1
+
+snippet script "<script ...>"
+<script type="module" type="application/javascript">
+	${0:${VISUAL}}
+</script>
+endsnippet
+
+snippet style "<style ...>"
+<style type="text/css">
+	${0:${VISUAL}}
+</style>
+endsnippet
+
+snippet div "<div>"
+<div id="$1">
+	${0:${VISUAL}}
+</div>
+endsnippet
+
+priority 0

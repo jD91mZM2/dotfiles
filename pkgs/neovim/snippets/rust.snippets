@@ -8,13 +8,19 @@ endsnippet
 
 snippet fn "Function"
 fn ${1:name}($2) {
-	${VISUAL}$0
+	${0:${VISUAL}}
 }
 endsnippet
 
 snippet struct "Struct"
 struct ${1:Name} {
-	${VISUAL}$0
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet enum "Enum"
+enum ${1:Name} {
+	${0:${VISUAL}}
 }
 endsnippet
 
@@ -57,6 +63,22 @@ endsnippet
 # }}}
 
 # impls {{{
+
+snippet default "impl Default for ..."
+impl Default for $1 {
+	fn default() -> Self {
+		Self {
+			${0:${VISUAL}}
+		}
+	}
+}
+impl $1 {
+	/// Construct a new instance. Alias for \`$1::default()\`
+	pub fn new() -> Self {
+		Self::default()
+	}
+}
+endsnippet
 
 snippet display "impl Display for ..."
 impl Display for $1 {

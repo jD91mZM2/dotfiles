@@ -1,9 +1,12 @@
 { pkgs, ... }:
 {
   environment = {
-    # Install rustup
     systemPackages = with pkgs; [
+      # Install rust
       rustup
+
+      # Install rust tooling
+      wasm-pack
     ];
 
     # Enable backtrace
