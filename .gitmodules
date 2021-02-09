@@ -2,3 +2,6 @@
 	path = old-dotfiles/nix-exprs
 	url = ../nix-exprs.git
     branch = master
+[submodule "nix-exprs"]
+	path = nix-exprs
+	url = ../nix-exprs.git

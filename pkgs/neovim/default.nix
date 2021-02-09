@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, lib, inputs, system, ... }:
 
 with lib;
 let
@@ -147,6 +147,7 @@ let
           # Languages
           vader-vim
           vim-polyglot
+          inputs.vim-mcfunction.defaultPackage."${system}"
 
           # Direnv
           direnv-vim
