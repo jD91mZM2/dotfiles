@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     mkchromecast
+    mpv
     sxiv
     vlc
   ];
