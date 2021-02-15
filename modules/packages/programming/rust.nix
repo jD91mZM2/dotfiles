@@ -5,6 +5,10 @@
       # Install rust
       rustup
 
+      # Cargo tools
+      cargo-edit
+      cargo-release
+
       # Install rust tooling
       wasm-pack
     ];
