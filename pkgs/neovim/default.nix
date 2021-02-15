@@ -24,6 +24,11 @@ let
     };
   };
 
+  nvim-treesitter = pkgs.vimUtils.buildVimPlugin {
+    name = "nvim-treesitter";
+    src = inputs.nvim-treesitter;
+  };
+
   # ale = pkgs.vimUtils.buildVimPlugin {
   #   name = "ale";
   #   src = ~/Coding/Vim/ale;
