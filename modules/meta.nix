@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, options, inputs, ... }:
 
 {
   nix = {
@@ -21,6 +21,7 @@
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
 
+    # Bind nixpkgs to latest nixos-unstable
     registry.nixpkgs = {
       from = {
         type = "indirect";
@@ -33,6 +34,12 @@
         rev = "nixos-unstable";
       };
     };
+
+    # Pin nixpkgs and nixos channels to flake version of nixpkgs
+    nixPath = options.nix.nixPath.default ++ [
+      "nixpkgs=${inputs.nixpkgs.sourceInfo.outPath}"
+      "nixos=${inputs.nixpkgs.sourceInfo.outPath}"
+    ];
 
     # Keep my harddrive relatively small
     gc = {
