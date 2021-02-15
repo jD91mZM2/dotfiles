@@ -24,15 +24,22 @@ let
     };
   };
 
-  nvim-treesitter = pkgs.vimUtils.buildVimPlugin {
-    name = "nvim-treesitter";
-    src = inputs.nvim-treesitter;
-  };
+  # List of inputs to be taken from flake
+  overrideSources = [
+    "ale"
+    "nvim-treesitter"
+  ];
 
-  # ale = pkgs.vimUtils.buildVimPlugin {
-  #   name = "ale";
-  #   src = ~/Coding/Vim/ale;
-  # };
+  overrides = listToAttrs (flip map overrideSources (source:
+    nameValuePair
+      source
+      (pkgs.vimUtils.buildVimPlugin {
+        name = source;
+        src = inputs."${source}";
+      })
+  ));
+
+  vimPlugins = pkgs.vimPlugins // overrides;
 
   neovim-unwrapped = pkgs.wrapNeovim
     (pkgs.neovim-unwrapped.overrideAttrs (attrs: {
@@ -101,7 +108,7 @@ let
         source ${./.}/init.vim
       '';
 
-      packages.nixPackages = with pkgs.vimPlugins; {
+      packages.nixPackages = with vimPlugins; {
         # Required packages
         start = [
           # Dependencies

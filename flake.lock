@@ -19,6 +19,22 @@
         "type": "gitlab"
       }
     },
+    "ale": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1613311452,
+        "narHash": "sha256-pIl2sypu/lDpTbvdGC3gLe8Ty/Zxfh8xA99urNNupBU=",
+        "owner": "dense-analysis",
+        "repo": "ale",
+        "rev": "88d052b5a9ee3a41364497e1b98f01305d01df35",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dense-analysis",
+        "repo": "ale",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -367,6 +383,7 @@
     "root": {
       "inputs": {
         "abottomod": "abottomod",
+        "ale": "ale",
         "home-manager": "home-manager",
         "mailserver": "mailserver",
         "neovim-nightly": "neovim-nightly",
