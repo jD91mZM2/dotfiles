@@ -16,6 +16,10 @@
       url = "github:neovim/neovim/nightly";
       flake = false;
     };
+    nvim-treesitter = {
+      url = "github:nvim-treesitter/nvim-treesitter";
+      flake = false;
+    };
     vim-mcfunction.url = "gitlab:jD91mZM2/vim-mcfunction";
     nur-rycee = {
       url = "gitlab:rycee/nur-expressions";

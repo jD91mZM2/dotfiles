@@ -22,6 +22,9 @@
   environment.systemPackages = with pkgs; [
     nixos-artwork.wallpapers.dracula
 
+    # Fix XDG user directories
+    xdg-user-dirs
+
     # Must have CLI utils
     xclip
     xdotool
@@ -29,4 +32,7 @@
     # Must have applications
     pavucontrol
   ];
+
+  # Autostart ~/.config/autostart etc
+  home.xdg.autoStart = true;
 }
