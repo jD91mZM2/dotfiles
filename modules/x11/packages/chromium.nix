@@ -12,18 +12,20 @@ in
 {
   environment.systemPackages = [
     chromium
-
-    (pkgs.makeDesktopItem {
-      name = "discord";
-      desktopName = "Discord";
-      exec = discord;
-    })
-    (pkgs.makeDesktopItem {
-      name = "redox-mattermost";
-      desktopName = "Redox Mattermost";
-      exec = mattermost;
-    })
   ];
+
+  desktopItems = {
+    discord = {
+      name = "Discord";
+      exec = mkApp "https://discord.com/channels/@me/";
+      autostart = true;
+    };
+    redox-mattermost = {
+      name = "Redox Mattermost";
+      exec = mkApp "https://chat.redox-os.org/";
+      autostart = true;
+    };
+  };
 
   programs.chromium = {
     enable = true;
@@ -63,10 +65,4 @@ in
       "hjdoplcnndgiblooccencgcggcoihigg" # tosdr
     ];
   };
-
-  # Startup
-  home.xsession.initExtra = ''
-    ${discord} &
-    ${mattermost} &
-  '';
 }

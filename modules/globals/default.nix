@@ -7,6 +7,7 @@ in
 {
   imports = [
     ./home.nix
+    ./desktop.nix
   ];
 
   options.globals = {

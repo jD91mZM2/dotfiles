@@ -12,13 +12,12 @@
 
     # Required by modules
     inc.url = "gitlab:jD91mZM2/inc";
-    vim-mcfunction.url = "gitlab:jD91mZM2/vim-mcfunction";
-    nur-rycee = { url = "gitlab:rycee/nur-expressions"; flake = false; };
 
     # Required by neovim
+    ale = { url = "github:dense-analysis/ale"; flake = false; };
     neovim-nightly = { url = "github:neovim/neovim/nightly"; flake = false; };
     nvim-treesitter = { url = "github:nvim-treesitter/nvim-treesitter"; flake = false; };
-    ale = { url = "github:dense-analysis/ale"; flake = false; };
+    vim-mcfunction.url = "gitlab:jD91mZM2/vim-mcfunction";
 
     # Required by server
     abottomod.url = "gitlab:jD91mZM2/abottomod";

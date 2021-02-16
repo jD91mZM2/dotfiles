@@ -3,9 +3,10 @@
 {
   environment.systemPackages = [
     pkgs.thunderbird
-  ];
 
-  home.xsession.initExtra = ''
-    ${pkgs.thunderbird}/bin/thunderbird &
-  '';
+    (pkgs.makeAutostartItem {
+      name = "thunderbird";
+      package = pkgs.thunderbird;
+    })
+  ];
 }
