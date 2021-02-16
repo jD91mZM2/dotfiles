@@ -22,12 +22,13 @@
     # CLI Packages
     ../modules/packages/convenience.nix
     ../modules/packages/git.nix
+    ../modules/packages/inc.nix
     ../modules/packages/neovim.nix
+    ../modules/packages/programming/base.nix
     ../modules/packages/programming/go.nix
     ../modules/packages/programming/nix.nix
     ../modules/packages/programming/python.nix
     ../modules/packages/programming/rust.nix
-    ../modules/packages/scaff.nix
     ../modules/packages/virt.nix
 
   ];

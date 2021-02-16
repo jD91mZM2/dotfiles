@@ -17,3 +17,9 @@ cat > $1 <<${2:EOF}
 $0
 $2
 endsnippet
+
+snippet for "For loop"
+for ${1:var} in ${2:"$@"}; do
+	${0:${VISUAL}}
+done
+endsnippet

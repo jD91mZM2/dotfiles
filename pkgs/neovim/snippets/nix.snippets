@@ -98,3 +98,9 @@ pkgs.symlinkJoin {
 	'';
 }
 endsnippet
+
+snippet systemPackages "environment.systemPackages"
+environment.systemPackages = with pkgs; [
+	${0:${VISUAL}}
+];
+endsnippet

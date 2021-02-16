@@ -11,7 +11,7 @@
     nix-exprs.url = "gitlab:jD91mZM2/nix-exprs";
 
     # Required by modules
-    scaff.url = "gitlab:jD91mZM2/scaff";
+    inc.url = "gitlab:jD91mZM2/inc";
     vim-mcfunction.url = "gitlab:jD91mZM2/vim-mcfunction";
     nur-rycee = { url = "gitlab:rycee/nur-expressions"; flake = false; };
 
