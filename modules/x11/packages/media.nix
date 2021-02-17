@@ -2,10 +2,13 @@
 
 {
   environment.systemPackages = with pkgs; [
-    mkchromecast
+    # Viewing
     mpv
     sxiv
     vlc
+
+    # Casting
+    mkchromecast
   ];
 
   environment.shellAliases = {

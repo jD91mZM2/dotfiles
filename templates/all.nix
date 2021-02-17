@@ -20,6 +20,7 @@
     ../modules/x11/packages/thunderbird.nix
 
     # CLI Packages
+    ../modules/packages/backup.nix
     ../modules/packages/convenience.nix
     ../modules/packages/git.nix
     ../modules/packages/inc.nix
