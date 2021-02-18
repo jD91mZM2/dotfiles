@@ -16,6 +16,7 @@ let g:airline_powerline_fonts = 1
 
 " Options --- {{{
 set clipboard=unnamedplus
+set cursorline
 set expandtab
 set hidden
 set ignorecase
@@ -90,24 +91,33 @@ function! s:highlight(group, extra, ...)
     execute command
 endfunction
 
+function! s:colourScheme()
+    " Don't draw background in terminals
+    hi Normal ctermbg=NONE
+
+    " Highlight cursorline
+    call s:highlight('CursorLine', '', 'guibg=bgdark', 'ctermbg=bgdark')
+
+    " Highlight trailing whitespace
+    " See https://vim.fandom.com/wiki/Highlight_unwanted_spaces#Highlighting_with_the_match_command
+    call s:highlight('ExtraWhitespace', '', 'guibg=red', 'ctermbg=red')
+    match ExtraWhitespace /\s\+\%#\@<!$/
+endfunction
+
 colorscheme dracula
-hi Normal ctermbg=NONE guibg=NONE
+call s:colourScheme()
 
-call s:highlight('CursorLine', ' cterm=NONE gui=NONE', 'guibg=bgdark', 'ctermbg=bgdark')
-set cursorline
-" }}}
-
-" Highlight trailing spaces --- {{{
-" See https://vim.fandom.com/wiki/Highlight_unwanted_spaces#Highlighting_with_the_match_command
-hi ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+\%#\@<!$/
-
-augroup s:extraws
+augroup s:colourscheme
     au!
 
-    " Redraws the highlights when leaving insert mode
+    " Modify some highlighting rules
+    au ColorScheme * call s:colourScheme()
+
+    " Set up styles
+    au UIEnter * colorscheme dracula
+    au UIEnter * call s:colourScheme()
+
+    " Highlight trailing whitespace when going to normal mode
     au InsertLeave * redraw!
 augroup END
-
-call s:highlight('ExtraWhitespace', ' cterm=NONE gui=NONE', 'guibg=red', 'ctermbg=red')
 " }}}
