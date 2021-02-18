@@ -5,8 +5,8 @@ let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 let s:skelMapping = {
-            \ 'flake.nix':      '_flake',
-            \ '.gitlab-ci.yml': '_gitlab',
+            \   'flake.nix':      '_flake',
+            \   '.gitlab-ci.yml': '_gitlab',
             \ }
 
 function! s:skeleton(_id)
@@ -29,4 +29,14 @@ augroup END
 " Operators --- {{{
 call operator#user#define_ex_command('sort', 'sort')
 map gs <Plug>(operator-sort)
+" }}}
+
+" Firenvim --- {{{
+let g:firenvim_config = {
+            \   'localSettings': {
+            \     '.*': {
+            \       'takeover': 'never',
+            \     },
+            \   },
+            \ }
 " }}}

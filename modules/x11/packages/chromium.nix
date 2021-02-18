@@ -54,6 +54,7 @@ in
       "gfapcejdoghpoidkfodoiiffaaibpaem" # Dracula Theme
       "djflhoibgkdhkhhcedjiklpkjnoahfmg" # User Agent Switcher
       "gbmdgpbipfallnflgajpaliibnhdgobh" # JSON Viewer
+      "egpjdkipkomnmjhjmdamaniclmdlobbo" # Firenvim
 
       # Extensions as recommended by https://www.privacytools.io/browsers/#addons
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
@@ -61,8 +62,6 @@ in
       "gcbommkclmclpchllfjekcdonpmejbdp" # HTTPS Everywhere
       "ldpochfccmkkmhdbclfhpagapcfdljkj" # Decentraleyes
       "lckanjgmijmafbedllaakclkaicjfmnk" # ClearURLs
-
-      "hjdoplcnndgiblooccencgcggcoihigg" # tosdr
     ];
   };
 }

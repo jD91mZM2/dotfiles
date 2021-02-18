@@ -24,6 +24,17 @@ let
     };
   };
 
+  firenvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "firenvim";
+    version = "2021-02-14";
+    src = pkgs.fetchFromGitHub {
+      owner = "glacambre";
+      repo = "firenvim";
+      rev = "2a50ec00381b445b48823ea7e5961b349dfad445";
+      sha256 = "sha256-BF4NLg77fAMwt7qt3VXd+EZNdWdVUD6RFu1raPS2KtQ=";
+    };
+  };
+
   # List of inputs to be taken from flake
   overrideSources = [
     "ale"
@@ -111,9 +122,6 @@ let
       packages.nixPackages = with vimPlugins; {
         # Required packages
         start = [
-          # Dependencies
-          nvim-yarp # ncm2
-
           # Libraries
           vim-operator-user
 
@@ -153,16 +161,15 @@ let
           vim-surround
           vim-table-mode
 
-          # Validation
-          ale
-
           # Languages
           vader-vim
           vim-polyglot
           inputs.vim-mcfunction.defaultPackage."${system}"
 
-          # Direnv
+          # Other
+          ale
           direnv-vim
+          firenvim
         ];
 
         # Packages that might be lazy-loaded
