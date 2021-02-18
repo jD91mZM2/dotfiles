@@ -7,13 +7,13 @@ augroup s:ncm2
     au BufEnter * call ncm2#enable_for_buffer()
 
     au User Ncm2Plugin call ncm2#register_source({
-                \ 'name' : 'html',
-                \ 'priority': 9,
-                \ 'scope': ['html'],
-                \ 'mark': 'html',
-                \ 'word_pattern': '[\w\-]+',
-                \ 'complete_pattern': '<',
-                \ 'on_complete': ['ncm2#on_complete#omni', 'htmlcomplete#CompleteTags'],
+                \   'name' : 'html',
+                \   'priority': 9,
+                \   'scope': ['html'],
+                \   'mark': 'html',
+                \   'word_pattern': '[\w\-]+',
+                \   'complete_pattern': '<',
+                \   'on_complete': ['ncm2#on_complete#omni', 'htmlcomplete#CompleteTags'],
                 \ })
 augroup END
 " }}}
@@ -25,12 +25,12 @@ let g:ale_disable_lsp = 1
 " Fix on save
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-            \ '*':      ['remove_trailing_lines', 'trim_whitespace'],
-            \ 'go':     ['goimports'],
-            \ 'json':   ['jq'],
-            \ 'nix':    ['nixpkgs-fmt'],
-            \ 'python': ['black'],
-            \ 'rust':   ['rustfmt'],
+            \   '*':      ['remove_trailing_lines', 'trim_whitespace'],
+            \   'go':     ['goimports'],
+            \   'json':   ['jq'],
+            \   'nix':    ['nixpkgs-fmt'],
+            \   'python': ['black'],
+            \   'rust':   ['rustfmt'],
             \ }
 
 let g:ale_rust_rustfmt_options = '+nightly'
@@ -46,16 +46,16 @@ call Map('n', '<M-p>', 'ALEPreviousWrap')
 " Language Server Protocol --- {{{
 " Configure language servers
 let g:LanguageClient_serverCommands = {
-            \ 'go':     ['gopls'],
-            \ 'nix':    ['rnix-lsp'],
-            \ 'python': ['pyls'],
-            \ 'rust':   ['rls'],
+            \   'go':     ['gopls'],
+            \   'nix':    ['rnix-lsp'],
+            \   'python': ['pyls'],
+            \   'rust':   ['rls'],
             \ }
 
 " Send settings via lsp command `didChangeConfiguration`
 let g:LanguageClient_settingsPath = [
-            \ Abspath('./lsp_settings.json'),
-            \ '.vim/settings.json',
+            \   Abspath('./lsp_settings.json'),
+            \   '.vim/settings.json',
             \ ]
 
 call Map('n', '<leader>ld', 'call LanguageClient#textDocument_definition()')

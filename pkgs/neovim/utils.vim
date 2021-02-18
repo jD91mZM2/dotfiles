@@ -6,12 +6,12 @@ function! AnonFunc(func)
     let s:count += 1
 
     " Bind global variable to a:func
-    let code = "let g:" . name . "_Var = a:func\n"
+    let code = 'let g:' . name . '_Var = a:func' . "\n"
 
     " Use variable in global function
-    let code .= "function! " . name . "(...)\n"
-    let code .= "return g:" . name . "_Var(a:000)\n"
-    let code .= "endfunction"
+    let code .= 'function! ' . name . '(...)' . "\n"
+    let code .= 'return g:' . name . '_Var(a:000)' . "\n"
+    let code .= 'endfunction'
     exec code
 
     " Return
@@ -58,7 +58,7 @@ function! Opts(opts)
     let options = a:opts
 
     return {
-                \ 'Has': { opt -> options =~# opt },
-                \ 'Intersecting': { list -> filter(copy(list), { _i, opt -> options =~# opt }) },
+                \   'Has': { opt -> options =~# opt },
+                \   'Intersecting': { list -> filter(copy(list), { _i, opt -> options =~# opt }) },
                 \ }
 endfunction
