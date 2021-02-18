@@ -51,8 +51,10 @@ in
   };
 
   # Networking
-  networking.useDHCP = false;
-  networking.interfaces.enp7s0.useDHCP = true;
+  networking = {
+    useDHCP = false;
+    interfaces.enp7s0.useDHCP = true;
+  };
 
   # Syncthing
   services.syncthing.declarative = {

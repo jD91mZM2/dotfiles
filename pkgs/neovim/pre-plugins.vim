@@ -17,6 +17,12 @@ vnoremap ga/ :Tabularize /
 " Fugitive --- {{{
 call Map('n', '<leader>g', 'Git')
 
+function! g:CmdGDelBranch(remote, branch)
+    exec 'G branch -D ' . a:branch
+    exec 'G push ' . a:remote ' :' . a:branch
+endfunction
+command! -nargs=* GDelBranch call CmdGDelBranch(<f-args>)
+
 function! s:fugitiveMain()
     call MapKeys('nb', ':', ':G ')
 
@@ -26,8 +32,7 @@ function! s:fugitiveMain()
 
     call MapKeys('nb', 'bs', ':G switch -c ')
     call MapKeys('nb', 'bb', ':G switch ')
-    call MapKeys('nb', 'bx', ':G branch -D ')
-    call MapKeys('nb', 'bX', ":G push  :<Left><Left>")
+    call MapKeys('nb', 'bx', ':GDelBranch ')
 
     call MapKeys('nb', 'mm', ':G merge ')
     call MapKeys('nb', 'ms', ':G merge --squash ')
