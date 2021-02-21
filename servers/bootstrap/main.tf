@@ -37,6 +37,8 @@ resource vultr_instance main {
   script_id = vultr_startup_script.install_nixos.id
 
   ssh_key_ids = [ vultr_ssh_key.main.id ]
+
+  enable_ipv6 = true
 }
 
 resource vultr_reverse_ipv4 rdns {
@@ -44,7 +46,15 @@ resource vultr_reverse_ipv4 rdns {
   ip = vultr_instance.main.main_ip
   reverse = "mail.krake.one"
 }
+resource vultr_reverse_ipv6 rdns {
+  instance_id = vultr_instance.main.id
+  ip = vultr_instance.main.v6_main_ip
+  reverse = "mail.krake.one"
+}
 
-output server_ip {
+output server_ipv4 {
   value = vultr_instance.main.main_ip
+}
+output server_ipv6 {
+  value = vultr_instance.main.v6_main_ip
 }
