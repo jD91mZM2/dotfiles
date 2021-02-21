@@ -54,6 +54,9 @@ in
   networking = {
     useDHCP = false;
     interfaces.enp7s0.useDHCP = true;
+
+    # Allow all local devices to access my open ports :)
+    firewall.enable = false;
   };
 
   # Syncthing
