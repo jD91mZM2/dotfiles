@@ -32,7 +32,4 @@
     # Must have applications
     pavucontrol
   ];
-
-  # Autostart ~/.config/autostart etc
-  home.xdg.autoStart = true;
 }

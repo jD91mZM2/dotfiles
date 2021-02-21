@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   # System-wide installation of AwesomeWM
   services.xserver.windowManager.awesome.enable = true;
@@ -12,6 +13,10 @@
     xsession = {
       enable = true;
       windowManager.awesome.enable = true;
+
+      initExtra = ''
+        "${pkgs.dex}/bin/dex" -a
+      '';
     };
   };
 }
