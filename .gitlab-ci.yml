@@ -13,8 +13,13 @@ Build ISO:
   timeout: 2h
   script:
     - nix build .#iso -L
-    - cp result/iso/nixos.iso nixos.iso
-  artifacts:
-    expire_in: never
-    paths:
-      - nixos.iso
+
+Publish ISO:
+  stage: deploy
+  timeout: 2h
+  only:
+    - master
+    - ci
+  script:
+    - rclone config create BackBlaze b2 account "$B2_ID" key "$B2_KEY" hard_delete true
+    - rclone sync result/iso/nixos.iso BackBlaze:jD91mZM2-public/nixos.iso
