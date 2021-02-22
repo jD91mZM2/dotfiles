@@ -22,4 +22,5 @@ Publish ISO:
     - ci
   script:
     - rclone config create BackBlaze b2 account "$B2_ID" key "$B2_KEY" hard_delete true
+    - nix build .#iso -L
     - rclone sync result/iso/nixos.iso BackBlaze:jD91mZM2-public/nixos.iso
