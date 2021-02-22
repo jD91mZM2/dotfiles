@@ -1,6 +1,9 @@
 default:
   image: jd91mzm2/nix-flakes
   before_script:
+    - nix profile install nixpkgs#cachix
+    - cachix use jd91mzm2
+
     # GitLab can't cache /nix directly
     - mkdir -p .nix
     - mount --bind /nix .nix
@@ -11,5 +14,24 @@ default:
 Build ISO:
   stage: build
   timeout: 2h
+  only:
+    - master
+    - ci
+  script:
+    - cachix watch-exec jd91mzm2 -- nix build .#iso -L
+
+Build ISO (legacy):
+  stage: test
+  script:
+    - nix-build -A packages.x86_64-linux.iso
+
+Publish ISO:
+  stage: deploy
+  timeout: 2h
+  only:
+    - master
+    - ci
   script:
     - nix build .#iso -L
+    - rclone config create BackBlaze b2 account "$B2_ID" key "$B2_KEY" hard_delete true
+    - rclone sync result/iso/nixos.iso BackBlaze:jD91mZM2-public/nixos.iso -P
