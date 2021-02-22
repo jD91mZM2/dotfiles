@@ -25,7 +25,7 @@ Build ISO:
 Publish ISO:
   stage: deploy
   needs:
-    - build:Build ISO
+    - Build ISO
   timeout: 2h
   only:
     - master
