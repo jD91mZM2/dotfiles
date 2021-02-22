@@ -14,7 +14,7 @@ default:
 Check:
   stage: build
   script:
-    - nix flake check
+    - nix flake check --impure
 
 Build ISO:
   stage: build
