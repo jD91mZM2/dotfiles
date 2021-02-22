@@ -8,13 +8,12 @@ default:
     paths:
       - .nix
 
-Build ISO:
+Build NeoVim:
   stage: build
-  timeout: 2h
   script:
-    - nix build .#iso -L
-    - cp result/iso/nixos.iso nixos.iso
-  artifacts:
-    expire_in: never
-    paths:
-      - nixos.iso
+    - nix build .#neovim -L
+
+Build Simple Terminal:
+  stage: build
+  script:
+    - nix build .#st -L
