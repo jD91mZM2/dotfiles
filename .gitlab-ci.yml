@@ -23,7 +23,7 @@ Build ISO:
     - master
     - ci
   script:
-    - cachix watch-exec jd91mzm2 nix build .#iso -L
+    - cachix watch-exec jd91mzm2 -- nix build .#iso -L
 
 Publish ISO:
   stage: deploy
