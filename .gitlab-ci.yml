@@ -19,21 +19,22 @@ Check:
 Build ISO:
   stage: build
   timeout: 2h
-  script:
-    - nix build .#iso -L
-
-Publish ISO:
-  stage: deploy
-  needs:
-    - Build ISO
-  timeout: 2h
   only:
     - master
     - ci
   script:
-    - rclone config create BackBlaze b2 account "$B2_ID" key "$B2_KEY" hard_delete true
-
     - cachix watch-store jd91mzm2
     - nix build .#iso -L
 
+Publish ISO:
+  stage: deploy
+  timeout: 2h
+  needs:
+    - Build ISO
+  only:
+    - master
+    - ci
+  script:
+    - nix build .#iso -L
+    - rclone config create BackBlaze b2 account "$B2_ID" key "$B2_KEY" hard_delete true
     - rclone sync result/iso/nixos.iso BackBlaze:jD91mZM2-public/nixos.iso -P
