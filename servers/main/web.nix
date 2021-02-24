@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 
 {
   #  _____ _     ____
@@ -123,8 +123,9 @@
 
   services.tor = {
     enable = true;
-    hiddenServices."rickroll".map = [
-      { port = 80; toPort = 11694; }
-    ];
+    relay.onionServices."rickroll".map = lib.singleton {
+      port = 80;
+      target.port = 11694;
+    };
   };
 }
