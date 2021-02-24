@@ -37,8 +37,8 @@
 
     # Pin nixpkgs and nixos channels to flake version of nixpkgs
     nixPath = [
-      "nixpkgs=${inputs.nixpkgs.sourceInfo.outPath}"
-      "nixos=${inputs.nixpkgs.sourceInfo.outPath}"
+      "nixpkgs=channel:nixos-unstable"
+      "nixos=channel:nixos-unstable"
     ] ++ options.nix.nixPath.default;
 
     # Keep my harddrive relatively small
