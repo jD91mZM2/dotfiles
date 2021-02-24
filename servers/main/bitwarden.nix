@@ -5,6 +5,7 @@
     enable = true;
     config = {
       signupsAllowed = false;
+      rocketAddress = "127.0.0.1";
       rocketPort = 27057;
       logFile = "/var/lib/bitwarden_rs/log";
     };
