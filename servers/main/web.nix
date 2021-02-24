@@ -97,7 +97,7 @@
         forceSSL = true;
 
         locations."/" = {
-          proxyPass = "http://localhost:27057";
+          proxyPass = "http://127.0.0.1:27057";
         };
       };
       "krake.one:11694" = {
