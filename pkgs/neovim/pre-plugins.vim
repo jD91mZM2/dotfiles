@@ -1,19 +1,3 @@
-" Tabularize --- {{{
-function! s:align(regex, mapping)
-    call Map('n', 'ga' . a:mapping, 'Tabularize ' . a:regex)
-    exec 'vnoremap <silent> ga' . a:mapping . ' :Tabularize ' . a:regex . '<CR>'
-endfunction
-
-call s:align('/^[^=]\{-}\zs[.&+\-]*=/l1r1', '=')
-call s:align('/:\zs/l1l0',                  ':')
-call s:align('/\s\+\zs\(\/\/\\|#\)',        '#')
-call s:align('/,\s\zs/l1l0',                ',')
-call s:align('/[]]/l1l0',                   ']')
-
-nnoremap ga/ :Tabularize /
-vnoremap ga/ :Tabularize /
-" }}}
-
 " Fugitive --- {{{
 call Map('n', '<leader>g', 'Git')
 
@@ -63,12 +47,23 @@ augroup s:fugitive
 augroup END
 " }}}
 
-" vim-table-mode  --- {{{
+" vim-table-mode --- {{{
 " Always look for '|' on new lines
 let g:table_mode_always_active = 1
 
 " Disable table mode mappings
 let g:table_mode_map_prefix = '<Plug>table-mode'
+" }}}
+
+" Vimtex --- {{{
+let g:vimtex_view_method = 'zathura'
+
+augroup s:vimtex
+    au!
+
+    " Bind C-c
+    au FileType tex map <C-c> <localleader>l
+augroup END
 " }}}
 
 " NeoVim Treesitter --- {{{

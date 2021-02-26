@@ -33,6 +33,11 @@ let g:ale_fixers = {
             \   'rust':   ['rustfmt'],
             \ }
 
+" Disable linters that break or bug out for me
+let g:ale_linters_ignore = {
+            \  'nix': ['nix'],
+            \ }
+
 let g:ale_rust_rustfmt_options = '+nightly'
 
 " Toggle whether to fix on save
@@ -50,6 +55,7 @@ let g:LanguageClient_serverCommands = {
             \   'nix':    ['rnix-lsp'],
             \   'python': ['pyls'],
             \   'rust':   ['rls'],
+            \   'tex':    ['texlab'],
             \ }
 
 " Send settings via lsp command `didChangeConfiguration`

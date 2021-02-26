@@ -1,0 +1,29 @@
+snippet - "List"
+\begin{itemize}
+	\item ${0:${VISUAL}}
+\end{itemize}
+endsnippet
+
+snippet * "Bold" A
+\textbf{${1:${VISUAL}}}$0
+endsnippet
+
+snippet _ "Italic" A
+\textit{${1:${VISUAL}}}$0
+endsnippet
+
+snippet \ "Section"
+\begin{$1}
+	$0
+\end{$1}
+endsnippet
+
+snippet lstset "Setup Listings"
+\lstset{frame=single, basicstyle=\ttfamily}
+endsnippet
+
+snippet fn "Inline Code"
+\begin{lstlisting}[language=$1]
+$0
+\end{lstlisting}
+endsnippet

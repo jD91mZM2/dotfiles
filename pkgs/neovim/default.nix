@@ -162,9 +162,10 @@ let
           vim-table-mode
 
           # Languages
+          inputs.vim-mcfunction.defaultPackage."${system}"
           vader-vim
           vim-polyglot
-          inputs.vim-mcfunction.defaultPackage."${system}"
+          vimtex
 
           # Other
           ale
