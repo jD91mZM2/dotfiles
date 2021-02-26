@@ -11,6 +11,9 @@ in
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
+    # Containers
+    ./containers.nix
+
     # Flox :D
     (import (fetchTarball "https://github.com/flox/nixos-module/archive/master.tar.gz"))
 

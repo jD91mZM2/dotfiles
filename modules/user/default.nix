@@ -12,7 +12,6 @@
 
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    initialPassword = "nixos";
   };
 
   homeUsers = [ config.globals.userName ];

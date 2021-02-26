@@ -28,9 +28,12 @@ with lib;
   };
 
   # Add SSH key to accounts
-  users.users = {
-    root.openssh.authorizedKeys.keys = singleton config.globals.sshKey;
-    "${config.globals.userName}".openssh.authorizedKeys.keys = singleton config.globals.sshKey;
+  users = {
+    mutableUsers = false;
+    users = {
+      root.openssh.authorizedKeys.keys = singleton config.globals.sshKey;
+      "${config.globals.userName}".openssh.authorizedKeys.keys = singleton config.globals.sshKey;
+    };
   };
 
   # Install mosh for OpenSSH
