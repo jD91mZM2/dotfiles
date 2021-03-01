@@ -48,6 +48,11 @@ call Map('n', '<M-n>', 'ALENextWrap')
 call Map('n', '<M-p>', 'ALEPreviousWrap')
 " }}}
 
+" Echodoc --- {{{
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'floating'
+" }}}
+
 " Language Server Protocol --- {{{
 " Configure language servers
 let g:LanguageClient_serverCommands = {
@@ -63,6 +68,9 @@ let g:LanguageClient_settingsPath = [
             \   Abspath('./lsp_settings.json'),
             \   '.vim/settings.json',
             \ ]
+
+let g:LanguageClient_loggingFile = tempname()
+let g:LanguageClient_loggingLevel = 'DEBUG'
 
 call Map('n', '<leader>ld', 'call LanguageClient#textDocument_definition()')
 call Map('n', '<leader>lr', 'call LanguageClient#textDocument_rename()')

@@ -170,6 +170,7 @@ let
           # Other
           ale
           direnv-vim
+          echodoc
           firenvim
         ];
 
