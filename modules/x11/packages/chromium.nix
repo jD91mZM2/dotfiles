@@ -50,7 +50,6 @@ in
       "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
       "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
       "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
-      "bmnlcjabgnpnenekpadlanbbkooimhnj" # Honey
       "gfapcejdoghpoidkfodoiiffaaibpaem" # Dracula Theme
       "djflhoibgkdhkhhcedjiklpkjnoahfmg" # User Agent Switcher
       "gbmdgpbipfallnflgajpaliibnhdgobh" # JSON Viewer
