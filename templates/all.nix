@@ -12,7 +12,7 @@
 
     # Graphical packages
     ../modules/x11
-    ../modules/x11/packages/chromium.nix
+    ../modules/x11/packages/firefox.nix
     ../modules/x11/packages/editing.nix
     ../modules/x11/packages/gaming.nix
     ../modules/x11/packages/media.nix

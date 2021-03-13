@@ -88,7 +88,11 @@
           neovim = broken-pkgs.callPackage ./pkgs/neovim {
             inherit inputs;
           };
-          firefox = pkgs.callPackage ./pkgs/firefox { };
+          firefox = import ./pkgs/firefox {
+            # Can't use callPackage because that replaces `.override` which we
+            # need to retain.
+            inherit pkgs;
+          };
 
           iso = (self.lib.makeSystem "x86_64-linux" ./systems/iso).config.system.build.isoImage;
         };

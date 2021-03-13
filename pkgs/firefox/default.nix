@@ -1,4 +1,6 @@
-{ firefox }:
+{ pkgs }:
+
+with pkgs.lib;
 
 let
   preference = val: {
@@ -12,7 +14,7 @@ let
   };
 in
 
-firefox.override {
+pkgs.firefox.override {
   extraPolicies = {
     Cookies = {
       AcceptThirdParty = "never";
@@ -23,11 +25,6 @@ firefox.override {
     DisableFirefoxStudies = true;
 
     PasswordManagerEnabled = false;
-
-    SearchEngines = {
-      Default = "DuckDuckGo";
-      PreventInstalls = true;
-    };
 
     EnableTrackingProtection = {
       Value = true;
@@ -106,7 +103,57 @@ firefox.override {
 
       # Other security add-ons
       "jid1-MnnxcxisBPnSXQ@jetpack" = extension "privacy-badger17";
-
     };
+
+    SearchEngines = {
+      Default = "searx";
+    };
+
+    DisableProfileImport = true;
+
+    DisplayBookmarksToolbar = true;
+    ManagedBookmarks = [
+      {
+        name = "NixOS";
+        children = [
+          { name = "IRC Chat Log"; url = "https://logs.nix.samueldr.com/nixos-chat/"; }
+          { name = "Builtins"; url = "https://nixos.org/nix/manual/#ssec-builtins"; }
+          { name = "Nixpkgs manual"; url = "https://nixos.org/nixpkgs/manual"; }
+          { name = "NixOS manual"; url = "https://nixos.org/nixos/manual"; }
+        ];
+      }
+      {
+        name = "Rust";
+        children = [
+          { name = "Standard Library"; url = "https://doc.rust-lang.org/std"; }
+          { name = "Crate Search"; url = "https://docs.rs/"; }
+        ];
+      }
+      {
+        name = "Python";
+        children = [
+          { name = "Modules"; url = "https://docs.python.org/3/search.html"; }
+          { name = "Builtins"; url = "https://docs.python.org/3/library/functions.html#built-in-funcs"; }
+          {
+            name = "Discord.py";
+            url = "https://discordpy.readthedocs.io/en/latest/api.html";
+            children = [
+              { name = "API Documentation"; url = "https://discordpy.readthedocs.io/en/latest/api.html"; }
+              { name = "Bot Commands"; url = "https://discordpy.readthedocs.io/en/latest/ext/commands/index.html"; }
+            ];
+          }
+        ];
+      }
+      {
+        name = "Haskell";
+        children = [
+          { name = "Hoogle Search"; url = "https://www.haskell.org/hoogle/"; }
+        ];
+      }
+      {
+        name = "Searx";
+        url = "https://searx.ir/?preferences=eJx9VcGO3DYM_Zr4YmyRNIecfCiatA0QIEF306tBSxwNY0l0JHlmla8vNTO25ewgh52FaPLxkXyiFCQ0HAhjZ9BjAPvq9z8pNRa8mcFgh_7h62NjWYEthwbmxIrdZDFhp2c1lj_DDTnx7qfAz7n7C2zExmE6su7-_vDURDhgRAjq2L1u0hEddpEKRhMwzjbFnn3v8dwnGG7RmqmXj2xPGDoGOf7GwTQcFYSHmLKwsWxIscZToynCYFH36A15qQUTs419v9WUeMycOB55BN_3B7IYxVw40Qlb2jlj4DPp2mLISAaIqTZG_OHB1ZatIe2lIYJ6_S_fLA0BQm6Ld9znM8zGYjtZyK3jE5W4E2nkEnfQgQuZhXJArSlVwGcaaWAed5DFGHkOCmvrQGkQeljCU4UlvS9IWptW44E8JWL_Au_7zAl_0VQ3R1KFcSA_EqiK45vn6nBikJyRFYFtHWqCIjoPVdGJQ0Cffmyg2ZibcWtF3TeYplh9QRwTucsA6kI37keQcZSfm0eNv-QEZaSHL89Llgxe4_NeEqgnxLD5RJwIruKv6huSJmMqg89Q1190PWAwN3Kl-3IRIqVcZ-MJfcCJq8IXimuzMWXH3sq1qCOv6VanQwAHRaB4S3glXFi05edOj1aqwq2oRaRdJ1BKPaRT5Xab1fV8d9I1IhVFrrocSY0Qd5ciILaRD-kMAVtNAZUA5RvPDXNpy0RBNt0A-b54LgPe5jyQNy-ZXobAuey5qtAKefUsCkjzgJXJZYdOGLYpgI9WQvTLeSz5wzxkg24Rb5XiZyWu-N_P4Hf6Xnu21Ktnjb72IC_RxHNdoyxtqS_cl_SS3MNp7_Lm7dt3z3fUvaS-VrcRWZZkjZHhyPyL5bKCr4UtdBx_k9u-o5wgpKkeVIN-_0IsC-GnLWQoWRhK37dHZbKzxMRuxVgM_zw9fXmUV-ocKKEE_0fuwdKI_ZHTiLmQfbxefHne1PWlzX1EK2KVbx_9ZdNiH1VgW3h_lvvc_6EUSnnvP3-soB_RHnoJ4ODgspvF9hRAVnnov_77STzl3cDQSNNQmP0PxdD10g==";
+      }
+    ];
   };
 }
