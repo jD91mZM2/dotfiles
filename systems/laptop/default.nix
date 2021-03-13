@@ -11,21 +11,12 @@ in
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    # Containers
-    ./containers.nix
-
-    # Flox :D
-    (import (fetchTarball "https://github.com/flox/nixos-module/archive/master.tar.gz"))
-
-    # This is my main computer, use all modules
+    # This is my personal laptop, use all modules
     ../../templates/all.nix
 
     # Use ZFS filesystem
     ../../modules/zfs.nix
   ];
-
-  # Flox
-  services.flox.substituterAdded = true;
 
   boot = {
     supportedFilesystems = [ "btrfs" ];
@@ -42,30 +33,31 @@ in
   };
 
   # Video Drivers
-  services.xserver = {
-    videoDrivers = [ "amdgpu" ];
-    displayManager.sessionCommands = ''
-      ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-2 --primary
-      ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-2 --set TearFree on
-    '';
-  };
+  services.xserver.videoDrivers = [ "intel" ];
 
   # Networking
   networking = {
-    hostName = "samael-computer";
-    hostId = "c0122dbe";
+    hostName = "samael-laptop";
+    hostId = "e345d278";
 
-    useDHCP = false;
-    interfaces.enp7s0.useDHCP = true;
+    networkmanager.enable = true;
+
+    # useDHCP = false;
+    # interfaces = {
+    #   enp2s0f1.useDHCP = true;
+    #   wlp3s0.useDHCP = true;
+    # };
 
     # Allow all local devices to access my open ports :)
     firewall.enable = false;
   };
+  users.users."${config.globals.userName}".extraGroups = [ "networkmanager" ];
+  home.services.network-manager-applet.enable = true;
 
   # Syncthing
   services.syncthing.declarative = {
-    cert = "${home}/Sync/secrets/syncthing/personal-computer/cert.pem";
-    key = "${home}/Sync/secrets/syncthing/personal-computer/key.pem";
+    cert = "${home}/Sync/secrets/syncthing/laptop/cert.pem";
+    key = "${home}/Sync/secrets/syncthing/laptop/key.pem";
   };
 
   # This value determines the NixOS release from which the default

@@ -68,7 +68,8 @@
 
       # NixOS configurations
       nixosConfigurations = {
-        samuel-computer = self.lib.makeSystem "x86_64-linux" ./systems/personal-computer;
+        samael-computer = self.lib.makeSystem "x86_64-linux" ./systems/personal-computer;
+        samael-laptop = self.lib.makeSystem "x86_64-linux" ./systems/laptop;
       };
     } // (utils.lib.eachDefaultSystem (system:
       let
