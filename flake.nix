@@ -83,10 +83,12 @@
       in
       {
         packages = {
+          st = inputs.st.defaultPackage."${system}";
+
           neovim = broken-pkgs.callPackage ./pkgs/neovim {
             inherit inputs;
           };
-          st = inputs.st.defaultPackage."${system}";
+          firefox = pkgs.callPackage ./pkgs/firefox { };
 
           iso = (self.lib.makeSystem "x86_64-linux" ./systems/iso).config.system.build.isoImage;
         };

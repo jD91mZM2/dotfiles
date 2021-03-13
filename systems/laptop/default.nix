@@ -42,7 +42,7 @@ in
 
     networkmanager.enable = true;
 
-    # useDHCP = false;
+    useDHCP = false;
     # interfaces = {
     #   enp2s0f1.useDHCP = true;
     #   wlp3s0.useDHCP = true;
