@@ -1,3 +1,4 @@
+" Fugitive --- {{{
 call MapLeader('n', 'g', 'Git')
 
 function! g:CmdGDelBranch(remote, branch)
@@ -44,6 +45,10 @@ augroup s:fugitive
     au FileType git       call s:fugitiveGit()
     au FileType gitcommit call s:fugitiveCommit()
 augroup END
+" }}}
+
+" vim-signify --- {{{
+set updatetime=100
 " }}}
 
 " vim-table-mode --- {{{
