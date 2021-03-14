@@ -57,6 +57,7 @@ awful.rules.rules = {
     rule_any = {
       class = { "Thunderbird" },
       instance = { "weechat" },
+      name = { ".*Redox Mattermost.*", ".*Discord.*" },
     },
     properties = { screen = 1, tag = "9" }
   },

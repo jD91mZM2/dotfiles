@@ -1,17 +1,20 @@
-{ pkgs, lib, self, system, ... }:
+{ pkgs, lib, self, system, config, ... }:
 
 with lib;
 
 let
-  # Privacy is good
-  chromium = pkgs.chromium;
+  inherit (self.packages."${system}") firefox;
 
-  mkApp = url: ''"${chromium}/bin/chromium" --app="${url}"'';
+  home = "/home/${config.globals.userName}";
+  mkApp = url: ''"${firefox}/bin/firefox" --profile ${home}/.mozilla/firefox/app --new-window "${url}"'';
 
   discord = mkApp "https://discord.com/channels/@me/";
   mattermost = mkApp "https://chat.redox-os.org/";
 
   preferences = {
+    # Allow userChrome.css
+    "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
     # Preferences as suggested by https://www.privacytools.io/browsers/#about_config
     "privacy.firstparty.isolate" = true;
     "privacy.resistFingerprinting" = true;
@@ -24,7 +27,7 @@ let
 in
 {
   environment.systemPackages = [
-    self.packages."${system}".firefox
+    firefox
   ];
 
   desktopItems = {
@@ -56,8 +59,12 @@ in
         settings = preferences;
 
         userChrome = ''
+          @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
           #navigator-toolbox {
-            display: none 
+            /* display: none; does not work for some reason */
+            overflow: hidden;
+            height: 0;
           }
         '';
       };
