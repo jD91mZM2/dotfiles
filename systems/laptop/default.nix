@@ -54,7 +54,6 @@ in
     # Allow all local devices to access my open ports :)
     firewall.enable = false;
   };
-  users.users."${config.globals.userName}".extraGroups = [ "networkmanager" ];
   home.services.network-manager-applet.enable = true;
 
   # Syncthing
@@ -62,6 +61,12 @@ in
     cert = "${home}/Sync/secrets/syncthing/laptop/cert.pem";
     key = "${home}/Sync/secrets/syncthing/laptop/key.pem";
   };
+
+  # Share Android Screen
+  programs.adb.enable = true;
+  environment.systemPackages = with pkgs; [
+    scrcpy
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
