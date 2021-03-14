@@ -1,5 +1,4 @@
-" Fugitive --- {{{
-call Map('n', '<leader>g', 'Git')
+call MapLeader('n', 'g', 'Git')
 
 function! g:CmdGDelBranch(remote, branch)
     exec 'G branch -D ' . a:branch

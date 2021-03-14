@@ -24,12 +24,12 @@ function! s:terminal()
                 \ [ 'cd', expand('%:p:h') ],
                 \ 'exec "$0"',
                 \ ])
-    let shell = exists('$SHELL') ? $SHELL : "/bin/sh"
+    let shell = exists('$SHELL') ? $SHELL : '/bin/sh'
     let command = 'terminal ' . shell . ' -c ' . shellescape(entry)
 
     return 'rightbelow vsplit +' . escape(command, ' ')
 endfunction
-call Map('n', '<leader>S', function('s:terminal'))
+call MapLeader('n', 'S', function('s:terminal'))
 
 " Map navigation keys
 for m in ['h', 'j', 'k', 'l']

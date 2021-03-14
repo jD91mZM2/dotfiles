@@ -72,16 +72,16 @@ let g:LanguageClient_settingsPath = [
 let g:LanguageClient_loggingFile = tempname()
 let g:LanguageClient_loggingLevel = 'DEBUG'
 
-call Map('n', '<leader>ld', 'call LanguageClient#textDocument_definition()')
-call Map('n', '<leader>lr', 'call LanguageClient#textDocument_rename()')
-call Map('n', '<leader>lf', 'call LanguageClient#textDocument_formatting()')
-call Map('n', '<leader>lt', 'call LanguageClient#textDocument_typeDefinition()')
-call Map('n', '<leader>lx', 'call LanguageClient#textDocument_references()')
-call Map('n', '<leader>la', 'call LanguageClient_workspace_applyEdit()')
-call Map('n', '<leader>lc', 'call LanguageClient#textDocument_completion()')
-call Map('n', '<leader>lh', 'call LanguageClient#textDocument_hover()')
-call Map('n', '<leader>ls', 'call LanguageClient_textDocument_documentSymbol()')
-call Map('n', '<leader>lm', 'call LanguageClient_contextMenu()')
+call MapLeader('n', 'l d', 'call LanguageClient#textDocument_definition()')
+call MapLeader('n', 'l r', 'call LanguageClient#textDocument_rename()')
+call MapLeader('n', 'l f', 'call LanguageClient#textDocument_formatting()')
+call MapLeader('n', 'l t', 'call LanguageClient#textDocument_typeDefinition()')
+call MapLeader('n', 'l x', 'call LanguageClient#textDocument_references()')
+call MapLeader('n', 'l a', 'call LanguageClient_workspace_applyEdit()')
+call MapLeader('n', 'l c', 'call LanguageClient#textDocument_completion()')
+call MapLeader('n', 'l h', 'call LanguageClient#textDocument_hover()')
+call MapLeader('n', 'l s', 'call LanguageClient_textDocument_documentSymbol()')
+call MapLeader('n', 'l m', 'call LanguageClient_contextMenu()')
 " }}}
 
 " Autopairs --- {{{

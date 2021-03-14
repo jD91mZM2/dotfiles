@@ -6,10 +6,14 @@ let g:qf_join_changes = 1
 let $FZF_DEFAULT_COMMAND = 'fd -H -E .git'
 let $FZF_DEFAULT_OPTS    = '--bind alt-q:select-all+accept'
 
-call Map('n',     'gt',        'Buffers')
-call Map('n',     '<leader>p', 'History')
-call MapKeys('n', '<leader>/', ':Rg ')
+call Map('n',       'gt',        'Buffers')
+call MapKeys('n',   '<leader>/', ':Rg ')
+call MapLeader('n', '<leader>',  'Files')
+call MapLeader('n', 'p',         'History')
 " }}}
+
+" Ranger
+call MapLeader('n', 'f', 'Ranger')
 
 " Configure NerdTREE --- {{{
 function! ToggleNERD()
@@ -27,5 +31,5 @@ function! ToggleNERD()
 endfunction
 
 let g:NERDTreeQuitOnOpen = 1
-call Map('n', '<leader>t', 'call ToggleNERD()')
+call MapLeader('n', 't', 'call ToggleNERD()')
 " }}}
