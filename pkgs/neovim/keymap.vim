@@ -43,25 +43,15 @@ function! Map(opts, trigger, command)
 endfunction
 
 function! MapLeader(opts, trigger, command)
-  if !exists('g:which_key_map')
-    let g:which_key_map = {}
-  endif
-
   " Document in which_key_map
   if IsString(a:command)
-    let mapping = 'g:which_key_map'
-
     " Create mapping of form g:which_key_map['a']['b']
     let components = split(a:trigger, ' ')
-    for component in components[:-2]
-      if !has_key(eval(mapping), component)
-        exec 'let ' . mapping . "['" . component . "'] = {}"
-      endif
-      let mapping = mapping . "['" . component . "']"
-    endfor
+    let final_index = components[-1]
+    let index_path = CreateDicts('g:which_key_map', components[:-2])
 
     " Execute g:which_key_map['a']['b']['c'] = a:command
-    exec 'let ' . mapping . '[components[-1]] = a:command'
+    call CreateIfNotExists(DictIndex(index_path, final_index), a:command)
   endif
 
   call Map(a:opts, '<leader> ' . a:trigger, a:command)

@@ -82,6 +82,20 @@ call MapLeader('n', 'l c', 'call LanguageClient#textDocument_completion()')
 call MapLeader('n', 'l h', 'call LanguageClient#textDocument_hover()')
 call MapLeader('n', 'l s', 'call LanguageClient_textDocument_documentSymbol()')
 call MapLeader('n', 'l m', 'call LanguageClient_contextMenu()')
+
+call CreateIfNotExists('g:which_key_map', {})
+let g:which_key_map['l'] = {
+            \   'd': 'Goto Definition',
+            \   'r': 'Rename',
+            \   'f': 'Format',
+            \   't': 'Type Definition',
+            \   'x': 'References',
+            \   'a': 'Apply Suggestion',
+            \   'c': 'Completion',
+            \   'h': 'Hover',
+            \   's': 'Document Symbol',
+            \   'm': 'Context Menu',
+            \ }
 " }}}
 
 " Autopairs --- {{{
