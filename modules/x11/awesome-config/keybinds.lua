@@ -2,6 +2,7 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local gears = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local naughty = require("naughty")
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -75,7 +76,12 @@ local globalkeys = gears.table.join(
 
   -- Misc
   awful.key({ modkey }, "p", script("dmenu-desktop.sh"), { description = "show the menubar", group = "misc" }),
-  awful.key({ modkey, "Shift" }, "l", spawn_cmd("slock"), { description = "lock screen", group = "misc" }),
+  awful.key({ modkey, "Shift" }, "l", function ()
+    naughty.suspend()
+    awful.spawn.easy_async_with_shell("i3lock-fancy -pn", function ()
+      naughty.resume()
+    end)
+  end, { description = "lock screen", group = "misc" }),
   awful.key({ modkey }, "z", spawn_cmd("echo -n \"\xE2\x80\x8B\" | xclip -sel clip"), { description = "clear the clipboard (zero-width space)", group = "misc" })
 )
 -- Global mouse-bindings

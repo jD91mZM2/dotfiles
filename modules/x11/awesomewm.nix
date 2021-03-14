@@ -3,6 +3,10 @@
   # System-wide installation of AwesomeWM
   services.xserver.windowManager.awesome.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    i3lock-fancy
+  ];
+
   home = {
     # Install my AwesomeWM config
     xdg.configFile."awesome".source = ./awesome-config;
