@@ -138,6 +138,7 @@ let
 
           # VCS
           fugitive
+          vim-signify
 
           # Completion
           LanguageClient-neovim
@@ -172,6 +173,7 @@ let
           direnv-vim
           echodoc
           firenvim
+          vim-which-key
         ];
 
         # Packages that might be lazy-loaded
