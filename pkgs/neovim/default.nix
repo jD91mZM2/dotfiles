@@ -73,6 +73,9 @@ let
 
     # For ranger
     ranger
+
+    # For big text
+    figlet
   ];
 
   preRun = ''

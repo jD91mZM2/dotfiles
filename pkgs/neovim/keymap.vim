@@ -91,6 +91,26 @@ call MapKeys('n', '<leader> .', ':e %:p:h/')
 call MapKeys('n', '<leader> :', 'q:')
 call MapKeys('n', 'D',         '0d$')
 
+function! g:BigText()
+    " Run figlet on line
+    let output = system('figlet', getline('.'))
+    let lines = split(output, "\n")
+
+    " Last line is always empty because of trailing newline
+    call remove(lines, -1)
+
+    " Append figlet text
+    call append(line('.'), lines)
+
+    " Comment out
+    exec '.,.+' . len(lines) . 'Commentary'
+
+    " Delete current line
+    normal! "_dd
+endfunction
+
+call MapLeader('n', 'b t', 'call BigText()')
+
 " Move left/right easier
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
