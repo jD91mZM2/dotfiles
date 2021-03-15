@@ -37,6 +37,10 @@ pkgs.firefox.override {
       "browser.shell.checkDefaultBrowser" = preference false;
       "browser.aboutConfig.showWarning" = preference false;
 
+      # I need widevine for stuff, sorry privacy :(
+      "media.gmp-widevinecdm.enabled" = preference true;
+      "media.eme.enabled" = preference true;
+
       # Support installing xpi from sources outside of mozilla
       "extensions.install.requireBuiltInCerts" = preference false;
 
@@ -54,8 +58,6 @@ pkgs.firefox.override {
       "dom.event.clipboardevents.enabled" = preference false;
 
       # media.*
-      "media.eme.enabled" = preference false;
-      "media.gmp-widevinecdm.enabled" = preference false;
       "media.navigator.enabled" = preference false;
 
       # network.*
