@@ -62,6 +62,11 @@ in
     key = "${home}/Sync/secrets/syncthing/laptop/key.pem";
   };
 
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+  home.services.blueman-applet.enable = true;
+
   # Share Android Screen
   programs.adb.enable = true;
   environment.systemPackages = with pkgs; [
