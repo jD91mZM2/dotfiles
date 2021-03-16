@@ -104,9 +104,6 @@ function! s:colourScheme()
     match ExtraWhitespace /\s\+\%#\@<!$/
 endfunction
 
-colorscheme dracula
-call s:colourScheme()
-
 augroup s:colourscheme
     au!
 
@@ -120,4 +117,6 @@ augroup s:colourscheme
     " Highlight trailing whitespace when going to normal mode
     au InsertLeave * redraw!
 augroup END
+
+colorscheme dracula
 " }}}
