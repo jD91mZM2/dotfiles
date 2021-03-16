@@ -15,6 +15,10 @@
     shortcut = "t";
 
     extraConfig = ''
+      # Support cursor shapes
+      # https://github.com/neovim/neovim/wiki/FAQ/fe93b6f551589a55b1c34670fc64b2bd56547924#how-to-change-cursor-shape-in-the-terminal
+      set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+
       set -g mouse on
 
       # Better windowing --- {{{
