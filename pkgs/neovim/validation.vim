@@ -25,12 +25,13 @@ let g:ale_disable_lsp = 1
 " Fix on save
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-            \   '*':      ['remove_trailing_lines', 'trim_whitespace'],
-            \   'go':     ['goimports'],
-            \   'json':   ['jq'],
-            \   'nix':    ['nixpkgs-fmt'],
-            \   'python': ['black'],
-            \   'rust':   ['rustfmt'],
+            \   '*':       ['remove_trailing_lines', 'trim_whitespace'],
+            \   'go':      ['goimports'],
+            \   'haskell': ['ormolu'],
+            \   'json':    ['jq'],
+            \   'nix':     ['nixpkgs-fmt'],
+            \   'python':  ['black'],
+            \   'rust':    ['rustfmt'],
             \ }
 
 " Disable linters that break or bug out for me
@@ -56,11 +57,12 @@ let g:echodoc#type = 'floating'
 " Language Server Protocol --- {{{
 " Configure language servers
 let g:LanguageClient_serverCommands = {
-            \   'go':     ['gopls'],
-            \   'nix':    ['rnix-lsp'],
-            \   'python': ['pyls'],
-            \   'rust':   ['rls'],
-            \   'tex':    ['texlab'],
+            \   'go':      ['gopls'],
+            \   'haskell': ['haskell-language-server'],
+            \   'nix':     ['rnix-lsp'],
+            \   'python':  ['pyls'],
+            \   'rust':    ['rls'],
+            \   'tex':     ['texlab'],
             \ }
 
 " Send settings via lsp command `didChangeConfiguration`

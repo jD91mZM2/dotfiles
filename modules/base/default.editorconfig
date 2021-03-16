@@ -9,9 +9,5 @@ indent_style = space
 [*.rs]
 indent_size = 4
 
-[*.{sh,nix,yaml,yml,md,lua,json,mcmeta,tex}]
-indent_size = 2
-
-[*.snippets]
-indent_style = tab
+[*.{sh,nix,yaml,yml,md,lua,json,mcmeta,tex,hs}]
 indent_size = 2
