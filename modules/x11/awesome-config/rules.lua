@@ -1,5 +1,7 @@
 local awful = require("awful")
 local beautiful = require("beautiful")
+local gears = require("gears")
+local naughty = require("naughty")
 
 -- Arguments
 local keybinds=...
@@ -62,3 +64,20 @@ awful.rules.rules = {
     properties = { screen = 1, tag = "9" }
   },
 }
+
+-- Apply rules to each client after they've all properly started (hacky)
+-- I do this because firefox doesn't set the title bar until it's properly started.
+
+gears.timer.start_new(
+  10, function()
+    for _, c in ipairs(client.get()) do
+      -- polybar can't be updated after launch for some reason, it gets moved
+      -- in a weird way
+      if c.instance ~= "polybar" then
+        awful.rules.apply(c)
+      end
+    end
+
+    return false
+  end
+)

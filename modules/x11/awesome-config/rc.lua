@@ -1,8 +1,8 @@
-local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
+local gears = require("gears")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local naughty = require("naughty")
 
 -- Not-stupid focus that doesn't disappear at times
 require("awful.autofocus")
