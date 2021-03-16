@@ -94,10 +94,12 @@ call MapKeys('n', 'D',         '0d$')
 function! g:BigText()
     " Run figlet on line
     let output = system('figlet', getline('.'))
-    let lines = split(output, "\n")
+    let lines = map(split(output, "\n"), { _, value -> substitute(value, ' *$', '', 'g') })
 
-    " Last line is always empty because of trailing newline
-    call remove(lines, -1)
+    if lines[-1] ==# ''
+      " Last line is empty because of trailing newline
+      call remove(lines, -1)
+    endif
 
     " Append figlet text
     call append(line('.'), lines)
