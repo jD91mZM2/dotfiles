@@ -1,20 +1,37 @@
+snippet _skel "Skel"
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+
+\title{${1:Title}}
+\author{${2:jD91mZM2}}
+\date{`date +"%B %d, %Y"`}
+
+\maketitle
+
+\begin{document}
+
+$0
+
+\end{document}
+endsnippet
+
 snippet - "List"
 \begin{itemize}
 	\item ${0:${VISUAL}}
 \end{itemize}
 endsnippet
 
-snippet * "Bold" A
+snippet * "Bold"
 \textbf{${1:${VISUAL}}}$0
 endsnippet
 
-snippet _ "Italic" A
+snippet _ "Italic"
 \textit{${1:${VISUAL}}}$0
 endsnippet
 
 snippet \ "Section"
 \begin{$1}
-	$0
+	${0:${VISUAL}}
 \end{$1}
 endsnippet
 
@@ -26,4 +43,16 @@ snippet fn "Inline Code"
 \begin{lstlisting}[language=$1]
 $0
 \end{lstlisting}
+endsnippet
+
+snippet / "Fraction"
+\frac{${1:${VISUAL}}}{$0}
+endsnippet
+
+snippet +- "Plus minus"
+\pm
+endsnippet
+
+snippet ( "Parentheses"
+\left($0\right
 endsnippet

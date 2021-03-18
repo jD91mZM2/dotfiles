@@ -2,7 +2,16 @@
 {
   environment.systemPackages = with pkgs; [
     # Install texlive
-    texlive.combined.scheme-medium
+    (texlive.combine {
+      inherit (texlive)
+        # Main suite
+        scheme-medium
+        # Extra packages
+        numprint
+        tkz-base
+        tkz-euclide
+        ;
+    })
 
     # Language Server
     texlab
